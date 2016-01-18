@@ -9,7 +9,7 @@
 #     git pull lab1 master
 # 
 # If the above command fails then the lab has not been released to be 
-# visible yet.
+# visible for your section yet.
 
 
 # Test SSH Keys to GitHub to make sure the student has access
