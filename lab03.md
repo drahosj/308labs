@@ -1,7 +1,35 @@
-Script Interpretation
-=====================
+---
+title: 'Script Interpretation'
+---
 
-In this lab, knowledge of how to create new processes and have those new processes execute other programs will be extended, along with exploration of a few extra topics.  Those extra topics will be how to write simple shell scripts using the Bourne Again SHell (Bash), and how to implement some of Bash’s built-in functions.  Again, some familiarity with how to open a file, read from it, and parse what was read from the file will be needed for this lab as well.
+In this lab, knowledge of how to create new processes and have those new processes execute other programs will be extended, along with exploration of a few extra topics.  Now, not only will the child processes execute other programs, the return value of the programs will need to be evaluated by the parent.  Those extra topics will be how to write simple shell scripts using the Bourne Again SHell (Bash), and how to implement some of Bash’s built-in functions.  Again, some familiarity with how to open a file, read from it, and parse what was read from the file will be needed for this lab as well.
+
+# Handling Child Process Return Values
+In the previous lab, when a program is run on a child process, the parent process waits on the child process; and once the program on the child process terminates, the parent process doesn't evaluate the return value in the `status` variable, as it was not necessary.  This is no longer the case for this lab.  Recall for the previous lab how the parent process waits for the child process:
+
+~~~c
+...
+int status = 0;
+...
+pid_t child;
+child = fork();
+if(child == 0){
+	//create and populate an argArray
+	...
+	execvp(nameOfProg, argArray);
+	perror("exec has encountered an error trying to execute nameOfProg");
+	return -1;
+}else if(child > 0){
+	//the parent waits on the child process to terminate
+	wait(&status);
+	return 0;
+}else{
+	perror("fork");
+	return -1;
+}
+~~~
+
+When the child terminates, the return value of the child program, along with the status of the child process is stored in the `status` variable.  To determine if the child process terminated normally, encountered an error, or received a signal, there are macros that can parse out that information from the variable `status`.  For a list of those macros and what they do, consult `man 2 wait`.
 
 # A Quick and Simple Guide to Bash Scripting
 The expectation of the student for this lab is that the student is at the very least familiar with the use of the Bash shell[^shell], if not proficient with its use.  With this knowledge, writing a simple Bash script is quite simple.  For example, here is a ‘hello world’ Bash script:
