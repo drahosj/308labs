@@ -169,7 +169,7 @@ $ ./setup_labs.sh
 This will execute the script.  If you are interested in what the script does, and how it does it, feel free to open up the script using either `less` or the editor of your choice.  If you get any errors from running the script ask your TA for help.
 
 ## Using The Class GitHub
-For all future labs you will get the code and other material for the lab by issuing the command in your labs directory:
+For all future labs you will get the code and other material for the lab by issuing the command in your `labs` directory:
 
 ~~~bash
 $ git pull labn master
@@ -187,10 +187,16 @@ To commit your labs in the lab directory run the command
 $ git status
 ~~~
 
-To see which files have changed or been created.  Add the lab you want to submit by typing
+To see which files have changed or been created.  Add the lab you want to submit by typing:
 
 ~~~bash
-$ git add lab1/
+$ git add lab-n
+~~~
+
+In the case of lab 1, type:
+
+~~~bash
+$ git add lab-01/
 ~~~
 
 Next run `git status` again and make sure all the files that should be submitted show up.  Next commit your changes to your local repository with a meaningful commit message using
