@@ -124,8 +124,8 @@ It is highly recommended that the student read through the man page for `wait` a
 
 In your lab report answer the following questions:
 
-    - How can you use `waitpid` to determine if a child process has ended without making the parrent wait for that child to end?
-    - What is the return value of `waitpid`?
+ - How can you use `waitpid` to determine if a child process has ended without making the parrent wait for that child to end?
+ - What is the return value of `waitpid`?
 
 # Making a Process Run Another Program
 Recall that to make a process run another program, the following lines of code are needed:
@@ -149,8 +149,8 @@ $ man 2 execve
 ~~~
 
 Please answer the following question in your lab report
-    - What is the return value of `execvp`?
-    - What is the difference between `execl` and `execlp`?
+ - What is the return value of `execvp`?
+ - What is the difference between `execl` and `execlp`?
 
 # Tying it Together
 With the information presented in the previous sections, this opens up the possibilities for the 'do something cool' part of the child process explored earlier.  Suppose that a certain function is desired to be performed by the child process; however, implementing it into the child process would not be possible for some reason or feasible.  Suppose further that this specific function has already been implemented by someone else, but it is only available in the form of a binary (i.e., executable) file.  The student can choose to either forego performing that specific function, or the student can use the ‘exec’ family of function calls.  Since the former choice is not very interesting, the later choice will be explored.  The following snippet of code will do just that:
