@@ -4,6 +4,9 @@
 *.obj
 *.elf
 
+# Vim swap files
+*.swp
+
 # Precompiled Headers
 *.gch
 *.pch

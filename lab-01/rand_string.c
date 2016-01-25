@@ -29,9 +29,9 @@ int main(int arg, char** argv)
 	printf("You entered the %d character line %s", n, string);
 
 	// generate an array of random indexes
-	for(i=0; i<=length; i++)
+	for(i=0; i<length; i++)
 	{
-		rand_array[i] = rand() % (n-1);
+		rand_array[i] = rand() % (length);
 	}
 	
 	printf("The randomized string is \"");
