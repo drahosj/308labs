@@ -4,38 +4,83 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define MAX_EXTENSION_LENGTH 10
+#define MAX_EXTENSION_LENGTH 3
 #define MAX_EXTENSIONS_SUPPORTED 6
 #define MAX_COMMAND_LENGTH 25
 
 static size_t extensions_defined = 0;
-static char extensions[MAX_EXTENSION_LENGTH + 1][MAX_EXTENSIONS_SUPPORTED];
-static char commands[MAX_COMMAND_LENGTH + 1][MAX_EXTENSIONS_SUPPORTED];
+static char extensions[MAX_EXTENSIONS_SUPPORTED][MAX_EXTENSION_LENGTH + 1];
+static char commands[MAX_EXTENSIONS_SUPPORTED][MAX_COMMAND_LENGTH + 1];
 
-static size_t get_extension_index(char * exten);
-static const char * get_extension_filename(size_t extension);
+static const char * get_extension_command(char * exten);
 static void print_configuration();
 static size_t define_extension(char * exten, char * command);
 
-void main(int argc, char *argv[])
+int main(int argc, char *argv[])
 {
-	/* Initially a hard-coded array */
-	strcpy(extensions[0], "doc");
-	strcpy(extensions[1], "odt");
-	strcpy(extensions[2], "png");
-	strcpy(extensions[3], "txt");
-	strcpy(extensions[4], "pdf");
-	strcpy(extensions[5], "mp3");
+	char * exten;
 
-	strcpy(commands[0], "libreoffice");
-	strcpy(commands[1], "libreoffice");
-	strcpy(commands[2], "eog");
-	strcpy(commands[3], "gedit");
-	strcpy(commands[4], "evince");
-	strcpy(commands[5], "vlc");
+	/* Standard extensions */
+	define_extension("doc", "libreoffice");
+	define_extension("odt", "libreoffice");
+	define_extension("png", "eog");
+	define_extension("txt", "gedit");
+	define_extension("pdf", "evince");
+	define_extension("mp3", "vlc");
 
-	extensions_defined = 6;
-	print_configuration();
+	if ((argc >= 2) && (strcmp("--print-config", argv[1]) == 0)) {
+		print_configuration();
+		return 0;
+	}
+
+	if (argc < 2) {
+		fputs("Usage: anyopen <filename>\n", stderr);
+		fputs("       anyopen --print-config\n", stderr);
+		return 1;
+	}
+
+	exten = strrchr(argv[1], '.');
+
+	if (!exten) {
+		fputs("Unable to determine file extension.\n", stderr);
+		return 2;
+	}
+
+	exten += 1;
+
+	printf("Running `%s %s`\n", get_extension_command(exten), argv[1]);
+}
+
+static const char * get_extension_command(char * exten)
+{
+	size_t i;
+	for(i = 0; i < extensions_defined; i++) {
+		if (strcmp(exten, extensions[i]) == 0) {
+			break;
+		}
+	}
+
+	if (i == extensions_defined) {
+		return NULL;
+	}
+	
+	return commands[i];
+}
+
+static size_t define_extension(char * exten, char * command)
+{
+	size_t old_index = extensions_defined;
+
+	if (extensions_defined == MAX_EXTENSIONS_SUPPORTED) {
+		return -1;
+	}
+
+	strcpy(extensions[extensions_defined], exten);
+	strcpy(commands[extensions_defined], command);
+	
+	extensions_defined++;
+
+	return old_index;
 }
 
 static void print_configuration()
