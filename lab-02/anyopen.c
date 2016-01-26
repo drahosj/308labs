@@ -5,7 +5,7 @@
 #include <string.h>
 
 #define MAX_EXTENSION_LENGTH 3
-#define MAX_EXTENSIONS_SUPPORTED 6
+#define MAX_EXTENSIONS_SUPPORTED 10
 #define MAX_COMMAND_LENGTH 25
 
 static size_t extensions_defined = 0;
@@ -19,14 +19,16 @@ static size_t define_extension(char * exten, char * command);
 int main(int argc, char *argv[])
 {
 	char * exten;
+	pid_t pid;
 
 	/* Standard extensions */
 	define_extension("doc", "libreoffice");
 	define_extension("odt", "libreoffice");
 	define_extension("png", "eog");
-	define_extension("txt", "gedit");
+	define_extension("txt", "vim");
 	define_extension("pdf", "evince");
 	define_extension("mp3", "vlc");
+	define_extension("foo", "echo");
 
 	if ((argc >= 2) && (strcmp("--print-config", argv[1]) == 0)) {
 		print_configuration();
@@ -48,7 +50,31 @@ int main(int argc, char *argv[])
 
 	exten += 1;
 
-	printf("Running `%s %s`\n", get_extension_command(exten), argv[1]);
+	pid = fork();
+	if (pid == 0) {
+		const char * command = get_extension_command(exten);
+		if (!command) {
+			fputs("Unrecognized extension!\n", stderr);
+			return 3;
+		}
+
+		if (execlp(command, command, argv[1], (char *) NULL) == -1) {
+			perror("exec");
+		}
+	} else {
+		int status; 
+		wait(&status);
+
+		if (WIFEXITED(status)) {
+			printf("Child exited with status %d\n", WEXITSTATUS(status));
+			return 0;
+		}
+
+		if (WIFSIGNALED(status)) {
+			printf("Child terminated by signal %d\n", WTERMSIG(status));
+			return 0;
+		}
+	}
 }
 
 static const char * get_extension_command(char * exten)
