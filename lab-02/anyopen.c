@@ -14,32 +14,62 @@ static char commands[MAX_EXTENSIONS_SUPPORTED][MAX_COMMAND_LENGTH + 1];
 
 static const char * get_extension_command(char * exten);
 static void print_configuration();
-static size_t define_extension(char * exten, char * command);
+static ssize_t define_extension(char * exten, char * command);
 
 int main(int argc, char *argv[])
 {
 	char * exten;
+	char * command;
+	char * line = NULL;
+	size_t len = 0;
 	pid_t pid;
-
-	/* Standard extensions */
-	define_extension("doc", "libreoffice");
-	define_extension("odt", "libreoffice");
-	define_extension("png", "eog");
-	define_extension("txt", "vim");
-	define_extension("pdf", "evince");
-	define_extension("mp3", "vlc");
-	define_extension("foo", "echo");
-
-	if ((argc >= 2) && (strcmp("--print-config", argv[1]) == 0)) {
-		print_configuration();
-		return 0;
-	}
+	FILE * config;
+	size_t i;
 
 	if (argc < 2) {
 		fputs("Usage: anyopen <filename>\n", stderr);
 		fputs("       anyopen --print-config\n", stderr);
 		return 1;
 	}
+
+
+	config = fopen("extensions.conf", "r");
+
+	if (config == NULL) {
+		perror("fopen");
+		fputs("Unable to open config file 'extensions.conf'\n", stderr);
+		return 1;
+	}
+
+	i = 0;
+	while (getline(&line, &len, config) != -1) {
+		i++;
+		if ((line[0] == '\n') || (line[0] == '#')) {
+			continue;
+		}
+
+		exten = strtok(line, " ");
+		if (exten == NULL) {
+			fprintf(stderr, "WARNING: Config syntax error on line %d\n", i);
+			continue;
+		}
+		
+		command = strtok(NULL, "\n");
+		if (command == NULL) {
+			fprintf(stderr, "WARNING: Config syntax error on line %d\n", i);
+			continue;
+		}
+
+		define_extension(exten, command);
+	}
+	fclose(config);
+
+	/* Print config if specified on command line */
+	if ((argc >= 2) && (strcmp("--print-config", argv[1]) == 0)) {
+		print_configuration();
+		return 0;
+	}
+
 
 	exten = strrchr(argv[1], '.');
 
@@ -53,12 +83,12 @@ int main(int argc, char *argv[])
 	pid = fork();
 	if (pid == 0) {
 		const char * command = get_extension_command(exten);
-		if (!command) {
+		if (command == NULL) {
 			fputs("Unrecognized extension!\n", stderr);
 			return 3;
 		}
 
-		if (execlp(command, command, argv[1], (char *) NULL) == -1) {
+		if (execlp(command, command, argv[1], (char *) NULL) < 0) {
 			perror("exec");
 		}
 	} else {
@@ -93,7 +123,7 @@ static const char * get_extension_command(char * exten)
 	return commands[i];
 }
 
-static size_t define_extension(char * exten, char * command)
+static ssize_t define_extension(char * exten, char * command)
 {
 	size_t old_index = extensions_defined;
 
