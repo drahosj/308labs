@@ -4,14 +4,17 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define MAX_EXTENSION_LENGTH 3
-#define MAX_EXTENSIONS_SUPPORTED 10
+/* Maximum sizes and number of configured extensions */
+#define MAX_EXTENSION_LENGTH 5
+#define MAX_EXTENSIONS_SUPPORTED 20
 #define MAX_COMMAND_LENGTH 25
 
+/* Configuration mapping of extensions to commands */
 static size_t extensions_defined = 0;
 static char extensions[MAX_EXTENSIONS_SUPPORTED][MAX_EXTENSION_LENGTH + 1];
 static char commands[MAX_EXTENSIONS_SUPPORTED][MAX_COMMAND_LENGTH + 1];
 
+/* Static functions */
 static const char * get_extension_command(char * exten);
 static void print_configuration();
 static ssize_t define_extension(char * exten, char * command);
@@ -26,6 +29,7 @@ int main(int argc, char *argv[])
 	FILE * config;
 	size_t i;
 
+	/* Check argc, print usage */
 	if (argc < 2) {
 		fputs("Usage: anyopen <filename>\n", stderr);
 		fputs("       anyopen --print-config\n", stderr);
@@ -33,6 +37,7 @@ int main(int argc, char *argv[])
 	}
 
 
+	/* Open and read configuration file. See extensions.conf */
 	config = fopen("extensions.conf", "r");
 
 	if (config == NULL) {
@@ -41,6 +46,7 @@ int main(int argc, char *argv[])
 		return 1;
 	}
 
+	/* Will print a warning and skip the line if there is a syntax error */
 	i = 0;
 	while (getline(&line, &len, config) != -1) {
 		i++;
@@ -64,22 +70,22 @@ int main(int argc, char *argv[])
 	}
 	fclose(config);
 
-	/* Print config if specified on command line */
+	/* Print config and return if specified on command line */
 	if ((argc >= 2) && (strcmp("--print-config", argv[1]) == 0)) {
 		print_configuration();
 		return 0;
 	}
 
-
+	/* Extract extension from argv */
 	exten = strrchr(argv[1], '.');
 
 	if (!exten) {
 		fputs("Unable to determine file extension.\n", stderr);
 		return 2;
 	}
-
 	exten += 1;
 
+	/* Fork and exec */
 	pid = fork();
 	if (pid == 0) {
 		const char * command = get_extension_command(exten);
@@ -95,11 +101,13 @@ int main(int argc, char *argv[])
 		int status; 
 		wait(&status);
 
+		/* Handle normal exit */
 		if (WIFEXITED(status)) {
 			printf("Child exited with status %d\n", WEXITSTATUS(status));
 			return 0;
 		}
 
+		/* Handle signalled termination */
 		if (WIFSIGNALED(status)) {
 			printf("Child terminated by signal %d\n", WTERMSIG(status));
 			return 0;
@@ -107,6 +115,7 @@ int main(int argc, char *argv[])
 	}
 }
 
+/* Search the list of extensions to find the appropriate command */
 static const char * get_extension_command(char * exten)
 {
 	size_t i;
@@ -123,11 +132,16 @@ static const char * get_extension_command(char * exten)
 	return commands[i];
 }
 
+/* Add a new command and extension to the configuration array */
 static ssize_t define_extension(char * exten, char * command)
 {
 	size_t old_index = extensions_defined;
 
 	if (extensions_defined == MAX_EXTENSIONS_SUPPORTED) {
+		return -1;
+	}
+
+	if ((strlen(exten) > MAX_EXTENSION_LENGTH) || (strlen(command) > MAX_COMMAND_LENGTH)) {
 		return -1;
 	}
 
