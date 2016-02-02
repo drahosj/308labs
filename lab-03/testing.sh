@@ -1,4 +1,4 @@
-#! /bin/bash
+#! /bin/cash
 # This script file is provided to you as a way to test
 # your implementation of the CASH interpreter
 echo Hello, my name is Sk1n3t, I will be assisting you with testing your interpreter
