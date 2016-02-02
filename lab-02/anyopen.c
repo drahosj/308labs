@@ -5,9 +5,11 @@
 #include <string.h>
 
 /* Maximum sizes and number of configured extensions */
-#define MAX_EXTENSION_LENGTH 5
-#define MAX_EXTENSIONS_SUPPORTED 20
-#define MAX_COMMAND_LENGTH 25
+#define MAX_EXTENSION_LENGTH 10
+#define MAX_EXTENSIONS_SUPPORTED 50
+#define MAX_COMMAND_LENGTH 50
+#define MAX_FILES 30
+#define CONFIG_FILE_NAME "extensions.conf"
 
 /* Configuration mapping of extensions to commands */
 static size_t extensions_defined = 0;
@@ -28,6 +30,7 @@ int main(int argc, char *argv[])
 	pid_t pid;
 	FILE * config;
 	size_t i;
+	size_t children_launched = 0;
 
 	/* Check argc, print usage */
 	if (argc < 2) {
@@ -38,7 +41,7 @@ int main(int argc, char *argv[])
 
 
 	/* Open and read configuration file. See extensions.conf */
-	config = fopen("extensions.conf", "r");
+	config = fopen(CONFIG_FILE_NAME, "r");
 
 	if (config == NULL) {
 		perror("fopen");
@@ -76,41 +79,55 @@ int main(int argc, char *argv[])
 		return 0;
 	}
 
-	/* Extract extension from argv */
-	exten = strrchr(argv[1], '.');
+	for (i = 1; i < argc; i++) {
+		const char * command;
 
-	if (!exten) {
-		fputs("Unable to determine file extension.\n", stderr);
-		return 2;
+		/* Extract extension from argv */
+		exten = strrchr(argv[i], '.');
+
+		if (!exten) {
+			fputs("Unable to determine file extension. Skipping.\n", stderr);
+			continue;
+		}
+		exten += 1;
+
+		command = get_extension_command(exten);
+		/* Fork and exec */
+		pid = fork();
+		if (pid == 0) {
+			if (command == NULL) {
+				fputs("Unrecognized extension. Skipping.\n", stderr);
+				continue;
+			}
+
+			if (execlp(command, command, argv[i], (char *) NULL) < 0) {
+				perror("exec");
+				continue;
+			}
+		} else {
+			children_launched++;
+			fprintf(stderr, "Launched command '%s' for file '%s' with pid %d\n", command, argv[i], pid);
+		}
 	}
-	exten += 1;
-
-	/* Fork and exec */
-	pid = fork();
-	if (pid == 0) {
-		const char * command = get_extension_command(exten);
-		if (command == NULL) {
-			fputs("Unrecognized extension!\n", stderr);
-			return 3;
-		}
-
-		if (execlp(command, command, argv[1], (char *) NULL) < 0) {
-			perror("exec");
-		}
-	} else {
+	
+	fprintf(stderr, "Waiting for children to return...\n");
+	i = 0;
+	while (i < children_launched) {
 		int status; 
-		wait(&status);
+		if ((pid = wait(&status)) > 0) {
+			/* Handle normal exit */
+			if (WIFEXITED(status)) {
+				fprintf(stderr, "Child with pid %d exited with status %d\n", pid, WEXITSTATUS(status));
+			}
 
-		/* Handle normal exit */
-		if (WIFEXITED(status)) {
-			printf("Child exited with status %d\n", WEXITSTATUS(status));
-			return 0;
-		}
+			/* Handle signalled termination */
+			if (WIFSIGNALED(status)) {
+				fprintf(stderr, "Child with pid %d terminated by signal %d\n", pid, WTERMSIG(status));
+			}	
 
-		/* Handle signalled termination */
-		if (WIFSIGNALED(status)) {
-			printf("Child terminated by signal %d\n", WTERMSIG(status));
-			return 0;
+			i++;
+		} else {
+			fputs("wait() return -1. Interesting...\n", stderr);
 		}
 	}
 }
