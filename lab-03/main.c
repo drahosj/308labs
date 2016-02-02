@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <string.h>
+#include <dlfcn.h>
 
 #include "cash_api.h"
 
@@ -50,8 +51,25 @@ int main(int argc, char ** argv)
 		free(line);
 	}
 
+	/* TEMP STUFF HERE */
 	/* Register a test builtin */
 	register_builtin("test", &test_builtin);
+
+	void * test_plugin = dlopen("plugins/test.so", RTLD_NOW);
+	if (test_plugin != NULL) {
+		void (*load)(void);
+
+	     	* (void**) &load = dlsym(test_plugin, "plugin_load");
+		if (load != NULL) {
+			(*load)();
+		} else {
+			fputs("Plugin didn't have a plugin_load function\n", stderr);
+		}
+		dlclose(test_plugin);
+	} else {
+		fputs("Unable to open test plugin file\n", stderr);
+	}
+	/* END TEMP STUFF */
 
 	int retval;
 	retval = run_shell(input);
