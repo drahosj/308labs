@@ -101,11 +101,29 @@ anyopen from output of the children.
 
 ### Test Case
 ~~~
-./anyopen test.foo test.bar test.t test.f test.long notexisting.long
+jake at gilliam in ~/308/lab-02 on master*
+$ ./anyopen test.foo test.bar test.t test.f test.long notexisting.long
+Launched command 'echo' for file 'test.foo' with pid 17470
+Launched command 'echo' for file 'test.bar' with pid 17471
+Launched command 'true' for file 'test.t' with pid 17472
+Launched command 'false' for file 'test.f' with pid 17473
+Launched command 'cat' for file 'test.long' with pid 17474
+Launched command 'cat' for file 'notexisting.long' with pid 17475
+Waiting for children to return...
+test.foo
+test.bar
+Child with pid 17470 exited with status 0
+Child with pid 17471 exited with status 0
+cat: Child with pid 17472 exited with status 0
+notexisting.longChild with pid 17473 exited with status 1
+: No such file or directory
+I am a cat
+Child with pid 17475 exited with status 1
+Child with pid 17474 exited with status 0
 ~~~
 
 This demonstrates the echo and cat commands, as well as both 0 and nonzero (false) return
-statuses.
+statuses. Note the race condition where cat and anyopen fight over stdout.
 
 # Conclusion
 This was a solid introduction to fork()ing and exec()ing to launch new processes.
