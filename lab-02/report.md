@@ -74,6 +74,7 @@ first argument begins at argv[1], and no parsing is done
 to understand flags vs. other forms of arguments.
 
 ## example
+~~~
 jake at gilliam in ~/308/lab-02 on master*
 $ ./example
 argv[0]="./arg-printer"
@@ -81,6 +82,7 @@ argv[1]="arguments"
 argv[2]="are"
 argv[3]="useful"
 Child process finished with return code 4
+~~~
 
 ## anyopen
 Anyopen is implemented using a dynamic configuration file and 
