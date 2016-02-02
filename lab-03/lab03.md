@@ -2,7 +2,7 @@
 title: 'Script Interpretation'
 ---
 
-In this lab, knowledge of how to create new processes and have those new processes execute other programs will be extended, along with exploration of a few extra topics.  Now, not only will the child processes execute other programs, the return value of the programs will need to be evaluated by the parent.  Those extra topics will be how to write simple shell scripts using the Bourne Again SHell (Bash), and how to implement some of Bash’s built-in functions.  Again, some familiarity with how to open a file, read from it, and parse what was read from the file will be needed for this lab as well.
+In this lab, knowledge of how to create new processes and have those new processes execute other programs will be extended, along with exploration of a few extra topics.  Now, not only will the child processes execute other programs, the return value of the programs will need to be evaluated by the parent.  Those extra topics will be how to write simple shell scripts using the Bourne Again SHell (Bash), and how to implement some of Bash’s built-in functions.  Again, some familiarity with how to open a file, read from it, and parse what was read from the file will be needed for this lab.
 
 # Handling Child Process Return Values
 In the previous lab, when a program is run on a child process, the parent process waits on the child process; and once the program on the child process terminates, the parent process doesn't evaluate the return value in the `status` variable, as it was not necessary.  This is no longer the case for this lab.  Recall for the previous lab how the parent process waits for the child process:
@@ -59,7 +59,7 @@ $ ./hello_world.sh
 Include the output of running the above script in your lab report.
 
 # Script file format
-With this simple example of `hello_world.sh`, some explanation of what each line in the file `hello_world.sh` does and how this can be extended. 
+With this simple example of `hello_world.sh`, some explanation of what each line in the file `hello_world.sh` does and how this can be extended is provided below. 
 
 ## First line
 The first line of a script file should tell what type of file it is, and which program should interpret it.  For example, shell scripts that start with 
@@ -126,12 +126,13 @@ Though not very important to the use of the Bash shell, this information will be
 $ type commandToCheck
 ~~~
 
-This will return the type of the command in `commandToCheck`.  If a command is a built-in command, `type` will return 'builtin'. If a command is an executable, `type` will return 'hashed'.
+This will return the type of the command in `commandToCheck`.  If a command is a built-in command, `type` will return 'builtin'. If a command is an executable, `type` will either return 'hashed' if the executable has been executed at least once during the session, or it would return the path to the executable if it has not.
 
 Use the `type` command to answer the following questions
 
  - What is the type of the `cd` command?
  - What is the type of the `ls` command?
+ - what is the type of the `python` command?
 
 ## Command Line Arguments
 Command line arguments can be passed to a shell script just like any c program.  The number of command line arguments passed is stored in a variable named `$#` and each argument is stored in `$1`, `$2`,…, `$n`.  The variable `$0` is the name of the program by convention.  Here is an example:
@@ -185,14 +186,14 @@ The task for the student for this lab is to implement a script interpreter simil
 - The interpreter will have one argument, the script that it will interpret.
 - If there is no argument, or the argument is not a script file, it should print out usage information before exiting
 - To determine if a file is not a script file, check the first line of the file to see if it is `#! /bin/cash`
-- If any errors are encountered during program execution, the program should print out error information and exit.  
+- If any errors are encountered during program execution, the program should print out error information and exit.
 - No segmentation faults should be allowed to occur.
 - The interpreter should be able to support the following types of commands in the script:
    a) `cd`
    b) `pwd`
    c) `export`
    d) `echo`
-   e) any program that is either user created (if given the path to it), or can be found in one of the directories specified in `$PATH`
+   e) any program that is either user created (if given the path to it), or can be found in one of the directories specified in `$PATH`[for example, the program `gedit` should be able to be executed from the interpreter, along with `anyopen` or even the interpreter that is the task for this lab]
 - The interpreter should be able to ignore all text following a comment
 - The interpreter should be able to run any command in the background(if the command has a `&` at the end of it), and when the background process is complete, a line should be printed in the following format:
 
