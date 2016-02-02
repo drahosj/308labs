@@ -99,7 +99,7 @@ anyopen from output of the children.
 
 ### Test Case
 ~~~
-./anyopen test.foo test.bar test.t test.f test.long
+./anyopen test.foo test.bar test.t test.f test.long notexisting.long
 ~~~
 
 This demonstrates the echo and cat commands, as well as both 0 and nonzero (false) return
