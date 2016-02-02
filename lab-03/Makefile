@@ -1,4 +1,4 @@
-OBJECTS=main.o
+OBJECTS=main.o cash_api.o
 CFLAGS=-g -Wall -Werror -pedantic -Wextra -std=gnu11
 
 all: cash

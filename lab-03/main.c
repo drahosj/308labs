@@ -3,8 +3,11 @@
 #include <unistd.h>
 #include <string.h>
 
+#include "cash_api.h"
+
 static int run_shell(FILE * input);
 static void usage();
+static int test_builtin(size_t argc, char ** argv);
 
 /* Exit values:
  * 0 - Success
@@ -47,11 +50,21 @@ int main(int argc, char ** argv)
 		free(line);
 	}
 
+	/* Register a test builtin */
+	register_builtin("test", &test_builtin);
+
 	int retval;
 	retval = run_shell(input);
 	fclose(input);
 
 	return retval;
+}
+
+static int test_builtin(size_t argc, char ** argv)
+{
+	puts("Hello, world!");
+	printf("%zd args, of which the first is %s", argc, argv[0]);
+	return 0;
 }
 
 static void usage()
