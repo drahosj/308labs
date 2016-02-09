@@ -103,7 +103,7 @@ Add `pthread_join` calls to pthread_test.c after the creation and checking of th
 Now that some code examples have been presented, it is time to examine a concrete code example.  Examine the `parallel_merge.c` file in the folder.  The program is a simple program that generates a large set of random numbers that will populate an array, which it then prints out to a file for reference.  Then the program will perform a merge sort on the set using pthreads, as the array is just too large to do with recursion, and it would be too time consuming to perform using a for loop.  Once the merge sort is complete, then the sorted array will be printed out into a different file for comparison.
 
 # Tasks for this lab
-Now that thread creation and joining have been introduced, it is time to do something fun with it.  The student will be tasked with writing a program that would solve an extension to the eight queens puzzle, the N queens puzzle, using pthreads.  For further information regarding the eight queens puzzle, you can read more about it at [https://en.wikipedia.org/wiki/Eight_queens_puzzle](https://en.wikipedia.org/wiki/Eight_queens_puzzle).  Skeleton code for this lab's task is provided in the `nqueens` folder.  Please read through it and understand how it runs before beginning work on the task.  Note the following:
+Now that thread creation and joining have been introduced, it is time to do something fun with it.  The student will be tasked with writing a program that would solve an extension to the eight queens puzzle, the N queens puzzle, using pthreads.  For further information regarding the eight queens puzzle, you can read more about it at [https://en.wikipedia.org/wiki/Eight_queens_puzzle](https://en.wikipedia.org/wiki/Eight_queens_puzzle).  Skeleton code for this lab's task is provided in the `nqueens` folder.  This code is based on the algorithm found at [https://en.wikibooks.org/wiki/Algorithm_Implementation/Miscellaneous/N-Queens](https://en.wikibooks.org/wiki/Algorithm_Implementation/Miscellaneous/N-Queens).  This code is based on the algorithm found at [https://en.wikibooks.org/wiki/Algorithm_Implementation/Miscellaneous/N-Queens](https://en.wikibooks.org/wiki/Algorithm_Implementation/Miscellaneous/N-Queens).  Please read through it and understand how it runs before beginning work on the task.  Note the following:
 
 - Currently, the skeleton code can be compiled and executed, though it uses one thread to find all solutions.
 - The single thread solution takes exponentially more time to compute as N increases; this can be greatly reduced if parallelized.
@@ -134,17 +134,35 @@ $ make
 $ make
 ~~~
 
-5. Once `make` completes execution, an executable of `nqueens.c` will be available to execute.
+5. Once `make` completes execution, an executable of `nqueens.c` will be available to execute.  To test the program run the following command:
+
+~~~bash
+$./nqueens -n 10 -v -d
+~~~
+
+The programm reccognizes the following flags:
+    
+    - `n`: The number of queens to use
+    - `t`: Uses multiple threads to solve
+    - `v`: Display verbose output
+    - `d`: Display the chess boards with the arrangement of queens
 
 From here on, to recompile `nqueens.c` should be performed using the `make` command.  
 
-#Hint
+## What to submit
+You should submit your working code which can find the number of solutions to the N Queen Problem both using N threads and 1 thread depending on the `-t` flag.  You should study how threadding effects the time for different numbers of threads.  Why is it not linear as the number of threads increases?  Is there solutions for which one thread is faster than multiple threads?  Please answer all of these questions and give some thoughtful analysis in your lab report.
+
+# Hint
+The threadded solution should complete considerably faster than the single threaded solution for most N.  If you are not seeing this there is a good chance you are only spawning one thread at a time instead of all at once.  The `-v` flag is useful to see if this is happening.
+
+There is not one correct solution to this problem, but there is one that is easiest to implement.  The idea is to use N threads to solve the N queens.  Think about what the `for` loop in main is doing, and how each itteration could be done at the same time.
 
 # Extra Credit
 Extra credit will be given for this lab if the program is capable of:
 
-- handling matrices of any size.
+- Solving the N queens problem with M threads, where M not equal to N.
+- Solving for other chess peices such as knights or bishops.
 
 # License
-This lab write up and all accompany materials are distributed under the MIT License.  For more information, read the accompaning LICENSE file distributed with the source code.
+This lab write is distributed under the MIT License.  Accompaning materials are distributed under GNU General Public License.  For more information, read the accompaning LICENSE file distributed with the source code.
 
