@@ -100,7 +100,21 @@ Add `pthread_join` calls to pthread_test.c after the creation and checking of th
 - Does it match with one of the expected outputs of the program?
 
 # Example program
-Now that some code examples have been presented, it is time to examine a concrete code example.  Examine the `parallel_merge.c` file in the folder.  The program is a simple program that generates a large set of random numbers that will populate an array, which it then prints out to a file for reference.  Then the program will perform a merge sort on the set using pthreads, as the array is just too large to do with recursion, and it would be too time consuming to perform using a for loop.  Once the merge sort is complete, then the sorted array will be printed out into a different file for comparison.
+Now that some code examples have been presented, it is time to examine a concrete code example.  Examine the `parallel_merge.c` file in the folder.  The program is a simple program that generates a large set of random numbers that will populate an array, which it then prints out to a file for reference.  Then the program will perform a merge sort on the set using pthreads, as the array is just too large to do with recursion, and it would be too time consuming to perform using a for loop.  Once the merge sort is complete, then the sorted array will be printed out into a different file for comparison.  To compile the program run the command:
+
+~~~bash
+$ gcc -o parallel_merge parallel_merge.c -pthread
+~~~
+
+This will compile the program in `parallel_merge.c` into the program `parallel_merge`.  Note that the program can take multiple arguments, or none at all.  For the purpose of this lab, run the program as follows:
+
+~~~bash
+$ ./parallel_merge -v -n 4096 > out.log
+~~~
+
+The `-v` option makes this program become verbose, the `-n` sets the array size to be the number following it, and the `-s` option(not shown here) will set the seed of the random number generator to be the number following it.  Note that running the program in this fashion produces a lot of output to `stdout`, thus, it is redirected to `out.log`.  The original array is printed out to `in_array.dat` and the sorted array is printed out to `out_array.dat`.
+
+The student is encouraged to play around with the parameters passed to the program to better understand how it works.
 
 # Tasks for this lab
 Now that thread creation and joining have been introduced, it is time to do something fun with it.  The student will be tasked with writing a program that would solve an extension to the eight queens puzzle, the N queens puzzle, using pthreads.  For further information regarding the eight queens puzzle, you can read more about it at [https://en.wikipedia.org/wiki/Eight_queens_puzzle](https://en.wikipedia.org/wiki/Eight_queens_puzzle).  Skeleton code for this lab's task is provided in the `nqueens` folder.  This code is based on the algorithm found at [https://en.wikibooks.org/wiki/Algorithm_Implementation/Miscellaneous/N-Queens](https://en.wikibooks.org/wiki/Algorithm_Implementation/Miscellaneous/N-Queens).  Please read through it and understand how it runs before beginning work on the task.  Note the following:
