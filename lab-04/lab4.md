@@ -103,7 +103,7 @@ Add `pthread_join` calls to pthread_test.c after the creation and checking of th
 Now that some code examples have been presented, it is time to examine a concrete code example.  Examine the `parallel_merge.c` file in the folder.  The program is a simple program that generates a large set of random numbers that will populate an array, which it then prints out to a file for reference.  Then the program will perform a merge sort on the set using pthreads, as the array is just too large to do with recursion, and it would be too time consuming to perform using a for loop.  Once the merge sort is complete, then the sorted array will be printed out into a different file for comparison.
 
 # Tasks for this lab
-Now that thread creation and joining have been introduced, it is time to do something fun with it.  The student will be tasked with writing a program that would solve the eight queens problem using pthreads.  The specification for the program is as follows:
+Now that thread creation and joining have been introduced, it is time to do something fun with it.  The student will be tasked with writing a program that would solve an extension to the eight queens puzzle using pthreads.  For further information regarding the eight queens puzzle, you can read more about it at [https://en.wikipedia.org/wiki/Eight_queens_puzzle](https://en.wikipedia.org/wiki/Eight_queens_puzzle).  Skeleton code for this lab's task is provided.  Please read through it and understand how it runs before beginning work on the task.:
 
 - The program is expecting three arguments: 
     1. A file containing the numbers for the first matrix
