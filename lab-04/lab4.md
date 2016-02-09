@@ -114,7 +114,11 @@ $ ./parallel_merge -v -n 4096 > out.log
 
 The `-v` option makes this program become verbose, the `-n` sets the array size to be the number following it, and the `-s` option(not shown here) will set the seed of the random number generator to be the number following it.  Note that running the program in this fashion produces a lot of output to `stdout`, thus, it is redirected to `out.log`.  The original array is printed out to `in_array.dat` and the sorted array is printed out to `out_array.dat`.
 
-The student is encouraged to play around with the parameters passed to the program to better understand how it works.
+The student is encouraged to play around with the parameters passed to the program to better understand how it works.  To see how long it takes the program to do the merge, run:
+
+~~~bash
+$ time ./parallel_merge -n 4096
+~~~
 
 # Tasks for this lab
 Now that thread creation and joining have been introduced, it is time to do something fun with it.  The student will be tasked with writing a program that would solve an extension to the eight queens puzzle, the N queens puzzle, using pthreads.  For further information regarding the eight queens puzzle, you can read more about it at [https://en.wikipedia.org/wiki/Eight_queens_puzzle](https://en.wikipedia.org/wiki/Eight_queens_puzzle).  Skeleton code for this lab's task is provided in the `nqueens` folder.  This code is based on the algorithm found at [https://en.wikibooks.org/wiki/Algorithm_Implementation/Miscellaneous/N-Queens](https://en.wikibooks.org/wiki/Algorithm_Implementation/Miscellaneous/N-Queens).  Please read through it and understand how it runs before beginning work on the task.  Note the following:
