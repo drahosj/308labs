@@ -3,6 +3,7 @@
 #include <unistd.h>
 #include <string.h>
 #include <dlfcn.h>
+#include <sys/wait.h>
 
 #include "cash_api.h"
 
@@ -114,7 +115,17 @@ static int run_shell(FILE * input)
 		command_type builtin;
 		builtin = get_builtin(argv[0]);
 		if (builtin == NULL) {
-			puts(argv[0]);
+			int status;
+
+			pid_t pid = fork();
+			if (pid == 0) {
+				execvp(argv[0], argv);
+			} else if (pid > 0) {
+				wait(&status);
+			} else {
+				perror("fork");
+			}
+
 		} else {
 			(*builtin)(argc, argv);
 		}

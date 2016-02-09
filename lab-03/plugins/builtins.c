@@ -37,7 +37,7 @@ static int builtin_cd(size_t argc, char ** argv)
 		dest = "/";
 	}
 
-	if(!chdir(dest)) {
+	if(chdir(dest) == -1) {
 		perror("chdir");
 		return -1;
 	}
