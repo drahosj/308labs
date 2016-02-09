@@ -103,29 +103,47 @@ Add `pthread_join` calls to pthread_test.c after the creation and checking of th
 Now that some code examples have been presented, it is time to examine a concrete code example.  Examine the `parallel_merge.c` file in the folder.  The program is a simple program that generates a large set of random numbers that will populate an array, which it then prints out to a file for reference.  Then the program will perform a merge sort on the set using pthreads, as the array is just too large to do with recursion, and it would be too time consuming to perform using a for loop.  Once the merge sort is complete, then the sorted array will be printed out into a different file for comparison.
 
 # Tasks for this lab
-Now that thread creation and joining have been introduced, it is time to do something fun with it.  The student will be tasked with writing a program that would solve an extension to the eight queens puzzle using pthreads.  For further information regarding the eight queens puzzle, you can read more about it at [https://en.wikipedia.org/wiki/Eight_queens_puzzle](https://en.wikipedia.org/wiki/Eight_queens_puzzle).  Skeleton code for this lab's task is provided.  Please read through it and understand how it runs before beginning work on the task.:
+Now that thread creation and joining have been introduced, it is time to do something fun with it.  The student will be tasked with writing a program that would solve an extension to the eight queens puzzle, the N queens puzzle, using pthreads.  For further information regarding the eight queens puzzle, you can read more about it at [https://en.wikipedia.org/wiki/Eight_queens_puzzle](https://en.wikipedia.org/wiki/Eight_queens_puzzle).  Skeleton code for this lab's task is provided in the `nqueens` folder.  Please read through it and understand how it runs before beginning work on the task.  Note the following:
 
-- The program is expecting three arguments: 
-    1. A file containing the numbers for the first matrix
-    2. A file containing the numbers for the second matrix
-    3. A path name for the numbers of the product matrix
-- All of the files will be ASCII .dat files.
-- If there are insufficient arguments, or one or more arguments cannot be opened, the program should print usage information before exiting.
-- If any errors are encountered during program execution, the program should print out error information and exit.  
-- No segmentation faults should be allowed to occur.
-- The output file should be formatted in a similar fashion to the input files.
+- Currently, the skeleton code can be compiled and executed, though it uses one thread to find all solutions.
+- The single thread solution takes exponentially more time to compute as N increases; this can be greatly reduced if parallelized.
+- A library, `libresuse` is used in this lab exercise.  This is a library to help keep track of, and to easily display process and thread resource usage while executing any program it is used in.
 
-Example input files will be available in the lab repository.
+The task left for the student is as follows:
+
+- Modify the skeleton code in `nqueens.c` to be able to solve the N queens problem in parallel using the `pthread` library.
+
+Before any work should start on the program, please perform the following instructions to acquire all the necessary elements to build and run the skeleton code:
+
+1. Navigate to the `nqueens` directory
+2. In the directory, clone the `libresuse` library into the directory by executing:
+
+~~~bash
+$ git clone git@github.com:jvens/libresuse.git
+~~~
+
+3. Once the cloning of the repository is complete, navigate into the `libresuse` directory and execute:
+
+~~~bash
+$ make
+~~~
+
+4. Once `make` is done executing, navigate back to the `nqueens` directory and execute:
+
+~~~bash
+$ make
+~~~
+
+5. Once `make` completes execution, an executable of `nqueens.c` will be available to execute.
+
+From here on, to recompile `nqueens.c` should be performed using the `make` command.  
 
 #Hint
-To make sure that the matrix multiplication is performed as fast as possible, each entry in the output matrix should have its own thread. However, this is not possible due to the fact that there is a limit of 1024 threads that can be allocated using pthreads at any given time, and that there are 4096 entries in the output matrix(assuming that the size of the input matrices are 64x64). Due to this, one thread per entry in the output matrix is not possible. However, there are ways to get around it, and it is up to the student how best to circumvent this limitation.
 
 # Extra Credit
 Extra credit will be given for this lab if the program is capable of:
 
 - handling matrices of any size.
-    + Note that in the example input files, the first line is `#N = 64`. This line should tell the program the size of the matrix of the input file.
-- The program can perform matrix multiplication in the most optimal way. This means that it should be on par with, or beat the program written to calculate the solution to the grading matrices.
 
 # License
 This lab write up and all accompany materials are distributed under the MIT License.  For more information, read the accompaning LICENSE file distributed with the source code.
