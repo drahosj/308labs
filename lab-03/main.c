@@ -88,7 +88,14 @@ static int run_shell(FILE * input)
 	size_t len = 0;
 	ssize_t line_size;
 	
+	if (input == stdin) {
+		printf("$ ");
+	}
 	while((line_size = getline(&line, &len, input))) {
+		if (input == stdin) {
+			printf("$ ");
+		}
+
 		if (line_size < 0) {
 			perror("getline");
 			free(line);
