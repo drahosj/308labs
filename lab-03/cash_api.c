@@ -1,16 +1,37 @@
 #include <stdio.h>
+#include <string.h>
 
 #include "cash_api.h"
 
-ssize_t num_builtins = 0;
+static size_t num_builtins = 0;
 
-ssize_t register_builtin(char * command, int(*fn)(size_t argc, char ** argv))
+command_type builtins[MAX_BUILTINS];
+char commands[MAX_BUILTINS][MAX_COMMAND_LENGTH + 1];
+
+ssize_t register_builtin(char * command, command_type fn)
 {
-	char * argv_v = NULL;
+	if (num_builtins < MAX_BUILTINS) {
+		builtins[num_builtins] = fn;
+		strncpy(commands[num_builtins], command, MAX_COMMAND_LENGTH);
+		num_builtins++;
+	} else {
+		return -1;
+	}
 
-	printf("Registering and testing new builtin %s\n", command);
+	return num_builtins;
+}
 
-	(*fn)(0, &argv_v);
+size_t get_num_builtins()
+{
+	return num_builtins;
+}
 
-	return ++num_builtins;
+command_type get_builtin(char * cmd)
+{
+	for(size_t i = 0; i < num_builtins; i++) {
+		if (strncmp(commands[i], cmd, MAX_COMMAND_LENGTH) == 0) {
+			return builtins[i];
+		}
+	}
+	return NULL;
 }

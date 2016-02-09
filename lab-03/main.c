@@ -6,9 +6,10 @@
 
 #include "cash_api.h"
 
+#define MAX_ARGC 32
+
 static int run_shell(FILE * input);
 static void usage();
-static int test_builtin(size_t argc, char ** argv);
 
 /* Exit values:
  * 0 - Success
@@ -51,11 +52,8 @@ int main(int argc, char ** argv)
 		free(line);
 	}
 
-	/* TEMP STUFF HERE */
-	/* Register a test builtin */
-	register_builtin("test", &test_builtin);
-
-	void * test_plugin = dlopen("plugins/test.so", RTLD_NOW);
+	/* Load required shell builtins */
+	void * test_plugin = dlopen("plugins/builtins.so", RTLD_NOW);
 	if (test_plugin != NULL) {
 		void (*load)(void);
 
@@ -65,24 +63,17 @@ int main(int argc, char ** argv)
 		} else {
 			fputs("Plugin didn't have a plugin_load function\n", stderr);
 		}
-		dlclose(test_plugin);
 	} else {
-		fputs("Unable to open test plugin file\n", stderr);
+		fputs("Unable to open builtins plugin file\n", stderr);
 	}
 	/* END TEMP STUFF */
 
 	int retval;
 	retval = run_shell(input);
 	fclose(input);
+	dlclose(test_plugin);
 
 	return retval;
-}
-
-static int test_builtin(size_t argc, char ** argv)
-{
-	puts("Hello, world!");
-	printf("%zd args, of which the first is %s", argc, argv[0]);
-	return 0;
 }
 
 static void usage()
@@ -95,14 +86,38 @@ static int run_shell(FILE * input)
 	char * line = NULL;
 	size_t len = 0;
 	ssize_t line_size;
-
+	
 	while((line_size = getline(&line, &len, input))) {
 		if (line_size < 0) {
 			perror("getline");
 			free(line);
 			return 127;
 		}
-		fputs(line, stdout);
+
+		/* Check for empty line */
+		if (line[0] == '\n') {
+			continue;
+		}
+
+		line = strtok(line, "\n");
+
+		size_t argc;
+		char *argv[MAX_ARGC];
+		argv[0] = strtok(line, " ");
+		for (argc = 1; argc < MAX_ARGC; argc++) {
+			argv[argc] = strtok(NULL, " ");
+			if (argv[argc] == NULL) {
+				break;
+			}
+		}
+		
+		command_type builtin;
+		builtin = get_builtin(argv[0]);
+		if (builtin == NULL) {
+			puts(argv[0]);
+		} else {
+			(*builtin)(argc, argv);
+		}
 	}
 	
 	free(line);
