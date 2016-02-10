@@ -11,7 +11,7 @@
 
 static int run_shell(FILE * input);
 static void usage();
-static void load_plugins();
+static int load_plugins();
 
 /* Exit values:
  * 0 - Success
@@ -54,7 +54,9 @@ int main(int argc, char ** argv)
 		free(line);
 	}
 
-	load_plugins();
+	if (load_plugins()) {
+		return 2;
+	}
 
 	int retval;
 	retval = run_shell(input);
@@ -63,12 +65,16 @@ int main(int argc, char ** argv)
 	return retval;
 }
 
-static void load_plugins()
+static int load_plugins()
 {
 	char * line = NULL;
 	size_t len = 0;
 
 	FILE * config = fopen("plugins.conf", "r");
+	if (config == NULL) {
+		perror("fopen");
+		return 2;
+	}
       while (getline(&line, &len, config) != -1) {
             if ((line[0] == '\n') || (line[0] == '#')) {
                   continue;
@@ -92,6 +98,7 @@ static void load_plugins()
 
 	}
 	fclose(config);
+	return 0;
 }
 
 static void usage()
@@ -148,6 +155,15 @@ static int run_shell(FILE * input)
 			}
 		}
 
+		int fg;
+		if ((argv[argc - 1][0] == '&') && (strlen(argv[argc - 1]) == 1)) {
+			argv[argc - 1] = NULL;
+			argc -= 1;
+			fg = 0;
+		} else {
+			fg = 1;
+		}
+
 		if (argv[0] == NULL) {
 			continue;
 		}
@@ -161,7 +177,33 @@ static int run_shell(FILE * input)
 			if (pid == 0) {
 				execvp(argv[0], argv);
 			} else if (pid > 0) {
-				pid = wait(&status);
+				if (!fg) {
+					fprintf(stderr, "[%d]\n", pid);
+				}
+
+				pid_t waitresult;
+				do {
+					waitresult = waitpid(-1, &status, WNOHANG);
+					if (waitresult == -1) {
+						perror("waitpid");
+						return 3;
+					} else if (waitresult == pid) {
+						break;
+					} else if (waitresult > 0) {
+						/* Handle normal exit */
+						if (WIFEXITED(status)) {
+							fprintf(stderr,
+				"Child with pid %d exited with status %d\n", 
+				waitresult, WEXITSTATUS(status));
+						}
+
+						/* Handle signalled termination */
+						if (WIFSIGNALED(status)) {
+				fprintf(stderr, "Child with pid %d terminated by signal %d\n",
+				waitresult, WTERMSIG(status));	
+						}
+					}
+				} while (fg);
 			} else {
 				perror("fork");
 			}
