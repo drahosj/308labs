@@ -93,7 +93,7 @@ static int load_plugins()
 				fputs("Plugin didn't have a plugin_load function\n", stderr);
 			}
 		} else {
-			fputs("Unable to open  plugin file\n", stderr);
+			fprintf(stderr, "Unable to open  plugin file '%s'\n", line);
 		}
 
 	}
