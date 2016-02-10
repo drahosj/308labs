@@ -11,6 +11,7 @@
 
 static int run_shell(FILE * input);
 static void usage();
+static void load_plugins();
 
 /* Exit values:
  * 0 - Success
@@ -53,28 +54,44 @@ int main(int argc, char ** argv)
 		free(line);
 	}
 
-	/* Load required shell builtins */
-	void * test_plugin = dlopen("plugins/builtins.so", RTLD_NOW);
-	if (test_plugin != NULL) {
-		void (*load)(void);
-
-	     	* (void**) &load = dlsym(test_plugin, "plugin_load");
-		if (load != NULL) {
-			(*load)();
-		} else {
-			fputs("Plugin didn't have a plugin_load function\n", stderr);
-		}
-	} else {
-		fputs("Unable to open builtins plugin file\n", stderr);
-	}
-	/* END TEMP STUFF */
+	load_plugins();
 
 	int retval;
 	retval = run_shell(input);
 	fclose(input);
-	dlclose(test_plugin);
 
 	return retval;
+}
+
+static void load_plugins()
+{
+	char * line = NULL;
+	size_t len = 0;
+
+	FILE * config = fopen("plugins.conf", "r");
+      while (getline(&line, &len, config) != -1) {
+            if ((line[0] == '\n') || (line[0] == '#')) {
+                  continue;
+            }
+
+		line = strtok(line, "\n");
+
+		void * plugin = dlopen(line, RTLD_NOW);
+		if (plugin != NULL) {
+			void (*load)(void);
+
+			* (void**) &load = dlsym(plugin, "plugin_load");
+			if (load != NULL) {
+				(*load)();
+			} else {
+				fputs("Plugin didn't have a plugin_load function\n", stderr);
+			}
+		} else {
+			fputs("Unable to open  plugin file\n", stderr);
+		}
+
+	}
+	fclose(config);
 }
 
 static void usage()
@@ -88,37 +105,53 @@ static int run_shell(FILE * input)
 	size_t len = 0;
 	ssize_t line_size;
 	
-	if (input == stdin) {
-		printf("$ ");
-	}
-	while((line_size = getline(&line, &len, input))) {
+	while(1) {
 		if (input == stdin) {
 			printf("$ ");
 		}
 
+		line_size = getline(&line, &len, input);
 		if (line_size < 0) {
 			perror("getline");
 			free(line);
 			return 127;
+		} else if (line_size == 0) {
+			free(line);
+			return 0;
+		}
+
+		/* Advance to first non-printing character */
+		char * start;
+		for(start = line; *start <= ' '; start++) {
+			if (*start == '\n') {
+				break;
+			}
 		}
 
 		/* Check for empty line */
-		if (line[0] == '\n') {
+		if (start[0] == '\n') {
 			continue;
 		}
 
-		line = strtok(line, "\n");
+		start = strtok(start, "\n");
 
 		size_t argc;
 		char *argv[MAX_ARGC];
-		argv[0] = strtok(line, " ");
+		argv[0] = strtok(start, " ");
 		for (argc = 1; argc < MAX_ARGC; argc++) {
 			argv[argc] = strtok(NULL, " ");
 			if (argv[argc] == NULL) {
 				break;
+			} else if (argv[argc][0] == '#') {
+				argv[argc] = NULL;
+				break;
 			}
 		}
-		
+
+		if (argv[0] == NULL) {
+			continue;
+		}
+
 		command_type builtin;
 		builtin = get_builtin(argv[0]);
 		if (builtin == NULL) {
@@ -128,13 +161,14 @@ static int run_shell(FILE * input)
 			if (pid == 0) {
 				execvp(argv[0], argv);
 			} else if (pid > 0) {
-				wait(&status);
+				pid = wait(&status);
 			} else {
 				perror("fork");
 			}
 
 		} else {
 			(*builtin)(argc, argv);
+			fflush(stdout);
 		}
 	}
 	
