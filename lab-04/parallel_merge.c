@@ -27,55 +27,133 @@ struct sub_array{
  */
 int merge(struct sub_array * s_array, int sub_array_start ,int sub_array_end, int * array, int array_start, int array_end){
 	int i;
+	int i_n;
 	int j;
+	int j_n;
+	int k;
 	int a_pos;
 	int b_pos;
-	if((sub_array_end - sub_array_start) > 2){
-		// merge left
-		merge(s_array, sub_array_start ,sub_array_end / 2, array, array_start, array_end / 2);
-		// merge right
-		merge(s_array, sub_array_end / 2 + 1, sub_array_end, array, array_end / 2 + 1, array_end);
-		for(i = array_start; i < array_end; i++){
-			
+	int c_pos;
+	int array_length = array_end - array_start;
+	// variable to tell when to sort from `temp_array` to `array`
+	int t = 0;
+	int * temp_array;
+
+	temp_array = calloc(array_length, sizeof(int));
+	if(NULL == temp_array){
+		perror("calloc encountered an error");
+		return -1;
+	}else{
+		if(verbose_flag) printf("array `temp_array` allocated\n");
+	}
+
+	for(i = 1; i < (sub_array_end - sub_array_start); i = i << 1){
+		if(verbose_flag) printf("in outer for loop, i = %d\n", i);
+		if(i == 1){
+			j = 0;
+			for(i_n = 0; i_n < (sub_array_end - sub_array_start); i_n = i_n + (i << 1)){
+				if(verbose_flag) printf("in inner for loop, i_n = %d\n", i_n);
+				a_pos = 0;
+				b_pos = 0;
+				// traverse through the `array`s in the adjacent elements in the `sub_array` array
+				// and do the merge into `temp_array`
+				while(a_pos < s_array[i_n].length && b_pos < s_array[i_n + 1].length){
+					if(s_array[i_n].array[a_pos] <= s_array[i_n + 1].array[b_pos]){
+						if(verbose_flag) printf("element %d of sub-array %d is less than or equal to element %d of sub-array %d\n", a_pos, i_n, b_pos, (i_n + 1));
+						temp_array[j] = s_array[i_n].array[a_pos];
+						if(verbose_flag) printf("temp_array[%d] = %d\n", j, temp_array[j]);
+						j++;
+						a_pos++;
+					}else{
+						if(verbose_flag) printf("element %d of sub-array %d is less than or equal to element %d of sub-array %d\n", b_pos, (i_n + 1), a_pos, i_n);
+						temp_array[j] = s_array[i_n + 1].array[b_pos];
+						if(verbose_flag) printf("temp_array[%d] = %d\n", j, temp_array[j]);
+						j++;
+						b_pos++;
+					}
+				}
+
+				if(a_pos >= s_array[i_n].length){
+					if(verbose_flag) printf("sub-array %d has been exhausted\n", i_n);
+					while(b_pos < s_array[i_n + 1].length){
+						temp_array[j] = s_array[i_n + 1].array[b_pos];
+						if(verbose_flag) printf("temp_array[%d] = %d\n", j, temp_array[j]);
+						j++;
+						b_pos++;
+					}
+				}else{
+					if(verbose_flag) printf("sub-array %d has been exhausted\n", (i_n + 1));
+					while(a_pos < s_array[i_n].length){
+						temp_array[j] = s_array[i_n].array[a_pos];
+						if(verbose_flag) printf("temp_array[%d] = %d\n", j, temp_array[j]);
+						j++;
+						a_pos++;
+					}
+				}
+			}
+			t = !t;
+		}else if(t){
+			// merge from `temp_array` into `array`
+			for(i_n = 0; i_n < array_length; i_n = i_n + ((i * s_array[0].length) << 1)){
+				if(verbose_flag) printf("in inner loop, i_n = %d\n", i_n);
+				a_pos = i_n;
+				// if i_n + i is greater than array length, then pick array length, otherwise pick i_n + i
+				b_pos = (i_n + (i * s_array[0].length)) > (array_length) ? (array_length) : (i_n + (i * s_array[0].length));
+				j_n = b_pos;
+				// if i_n + (i << 1) is greater than array length, then pick array length, otherwise pick i_n + (i << 1)
+				c_pos = (i_n + ((i * s_array[0].length) << 1)) > (array_length) ? (array_length) : (i_n + ((i * s_array[0].length) << 1));
+				if(verbose_flag) printf("a_pos = %d; b_pos = %d; c_pos = %d\n", a_pos, b_pos, c_pos);
+				for(j = a_pos; j < (i_n + ((i * s_array[0].length) << 1)); j++){
+					if((a_pos < j_n) && ((b_pos >= c_pos) || (temp_array[a_pos] <= temp_array[b_pos]))){
+						if(verbose_flag) printf("element %d of `temp_array` is less than or equal to element %d of `temp_array`\n", a_pos, b_pos);
+						array[j] = temp_array[a_pos];
+						a_pos++;
+						if(verbose_flag) printf("array[%d] = %d\n", j, array[j]);
+					}else{
+						if(verbose_flag) printf("element %d of `temp_array` is less than or equal to element %d of `temp_array`\n", b_pos, a_pos);
+						array[j] = temp_array[b_pos];
+						b_pos++;
+						if(verbose_flag) printf("array[%d] = %d\n", j, array[j]);
+					}
+				}
+			}
+			t = !t;
+		}else{
+			// merge from `array into `temp_array`
+			for(i_n = 0; i_n < array_length; i_n = i_n + ((i * s_array[0].length) << 1)){
+				if(verbose_flag) printf("in inner loop, i_n = %d\n", i_n);
+				a_pos = i_n;
+				// if i_n + i is greater than array length, then pick array length, otherwise pick i_n + i
+				b_pos = (i_n + (i * s_array[0].length)) > (array_length) ? (array_length) : (i_n + (i * s_array[0].length));
+				j_n = b_pos;
+				// if i_n + (i << 1) is greater than array length, then pick array length, otherwise pick i_n + (i << 1)
+				c_pos = (i_n + (i << 1)) > (array_length) ? (array_length) : (i_n + ((i * s_array[0].length) << 1));
+				if(verbose_flag) printf("a_pos = %d; b_pos = %d; c_pos = %d\n", a_pos, b_pos, c_pos);
+				for(j = a_pos; j < (i_n + ((i * s_array[0].length) << 1)); j++){
+					if((a_pos < j_n) && ((b_pos >= c_pos) || (array[a_pos] <= array[b_pos]))){
+						if(verbose_flag) printf("element %d of `array` is less than or equal to element %d of `array`\n", a_pos, b_pos);
+						temp_array[j] = array[a_pos];
+						a_pos++;
+						if(verbose_flag) printf("temp_array[%d] = %d\n", j, temp_array[j]);
+					}else{
+						if(verbose_flag) printf("element %d of `array` is less than or equal to element %d of `array`\n", b_pos, a_pos);
+						temp_array[j] = array[b_pos];
+						b_pos++;
+						if(verbose_flag) printf("temp_array[%d] = %d\n", j, temp_array[j]);
+					}
+				}
+			}
+			t = !t;
+		}
+	}
+	if(verbose_flag) printf("t = %d\n", t);
+	if(t){
+		if(verbose_flag) printf("copying `temp_array` to `array`\n", t);
+		for(i = 0; i < array_length; i++){
+			array[i] = temp_array[i];
 		}
 	}else{
-		i = sub_array_start;
-		j = array_start;
-		if(verbose_flag) printf("merging subarrays %d and %d\n", i, i + 1);
-		a_pos = 0;
-		b_pos = 0;
-		while(a_pos < s_array[i].length && b_pos < s_array[i + 1].length){
-			if(s_array[i].array[a_pos] <= s_array[i + 1].array[b_pos]){
-				if(verbose_flag) printf("element %d of sub-array %d is less than or equal to element %d of sub-array %d\n", a_pos, i, b_pos, i + 1);
-				array[j] = s_array[i].array[a_pos];
-				if(verbose_flag) printf("element %d of `array` is: %d\n", j, array[j]);
-				j++;
-				a_pos++;
-			}else{
-				if(verbose_flag) printf("element %d of sub-array %d is less than or equal to element %d of sub-array %d\n", b_pos, i + 1, a_pos, i);
-				array[j] = s_array[i + 1].array[b_pos];
-				if(verbose_flag) printf("element %d of `array` is: %d\n", j, array[j]);
-				j++;
-				b_pos++;
-			}
-		}
-		if(a_pos == s_array[i].length){
-			while(b_pos < s_array[i + 1].length){
-				if(verbose_flag) printf("the sub-array %d has been exhausted\n", i);
-				array[j] = s_array[i + 1].array[b_pos];
-				if(verbose_flag) printf("element %d of `array` is: %d\n", j, array[j]);
-				j++;
-				b_pos++;
-			}
-		}else{
-			while(a_pos < s_array[i].length){
-				if(verbose_flag) printf("the sub-array %d has been exhausted\n", i + 1);
-				array[j] = s_array[i].array[a_pos];
-				if(verbose_flag) printf("element %d of `array` is: %d\n", j, array[j]);
-				j++;
-				a_pos++;
-			}
-		}
+		if(verbose_flag) printf("since t is 0, do nothing\n", t);
 	}
 	return 0;
 }
@@ -260,8 +338,11 @@ int main(int argc, char **argv){
 		pthread_join(threads[j], NULL);
 	}
 
-	// once all threads terminate, we do the merging
-	merge(sub_arrs, MAX_THREADS, arr, num_elements);
+	// once all threads terminate, we free the `threads` array
+	free(threads);
+
+	// and then we perform the merge
+	merge(sub_arrs, 0, MAX_THREADS, arr, 0, num_elements);
 
 	// Once merging is complete, we print out the new array
 	// first, we need to open the file
