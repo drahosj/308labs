@@ -82,7 +82,12 @@ static int run_shell(FILE * input)
 	
 	while(1) {
 		if (input == stdin) {
-			printf("$ ");
+			char * buf = malloc(512);
+			if (getcwd(buf, 512) == NULL) {
+				perror("getcwd");
+			}
+			printf("%s$ ", buf);
+			free(buf);
 		}
 
 		line_size = getline(&line, &len, input);
@@ -113,6 +118,10 @@ static int run_shell(FILE * input)
 		size_t argc;
 		char *argv[MAX_ARGC];
 		argv[0] = strtok(start, " ");
+		if (argv[0][0] == '#') {
+			continue;
+		}
+
 		for (argc = 1; argc < MAX_ARGC; argc++) {
 			char * arg = strtok(NULL, " ");
 			if (arg == NULL) {
@@ -155,7 +164,7 @@ static int run_shell(FILE * input)
 				execvp(argv[0], argv);
 
 				/* Shouldn't be reached */
-				fprintf(stderr, "%s: ", argv[0]);
+				fprintf(stderr, "cash (%s): ", argv[0]);
 				perror("exec");
 				exit(errno);
 			} else if (pid > 0) {
