@@ -12,4 +12,4 @@ cash: $(OBJECTS)
 
 
 clean:
-	rm -f cash *.o
+	rm -f cash *.o plugins/*.o

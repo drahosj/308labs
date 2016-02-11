@@ -35,6 +35,7 @@ int main(int argc, char ** argv)
 	}
 
 	FILE * input = stdin;
+	/* If it isn't a flag for interactive, assume it is a path to a script */
 	if (strcmp(argv[1], "-i") && strcmp(argv[1], "--interactive")) {
 		input = fopen(argv[1], "r");
 		if (input == NULL) {
@@ -42,6 +43,10 @@ int main(int argc, char ** argv)
 			return 2;
 		}
 
+		/* Read first line of the script and check for a shebang.
+		 * Not exactly a POSIX way of handling it by any means,
+		 * but whatever 
+		 */
 		char * line = NULL;
 		size_t len = 0;
 		if (getline(&line, &len, input) < 0) {
@@ -58,10 +63,12 @@ int main(int argc, char ** argv)
 		free(line);
 	}
 	
+	/* Load plugins */
 	if (load_plugins()) {
-		return 2;
+		return 127;
 	}
 
+	/* Run the script, clean up, and return */
 	int retval;
 	retval = run_shell(input);
 	fclose(input);
@@ -80,7 +87,12 @@ static int run_shell(FILE * input)
 	size_t len = 0;
 	ssize_t line_size;
 	
+	/* Each iteration of this loop is a single line of execution
+	 * either of the script or of the interactive shell.
+	 */
 	while(1) {
+
+		/* Print prompt if interactive */
 		if (input == stdin) {
 			char * buf = malloc(512);
 			if (getcwd(buf, 512) == NULL) {
@@ -90,17 +102,20 @@ static int run_shell(FILE * input)
 			free(buf);
 		}
 
+		/* Read a single line */
 		line_size = getline(&line, &len, input);
 		if (line_size < 0) {
 			perror("getline");
 			free(line);
 			return 127;
 		} else if (line_size == 0) {
+			/* End of file */
 			free(line);
 			return 0;
 		}
 
-		/* Advance to first non-printing character */
+		/* Advance to first printing character or newline. (This
+		 * will probably break on CRLF line-endings) */
 		char * start;
 		for(start = line; *start <= ' '; start++) {
 			if (*start == '\n') {
@@ -113,8 +128,10 @@ static int run_shell(FILE * input)
 			continue;
 		}
 
+		/* Strip trailing newline */
 		start = strtok(start, "\n");
 
+		/* Check if entire line is a comment */
 		size_t argc;
 		char *argv[MAX_ARGC];
 		argv[0] = strtok(start, " ");
@@ -122,25 +139,32 @@ static int run_shell(FILE * input)
 			continue;
 		}
 
+		/* Parse subsequent words into arguments */
 		for (argc = 1; argc < MAX_ARGC; argc++) {
 			char * arg = strtok(NULL, " ");
+			
+			/* Check for special cases */
 			if (arg == NULL) {
+				/* Out of words. No more args */
 				argv[argc] = NULL;
 				break;
 			} else if (arg[0] == '#') {
+				/* Rest of the line is a comment */
 				argv[argc] = NULL;
 				break;
-			}
-			if (arg[0] == '$') {
+			} else if (arg[0] == '$') {
+				/* Expand the variable */
 				arg = getenv(arg + 1);
 				if (arg == NULL) {
 					arg = "";
 				}
 			}
 			
+			/* Assign to argv */
 			argv[argc] = arg;
 		}
 
+		/* Determine foreground or background */
 		int fg;
 		if ((argv[argc - 1][0] == '&') && (strlen(argv[argc - 1]) == 1)) {
 			argv[argc - 1] = NULL;
@@ -150,14 +174,16 @@ static int run_shell(FILE * input)
 			fg = 1;
 		}
 
+		/* Last chance to make sure there isn't an empty line or something */
 		if (argv[0] == NULL) {
 			continue;
 		}
 
+		/* See if it's a builtin */
 		command_type builtin;
 		builtin = get_builtin(argv[0]);
 		if (builtin == NULL) {
-			int status;
+			/* It isn't a builtin. Time to fork() and exec() */
 
 			pid_t pid = fork();
 			if (pid == 0) {
@@ -168,9 +194,18 @@ static int run_shell(FILE * input)
 				perror("exec");
 				exit(errno);
 			} else if (pid > 0) {
+				/* Kick it off in the background. Print the
+				 * pid of the spawned process, and store
+				 * the process command in the pid table.
+				 */
 				if (!fg) {
 					fprintf(stderr, "[%d]\n", pid);
 
+					/* Store it in the first available entry of
+					 * the pid table. Running out of pid table
+					 * space isn't a fatal error; we will just
+					 * lose the name of this particular process.
+					 */
 					int i = 0;
 					while(1) {
 						if (i >= MAX_BG_PROCESSES) {
@@ -187,9 +222,21 @@ static int run_shell(FILE * input)
 					}
 				}
 
+				/* Check for children that have terminated. Print
+				 * their status if they have.
+				 *
+				 * If we are a foreground process, it will block on
+				 * waitpid(). Once the foreground process exits,
+				 * we will stop calling waitpid().
+				 *
+				 * If we are a background process, waitpid will not
+				 * block. However, it will keep being called until
+				 * all terminated children have been reaped.
+				 */
+				int status;
 				pid_t waitresult;
 				do {
-					waitresult = waitpid(-1, &status, WNOHANG);
+					waitresult = waitpid(-1, &status, fg ? WNOHANG : 0);
 					if (waitresult == -1) {
 						perror("waitpid");
 						return 3;
@@ -198,14 +245,13 @@ static int run_shell(FILE * input)
 					} else if (waitresult > 0) {
 						print_exit(waitresult, status);
 					}
-				} while (fg);
+				} while (waitresult);
 			} else {
 				perror("fork");
 			}
 
 		} else {
 			(*builtin)(argc, argv);
-			fflush(stdout);
 		}
 	}
 	
@@ -213,10 +259,19 @@ static int run_shell(FILE * input)
 	return 0;
 }
 
+/* Print the status and command of a background process
+ * that terminated.
+ *
+ * Note that this will only occur when another process
+ * is launched, not necessarily immediately when the
+ * background process finishes.
+ */
 static void print_exit(pid_t pid, int status)
 {
 	int exit_status;
 	char * term;
+	
+	/* Get exit status or term sig */
 	if (WIFEXITED(status)) {
 		exit_status = WEXITSTATUS(status);
 		term = "";
@@ -228,8 +283,8 @@ static void print_exit(pid_t pid, int status)
 		term = "";
 	}
 
+	/* Get the command from the pid table */
 	char * command = "ERROR: LOST";
-	
 	for (size_t i = 0; i < MAX_BG_PROCESSES; i++) {
 		if (pid == bg_pids[i]) {
 			command = bg_commands[i];
@@ -238,6 +293,7 @@ static void print_exit(pid_t pid, int status)
 		}
 	}
 
+	/* Print formatted pid, exit status, and command */
 	if (WIFEXITED(status)) {
 		fprintf(stderr, "[%d] %s%d\t\t%s\n\n", pid, term, exit_status, command);
 	}
