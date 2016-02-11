@@ -83,6 +83,8 @@ echo
 echo Now we launch another instance of CASH. See you soon!
 
 sleep 8
+echo
+echo
 
 ./cash advancedtest_stage2.sh
 

@@ -10,9 +10,10 @@ sleep 5
 
 echo
 echo We cannot cd
-sleep 2
+sleep 3
 
-echo PWD:
+echo
+echo pwd
 pwd
 sleep 2
 
@@ -78,8 +79,9 @@ echo
 echo Now that our plugins are loaded, we should have our builtins back!
 
 sleep 2
+
 echo
-echo PWD:
+echo pwd
 pwd
 sleep 4
 
