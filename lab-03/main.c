@@ -3,13 +3,20 @@
 #include <unistd.h>
 #include <string.h>
 #include <sys/wait.h>
+#include <errno.h>
 
 #include "cash_api.h"
 
 #define MAX_ARGC 32
+#define MAX_BG_PROCESSES 64
+#define MAX_BG_PROCESS_LENGTH 128
 
 static int run_shell(FILE * input);
 static void usage();
+static void print_exit(pid_t pid, int status);
+
+static char bg_commands[MAX_BG_PROCESSES][MAX_BG_PROCESS_LENGTH + 1];
+static pid_t bg_pids[MAX_BG_PROCESSES];
 
 /* Exit values:
  * 0 - Success
@@ -108,13 +115,22 @@ static int run_shell(FILE * input)
 		char *argv[MAX_ARGC];
 		argv[0] = strtok(start, " ");
 		for (argc = 1; argc < MAX_ARGC; argc++) {
-			argv[argc] = strtok(NULL, " ");
-			if (argv[argc] == NULL) {
+			char * arg = strtok(NULL, " ");
+			if (arg == NULL) {
+				argv[argc] = NULL;
 				break;
-			} else if (argv[argc][0] == '#') {
+			} else if (arg[0] == '#') {
 				argv[argc] = NULL;
 				break;
 			}
+			if (arg[0] == '$') {
+				arg = getenv(arg + 1);
+				if (arg == NULL) {
+					arg = "";
+				}
+			}
+			
+			argv[argc] = arg;
 		}
 
 		int fg;
@@ -138,9 +154,28 @@ static int run_shell(FILE * input)
 			pid_t pid = fork();
 			if (pid == 0) {
 				execvp(argv[0], argv);
+
+				/* Shouldn't be reached */
+				perror("exec");
+				exit(errno);
 			} else if (pid > 0) {
 				if (!fg) {
 					fprintf(stderr, "[%d]\n", pid);
+
+					int i = 0;
+					while(1) {
+						if (i >= MAX_BG_PROCESSES) {
+							fputs("ERR: Pid table full, command data lost!\n", stderr);
+							break;
+						}
+
+						if (bg_pids[i] == 0) {
+							bg_pids[i] = pid;
+							strncpy(bg_commands[i], argv[0], MAX_BG_PROCESS_LENGTH);
+							break;
+						}
+						i++;
+					}
 				}
 
 				pid_t waitresult;
@@ -152,18 +187,7 @@ static int run_shell(FILE * input)
 					} else if (waitresult == pid) {
 						break;
 					} else if (waitresult > 0) {
-						/* Handle normal exit */
-						if (WIFEXITED(status)) {
-							fprintf(stderr,
-				"Child with pid %d exited with status %d\n", 
-				waitresult, WEXITSTATUS(status));
-						}
-
-						/* Handle signalled termination */
-						if (WIFSIGNALED(status)) {
-				fprintf(stderr, "Child with pid %d terminated by signal %d\n",
-				waitresult, WTERMSIG(status));	
-						}
+						print_exit(waitresult, status);
 					}
 				} while (fg);
 			} else {
@@ -178,4 +202,35 @@ static int run_shell(FILE * input)
 	
 	free(line);
 	return 0;
+}
+
+static void print_exit(pid_t pid, int status)
+{
+	int exit_status;
+	char * term;
+	if (WIFEXITED(status)) {
+		exit_status = WEXITSTATUS(status);
+		term = "";
+	} else if (WIFSIGNALED(status)) {
+		exit_status = WTERMSIG(status);
+		term = "Sig:";
+	} else {
+		exit_status = 0;
+		term = "";
+	}
+
+	char * command = "ERROR: LOST";
+	
+	for (size_t i = 0; i < MAX_BG_PROCESSES; i++) {
+		if (pid == bg_pids[i]) {
+			command = bg_commands[i];
+			bg_pids[i] = 0;
+			break;
+		}
+	}
+
+	if (WIFEXITED(status)) {
+		fprintf(stderr, "[%d] %s%d\t\t%s\n\n", pid, term, exit_status, command);
+	}
+
 }
