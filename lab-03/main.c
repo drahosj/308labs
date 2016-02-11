@@ -155,6 +155,7 @@ static int run_shell(FILE * input)
 				execvp(argv[0], argv);
 
 				/* Shouldn't be reached */
+				fprintf(stderr, "%s: ", argv[0]);
 				perror("exec");
 				exit(errno);
 			} else if (pid > 0) {

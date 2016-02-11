@@ -1,4 +1,4 @@
-PLUGINS = builtins.so pluginmanager.so exit.so
+PLUGINS = echocd.so pluginmanager.so exit.so export.so
 CFLAGS = -g -Wall -Werror -Wextra -Wpedantic -std=gnu99 -shared -fPIC -iquote ..
 
 %.so: %.c
