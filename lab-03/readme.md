@@ -99,8 +99,15 @@ When running interactively, CASH is not terminated by Ctrl-C, but foreground
 processes are. Test this with sleep 10, then Ctrl-C. It behaves as expected.
 Launch a background sleep with sleep 10 &, then another foreground sleep 10. Ctrl-c
 will cancel the foreground sleep, but the background sleep will eventually finish. 
-(You will have to run other commands such as ls to get CASH to reap the
-background tasks, see Bugs).
+You will have to run other commands such as ls to get CASH to reap the
+zombie background tasks, see Bugs.
+
+Also note that if you launch a background process, such as sleep 10 &, then kill it with
+kill <pid>,
+the background handler will print the signal that terminated it. Different signals can
+be used such as SIGTERM and SIGKILL. You will probably have to run another command
+to get it to reap the zombie and display the signal that killed it.
+
 
 # Bugs
 
@@ -123,4 +130,5 @@ CASH does not implement sigchld, so it will not print a status as soon as a back
 terminates. Another command must be launched to trigger CASH to reap on the background
 processes. CASH will reap any background process that finishes while a task is running in the foreground,
 or that is ready for reaping at the moment a new background task is launched. CASH will not reap
-children while it is waiting for input from the user.
+zombie children while it is waiting for input from the user. Only launching a process will cause CASH to
+attempt to reap zombies; builtins do not trigger wait.

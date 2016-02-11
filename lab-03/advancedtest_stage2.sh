@@ -1,7 +1,9 @@
 #! /bin/cash
 
+echo
+echo
 echo Hello, welcome to the second CASH instance running.
-sleep 5
+sleep 10
 
 echo
 echo This one is missing a bunch of critical builtins, because
@@ -47,11 +49,17 @@ echo
 echo type echo
 type echo
 
+sleep 1
+echo
+echo which echo
+which echo
+
 sleep 3
 echo
 echo Because echo is also a binary provided by the system, not a builtin!
 
 sleep 3
+echo
 echo Time to do something about that.
 
 sleep 4
@@ -91,6 +99,7 @@ cd plugins
 pwd
 sleep 4
 
+echo
 echo cd ..
 cd ..
 pwd

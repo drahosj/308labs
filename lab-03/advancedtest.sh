@@ -19,8 +19,9 @@ echo
 echo You can Ctrl-C out of this at any point. CASH respects Ctrl-C when
 echo running non-interactively.
 
-sleep 10
+sleep 5
 
+echo
 echo Now check out CASHs backgrounding
 sleep 4
 
@@ -44,6 +45,7 @@ echo
 echo sleep 1 <backgrounded>
 sleep 1 &
 
+echo
 echo Sleep for a little while to reap the last sleep
 
 echo
@@ -60,7 +62,7 @@ echo sleep 10
 sleep 10
 
 echo
-echo Good, all of the children should have been reaped.
+echo All the zombie children should have been reaped.
 
 sleep 4
 
@@ -86,8 +88,11 @@ sleep 8
 echo
 echo
 
+echo ./cash advancedtest_stage2.sh
+echo
 ./cash advancedtest_stage2.sh
 
+echo
 echo So what did you think of that? Pretty neat!
 sleep 2
 exit
