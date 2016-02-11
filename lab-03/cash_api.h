@@ -13,4 +13,7 @@ ssize_t register_builtin(char * command, command_type);
 size_t get_num_builtins();
 command_type get_builtin(char * command) ;
 
+int load_plugin(char * path);
+int load_plugins();
+
 #endif

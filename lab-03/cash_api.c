@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include <dlfcn.h>
 
 #include "cash_api.h"
 
@@ -34,4 +35,53 @@ command_type get_builtin(char * cmd)
 		}
 	}
 	return NULL;
+}
+
+int load_plugin(char * path)
+{
+	/* If already open */
+	if (dlopen(path, RTLD_NOW | RTLD_NOLOAD) != NULL) {
+		return 127;
+	}
+
+	void * plugin = dlopen(path, RTLD_NOW);
+	if (plugin != NULL) {
+		void (*load)(void);
+
+		* (void**) &load = dlsym(plugin, "plugin_load");
+		if (load != NULL) {
+			(*load)();
+		} else {
+			fputs("Plugin didn't have a plugin_load function\n", stderr);
+			return 1;
+		}
+	} else {
+		fprintf(stderr, "Unable to open  plugin file '%s'\n", path);
+		return 2;
+	}
+
+	return 0;
+}
+
+int load_plugins()
+{
+      char * line = NULL;
+      size_t len = 0;
+
+      FILE * config = fopen("plugins.conf", "r");
+      if (config == NULL) {
+            perror("fopen");
+            return 2;
+      }
+      while (getline(&line, &len, config) != -1) {
+            if ((line[0] == '\n') || (line[0] == '#')) {
+                  continue;
+            }
+
+            line = strtok(line, "\n");
+
+            load_plugin(line);
+      }
+      fclose(config);
+      return 0;
 }

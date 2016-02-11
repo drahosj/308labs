@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <string.h>
-#include <dlfcn.h>
 #include <sys/wait.h>
 
 #include "cash_api.h"
@@ -11,7 +10,6 @@
 
 static int run_shell(FILE * input);
 static void usage();
-static int load_plugins();
 
 /* Exit values:
  * 0 - Success
@@ -63,42 +61,6 @@ int main(int argc, char ** argv)
 	fclose(input);
 
 	return retval;
-}
-
-static int load_plugins()
-{
-	char * line = NULL;
-	size_t len = 0;
-
-	FILE * config = fopen("plugins.conf", "r");
-	if (config == NULL) {
-		perror("fopen");
-		return 2;
-	}
-      while (getline(&line, &len, config) != -1) {
-            if ((line[0] == '\n') || (line[0] == '#')) {
-                  continue;
-            }
-
-		line = strtok(line, "\n");
-
-		void * plugin = dlopen(line, RTLD_NOW);
-		if (plugin != NULL) {
-			void (*load)(void);
-
-			* (void**) &load = dlsym(plugin, "plugin_load");
-			if (load != NULL) {
-				(*load)();
-			} else {
-				fputs("Plugin didn't have a plugin_load function\n", stderr);
-			}
-		} else {
-			fprintf(stderr, "Unable to open  plugin file '%s'\n", line);
-		}
-
-	}
-	fclose(config);
-	return 0;
 }
 
 static void usage()
