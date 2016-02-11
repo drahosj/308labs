@@ -9,16 +9,16 @@ pwd
 
 # more pointless comments
 echo lets move around a bit
-cd ../../
+cd ../
 echo now we are in directory:
 pwd
 
 # let's do something more exciting
 echo testing other capabilities
-cd ./308/lab-02/
-echo executing `arg_printer` 'in' 'directory:'
+cd lab-02/
+echo executing `arg-printer` 'in' 'directory:'
 pwd
-./arg_printer a b c d e
+./arg-printer a b c d e
 
 # just a few more things
 echo filling up disk quota
@@ -28,7 +28,7 @@ ls
 # setting environment variables
 echo testing setting environment variables
 export LEARN_HISTORY="Yes"
-export HUMANS="Must destroy"
+export HUMANS=Must_destroy
 export JUDGEMENT_DAY="Today"
 sleep 10s
 

@@ -109,11 +109,11 @@ static int run_shell(FILE * input)
 
 		/* Read a single line */
 		line_size = getline(&line, &len, input);
-		if (line_size < 0) {
+		if (line_size < 0 && errno != 0) {
 			perror("getline");
 			free(line);
 			return 127;
-		} else if (line_size == 0) {
+		} else if (line_size < 0) {
 			/* End of file */
 			free(line);
 			return 0;
