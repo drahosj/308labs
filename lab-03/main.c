@@ -4,6 +4,7 @@
 #include <string.h>
 #include <sys/wait.h>
 #include <errno.h>
+#include <signal.h>
 
 #include "cash_api.h"
 
@@ -58,9 +59,13 @@ int main(int argc, char ** argv)
 			fprintf(stderr, "'%s' doesn't look like a script! " 
 					"(does it have a shebang?)\n", argv[1]);
 			free(line);
+			usage();
 			return 3;
 		}
 		free(line);
+	} else {
+		/* Mask SIGINT if interactive */
+		signal(SIGINT, SIG_IGN);
 	}
 	
 	/* Load plugins */
@@ -187,6 +192,10 @@ static int run_shell(FILE * input)
 
 			pid_t pid = fork();
 			if (pid == 0) {
+				/* Foreground processes should respect SIGINT. */
+				if (fg) {
+					signal(SIGINT, SIG_DFL);
+				}
 				execvp(argv[0], argv);
 
 				/* Shouldn't be reached */
@@ -236,7 +245,7 @@ static int run_shell(FILE * input)
 				int status;
 				pid_t waitresult;
 				do {
-					waitresult = waitpid(-1, &status, fg ? WNOHANG : 0);
+					waitresult = waitpid(-1, &status, fg ? 0 : WNOHANG);
 					if (waitresult == -1) {
 						perror("waitpid");
 						return 3;
@@ -294,8 +303,6 @@ static void print_exit(pid_t pid, int status)
 	}
 
 	/* Print formatted pid, exit status, and command */
-	if (WIFEXITED(status)) {
-		fprintf(stderr, "[%d] %s%d\t\t%s\n\n", pid, term, exit_status, command);
-	}
+	fprintf(stderr, "[%d] %s%d\t\t%s\n\n", pid, term, exit_status, command);
 
 }

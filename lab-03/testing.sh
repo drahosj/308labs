@@ -15,7 +15,7 @@ pwd
 
 # let's do something more exciting
 echo testing other capabilities
-cd ./lab-02/lab-02/
+cd ./308/lab-02/
 echo executing `arg_printer` 'in' 'directory:'
 pwd
 ./arg_printer a b c d e
