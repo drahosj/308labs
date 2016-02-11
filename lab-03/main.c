@@ -29,20 +29,19 @@ static pid_t bg_pids[MAX_BG_PROCESSES];
 
 int main(int argc, char ** argv)
 {
-	FILE * input = stdin;
-
-	if (argc > 2) {
+	if (argc != 2) {
 		usage();
 		return 1;
 	}
 
-	if (argc == 2) {
+	FILE * input = stdin;
+	if (strcmp(argv[1], "-i") && strcmp(argv[1], "--interactive")) {
 		input = fopen(argv[1], "r");
 		if (input == NULL) {
 			perror("fopen");
 			return 2;
 		}
-		
+
 		char * line = NULL;
 		size_t len = 0;
 		if (getline(&line, &len, input) < 0) {
@@ -58,7 +57,7 @@ int main(int argc, char ** argv)
 		}
 		free(line);
 	}
-
+	
 	if (load_plugins()) {
 		return 2;
 	}
@@ -72,7 +71,7 @@ int main(int argc, char ** argv)
 
 static void usage()
 {
-	fputs("Usage: cash\n       cash <script>\n", stderr);
+	fputs("Usage: cash -i, --interactive\n       cash <script>\n", stderr);
 }
 
 static int run_shell(FILE * input)
