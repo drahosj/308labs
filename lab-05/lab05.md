@@ -155,7 +155,7 @@ void *genericThread1(void *args){
 .
 .
 int main(int argc, char **argv){
-  int test_var = 0;
+  test_var = 0;
 .
   err = pthread_mutex_init(&lock, NULL);
 .
@@ -177,7 +177,7 @@ As can be seen above, the variable `generic_condition` is declared as a global v
 
 Once all is said and done, remove the conditional variable using `pthread_cond_destroy`.
 
-To see an example of conditional variables, please take a look at `cond_example.c`.  
+To see an example of conditional variables, please take a look at `cond_example.c`.  Make sure that everything pertaining to condition variables, such as how it's created, and used, is understood before compiling it.  Run the compiled code, and put the output value of the program into your report.
 
 ##Why not semaphore; you've got to declare yourself openly
 Semaphores perform a similar task to conditional variables, and they are slightly easier to use.  Semaphores come it two flavors, Named, and Unnamed.  The differences between the two are in how they are created, and destroyed.  For simplicity, the unnamed flavor of semaphores will be covered in this handout.  To use semaphores, the following function calls and includes are needed:
@@ -223,7 +223,17 @@ int main(int argc, char **argv){
 }
 ~~~
 
-For more information on the init, wait, post, and destroy functions, consult `man 3 sem_init`, `man 3 sem_wait`, `man 3 sem_post`, and `man 3 sem_destroy` respectively.  Note that the calls to`pthread_mutex_lock` and `pthread_mutex_unlock` do not necessarily have to be where they are shown in the above code, i.e., the mutex lock does not have to occur before the semaphore wait, and the mutex unlock doesn't have to occur after the semaphore post.  For similar reasons to `lock` and `generic_condition`, `semaphore` is declared as a global variable.  It is initialized in main using `sem_init` with the value for _pshared_ set to `0`(meaning the semaphore is only shared between the threads of the current process), and it's initial value will be `1`(last argument to `sem_init`).  `genericThread0` decrements semaphore by one using `sem_wait`. If `genericThread1` got to its `sem_wait` before `genericThread0` incremented the semaphore by calling `sem_post`, then `genericThread1` will block right at its `sem_wait` line.  Once everything is completed, destroy the semaphore by calling `sem_destroy` on `semaphore`.
+For more information on the init, wait, post, and destroy functions, consult `man 3 sem_init`, `man 3 sem_wait`, `man 3 sem_post`, and `man 3 sem_destroy` respectively.
+
+Note that the calls to`pthread_mutex_lock` and `pthread_mutex_unlock` do not necessarily have to be where they are shown in the above code, i.e., the mutex lock does not have to occur before the semaphore wait, and the mutex unlock doesn't have to occur after the semaphore post.
+
+For similar reasons to `lock` and `generic_condition`, `semaphore` is declared as a global variable.  It is initialized in main using `sem_init` with the value for _pshared_ set to `0`(meaning the semaphore is only shared between the threads of the current process), and it's initial value will be `1`(last argument to `sem_init`).
+
+`genericThread0` decrements `semaphore` by one using `sem_wait`.  If `genericThread1` attempts to decrement `semaphore` when it got to its call to `sem_wait` before `genericThread0` incremented the semaphore by calling `sem_post`, then `genericThread1` will block right at its `sem_wait` line.  This is because decrementing a semaphore past `0` will not evaluate.  So if a semaphore is already at a value of `0`, decrementing it with `sem_wait` will cause the thread calling `sem_wait` to wait until the value of the semaphore is incremented to a value greater than `0`.
+
+Once everything is completed, destroy the semaphore by calling `sem_destroy` on `semaphore`.
+
+For an example of semaphores being used, take a look at `sem_example.c`.  Please make sure that everything in the program `sem_example.c` pertaining to semaphores is understood before compiling it.  Run the program
 
 #Tasks for this lab
 This is week one of a three part lab assignment.  You will be expected to submit this week's work as normal with a lab report.  Next week's lab will build on the code you have written for this lab.  It is therefore in your best interest to write clean and portable code to minimize work in future labs.
