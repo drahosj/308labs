@@ -86,5 +86,10 @@ int main(int argc, char **argv){
 		return -1;
 	}
 
+	err = pthread_create(&t2, NULL, printCanYouHearMe, NULL);
+	if(err){
+
+	}
+
 	return 0;
 }
