@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <pthread.h>
-#include <sys/file.h>
+#include <errno.h>
 
 int test1;
 int test2;
@@ -28,7 +28,7 @@ void *printCanYouHearMe(void *args){
 	flockfile(stdout);
 	fprintf(stdout, "Never going to let you down\n");
 	funlockfile(stdout);
-	pthread_cond_signal(&I_cond);
+	pthread_cond_broadcast(&I_cond);
 	test2 = 1;
 	pthread_mutex_unlock(&lock);
 }
@@ -39,15 +39,14 @@ void *printIWasWondering(void *args){
 		pthread_cond_wait(&I_cond, &lock);
 	}
 	flockfile(stdout);
-	fprintf(stdout, "Never going to run around\n");
+	fprintf(stdout, "Never going to run around");
 	funlockfile(stdout);
 	pthread_mutex_unlock(&lock);
 }
 
 int main(int argc, char **argv){
-	pthread_t t1;
-	pthread_t t2;
-	pthread_t t3;
+	pthread_t t[3];
+	int i;
 	int err;
 	test1 = 0;
 	test2 = 0;
@@ -76,20 +75,42 @@ int main(int argc, char **argv){
 		return -1;
 	}
 
-	err = pthread_create(&t1, NULL, printHello, NULL);
-	if(err){
-		errno = err;
-		perror("pthread create");
-		pthread_mutex_destroy(&lock);
-		pthread_cond_destroy(&can_cond);
-		pthread_cond_destroy(&I_cond);
-		return -1;
+	for(i = 0; i < 3; i++){
+		if(i == 0){
+			err = pthread_create(&t[i], NULL, printHello, NULL);
+		}else if(i == 1){
+			err = pthread_create(&t[i], NULL, printCanYouHearMe, NULL);
+		}else{
+			err = pthread_create(&t[i], NULL, printIWasWondering, NULL);
+		}
+		if(err){
+			errno = err;
+			perror("pthread create");
+			pthread_mutex_destroy(&lock);
+			pthread_cond_destroy(&can_cond);
+			pthread_cond_destroy(&I_cond);
+			return -1;
+		}
 	}
 
-	err = pthread_create(&t2, NULL, printCanYouHearMe, NULL);
-	if(err){
-
+	for(i = 0; i < 3; i++){
+		err = pthread_join(t[i], NULL);
+		if(err){
+			errno = err;
+			perror("pthread join");
+			pthread_mutex_destroy(&lock);
+			pthread_cond_destroy(&can_cond);
+			pthread_cond_destroy(&I_cond);
+			return -1;
+		}
 	}
+
+	printf(" and desert you\n");
+
+	// clean up
+	pthread_mutex_destroy(&lock);
+	pthread_cond_destroy(&can_cond);
+	pthread_cond_destroy(&I_cond);
 
 	return 0;
 }
