@@ -6,12 +6,13 @@
 
 #define MAX_PRODUCE 40
 
-sem_t buffer_semaphore;
+sem_t buffer_items;
+sem_t buffer_slots;
 
 // Producer thread
 void *producer(void *args){
 	// Produces ints and puts them into the buffer
-	// until the value of `buffer_semaphore` gets
+	// until the value of `buffer_items` gets
 	// to 20, then wait for the consumer to consume
 	// the ints
 	int i = 0;
@@ -20,21 +21,14 @@ void *producer(void *args){
 	int tail = 0;
 	int *buffer = (int *)args;
 	while(i < MAX_PRODUCE){
-		err = sem_getvalue(&buffer_semaphore, &sem_val);
-		if(err){
-			perror("sem_getvalue");
-			pthread_exit(NULL);
-		}
-
-		if(sem_val < 20){
-			buffer[tail % 20] = rand() % MAX_PRODUCE;
-			flockfile(stdout);
-			fprintf(stdout, "Producer: element %d: %d; placed in the tail of the buffer\n", i, buffer[tail & 20]);
-			funlockfile(stdout);
-			i++;
-			sem_post(&buffer_semaphore);
-			tail++;
-		}
+		sem_wait(&buffer_slots);
+		buffer[tail % 20] = rand() % MAX_PRODUCE;
+		flockfile(stdout);
+		fprintf(stdout, "Producer: element %d: %d; placed in the tail of the buffer\n", i, buffer[tail & 20]);
+		funlockfile(stdout);
+		i++;
+		tail++;
+		sem_post(&buffer_items);
 	}
 }
 
@@ -49,21 +43,14 @@ void *consumer(void *args){
 	int head = 0;
 	int *buffer = (int *)args;
 	while(i < MAX_PRODUCE){
-		err = sem_getvalue(&buffer_semaphore, &sem_val);
-		if(err){
-			perror("sem_getvalue");
-			pthread_exit(NULL);
-		}
-
-		if(sem_val > 0){
-			flockfile(stdout);
-			fprintf(stdout, "Consumer: element %d: %d; read from the head of the buffer\n", i, buffer[head % 20]);
-			funlockfile(stdout);
-			buffer[head % 20] = -1;
-			i++;
-			sem_wait(&buffer_semaphore);
-			head++;
-		}
+		sem_wait(&buffer_items);
+		flockfile(stdout);
+		fprintf(stdout, "Consumer: element %d: %d; read from the head of the buffer\n", i, buffer[head % 20]);
+		funlockfile(stdout);
+		buffer[head % 20] = -1;
+		i++;
+		head++;
+		sem_post(&buffer_slots);
 	}
 }
 
@@ -79,17 +66,27 @@ int main(int argc, char **argv){
 		return -1;
 	}
 
-	err = sem_init(&buffer_semaphore, 0, 0);
+	err = sem_init(&buffer_items, 0, 0);
 	if(err){
 		perror("sem_init");
 		free(buffer);
+		return -1;
+	}
+	
+	err = sem_init(&buffer_slots, 0, 20);
+	if(err){
+		perror("sem_init");
+		free(buffer);
+		sem_destroy(&buffer_items);
 		return -1;
 	}
 
 	err = pthread_create(&t1, NULL, producer, buffer);
 	if(err){
 		errno = err;
-		sem_destroy(&buffer_semaphore);
+		perror("pthread_create");
+		sem_destroy(&buffer_items);
+		sem_destroy(&buffer_slots);
 		free(buffer);
 		return -1;
 	}
@@ -97,7 +94,9 @@ int main(int argc, char **argv){
 	err = pthread_create(&t2, NULL, consumer, buffer);
 	if(err){
 		errno = err;
-		sem_destroy(&buffer_semaphore);
+		perror("pthread_create");
+		sem_destroy(&buffer_items);
+		sem_destroy(&buffer_slots);
 		free(buffer);
 		return -1;
 	}
@@ -106,7 +105,8 @@ int main(int argc, char **argv){
 	if(err){
 		errno = err;
 		perror("pthread_join");
-		sem_destroy(&buffer_semaphore);
+		sem_destroy(&buffer_items);
+		sem_destroy(&buffer_slots);
 		free(buffer);
 		return -1;
 	}
@@ -115,10 +115,15 @@ int main(int argc, char **argv){
 	if(err){
 		errno = err;
 		perror("pthread_join");
-		sem_destroy(&buffer_semaphore);
+		sem_destroy(&buffer_items);
+		sem_destroy(&buffer_slots);
 		free(buffer);
 		return -1;
 	}
+
+	sem_destroy(&buffer_items);
+	sem_destroy(&buffer_slots);
+	free(buffer);
 
 	return 0;
 }
