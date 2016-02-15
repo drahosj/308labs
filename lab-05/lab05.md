@@ -233,7 +233,7 @@ For similar reasons to `lock` and `generic_condition`, `semaphore` is declared a
 
 Once everything is completed, destroy the semaphore by calling `sem_destroy` on `semaphore`.
 
-For an example of semaphores being used, take a look at `sem_example.c`.  Please make sure that everything in the program `sem_example.c` pertaining to semaphores is understood before compiling it.  Run the program
+For an example of semaphores being used, take a look at `sem_example.c`.  Please make sure that everything in the program `sem_example.c` pertaining to semaphores is understood before compiling it.  Run the program, and note the order in which the buffer is read/written to.  Run the program multiple times, and again not the order in which the buffer is read/written to.  Do they look different?  Why do you think that is the case?
 
 #Tasks for this lab
 This is week one of a three part lab assignment.  You will be expected to submit this week's work as normal with a lab report.  Next week's lab will build on the code you have written for this lab.  It is therefore in your best interest to write clean and portable code to minimize work in future labs.
