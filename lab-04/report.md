@@ -174,3 +174,15 @@ Real Time is being wasted. When the last few (2 or 3) threads take a few seconds
 longer to finish, a large amount of real time is wasted. The solution would be
 optimising my scheduler to assign the longest task before the second-longest task, etc. This
 way, the threads would finish at the same time.
+
+#### Alternative scheduler algothm: Decrement
+
+I adjusted the scheduler algorithm to use a decremental, rather than incremental, approach.
+The idea was to run the longest threads first, so that the shorter-running threads would 
+better "fill in" the end of the process, letting the threads finish closer together. However, the
+drastic difference between columns still prevents the threads from finishing near the same time.
+
+The decremental scheduler does have better performance than the incremental scheduler with thread
+counts of 2 or 4. This is because stepping by 2 is a much more gradual time difference, allowing
+better granularity for the "filling in" to occur. However, such low thread counts have awful
+performance compared to higher thread counts, so this is not of much use.
