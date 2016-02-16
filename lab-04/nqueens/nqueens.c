@@ -57,6 +57,12 @@ int display_flag = 0;
 /// The format string used for the libresuse output.
 const char const * resuse_fmt = "Real Time: %E, User Time: %U, System Time: %S, CPU Usage: %P\n";
 
+/// Next column to assign
+int next_column = 0;
+
+/// Mutex protecting next_column
+pthread_mutex_t nc_mutex = PTHREAD_MUTEX_INITIALIZER;
+
 /**
  * Test if placing a queen on the @param rows board at a given @param x - 
  * @param y location will be safe or not.
@@ -147,23 +153,64 @@ void* thread(void* p)
 	struct thread_param * param = (struct thread_param *) p;
 	struct resuse resuse;
 	int rows[num_queens];
+	int column;
 
 	// star collecting resource information about this thread
 	resuse_start(&resuse, RESUSE_SCOPE_THREAD);
-	
+
 	// print debug information
 	dprintf("Thread %d Starting\n", param->thread_num);
 
-	rows[0] = param->thread_num;
-	queens_helper(rows, 1, &(param->solution_count));
+	while(1) {
+		/* Obtain the mutex for the next column */
+		int err = pthread_mutex_lock(&nc_mutex);
+		if (err) {
+			fprintf(stderr, "ERR: pthread_mutex_lock returned %d\n", err);
+			exit(1);
+		}
 
+		/* Take the next column */
+		column = next_column; 
+
+		/* Increment the next column */
+		next_column++;
+
+		/* NOTE: Even though it *looks* atomic,
+		 * local = global++ is anything but.
+		 * Without the mutex, two threads
+		 * could end up grabbing
+		 * the same column, then
+		 * both incrementing it and
+		 * skipping a column, or any
+		 * other sort of weirdness.
+		 */
+
+		/* Release mutex */
+		err = pthread_mutex_unlock(&nc_mutex);
+		if (err) {
+			fprintf(stderr, "ERR: pthread_mutex_lock returned %d\n", err);
+			exit(1);
+		}
+
+		if (column >= num_queens) {
+			break;
+		}
+
+		dprintf("Thread %d kicking off column %d\n", param->thread_num, column);
+
+		rows[0] = param->thread_num;
+		queens_helper(rows, 1, &(param->solution_count));
+
+		dprintf("Thread %d finished column %d, looking for new work...\n", param->thread_num, column);
+
+	}
 	// print debug information
 	dprintf("Thread %d Finished, found %d solutions\n", param->thread_num, 
 					param->solution_count);
 
 	// finish collecting resource information about this thread
 	resuse_end(&resuse);
-	
+
 	// print the resource information to stdout
 	flockfile(stdout);
 	fprintf(stdout, "Thread %02d: ", param->thread_num);
@@ -181,6 +228,7 @@ int main(int argc, char* argv[])
 	int i;
 	int c;
 	int solution_count = 0;
+	int num_threads;
 	struct thread_param * params;
 	struct resuse resuse;
 	pthread_t * thread_handles;
@@ -189,7 +237,7 @@ int main(int argc, char* argv[])
 	resuse_start(&resuse, RESUSE_SCOPE_PROC);
 	
 	// parse the command line arguments
-	while((c = getopt(argc, argv, "n:tvd")) != -1)
+	while((c = getopt(argc, argv, "n:t:vd")) != -1)
 	{
 		// for each argument
 		switch(c)
@@ -198,9 +246,10 @@ int main(int argc, char* argv[])
 			case 'n':
 				num_queens = atoi(optarg);
 				break;
-			// t = Use threads
+			// t = The number of threads
 			case 't':
 				threaded_flag = 1;
+				num_threads = atoi(optarg);
 				break;
 			// v = Turn on verbose output
 			case 'v':
@@ -222,10 +271,11 @@ int main(int argc, char* argv[])
 				abort();
 		}
 	}
-	
+
 	// print out information about the program
-	printf("# Queens = %d, Threaded = %s, Verbose = %s, Display = %s\n", 
+	printf("# Queens = %d, # Threads = %d, Threaded = %s, Verbose = %s, Display = %s\n", 
 			num_queens, 
+			threaded_flag ? num_threads : 1,
 			threaded_flag ? "TRUE" : "FALSE",
 			verbose_flag ? "TRUE" : "FALSE",
 			display_flag ? "TRUE" : "FALSE");
@@ -247,10 +297,16 @@ int main(int argc, char* argv[])
 
 
 	// for each column of the chess board
-	for(i=0;i<num_queens;i++)
-	{
-		if(threaded_flag)
-		{
+	if(!threaded_flag) {
+		for(i=0;i<num_queens;i++) {
+			int rows[num_queens];
+			int tmp_solution_count = 0;
+			rows[0] = i;
+			queens_helper(rows, 1, &tmp_solution_count);
+			solution_count += tmp_solution_count;
+		}
+	} else {
+		for(i = 0; i < num_threads; i++) {
 			params[i].thread_num = i;
 			int err = pthread_create(&(thread_handles[i]), NULL, thread, &(params[i]));
 			if (err) {
@@ -258,19 +314,9 @@ int main(int argc, char* argv[])
 				exit(1);
 			}
 		}
-		else
-		{
-			int rows[num_queens];
-			int tmp_solution_count = 0;
-			rows[0] = i;
-			queens_helper(rows, 1, &tmp_solution_count);
-			solution_count += tmp_solution_count;
-		}
-	}
 
-	if (threaded_flag) {
 		solution_count = 0;
-		for (i = 0; i < num_queens; i++) {
+		for (i = 0; i < num_threads; i++) {
 			int err = pthread_join(thread_handles[i], NULL);
 
 			if (err) {

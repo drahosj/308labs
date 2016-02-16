@@ -139,4 +139,6 @@ of seconds.
 The number of threads is not linear with respect to the number of queens because the number of 
 simultaneously running threads is capped by the number of hardware threads supported by the system.
 In the case of my system (two quad-core Xeon processors), 8 threads can run
-simultaneously, giving a result of close to 800% CPU utilization.
+simultaneously, giving a result of close to 800% CPU utilization. Adding any more threads
+will just cause threads to have to share user time, resulting in no gain in real-time performance.
+In fact, this will result in minute losses due to context switches between running threads.
