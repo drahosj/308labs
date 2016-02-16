@@ -4,9 +4,8 @@ In the previous lab, the subjects of creating and joining threads were explored.
 #If you like it, then you shoulda put a mutex_lock on it
 For the task in the previous lab, there was no reason for variables & information to be shared between multiple threads as
 each thread computed its own value in the result matrix without need of input from another thread.  Though great, it’s not a
-very interesting problem to solve.  For more interesting problems, there is a need to share memory between threads.  One
-example of such an interesting problem would be calculating the standard deviation of a distribution.  The program to do that
-is as follows:
+very interesting problem to solve.  For more interesting problems, there is a need to share memory between threads.  A trivial
+example of this would be to increment a shared variable between multiple threads.  The program to do that is as follows:
 
 ~~~c
 #include <stdio.h>
@@ -14,19 +13,12 @@ is as follows:
 #include <pthread.h>
 #include <errno.h>
 
-void *thread1Counter(void *param){
+void *threadCounter(void *param){
 	int *args = (int *)param;
 	int i;
-	for(i = 0; i < 1000; i++){
-		args++;
-	}
-}
 
-void *thread2Counter(void *param){
-	int *args = (int *)param;
-	int i;
 	for(i = 0; i < 1000; i++){
-		args++;
+		(*args)++;
 	}
 }
 
@@ -37,23 +29,23 @@ int main(int argc, char** argv){
 	
 	int err;
 
-	err = pthread_create(&t1, NULL, thread1Counter, (void *)&shared);
+	err = pthread_create(&t1, NULL, threadCounter, (void *)&shared);
 	if(err != 0){
 		errno = err;
 		perror("pthread_create");
 		exit(1);
 	}
+	err = pthread_create(&t2, NULL, threadCounter, (void *)&shared);
+	if(err != 0){
+		errno = err;
+		perror("pthread_create");
+		exit(1);
+	}
+
 	err = pthread_join(t1, NULL);
 	if(err != 0){
 		errno = err;
 		perror("pthread_join");
-		exit(1);
-	}
-
-	err = pthread_create(&t2, NULL, thread2Counter, (void *)&shared);
-	if(err != 0){
-		errno = err;
-		perror("pthread_create");
 		exit(1);
 	}
 	err = pthread_join(t2, NULL);
