@@ -105,6 +105,10 @@ A mutex is used to protect the next_column variable.
 
 The -t flag takes a mandatory argument: the number of threads in which to run.
 
+When running multithreaded, the -v flag provides very useful debug
+output for seeing how the scheduling algorithm causes threads to pick up
+individual columns
+
 ### Performance Notes: N Queens N Threads
 Running for 14 queens, the results below can be observed:
 ```
@@ -175,7 +179,7 @@ longer to finish, a large amount of real time is wasted. The solution would be
 optimising my scheduler to assign the longest task before the second-longest task, etc. This
 way, the threads would finish at the same time.
 
-#### Alternative scheduler algothm: Decrement
+#### Alternative scheduler algorithm: Decremental
 
 I adjusted the scheduler algorithm to use a decremental, rather than incremental, approach.
 The idea was to run the longest threads first, so that the shorter-running threads would 
