@@ -102,27 +102,6 @@ void *printer_thread(void* param)
 // In this loop the thread should wait for the producer to add something to the 
 // this->job_queue list.  It should then in a thread safe way pull that job
 // out of the queue
-		// wait for an item to be in the list
-		sem_wait(&this->job_queue->num_jobs);
-		// lock the list before walking it
-		pthread_mutex_lock(&this->job_queue->lock);
-		// walk the list to the end
-		for(job = this->job_queue->head; job->next_job; prev = job, job = job->next_job);
-		if(prev)			
-			// fix the tail of the list
-			prev->next_job = NULL;
-		else
-			// There is only one item in the list
-			this->job_queue->head = NULL;
-			
-		// unlock the list
-		pthread_mutex_unlock(&this->job_queue->lock);
-		
-		printf("consumed job %s\n", job->job_name);
-		
-		// send the job to the printer
-		printer_print(&this->driver, job);
-		return NULL;
 	}
 	return NULL;
 }
@@ -188,15 +167,6 @@ void * producer_thread(void * param)
 // At this point the job has been created and should be pushed into the job_queue
 // for group `g`.  This should also signal the consumer that the job is ready to
 // be consumed.
-					pthread_mutex_lock(&g->job_queue.lock);
-					job->next_job = g->job_queue.head;
-					g->job_queue.head = job;
-					pthread_mutex_unlock(&g->job_queue.lock);
-					sem_post(&g->job_queue.num_jobs);
-//
-
-					job = NULL;
-					break;
 				}
 			}
 			if(job)
