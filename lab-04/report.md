@@ -92,6 +92,19 @@ The creation of the rows array and initial call of queens_helper into the
 thread function. The for loop then invokes a thread for each column, and
 afterwards collects all threads with join() and sums their solutions_found.
 
+Scheduling for multiple threads is accomplished with a simple algorithm:
+Each thread grabs the next available column to calculate. Thread 0 grabs
+Column 0, then as threads start (or finish), they grab the next column
+(Column 1 and so on), incrementing the next_column variable for
+whichever thread comes next. Columns are then calculated
+in order, from 0 to num_queens - 1.
+
+A mutex is used to protect the next_column variable.
+
+### Notes on Running
+
+The -t flag takes a mandatory argument: the number of threads in which to run.
+
 ### Performance Notes: N Queens N Threads
 Running for 14 queens, the results below can be observed:
 ```
@@ -142,3 +155,22 @@ In the case of my system (two quad-core Xeon processors), 8 threads can run
 simultaneously, giving a result of close to 800% CPU utilization. Adding any more threads
 will just cause threads to have to share user time, resulting in no gain in real-time performance.
 In fact, this will result in minute losses due to context switches between running threads.
+
+### Performance Notes: N Queens T Threads
+When the number of threads can differ from the number of queens, 
+better experimentation can be performed.
+
+I expected the fastest run time for any given number of queens to occur when the number
+of threads was set equal to the number of physical threads available (8), however this
+was not exactly the case. For value of N in the range of 13-15, it actually ran quickest with 
+the number of threads equal to the number of queens. The next most efficient run time
+was with the number of threads equal to physical threads. Values in between were notably slower,
+and incurred notably worse CPU usage.
+
+To me, this indicates inefficiency with my scheduling/work assignment algorithm. Perhaps it
+is an artifact of the order in which threads finish, since there seems to be a significant delay
+between the first threads finishing and the last. With less than 8 threads running,
+Real Time is being wasted. When the last few (2 or 3) threads take a few seconds
+longer to finish, a large amount of real time is wasted. The solution would be
+optimising my scheduler to assign the longest task before the second-longest task, etc. This
+way, the threads would finish at the same time.
