@@ -131,13 +131,14 @@ int main(int argc, char* argv[])
 			printf("job recieved\n"); fflush(stdout);
 			// read the first line
 			fgets(line, 1024, print_stream);
-			printf("%s", line);
+			printf("%s", line); fflush(stdout);
 			// see if the line is "##NAME##"
-			if(!strncmp(line, "##NAME##", 8)){
+			if(!strncmp(line, "##NAME##\n", 9)){
+				printf("found ##NAME##\n"); fflush(stdout);
 				fprintf(print_stream, "Name: %s\n", printer_name);
-			}else if(!strncmp(line, "##DESCRIPTION##", 15)){
+			}else if(!strncmp(line, "##DESCRIPTION##\n", 16)){
 				fprintf(print_stream, "Description: a generic printer\n");
-			}else if(!strncmp(line, "##LOCATION##", 12)){
+			}else if(!strncmp(line, "##LOCATION##\n", 13)){
 				fprintf(print_stream, "Location: center of a black hole\n");
 			}else{
 				// parse out the file name from the first line
