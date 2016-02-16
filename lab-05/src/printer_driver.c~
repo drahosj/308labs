@@ -83,4 +83,3 @@ int printer_print(const struct printer_driver * printer, const struct print_job 
 	
 	return 0;
 }
-

@@ -3,9 +3,8 @@
  * @author    Jeramie Vens
  * @date      2015-02-13: Created
  * @date      2015-02-15: Last updated
- * @date      2016-02-16: Complete re-write of the code
  * @brief     A virtual printer for the print sever program
- * @copyright MIT License (c) 2015, 2016
+ * @copyright MIT License (c) 2015
  */
  
 /*

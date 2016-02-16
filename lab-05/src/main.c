@@ -3,8 +3,9 @@
  * @author    Jeramie Vens
  * @date      2015-02-11: Created
  * @date      2015-02-15: Last updated
+ * @date      2015-02-16: Complete re-write
  * @brief     Emulate a print server system
- * @copyright MIT License (c) 2015
+ * @copyright MIT License (c) 2015, 2016
  */
  
 /*
@@ -23,122 +24,69 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 #include <assert.h>
 #include <string.h>
 #include <semaphore.h>
-#include <argp.h>
+
 
 #include "print_job.h"
 #include "printer_driver.h"
 #include "debug.h"
 
+// -- GLOBAL VARIABLES -- //
 int verbose_flag = 0;
 int exit_flag = 0;
 
-/// program version string
-const char const *argp_program_version = "ISU CprE308 Print Server 0.1";
-/// program bug address string
-const char const *argp_program_bug_address = "Jeramie Vens: <vens@iastate.edu>";
-/// program documentation string
-static char doc[] = "Print server -- For my class\vThis should be at the bottom";
-
-// list of options supported
-static struct argp_option options[] = 
-{
-	{"verbose", 'v', 0, 0, "Produce verbose output"},
-	{"quite", 'q', 0, 0, "Don't produce any output"},
-	{"silent", 's', 0, OPTION_ALIAS, 0},
-	{"log-file", 'o', "FILE", 0, "The output log file"},
-	{0}
-	// The student should add aditional options here
-	#warning argp_option not finished
-};
-
-static void parse_rc_file(FILE* fp);
-
+// -- STATIC VARIABLES -- //
 static struct printer_group * printer_group_head;
 
-/// arugment structure to store the results of command line parsing
-struct arguments
-{
-	/// are we in verbose mode?
-//	int verbose_mode;
-	/// name of the log file
-	char* log_file_name;
-	// The student should add anything else they wish here
-	//...
-};
+// -- FUNCTION PROTOTYPES -- //
+static void parse_command_line(int argc, char * argv[]);
+static void parse_rc_file(FILE* fp);
+
 
 /**
- * @brief     Callback to parse a command line argument
- * @param     key
- *                 The short code key of this argument
- * @param     arg
- *                 The argument following the code
- * @param     state
- *                 The state of the arg parser state machine
- * @return    0 if succesfully handeled the key, ARGP_ERR_UNKONWN if the key was uknown
+ * A list of print jobs that must be kept thread safe
  */
-error_t parse_opt(int key, char *arg, struct argp_state *state)
-{
-	// the student should add the additional required arguments here
-	#warning parse_opt not finished
-	struct arguments *arguments = state->input;
-	switch(key)
-	{
-		case 'v':
-			verbose_flag = 2;
-			break;
-		case 'q':
-			verbose_flag = 0;
-			break;
-		case 'o':
-			arguments->log_file_name = arg;
-			break;
-		default:
-			return ARGP_ERR_UNKNOWN;
-	}
-	return 0;
-}
-
-/// The arg parser object
-static struct argp argp = {&options, parse_opt, 0, doc};
-
 struct print_job_list
 {
+	// the head of the list
 	struct print_job * head;
+	// the number of jobs in the list
 	sem_t num_jobs;
+	// a lock for the list
 	pthread_mutex_t lock;
 };
 
+/**
+ * A printer object with associated thread
+ */
 struct printer
 {
+	// the next printer in the group
 	struct printer * next;
+	// the driver for this printer
 	struct printer_driver driver;
+	// the list of jobs this printer can pull from
 	struct print_job_list * job_queue;
+	// the thread id for this printer thread
 	pthread_t tid;
 };
 
-
+/**
+ * A printer group.  A group represents a collection of printers that can pull
+ * from the same job queue.
+ */
 struct printer_group
 {
+	// the next group in the system
 	struct printer_group * next_group;
+	// the name of this group
 	char * name;
+	// the list of printers in this group
 	struct printer * printer_queue;
+	// the list of jobs for this group
 	struct print_job_list job_queue;
 };
 
 
-void push_job(struct print_job_list * list, struct print_job * job)
-{
-	job->next_job = list->head;
-	list->head = job;
-}
-
-struct print_job * pop_job(struct print_job_list * list)
-{
-	struct print_job * job, * prev;
-	for(job = list->head; job->next_job; prev = job, job = job->next_job);
-	prev->next_job = NULL;
-	return job;
-}
 
 void *printer_thread(void* param)
 {
@@ -150,6 +98,10 @@ void *printer_thread(void* param)
 	//return NULL;
 	while(1)
 	{
+#warning The student should implement the consumer thread
+// In this loop the thread should wait for the producer to add something to the 
+// this->job_queue list.  It should then in a thread safe way pull that job
+// out of the queue
 		// wait for an item to be in the list
 		sem_wait(&this->job_queue->num_jobs);
 		// lock the list before walking it
@@ -172,9 +124,6 @@ void *printer_thread(void* param)
 		printer_print(&this->driver, job);
 		return NULL;
 	}
-
-	// The student should fill in all of this function
-	#warning printer_spooler not implememnted
 	return NULL;
 }
 
@@ -184,7 +133,6 @@ void * producer_thread(void * param)
 	struct printer_group * g;
 	struct print_job * job;
 	char * line = NULL;
-	char * tmp;
 	size_t n = 0;
 	long long job_number = 0;
 	
@@ -235,11 +183,18 @@ void * producer_thread(void * param)
 			{
 				if(strcmp(job->group_name, g->name) == 0)
 				{
+
+#warning The student should push the job into the queue
+// At this point the job has been created and should be pushed into the job_queue
+// for group `g`.  This should also signal the consumer that the job is ready to
+// be consumed.
 					pthread_mutex_lock(&g->job_queue.lock);
 					job->next_job = g->job_queue.head;
 					g->job_queue.head = job;
 					pthread_mutex_unlock(&g->job_queue.lock);
 					sem_post(&g->job_queue.num_jobs);
+//
+
 					job = NULL;
 					break;
 				}
@@ -256,75 +211,17 @@ void * producer_thread(void * param)
 			return NULL;
 		}
 	}
+	return NULL;
 }
 
 
-/**
- * @brief     A print server program
- * This program shall take postscript files with some special header information from stdin
- * and print them to a printer device.  For Lab 5 the only printer device you need to support
- * is the pdf_printer provided.  Keep in mind that in future labs you will be expected to
- * support additional printers, so keep your code modular.  All printers will support the
- * API shown in printer.h.  
- *
- * The program should take a number of command line arguments.  At a minimum the following
- * should be supported:
- * - -?, --help: display help information and exit
- * - -V, --version: display version information and exit
- * - -v, --verbose: display debugging information to stderr
- * - -q, --quiet: don't display any messages or outputs unless it is a fatal error
- * - -o, --log-file: use the given log file to print out when jobs start and finish printing
- * - -d, --daemon: future lab will implement this
- * - -c, --config: future lab will implement this
- * - -p, --printer: future lab will implement this
- * - -n1: the number of print queue 1 printers there are (future lab will remove this)
- * - -n2: the number of print queue 2 printers there are (future lab will remove this)
- *
- * The syntax of the postscrip file is as follows.  The file will be suplied through stdin for
- * this lab.  A future lab will change this to a different location, so keep in mind modularity
- * as you go.  Each job will start with header information.  Each line of header information
- * will start with a `#` followed by a keyword and an `=` sign.  You must support at minimum
- * the following commands
- * - #name=: The name of the print job.
- * - #driver=: The driver to print the job to.  For Lab 5 this will be either "pdf1" or "pdf2".
- * - #description=: A discription of the print job which will be included in the log file
- * After all of the header information will be a line starting with a `%`.  Any line following
- * from that line to the line containing `%EOF` should be interpreted as raw postscript data.
- * It should therefore all be copied into the `print_job->file` file.
- *
- * After the `%EOF` has been found a new header may begin for the next file, or if the program
- * is finished `#exit` will be supplied.
- *
- * The flow of the program should be as follows:
- * -# parse command line arguments
- * -# create two print queues using the `queue_create()` function
- * -# install n1 pdf_printer drivers called "pdf1-%d" and n2 pdf_printer drivers called "pdf2-%d"
- * -# create n1+n2 spooler param objects: the first n1 with one of the print queues and all the n1
- *    drivers, and the other n2 with the other print queue and all the n2 drivers
- * -# create n1+n2 spooler threads
- * -# create a new print job using `print_job_create()`
- * -# parse stdin to build the print job
- * -# all postscript data should be appended to the `print_job->file` file
- * -# when the entire job has been read the `print_job->file` file should be closed
- * -# push the print job onto the correct print queue (if the driver was pdf1 or pdf2)
- * -# parse the next print job
- * -# when `#exit` is recieved make sure to release all threads and join them
- * -# free all resources and exit
- *
- * When the program is run with valgrind it should not have ANY memory leaks.  The program
- * should also never cause a segfault for any input or reason.
- */
 int main(int argc, char* argv[])
 {
 	struct printer_group * g;
 	struct printer * p;
-	// parse arguments.  Look at the man pages and section 25.3 of the GNU libc manual
-	// found at https://www.gnu.org/software/libc/manual/pdf/libc.pdf for more information
-	// on how to use argp to parse arguments.  An example is shown below to get you started
-	struct arguments arguments;
-	//arguments.verbose_mode = 1;
-	arguments.log_file_name = "";
-	argp_parse(&argp, argc, argv, 0, 0, &arguments);
+
+	// parse the command line arguments
+	parse_command_line(argc, argv);
 
 	// open the runtime config file
 	FILE* config = fopen("config.rc", "r");
@@ -332,6 +229,7 @@ int main(int argc, char* argv[])
 	parse_rc_file(config);
 	// close the config file
 	fclose(config);
+
 
 	//-- Create the consumer threads
 	// for each printer group
@@ -349,6 +247,7 @@ int main(int argc, char* argv[])
 	}
 	
 	
+	//-- Create the prducer thread
 	pthread_t producer_tid;
 	pthread_create(&producer_tid, NULL, producer_thread, NULL);
 
@@ -362,9 +261,37 @@ int main(int argc, char* argv[])
 			pthread_join(p->tid, NULL);
 		}
 	}
+
+
+	
+	
 	return 0;
 }
 
+/**
+ * Parse the command line arguments and set the appropriate flags and variables
+ * 
+ * Recognized arguments:
+ *   - `-v`: Turn on Verbose mode
+ *   - `-?`: Print help information
+ */
+static void parse_command_line(int argc, char * argv[])
+{
+	int c;
+	while((c = getopt(argc, argv, "v?")) != -1)
+	{
+		switch(c)
+		{
+			case 'v': // turn on verbose mode
+				verbose_flag = 1;
+				break;
+			case '?': // print help information
+				fprintf(stdout, "Usage: %s [options]\n", argv[0]);
+				exit(0);
+				break;
+		}
+	}
+}
 
 static void parse_rc_file(FILE* fp)
 {
@@ -376,11 +303,14 @@ static void parse_rc_file(FILE* fp)
 	struct printer * printer = NULL;
 	struct printer * p;
 
+	// get each line of text from the config file
 	while(getline(&line, &n, fp) > 0)
 	{
+		// if the line is a comment
 		if(line[0] == '#')
 				continue;
 
+		// If the line is defining a new printer group
 		if(strncmp(line, "PRINTER_GROUP", 13) == 0)
 		{
 			strtok(line, " ");
@@ -399,6 +329,7 @@ static void parse_rc_file(FILE* fp)
 				printer_group_head = group;
 			}
 		}
+		// If the line is defining a new printer
 		else if(strncmp(line, "PRINTER", 7) == 0)
 		{
 			strtok(line, " ");
@@ -419,6 +350,7 @@ static void parse_rc_file(FILE* fp)
 		}
 	}
 
+	// print out the printer groups
 	dprintf("\n--- Printers ---\n"); 
 	for(g = printer_group_head; g; g = g->next_group)
 	{
