@@ -145,19 +145,17 @@ struct thread_param
 void* thread(void* p)
 {
 	struct thread_param * param = (struct thread_param *) p;
-	int rows[num_queens];
 	struct resuse resuse;
+	int rows[num_queens];
+
 	// star collecting resource information about this thread
 	resuse_start(&resuse, RESUSE_SCOPE_THREAD);
 	
 	// print debug information
 	dprintf("Thread %d Starting\n", param->thread_num);
 
-
-	/**
-	 * @todo Your code should go here
-	 */
-
+	rows[0] = param->thread_num;
+	queens_helper(rows, 1, &(param->solution_count));
 
 	// print debug information
 	dprintf("Thread %d Finished, found %d solutions\n", param->thread_num, 
@@ -185,6 +183,7 @@ int main(int argc, char* argv[])
 	int solution_count = 0;
 	struct thread_param * params;
 	struct resuse resuse;
+	pthread_t * thread_handles;
 	
 	// Star collecting resource information about the entire proccess
 	resuse_start(&resuse, RESUSE_SCOPE_PROC);
@@ -232,18 +231,32 @@ int main(int argc, char* argv[])
 			display_flag ? "TRUE" : "FALSE");
 
 	// If the threaded option is true
-	if(threaded_flag)
+	if(threaded_flag) {
 		// Dynamically allocate the the thread parameter objects	
 		params = calloc(num_queens, sizeof(struct thread_param));
+		if (params == NULL) {
+			perror("calloc");
+			exit(1);
+		}
+		thread_handles = calloc(num_queens, sizeof(pthread_t));
+		if (thread_handles == NULL) {
+			perror("calloc");
+			exit(1);
+		}
+	}
+
 
 	// for each column of the chess board
 	for(i=0;i<num_queens;i++)
 	{
 		if(threaded_flag)
 		{
-				/**
-				 * @todo fill in your code here
-				 */
+			params[i].thread_num = i;
+			int err = pthread_create(&(thread_handles[i]), NULL, thread, &(params[i]));
+			if (err) {
+				fprintf(stderr, "ERR: pthread_create returned %d\n", err);
+				exit(1);
+			}
 		}
 		else
 		{
@@ -255,11 +268,17 @@ int main(int argc, char* argv[])
 		}
 	}
 
+	if (threaded_flag) {
+		solution_count = 0;
+		for (i = 0; i < num_queens; i++) {
+			int err = pthread_join(thread_handles[i], NULL);
 
-	/**
-	 * @todo Make sure all the threads finish and collect the number of 
-	 * solutions found.
-	 */
+			if (err) {
+				fprintf(stderr, "ERR: pthread_join returned %d\n", err);
+			}
+			solution_count += params[i].solution_count;
+		}
+	}
 
 
 	// Stop collecting resource usage information
@@ -269,6 +288,11 @@ int main(int argc, char* argv[])
 
 	// Print out the final number of solutions that were found
 	printf("Solution Count = %d\n", solution_count);
+
+	if (threaded_flag) {
+		free(params);
+		free(thread_handles);
+	}
 	return 0;
 }
 

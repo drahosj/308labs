@@ -2,7 +2,7 @@ EXE=nqueens
 SRC=nqueens.c
 LIB=libresuse.a
 LFLAGS=-L./libresuse -pthread -lresuse
-CFLAGS=-D_GNU_SOURCE
+CFLAGS=-Wall -Wextra -Wpedantic -Werror -std=gnu11 -D_GNU_SOURCE
 
 CC=gcc
 
