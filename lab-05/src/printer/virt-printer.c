@@ -62,7 +62,6 @@ int main(int argc, char* argv[])
 				strncat(printer_name, "./drivers/", 10);
 				strncat(printer_name, optarg, strlen(optarg));
 				// test
-				printf("printer_name: %s\n", printer_name);
 				break;
 			case 'v': // turn on verbose mode
 				verbose_flag = 1;
@@ -85,7 +84,7 @@ int main(int argc, char* argv[])
 	}
 	
 	// replace the constant string with `printer_name` later	
-	rv = mkfifo("./drivers/printer1", PRINT_STREAM_MODE);
+	rv = mkfifo(printer_name, PRINT_STREAM_MODE);
 	if(rv)
 	{
 		perror("mkfifo()");
@@ -97,7 +96,7 @@ int main(int argc, char* argv[])
 	printf("Switching to background\n");fflush(stdout);
 	daemon(1, 1);
 
-	print_stream = fopen("./drivers/printer1", "r");
+	print_stream = fopen(printer_name, "r");
 	if(!print_stream)
 	{
 		perror("fopen()");
@@ -113,7 +112,7 @@ int main(int argc, char* argv[])
 	// set the file descriptor to the value of the print stream
 	p->fd = fileno(print_stream);
 	// looking for any input events(high priority or otherwise)
-	p->events = POLLIN | POLLPRI;
+	p->events = POLLIN;
 	
 	// 1. watch the fifo/print stream
 	// 2. when the print stream is not empty, assume the first line is meta data
@@ -124,65 +123,81 @@ int main(int argc, char* argv[])
 	// 7. copy data from the fifo to the pipe until `##END##` is reached
 	// 8. wait for the next job
 	while(1){
-		// poll the fifo for 100 milliseconds
-		poll_ret = poll(p, (nfds_t)1, 100);
+		// poll the fifo for 1 second
+		poll_ret = poll(p, (nfds_t)1, 1000);
 		// if the poll returns a positive value
 		if(poll_ret > 0){
 			// means we have a print job
 			printf("job recieved\n"); fflush(stdout);
 			// read the first line
 			fgets(line, 1024, print_stream);
-			// parse out the file name from the first line
-			temp = strtok(line, ": ");
-			if(temp == NULL){
-				printf("invalid format\n"); fflush(stdout);
-				continue;
-			}
-			temp = strtok(NULL, ": ");
-			temp[strlen(temp) - 1] = '\0';
-
-			// create the argument array
-			arguments[0] = "ps2pdf";
-			arguments[1] = "-";
-			arguments[2] = strdup(temp);
-			arguments[3] = NULL;
-
-			// create an unnamed pipe
-			err = pipe(pipefd);
-			if(err){
-				perror("pipe");
-				abort();
-			}
-
-			// fork a child
-			child = fork();
-
-			// if child
-			if(child == 0){
-				// reopen stdin file handle using the read end of the pipe
-				dup2(pipefd[0], fileno(stdin));
-				// call `ps2pdf - job_name`
-				execvp(arguments[0], arguments);
-			// if parent
+			printf("%s", line);
+			// see if the line is "##NAME##"
+			if(!strncmp(line, "##NAME##", 8)){
+				fprintf(print_stream, "Name: %s\n", printer_name);
+			}else if(!strncmp(line, "##DESCRIPTION##", 15)){
+				fprintf(print_stream, "Description: a generic printer\n");
+			}else if(!strncmp(line, "##LOCATION##", 12)){
+				fprintf(print_stream, "Location: center of a black hole\n");
 			}else{
-				// read data from print_stream and write it to the write end of the pipe
-				// but only until the line "##END##" is reached
-				write_end = fdopen(pipefd[1], "w");
-				if(write_end == NULL){
-					perror("fdopen");
+				// parse out the file name from the first line
+				temp = strtok(line, ": ");
+				if(temp == NULL){
+					printf("invalid format\n"); fflush(stdout);
+					continue;
+				}
+				temp = strtok(NULL, ": ");
+				if(temp != NULL){
+					temp[strlen(temp) - 1] = '\0';
+				}else{
+					continue;
+				}
+
+				// create the argument array
+				arguments[0] = "ps2pdf";
+				arguments[1] = "-";
+				arguments[2] = strdup(temp);
+				arguments[3] = NULL;
+
+				// create an unnamed pipe
+				err = pipe(pipefd);
+				if(err){
+					perror("pipe");
 					abort();
 				}
-				fgets(line, 1024, print_stream);
-				while(strncmp(line, "##END##", 7)){
-					fprintf(write_end, "%s", line);
+
+				// fork a child
+				child = fork();
+
+				// if child
+				if(child == 0){
+					// reopen stdin file handle using the read end of the pipe
+					dup2(pipefd[0], fileno(stdin));
+					// call `ps2pdf - job_name`
+					execvp(arguments[0], arguments);
+				// if parent
+				}else{
+					// read data from print_stream and write it to the write end of the pipe
+					// but only until the line "##END##" is reached
+					write_end = fdopen(pipefd[1], "w");
+					if(write_end == NULL){
+						perror("fdopen");
+						abort();
+					}
 					fgets(line, 1024, print_stream);
+					while(strncmp(line, "##END##", 7)){
+						fprintf(write_end, "%s", line);
+						fgets(line, 1024, print_stream);
+					}
+					// once "##END##" is reached, read one last time, and close the write end of pipe
+					fgets(line, 1024, print_stream);
+					fclose(write_end);
 				}
-				// once "##END##" is reached, read one last time, and close the write end of pipe
-				fgets(line, 1024, print_stream);
-				fclose(write_end);
 			}
 		}else if(poll_ret == -1){
 			perror("poll");
+		}else{
+			//printf("poll found nothing\n");
 		}
 	}
 	
