@@ -16,7 +16,8 @@
 int verbose_flag = 0;
 FILE* log_stream;
 FILE* debug_stream;
-FILE* print_stream;
+FILE* print_stream_in;
+FILE* print_stream_out;
 
 void onExit(int p);
 
@@ -39,7 +40,8 @@ int main(int argc, char* argv[])
 	struct pollfd *p;
 	log_stream = stdout;	
 	debug_stream = stderr;
-	char *printer_name = NULL;
+	char *printer_name_r = NULL;
+	char *printer_name_w = NULL;
 	char *line = NULL;
 	char *temp = NULL;
 	char *arguments[4];
@@ -50,18 +52,28 @@ int main(int argc, char* argv[])
 		switch(c)
 		{
 			case 'f': // log stream file
+				log_stream = freopen(optarg, "w", stdout);
 				break;
 			case 'd': // debug stream file
 				break;
 			case 'n': // printer name
-				printer_name = calloc(11 + strlen(optarg), sizeof(char));
-				if(printer_name == NULL){
+				printer_name_r = calloc(13 + strlen(optarg), sizeof(char));
+				if(printer_name_r == NULL){
 					perror("calloc");
 					abort();
 				}
-				strncat(printer_name, "./drivers/", 10);
-				strncat(printer_name, optarg, strlen(optarg));
-				// test
+				printer_name_w = calloc(13 + strlen(optarg), sizeof(char));
+				if(printer_name_w == NULL){
+					perror("calloc");
+					abort();
+				}
+				strncat(printer_name_r, "./drivers/", 10);
+				strncat(printer_name_r, optarg, strlen(optarg));
+				strncat(printer_name_r, "-r", 2);
+				
+				strncat(printer_name_w, "./drivers/", 10);
+				strncat(printer_name_w, optarg, strlen(optarg));
+				strncat(printer_name_w, "-r", 2);
 				break;
 			case 'v': // turn on verbose mode
 				verbose_flag = 1;
@@ -71,7 +83,7 @@ int main(int argc, char* argv[])
 				break;
 		}
 	}
-
+	
 	line = calloc(1024, sizeof(char));
 	if(line == NULL){
 		perror("calloc");
@@ -84,9 +96,15 @@ int main(int argc, char* argv[])
 	}
 	
 	// replace the constant string with `printer_name` later	
-	rv = mkfifo(printer_name, PRINT_STREAM_MODE);
+	rv = mkfifo(printer_name_r, PRINT_STREAM_MODE);
 	if(rv)
 	{
+		perror("mkfifo()");
+		abort();
+	}
+
+	rv = mkfifo(printer_name_w, PRINT_STREAM_MODE);
+	if(rv){
 		perror("mkfifo()");
 		abort();
 	}
@@ -96,9 +114,15 @@ int main(int argc, char* argv[])
 	printf("Switching to background\n");fflush(stdout);
 	daemon(1, 1);
 
-	print_stream = fopen(printer_name, "r+");
-	if(!print_stream)
+	print_stream_in = fopen(printer_name_r, "r");
+	if(!print_stream_in)
 	{
+		perror("fopen()");
+		abort();
+	}
+
+	print_stream_out = fopen(printer_name_w, "w");
+	if(!print_stream_out){
 		perror("fopen()");
 		abort();
 	}
@@ -110,7 +134,7 @@ int main(int argc, char* argv[])
 		abort();
 	}
 	// set the file descriptor to the value of the print stream
-	p->fd = fileno(print_stream);
+	p->fd = fileno(print_stream_in);
 	// looking for any input events(high priority or otherwise)
 	p->events = POLLIN;
 	
@@ -130,16 +154,24 @@ int main(int argc, char* argv[])
 			// means we have a print job
 			printf("job recieved\n"); fflush(stdout);
 			// read the first line
-			fgets(line, 1024, print_stream);
+			fgets(line, 1024, print_stream_in);
 			printf("%s", line); fflush(stdout);
 			// see if the line is "##NAME##"
 			if(!strncmp(line, "##NAME##\n", 9)){
-				printf("found ##NAME##\n"); fflush(stdout);
-				fprintf(print_stream, "Name: %s\n", printer_name);
+				if(verbose_flag){
+					printf("found ##NAME##\n"); fflush(stdout);
+				}
+				fprintf(print_stream_out, "Name: %s\n", printer_name);
 			}else if(!strncmp(line, "##DESCRIPTION##\n", 16)){
-				fprintf(print_stream, "Description: a generic printer\n");
+				if(verbose_flag){
+					printf("found ##DESCRIPTION##\n"); fflush(stdout);
+				}
+				fprintf(print_stream_out, "Description: a generic printer\n");
 			}else if(!strncmp(line, "##LOCATION##\n", 13)){
-				fprintf(print_stream, "Location: center of a black hole\n");
+				if(verbose_flag){
+					printf("found ##LOCATION##\n"); fflush(stdout);
+				}
+				fprintf(print_stream_out, "Location: center of a black hole\n");
 			}else{
 				// parse out the file name from the first line
 				temp = strtok(line, ": ");
@@ -176,8 +208,14 @@ int main(int argc, char* argv[])
 				if(child == 0){
 					// reopen stdin file handle using the read end of the pipe
 					dup2(pipefd[0], fileno(stdin));
+					// close the pipe file descriptor for the read side
+					close(pipefd[0]);
 					// call `ps2pdf - job_name`
 					execvp(arguments[0], arguments);
+					// if execvp fails
+					perror("execvp");
+					close(pipefd[0]);
+					close(pipefd[1]);
 				// if parent
 				}else{
 					// read data from print_stream and write it to the write end of the pipe
@@ -187,14 +225,14 @@ int main(int argc, char* argv[])
 						perror("fdopen");
 						abort();
 					}
-					fgets(line, 1024, print_stream);
+					fgets(line, 1024, print_stream_in);
 					while(strncmp(line, "##END##", 7)){
 						fprintf(write_end, "%s", line);
-						fgets(line, 1024, print_stream);
+						fgets(line, 1024, print_stream_in);
 					}
 					// once "##END##" is reached, read one last time, and close the write end of pipe
 					printf("reached the ##END##\n");
-					fgets(line, 1024, print_stream);
+					fgets(line, 1024, print_stream_in);
 					fclose(write_end);
 				}
 			}
@@ -210,7 +248,8 @@ int main(int argc, char* argv[])
 
 void onExit(int p)
 {
-	fclose(print_stream);
+	fclose(print_stream_in);
+	fclose(print_stream_out);
 	remove("./drivers/printer1");
 }
 
