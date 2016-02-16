@@ -96,7 +96,7 @@ int main(int argc, char* argv[])
 	printf("Switching to background\n");fflush(stdout);
 	daemon(1, 1);
 
-	print_stream = fopen(printer_name, "r");
+	print_stream = fopen(printer_name, "r+");
 	if(!print_stream)
 	{
 		perror("fopen()");
