@@ -161,7 +161,7 @@ int main(int argc, char* argv[])
 				if(verbose_flag){
 					printf("found ##NAME##\n"); fflush(stdout);
 				}
-				fprintf(print_stream_out, "Name: %s\n", printer_name);
+				fprintf(print_stream_out, "Name: %s\n", printer_name_r);
 			}else if(!strncmp(line, "##DESCRIPTION##\n", 16)){
 				if(verbose_flag){
 					printf("found ##DESCRIPTION##\n"); fflush(stdout);
