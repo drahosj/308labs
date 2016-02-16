@@ -16,10 +16,6 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 */
 
-// lab1: print server program as it is
-// lab2: make as a daemon, install different printer backends
-// lab3: write a kernel module that gets installed as a backend
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <pthread.h>
@@ -33,9 +29,9 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 #include <argp.h>
 
 /// program version string
-const char *argp_program_version = "ISU CprE308 Print Server 0.1";
+const char const *argp_program_version = "ISU CprE308 Print Server 0.1";
 /// program bug address string
-const char *argp_program_bug_address = "Jeramie Vens: <vens@iastate.edu>";
+const char const *argp_program_bug_address = "Jeramie Vens: <vens@iastate.edu>";
 /// program documentation string
 static char doc[] = "Print server -- For my class\vThis should be at the bottom";
 
