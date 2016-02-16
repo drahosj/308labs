@@ -221,6 +221,9 @@ int main(int argc, char* argv[])
 	pthread_t producer_tid;
 	pthread_create(&producer_tid, NULL, producer_thread, NULL);
 
+
+#warning The student should take care to handle the exit case and join the threads
+
 	// for each printer group
 	for(g = printer_group_head; g; g = g->next_group)
 	{
