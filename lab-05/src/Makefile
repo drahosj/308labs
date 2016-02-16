@@ -1,9 +1,6 @@
-NETID := $(shell whoami)
-
 EXE=main
-#SRC=main.c queue.c print_job.c printer.c
 SRC=main.c printer_driver.c
-CFLAGS=-D NETID=\"$(NETID)\"  -D_GNU_SOURCE
+CFLAGS=-D_GNU_SOURCE
 LFLAGS=-pthread
 DEBUG=-g -Wall
 

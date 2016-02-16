@@ -231,31 +231,17 @@ For an example of semaphores being used, take a look at `sem_example.c`.  Please
 This is week one of a three part lab assignment.  You will be expected to submit this week's work as normal with a lab report.  Next week's lab will build on the code you have written for this lab.  It is therefore in your best interest to write clean and portable code to minimize work in future labs.
 
 ##Print Server
-This week's lab is to write a multi-threaded print server program.  The server will take in jobs from stdin in a Postscript format and print the files to PDF.  The layout of the program is one producer thread reading files from stdin and inserting the jobs into one of two queues.  Each queue has a set of consumer threads which will take the print jobs and print to PDF.  Since the printing takes time we will want to print multiple files at the same time; hence we are using multiple threads for this problem.  The overall flow is shown below:
+This week's lab is to write a multi-threaded print server program.  The server will take in jobs
+from stdin and send them to printer drivers that will print them out.  The printers are configured
+using the `config.rc` file.  Printers are arranged into groups where each group contains one or
+more printer.  When a job is sent it must include a `PRINTER` tag which will select the group that
+that job can be printed to.  Any printer in that group is able to print the job.
 
-![](basic_flow.png)
-
-The idea being simulated here is a single print server printing to a number of printers.  Each print job will request what type of printer it should be print on (e.g. color vs. black and white).  There may be multiple of a single type of printer; e.g. there could be three BW printers and one color, and a BW job could be printed to any BW printer.  For this first lab there is really only one type of printer (ps2pdf), but we are going to install this driver twice to simulate two different types of printers.  In a future lab we will expand this to additional types of printers.  To implement this define two print queues, one for each type of printer (pdf1, and pdf2) and install the pdf printer driver n1+n2 times, but allocate n1 to the pdf1 queue and n2 to the pdf2 queue.  This is explained in the code as well.
-
-##Given Code
-For this lab a large portion of the code is already written and supplied to you.  You will first need to read through the code provided in the `./src/` directory to understand what is already finished and what needs to be added.  You will also find, as is often the case when you are given code, that you will need to fix some of the given code to meet the project expectations.  For example, you will find that some of the errors are reported in a way that will not meet the --quiet command line flag you must support.  You should NOT change the existing API (i.e. the function prototypes or structure types) unless a comment tells you to do so.  If you do change you sould only add to maintain backwards compatability.  To help understand the code you can look at the doxygen generated comments.  To generate the documentation run `make doc` from inside the `src` directory.  The documentation can also be found at [http://cpre308.github.io/labs/Lab5/doc/html/index.html](http://cpre308.github.io/labs/Lab5/doc/html/index.html). 
-
-Below is a brief description of each file.  You still should look through all of the code to make sure you understand what it is doing.
-
-### main.c
-This file is where the main function is along with the `printer_spooler` function.  `main` will act as the producer thread reading jobs from stdin and sending them to the print queues.  The `printer_spooler` function will be the consumer threads.  Each `printer_spooler` will be assigned a single printer to print to (created by calling `printer_install()`) and a print job queue.  The thead will be in an infinite loop pulling jobs off the queue and sending them to the printer.
-
-### queue.c, queue.h
-These two files are used for representing queues.  In this system a queue is a doubly linked list with functions to push and pop elements on both the head and tail of the list.  The student will need to fill in all of the `todo` sections of these files to add mutual exclusion to the list.  Look at the files for more information.  _Note_, currently the setup is to use semaphores to implement this functionallity.  If you would like you can change this to using condition variables instead, or you can stick with the semaphores.
-
-### print_job.c, print_job.h
-These two files represent a print job.  The function `print_job_create` creates a new print job object and allocates a temporary file in the `/tmp` directory.  The student is expected to fill in the `print_job_tostring` function, and should read through the rest to understand what is going on.
-
-### printer.h
-This file is the the public API of a printer driver.  Any print driver that is later used with this server will need to include this header.  In the next labs the student will write an additional print driver and load that driver into this program at runtime.  For now just pass `NULL` into the first param of `printer_install`.
-
-### pdf_printer.c
-This file is an example print driver for this print server.  For this week the student will just compile the driver into the program.  In a future lab this will be compiled seperately and loaded at runtime.  This is why the `print` and `uninstall` methods are accessed through the `printer_t` object.
+###What you are given
+Please look through and understand the code in the `src` directory.  The code you are given will
+spawn a consumer thread for each printer and one producer thread that will read print jobs from
+stdin.  It is your job to implement the pushing and popping to the `job_queue` in the producer
+and consumer threads.
 
 ### Makefile
 Everything you have done for this class so far were simple one file programs.  This time the project is larger and being split into multiple files.  The supplied makefile will compile all of the source files and link them together to create a executable file.  You should look at the makefile, but you do not have to make any changes to it for this lab.  This make file can do the following:
@@ -267,15 +253,25 @@ $ make
 $ make clean
 # generate the documentation
 $ make doc
-# make a single object file
-$ make queue.o
 ~~~
 
 ## Input file format
-The files to be printed will be supplied through stdin.  The streams will begin with several lines of header information, each starting with a `#` sign.  After the last header information the actual Postscript file will begin with at `%` sign.  The end of the Postscript file will end with a `%EOF`.  See the example files to understand the format, and the `main.c` file to find more information on how to parse the file.
+The files to be printed will be supplied through `FILE` flag.  The files must be in a PostScript format, a standard ASCII document format.
+
+## Accepted flags
+The print server gets its print jobs from stdin by default.  The jobs are given as a series of optional and required tags.  The accepted tags are
+
+    - NEW: (required) start a new print job
+    - FILE: (required) the .ps file to print
+    - NAME: (required) the name of the print job
+    - DESCRIPTION: (optiona) a discription of the print job
+    - PRINTER: (required) the name of the printer group to print the job
+    - PRINT: (required) send the print job to the printer
 
 ## What you should do
-First read all of the code and understand what it currently does and read the rest of this document.  Go through the code and fix all of the `todo` tags and implement the functionality of the program.  The provided test script only tests a very basic case; you should write a better test script that will test all of the features of the code.  You should write a report answering all questions in this lab write up and detailing how you solved this problem.  If you made any changes to the code explain what you changed and why.  Talk about any issues you ran into and how you overcame them.
+First read all of the code and understand what it currently does and read the rest of this document.  Go through the code and fix all of the `warning` tags and implement the functionality of the program.  The provided test script only tests a very basic case; you should write a better test script that will test all of the features of the code.  You should also take in a `-l` flag from the command line that sets a log file output.  In that file you should have the consumer threads print detailed information about each print job including it's arrival time, finish time, and elapsed time.
+
+You should write a report answering all questions in this lab write up and detailing how you solved this problem.  If you made any changes to the code explain what you changed and why.  Talk about any issues you ran into and how you overcame them.
 
 ## What to submit
 Submit the following via GitHub:
@@ -296,7 +292,7 @@ The man pages are going to be your best friend for this lab.  In addition to the
 - [https://gcc.gnu.org/onlinedocs/gcc-4.9.2/gcc.pdf](https://gcc.gnu.org/onlinedocs/gcc-4.9.2/gcc.pdf)
 
 ## Extra credit
-There are a couple of ways to get extra credit for this lab.  One is to support additional printer drivers.  For example you could use ghostwriter to take in a Postscript file and output an ascii text file (`ps2ascii`).  Another way to get extra credit is to support additional **useful** command line arguments.  Please document any additional features in your lab report so the TAs know to grade them.
+There are a couple of ways to get extra credit for this lab.  One is to support additional printer drivers.  For example you could use ghostwriter to take in a Postscript file and output an ascii text file (`ps2ascii`).  Another way to get extra credit is to support additional **useful** command line arguments.  Please document any additional features in your lab report so the TAs know to grade them.  You can also use the libresuse from a previous lab to better profile the system and memory usage of this program and look for ways to improve it.
 
 
 # License
