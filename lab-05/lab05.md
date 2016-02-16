@@ -13,153 +13,69 @@ is as follows:
 #include <stdlib.h>
 #include <pthread.h>
 #include <errno.h>
-#include <math.h>
 
-float Vals[1000];
-
-//typedef for the struct to be the argument for calcAverage
-typedef struct{
-	float **s;
-	int tid;
-}sumArgs;
-
-//typedef for the struct to be the argument for calcStandardDev
-typedef struct{
-	float **s;
-	float avg;
-	int tid;
-}stdArgs;
-
-void *calcAverage(void *param){
-	sumArgs *args = (sumArgs *)param;
-	while(args->tid < 1000){
-		args->s[0][0] += Vals[args->tid];
-		args->tid += 8;
+void *thread1Counter(void *param){
+	int *args = (int *)param;
+	int i;
+	for(i = 0; i < 1000; i++){
+		args++;
 	}
 }
 
-void *calcStandardDev(void *param){
-	stdArgs *args = (stdArgs *)param;
-	while(args->tid < 1000){
-		args->s[0][0] += powf((Vals[args->tid] - args->avg), 2.f);
-		args->tid += 8;
+void *thread2Counter(void *param){
+	int *args = (int *)param;
+	int i;
+	for(i = 0; i < 1000; i++){
+		args++;
 	}
 }
 
 int main(int argc, char** argv){
-	pthread_t threads[8];
-	sumArgs *avgCalcArgs = malloc(8 * sizeof(sumArgs));
-	if(avgCalcArgs == NULL){
-		perror("Malloc encountered an error");
-		exit(1);
-	}
-	stdArgs *stdCalcArgs = malloc(8 * sizeof(stdArgs));
-	if(stdCalcArgs == NULL){
-		perror("Malloc encountered an error");
-		exit(1);
-	}
-	float *sum = malloc(sizeof(float));
-	if(sum == NULL){
-		perror("Malloc encountered an error");
-		exit(1);
-	}
-	float avg;
-	float e_sum = 0.f;
-	float e_avg = 0.f;
-	float e_std;
-	int i;
+	pthread_t t1;
+	pthread_t t2;
+	int shared = 0;
+	
 	int err;
 
-	sum[0] = 0.f;
-
-	srand(7);
-
-	for(i = 0; i < 1000; i++){
-		Vals[i] = (float)(rand() % 15);
-		printf("%f\n", Vals[i]);
+	err = pthread_create(&t1, NULL, thread1Counter, (void *)&shared);
+	if(err != 0){
+		errno = err;
+		perror("pthread_create");
+		exit(1);
+	}
+	err = pthread_join(t1, NULL);
+	if(err != 0){
+		errno = err;
+		perror("pthread_join");
+		exit(1);
 	}
 
-	for(i = 0; i < 8; i++){
-		avgCalcArgs[i].s = &sum;
-		avgCalcArgs[i].tid = i;
-		err = pthread_create(&threads[i], NULL, calcAverage, (void *)&avgCalcArgs[i]);
-		if(err != 0){
-			errno = err;
-			perror("pthread_create");
-			exit(1);
-		}
+	err = pthread_create(&t2, NULL, thread2Counter, (void *)&shared);
+	if(err != 0){
+		errno = err;
+		perror("pthread_create");
+		exit(1);
+	}
+	err = pthread_join(t2, NULL);
+	if(err != 0){
+		errno = err;
+		perror("pthread_join");
+		exit(1);
 	}
 
-	for(i = 0; i < 8; i++){
-		err = pthread_join(threads[i], NULL);
-		if(err != 0){
-			errno = err;
-			perror("pthread_join");
-			exit(1);
-		}
-	}
-
-	for(i = 0; i < 1000; i++){
-		e_sum += Vals[i];
-	}
-
-	printf("e_sum: %f\tsum: %f\n", e_sum, sum[0]);
-
-	avg = sum[0] / 1000.f;
-	e_avg = e_sum / 1000.f;
-
-	printf("e_avg: %f\t\tavg: %f\n", e_avg, avg);
-
-	sum[0] = 0.f;
-	e_sum = 0.f;
-	for(i = 0; i < 8; i++){
-		stdCalcArgs[i].s = &sum;
-		stdCalcArgs[i].tid = i;
-		stdCalcArgs[i].avg = avg;
-		err = pthread_create(&threads[i], NULL, calcStandardDev, (void *)&stdCalcArgs[i]);
-		if(err != 0){
-			errno = err;
-			perror("pthread_create");
-			exit(1);
-		}
-	}
-
-	for(i = 0; i < 8; i++){
-		err = pthread_join(threads[i], NULL);
-		if(err != 0){
-			errno = err;
-			perror("pthread_join");
-			exit(1);
-		}
-	}
-
-	for(i = 0; i < 1000; i++){
-		e_sum += powf(Vals[i] - e_avg, 2.f);
-	}
-
-	printf("e_sum: %f\tsum: %f\n", e_sum, sum[0]);
-
-	avg = sqrtf(sum[0] / 1000.f);
-	e_avg = sqrtf(e_sum / 1000.f);
-
-	printf("e_std: %f\tstd: %f\n", e_avg, avg);
-
-	free(avgCalcArgs);
-	free(stdCalcArgs);
-	free(sum);
-	
+	printf("After both threads are done executing, `shared` = %d\n", shared);
 	return 0;
 }
 ~~~
 
-Save this code snippet as `std_dev_calc.c`, compile it with the `-lm` flag to link against the math library, and run the program a couple of times, observe the outputs and answer the following questions:
+Save this code snippet as `threaded_count.c`, compile it, and run the program a couple of times, observe the outputs and answer the following questions:
 
 - what is the expected output?
 - what is the calculated output?
 - what caused the discrepancy between the expected and calculated values?
 
 ##Ride into the critical section
-One way to avoid the error that occurs in the calculation of the average and standard deviation is for the individual threads to lock the area of code where the accumulation of `sum` is performed, and unlock it once the accumulation is complete for that individual thread.  This area is known as the critical section.  To maximize performance, it is preferred that the critical section is as small as possible.  To perform these locks, the following lines of code are needed:
+One way to avoid the error that occurs in the threaded counter program is for the individual threads to lock the area of code where the accumulation of `shared` is performed, and unlock it once the accumulation is complete for that individual thread.  This area is known as the critical section.  To maximize performance, it is preferred that the critical section is as small as possible.  To perform these locks, the following lines of code are needed:
 
 ~~~c
 pthread_mutex_t lock;
@@ -193,14 +109,16 @@ return 0;
 
 For more information regarding the init, lock, and unlock calls, consult `man 3 pthread_mutex_init`, `man 3 pthread_mutex_lock`, and `man 3 pthread_mutex_unlock` respectively.  As seen above, the variable `lock` is declared as a global variable so that all the threads can get access to it.  It is initialized in the main thread using `pthread_mutex_init`, and the threads use it to lock critical sections using `pthread_mutex_lock`.  Once the critical section is complete, the critical section is unlocked using `pthread_mutex_unlock`. Finally, before the program exits, destroy the mutex using the `pthread_mutex_destroy` function call.
 
-Now, add the mutex and the calls to `pthread_mutex_lock` and `pthread_mutex_unlock` to the averaging and standard deviation calculation thread functions in `std_dev_calc.c`, compile it, run it, and answer the following questions:
+Now, add the mutex and the calls to `pthread_mutex_lock` and `pthread_mutex_unlock` to the counting thread functions in `threaded_count.c`, compile it, run it, and answer the following questions:
 
 - Did this fix the issue with the original code?
 
 #See the threads in the streets, with not enough to do
-Using mutexes to lock and unlock are great for avoiding race conditions, like what was shown in `std_dev_calc.c`, but it doesn't do a very good job of keeping threads from executing when we do not want them to.
+Using mutexes to lock and unlock are great for avoiding race conditions, like what was shown in `threaded_count.c`, but it doesn't do a very good job of keeping threads from executing when we do not want them to.
 
-Suppose that a program has a thread that takes in data from some outside source, performs some preprocessing on it, and places it into a queue for other threads in the program to perform some computations on it.  We will call this thread the producer thread.  The other threads that read from the queue and performs computations on that data will be called consumer threads.  To ensure correctness of the program and to avoid duplicit computations, the critical sections of the program should be when the producer thread writes elements to the queue and when the consumer threads read from the queue.  This would work fine, but there is a problem.  Suppose that the program has one producer thread with two consumer threads.   Suppose that during execution, the producer thread attempts and gets the mutex first, writes to the queue, and releases the mutex.  Then the first consumer thread attempts and gets the mutex next, reads from the queue, and releases the mutex. Then the second consumer thread does the same thing, but this time the queue is empty, so it can't do anything, and releases the mutex.  Suppose further that by the time the second consumer thread releases the mutex, the first consumer thread completes its computation and is attempting to read from the queue.  It gets the mutex, sees that the queue is empty, so it also releases the mutex.  Now, due to how the scheduling of the threads are, the producer thread performs the check of the mutex whenever one of the consumer threads has it, and it cannot lock the queue so that it can write to it.  This situation is known as starvation.  Since that is not desirable, conditional variables and semaphores should be used to avoid starvation.
+Suppose that a program has one producer thread P, and two consumer threads C1 and C2.  To ensure correctness of this program and to avoid duplicit computations, the critical sections of this program should be when P writes elements to the queue, and when either C1 or C2 reads from the queue.  This would work fine, but there is a problem.
+
+Suppose that the program was implemented naively, making the critical section of P, C1, and C2 are quite lengthy.  During execution, P locks the mutex, produces data, writes to the queue, and releases the mutex.  Then C1 gets to execute, going in to its critical section.  While C1 is in its critical section, C2 gets scheduled to execute.  Due to C1 still being in the critical section, C2 cannot get the lock, and thus cannot execute.  A bit later, C1 finishes the execution of its critical section, and unlocks the mutex.  Then P executes and goes into its critical section.  While P is in its critical section, C2 gets scheduled to execute.  Since P is in its critical section, C2 cannot get the lock and cannot execute.  Then P finishes execution in its critical section, and unlocks the mutex.  Then C1 goes next, and the cycle repeats.  We see that C2 is never able to do anything, due to the fact that either P or C1 has the lock when C2 tries to get it.  This situation is known as starvation.  Since that is not desirable, conditional variables and semaphores should be used to avoid starvation.
 
 ##Waiting on the conditional variable to change
 Conditional variables are used to ensure that threads wait until a specific condition occurs.  Using the example presented in the previous section, answer the following questions:
@@ -237,7 +155,7 @@ void *genericThread1(void *args){
 .
 .
 int main(int argc, char **argv){
-  int test_var = 0;
+  test_var = 0;
 .
   err = pthread_mutex_init(&lock, NULL);
 .
@@ -251,7 +169,15 @@ int main(int argc, char **argv){
 }
 ~~~
 
-For more information regarding the cond\_init, cond\_wait, cond\_signal(and in extension cond\_broadcast), and cond\_destroy please consult `man 3 pthread_cond_init`, `man 3 pthread_cond_wait`, `man 3 pthread_cond_signal`, and `man 3 pthread_cond_destroy` respectively.  As can be seen above, the variable `generic_condition` is declared as a global variable for the same reason that `lock` is declared as a global variable.  `generic_condition` is then initialized in main by calling `pthread_cond_init`.  `genericThread0` locks the mutex, does what it's supposed to do, then sets `test_var` to `1`, so that `genericThread1` can break out of the loop, signals the conditional variable, then unlocks the mutex.  `genericThread1` will attempt to lock the mutex, test the value of `test_var`, and call `pthread_cond_wait` to see if the conditional variable has been signaled. If not, the thread will block, and `pthread_cond_wait` will not return. However, according to the man pages, this block does not last forever, and should be re-evaluated each time `pthread_cond_wait` returns; hence the `while` loop that surrounds the call to `pthread_cond_wait`.  If the conditional variable has been signaled, then `pthread_cond_wait` would return, and the thread calling it would get the mutex.  The value of `test_var` would then be tested, fall through, fun things are performed, and the mutex is unlocked.  Once all is said and done, remove the conditional variable using `pthread_cond_destroy`.
+For more information regarding the cond\_init, cond\_wait, cond\_signal(and in extension cond\_broadcast), and cond\_destroy please consult `man 3 pthread_cond_init`, `man 3 pthread_cond_wait`, `man 3 pthread_cond_signal`, and `man 3 pthread_cond_destroy` respectively.
+
+As can be seen above, the variable `generic_condition` is declared as a global variable for the same reason that `lock` is declared as a global variable.  `generic_condition` is then initialized in main by calling `pthread_cond_init`.  `genericThread0` locks the mutex, does what it's supposed to do, then sets `test_var` to `1`, so that `genericThread1` can break out of the loop, signals the conditional variable, then unlocks the mutex.
+
+`genericThread1` will attempt to lock the mutex, test the value of `test_var`, and call `pthread_cond_wait` to see if the conditional variable has been signaled.  If not, the thread will block, and `pthread_cond_wait` will not return.  However, according to the man pages, this block does not last forever, and should be re-evaluated each time `pthread_cond_wait` returns; hence the `while` loop that surrounds the call to `pthread_cond_wait`.  If the conditional variable has been signaled, then `pthread_cond_wait` would return, and the thread calling it would get the mutex.  The value of `test_var` would then be tested, fall through, fun things are performed, and the mutex is unlocked.
+
+Once all is said and done, remove the conditional variable using `pthread_cond_destroy`.
+
+To see an example of conditional variables, please take a look at `cond_example.c`.  Make sure that everything pertaining to condition variables, such as how it's created, and used, is understood before compiling it.  Run the compiled code, and put the output value of the program into your report.
 
 ##Why not semaphore; you've got to declare yourself openly
 Semaphores perform a similar task to conditional variables, and they are slightly easier to use.  Semaphores come it two flavors, Named, and Unnamed.  The differences between the two are in how they are created, and destroyed.  For simplicity, the unnamed flavor of semaphores will be covered in this handout.  To use semaphores, the following function calls and includes are needed:
@@ -297,7 +223,17 @@ int main(int argc, char **argv){
 }
 ~~~
 
-For more information on the init, wait, post, and destroy functions, consult `man 3 sem_init`, `man 3 sem_wait`, `man 3 sem_post`, and `man 3 sem_destroy` respectively.  Note that the calls to`pthread_mutex_lock` and `pthread_mutex_unlock` do not necessarily have to be where they are shown in the above code, i.e., the mutex lock does not have to occur before the semaphore wait, and the mutex unlock doesn't have to occur after the semaphore post.  For similar reasons to `lock` and `generic_condition`, `semaphore` is declared as a global variable.  It is initialized in main using `sem_init` with the value for _pshared_ set to `0`(meaning the semaphore is only shared between the threads of the current process), and it's initial value will be `1`(last argument to `sem_init`).  `genericThread0` decrements semaphore by one using `sem_wait`. If `genericThread1` got to its `sem_wait` before `genericThread0` incremented the semaphore by calling `sem_post`, then `genericThread1` will block right at its `sem_wait` line.  Once everything is completed, destroy the semaphore by calling `sem_destroy` on `semaphore`.
+For more information on the init, wait, post, and destroy functions, consult `man 3 sem_init`, `man 3 sem_wait`, `man 3 sem_post`, and `man 3 sem_destroy` respectively.
+
+Note that the calls to`pthread_mutex_lock` and `pthread_mutex_unlock` do not necessarily have to be where they are shown in the above code, i.e., the mutex lock does not have to occur before the semaphore wait, and the mutex unlock doesn't have to occur after the semaphore post.
+
+For similar reasons to `lock` and `generic_condition`, `semaphore` is declared as a global variable.  It is initialized in main using `sem_init` with the value for _pshared_ set to `0`(meaning the semaphore is only shared between the threads of the current process), and it's initial value will be `1`(last argument to `sem_init`).
+
+`genericThread0` decrements `semaphore` by one using `sem_wait`.  If `genericThread1` attempts to decrement `semaphore` when it got to its call to `sem_wait` before `genericThread0` incremented the semaphore by calling `sem_post`, then `genericThread1` will block right at its `sem_wait` line.  This is because decrementing a semaphore past `0` will not evaluate.  So if a semaphore is already at a value of `0`, decrementing it with `sem_wait` will cause the thread calling `sem_wait` to wait until the value of the semaphore is incremented to a value greater than `0`.
+
+Once everything is completed, destroy the semaphore by calling `sem_destroy` on `semaphore`.
+
+For an example of semaphores being used, take a look at `sem_example.c`.  Please make sure that everything in the program `sem_example.c` pertaining to semaphores is understood before compiling it.  Run the program, and note the order in which the buffer is read/written to.  Run the program multiple times, and again not the order in which the buffer is read/written to.  Do they look different?  Why do you think that is the case?
 
 #Tasks for this lab
 This is week one of a three part lab assignment.  You will be expected to submit this week's work as normal with a lab report.  Next week's lab will build on the code you have written for this lab.  It is therefore in your best interest to write clean and portable code to minimize work in future labs.
