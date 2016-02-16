@@ -85,5 +85,58 @@ Yes. The joins ensure that both created threads will run before the main
 thread returns. It would be possible for Thread 2 to print before Thread 1, but
 that never ended up happening to me.
 
-## Example Program
+## NQueens
 
+It was a relatively simple task to expand the provided nqueens to include multi-threading.
+The creation of the rows array and initial call of queens_helper into the
+thread function. The for loop then invokes a thread for each column, and
+afterwards collects all threads with join() and sums their solutions_found.
+
+### Performance Notes: N Queens N Threads
+Running for 14 queens, the results below can be observed:
+```
+jake at gilliam in ~/308/lab-04/nqueens on master*
+$ ./nqueens -n 14
+# Queens = 14, Threaded = FALSE, Verbose = FALSE, Display = FALSE
+Real Time: 0:21.06, User Time: 21.06, System Time: 0.00, CPU Usage: 99%
+Solution Count = 365596
+jake at gilliam in ~/308/lab-04/nqueens on master*
+$ ./nqueens -n 14 -t
+# Queens = 14, Threaded = TRUE, Verbose = FALSE, Display = FALSE
+Thread 00: Real Time: 0:01.98, User Time: 1.17, System Time: 0.00, CPU Usage: 59%
+Thread 02: Real Time: 0:02.08, User Time: 1.49, System Time: 0.00, CPU Usage: 71%
+Thread 03: Real Time: 0:02.20, User Time: 1.54, System Time: 0.00, CPU Usage: 70%
+Thread 13: Real Time: 0:02.32, User Time: 1.19, System Time: 0.00, CPU Usage: 51%
+Thread 07: Real Time: 0:02.34, User Time: 1.67, System Time: 0.00, CPU Usage: 71%
+Thread 01: Real Time: 0:02.46, User Time: 1.36, System Time: 0.00, CPU Usage: 55%
+Thread 06: Real Time: 0:02.47, User Time: 1.67, System Time: 0.00, CPU Usage: 67%
+Thread 11: Real Time: 0:02.52, User Time: 1.49, System Time: 0.00, CPU Usage: 59%
+Thread 12: Real Time: 0:02.60, User Time: 1.36, System Time: 0.00, CPU Usage: 52%
+Thread 09: Real Time: 0:02.60, User Time: 1.61, System Time: 0.00, CPU Usage: 61%
+Thread 10: Real Time: 0:02.65, User Time: 1.54, System Time: 0.00, CPU Usage: 57%
+Thread 04: Real Time: 0:02.71, User Time: 1.61, System Time: 0.00, CPU Usage: 59%
+Thread 08: Real Time: 0:02.73, User Time: 1.64, System Time: 0.00, CPU Usage: 60%
+Thread 05: Real Time: 0:02.78, User Time: 1.64, System Time: 0.00, CPU Usage: 58%
+Real Time: 0:02.78, User Time: 21.08, System Time: 0.00, CPU Usage: 756%
+Solution Count = 365596
+```
+
+Note that despite the tremendous difference in Real Time, the User Times are very similar.
+The 0.02 second increase in User Time can be explained by thread overhead - the time needed
+to set up and tear down the threads.
+
+For real time, there was no number of threads, where queens = threads, at which the threaded solution ran
+slower, given the time was measurable. The real time was not measurable until N = 10, at
+which point both the threaded and unthreaded times were equal to 0.01s. At N = 11, the 
+non-threaded solution was notably slower, at 0.08s vs 0.01s.
+
+The user time of the threaded solution was often several times higher than the non-threaded times for
+very low (0.01s) real-time runs. This is probably due to rounding errors, where ~0.005 rounds 
+up to 0.01 for non-threaded, but it rounds up to 0.01 and then sums 8 times for the threaded run.
+In either case, the difference is trivial and disappears once run-times become measurable on the scale
+of seconds.
+
+The number of threads is not linear with respect to the number of queens because the number of 
+simultaneously running threads is capped by the number of hardware threads supported by the system.
+In the case of my system (two quad-core Xeon processors), 8 threads can run
+simultaneously, giving a result of close to 800% CPU utilization.
