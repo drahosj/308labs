@@ -73,7 +73,7 @@ int main(int argc, char* argv[])
 				
 				strncat(printer_name_w, "./drivers/", 10);
 				strncat(printer_name_w, optarg, strlen(optarg));
-				strncat(printer_name_w, "-r", 2);
+				strncat(printer_name_w, "-w", 2);
 				break;
 			case 'v': // turn on verbose mode
 				verbose_flag = 1;
