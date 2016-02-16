@@ -143,13 +143,15 @@ int main(int argc, char* argv[])
 			}else{
 				// parse out the file name from the first line
 				temp = strtok(line, ": ");
+				printf("temp: %s\n", temp); fflush(stdout);
 				if(temp == NULL){
 					printf("invalid format\n"); fflush(stdout);
 					continue;
 				}
 				temp = strtok(NULL, ": ");
 				if(temp != NULL){
-					temp[strlen(temp) - 1] = '\0';
+					temp[strlen(temp) - 3] = '\0';
+					printf("temp: %s", temp); fflush(stdout);
 				}else{
 					continue;
 				}
@@ -191,6 +193,7 @@ int main(int argc, char* argv[])
 						fgets(line, 1024, print_stream);
 					}
 					// once "##END##" is reached, read one last time, and close the write end of pipe
+					printf("reached the ##END##\n");
 					fgets(line, 1024, print_stream);
 					fclose(write_end);
 				}
