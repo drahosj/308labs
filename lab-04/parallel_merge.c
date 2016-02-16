@@ -30,7 +30,6 @@ int merge(struct sub_array * s_array, int sub_array_start ,int sub_array_end, in
 	int i_n;
 	int j;
 	int j_n;
-	int k;
 	int a_pos;
 	int b_pos;
 	int c_pos;
@@ -148,12 +147,12 @@ int merge(struct sub_array * s_array, int sub_array_start ,int sub_array_end, in
 	}
 	if(verbose_flag) printf("t = %d\n", t);
 	if(t){
-		if(verbose_flag) printf("copying `temp_array` to `array`\n", t);
+		if(verbose_flag) printf("copying `temp_array` to `array`\n");
 		for(i = 0; i < array_length; i++){
 			array[i] = temp_array[i];
 		}
 	}else{
-		if(verbose_flag) printf("since t is 0, do nothing\n", t);
+		if(verbose_flag) printf("since t is 0, do nothing\n");
 	}
 	return 0;
 }
@@ -183,6 +182,7 @@ void * thread_sort(void * s){
 			j--;
 		}
 	}
+	return NULL;
 }
 
 /**
