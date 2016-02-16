@@ -25,26 +25,44 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 extern "C" {
 #endif 
 
-/// Publically accessable printer object
-typedef struct PRINTER_STRUCT* printer_t;
-/// A internal representation of a printer device
-struct PRINTER_STRUCT
+
+
+struct printer_driver
 {
+	char * name;
+	char * description;
+	char * location;
+	FILE * driver_write;
+	FILE * driver_read;
+};
+
+int printer_install(struct printer_driver * printer, const char * driver);
+int printer_uninstall(struct printer_driver * printer);
+int printer_print(const struct printer_driver * printer, const struct print_job * job);
+
+
+/// Publically accessable printer object
+//typedef struct PRINTER_STRUCT* printer_t;
+/// A internal representation of a printer device
+//struct PRINTER_STRUCT
+//{
 	/// The name of this printer
-	char* printer_name;
+//	char* printer_name;
+	
+	
 	/// The driver name (set by printer_install() function)
-	const char* driver_name;
+//	const char* driver_name;
 	/// The driver version (set by printer_install() function)
-	const char* driver_version;
+//	const char* driver_version;
 	/// Handle to the library object.  Ignore for Lab 5, we will need this in a future lab
-	void* lib_handle;
+//	void* lib_handle;
 	/**
 	 * @brief      Uninstall this printer and clean up any resources it has allocated.
 	 * @param      printer
 	 *                  A pointer to this object
 	 * @return     0 on success, <0 otherwise
 	 */
-	int (*uninstall)(printer_t printer);
+//	int (*uninstall)(printer_t printer);
 	/**
 	 * @brief      Print a job to the printer.
 	 * @param      printer
@@ -55,8 +73,8 @@ struct PRINTER_STRUCT
 	 * example useage:
 	 *   int error = printer->print(printer, my_job);
 	 */
-	int (*print)(printer_t, print_job_t*);
-};
+//	int (*print)(printer_t, print_job_t*);
+//};
 
 /**
  * @brief     Install the given printer and return a handle to it
@@ -66,7 +84,7 @@ struct PRINTER_STRUCT
  *                 A unique name to give the printer
  * @return    A printer object which can invoke print and uninstall methods.
  */
-printer_t     printer_install          (void* future, char* printer_name);
+//printer_t     printer_install          (void* future, char* printer_name);
 
 #ifdef __cplusplus
 }

@@ -1,14 +1,19 @@
 NETID := $(shell whoami)
 
-EXES=main
-OBJS=main.o queue.o pdf_printer.o print_job.o
+EXE=main
+#SRC=main.c queue.c print_job.c printer.c
+SRC=main.c printer_driver.c
 CFLAGS=-D NETID=\"$(NETID)\"  -D_GNU_SOURCE
+LFLAGS=-pthread
 DEBUG=-g -Wall
 
-all: $(EXES)
 
-main: $(OBJS)
-	gcc -o main $^ -pthread $(DEBUG)
+OBJ := $(patsubst %.c,%.o,$(SRC))
+
+all: $(EXE)
+
+$(EXE): $(OBJ)
+	gcc -o $@ $^ $(LFLAGS)
 
 %.o: %.c *.h
 	gcc -c $< $(CFLAGS) $(DEBUG)
@@ -18,6 +23,6 @@ doc:
 
 clean:
 	rm -rf *.o
-	rm -rf $(EXES)
+	rm -rf $(EXE)
 	
 .PHONY: doc
