@@ -172,8 +172,8 @@ void* thread(void* p)
 		/* Take the next column */
 		column = next_column; 
 
-		/* Increment the next column */
-		next_column++;
+		/* Decrement the next column */
+		next_column--;
 
 		/* NOTE: Even though it *looks* atomic,
 		 * local = global++ is anything but.
@@ -192,7 +192,7 @@ void* thread(void* p)
 			exit(1);
 		}
 
-		if (column >= num_queens) {
+		if (column < 0) {
 			break;
 		}
 
@@ -306,6 +306,13 @@ int main(int argc, char* argv[])
 			solution_count += tmp_solution_count;
 		}
 	} else {
+		/* Count down from highest column to lowest.
+		 * This allows for the longest threads to run
+		 * first, and causes the threads to finish more
+		 * at the same time, which increases CPU usage
+		 * for better run time
+		 */
+		next_column = num_queens - 1;
 		for(i = 0; i < num_threads; i++) {
 			params[i].thread_num = i;
 			int err = pthread_create(&(thread_handles[i]), NULL, thread, &(params[i]));
