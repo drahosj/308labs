@@ -10,7 +10,9 @@
 
 int printer_install(struct printer_driver * printer, const char * driver)
 {
+	int i = 0;
 	char driver_name[500];
+	char line[1024];
 	snprintf(driver_name, 500, "%s-r", driver);
 	printer->driver_write = fopen(driver_name, "w");
 	if(printer->driver_write == NULL)
@@ -30,17 +32,26 @@ int printer_install(struct printer_driver * printer, const char * driver)
 	fprintf(printer->driver_write, "##NAME##\n");
 	fflush(printer->driver_write);
 	printer->name = NULL;
-	getline(&printer->name, NULL, printer->driver_read);
+	fgets(line, 1024, printer->driver_read);
+	i = strlen(line);
+	line[i - 1] = '\0';
+	printer->name = strdup(line);
 
 	fprintf(printer->driver_write, "##DESCRIPTION##\n");
 	fflush(printer->driver_write);
 	printer->description = NULL;
-	getline(&printer->description, NULL, printer->driver_read);
+	fgets(line, 1024, printer->driver_read);
+	i = strlen(line);
+	line[i - 1] = '\0';
+	printer->description = strdup(line);
 
 	fprintf(printer->driver_write, "##LOCATION##\n");
 	fflush(printer->driver_write);
 	printer->location = NULL;
-	getline(&printer->location, NULL, printer->driver_read);
+	fgets(line, 1024, printer->driver_read);
+	i = strlen(line);
+	line[i - 1] = '\0';
+	printer->location = strdup(line);
 
 	dprintf("Installed Printer:\n"
 					"\tDriver: %s\n"
@@ -78,7 +89,7 @@ int printer_print(const struct printer_driver * printer, const struct print_job 
 	{
 		fputs(buffer, printer->driver_write);
 	}
-	fprintf(printer->driver_write, "##END##");
+	fprintf(printer->driver_write, "##END##\n");
 	fflush(printer->driver_write);
 	
 	return 0;
