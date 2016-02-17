@@ -17,7 +17,7 @@ void *threadCounter(void *param){
 	int *args = (int *)param;
 	int i;
 
-	for(i = 0; i < 1000; i++){
+	for(i = 0; i < 1000000; i++){
 		(*args)++;
 	}
 }
