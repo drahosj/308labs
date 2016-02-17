@@ -224,20 +224,6 @@ int main(int argc, char* argv[])
 
 #warning The student should take care to handle the exit case and join the threads
 
-	// for each printer group
-	for(g = printer_group_head; g; g = g->next_group)
-	{
-		// for each printer in the group
-		for(p = g->printer_queue; p; p = p->next)
-		{
-			// spawn the printer thread
-			pthread_join(p->tid, NULL);
-		}
-	}
-
-
-	
-	
 	return 0;
 }
 
