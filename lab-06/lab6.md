@@ -1,8 +1,6 @@
 # Interprocess Comunication
 Last week you created a print server application which would take in jobs from the `stdin` of the application and printed to a single backend driver.  This has a very clear flaw: it can only print jobs from programs piped into it at start time.  This week you will modify the program so any program can send print jobs to it at any time using interprocess communication (IPC).
 
-Please note that this is a **TWO WEEK LAB**.  The code and report are due two weeks after your scheduled lab section.  This is also twice as long as a normal lab so you should work on it early and not put it off to the last minute.
-
 # Types of IPC
 There are various methods of IPC in a system.  At their root all IPC methods are simply a way for one process to comunicate some information to another process.  By this definition, what you implemented last week is IPC by piping data from the test script into the server, but that only allowed one program to talk to one other program.  Now we want to make any number of processes be able to talk to the server program.  All of the following example programs can be found in the `ipc-types` subdirectory of the Lab 6 repository.
 
@@ -14,7 +12,7 @@ One of the simplest forms of IPC is a pipe.  When you pipe the output of one pro
 $ lsmod | grep acpi
 ~~~
 
-Another way to create an unnamed pipe is using the `pipe(2)` system call in C.  The `pipe` function will create a unidrirectional pipe and return a two element array where element 0 is the read end and elemement 1 is the write end of the pipe.  The can be called before a `fork` call and then the child and parent can use it to communicate.  For example, try running this code example `pipe_test.c`.  In your report and record the output of this program along with anything you notice about the timing of when things are printed. 
+Another way to create an unnamed pipe is using the `pipe(2)` system call in C.  The `pipe` function will create a unidrirectional pipe and return a two element array where element 0 is the read end and elemement 1 is the write end of the pipe.  They can be called before a `fork` call and then the child and parent can use it to communicate.  For example, try running this code example `pipe_test.c`.  In your report and record the output of this program along with anything you notice about the timing of when things are printed. 
 
 Learn more about pipes by reading the man pages `pipe(2)` and `pipe(7)`.  In your report answer the following questions:
 
@@ -101,7 +99,7 @@ One thing of note is that many of these above methods of IPC can generate signal
 It is also worth mentioning that signals can be used for exception handling similar to most object oriented languages.  For example you could have a signal handler which catches a certain error and then when that error occurs use `raise(3)` to raise the exception.  With some clever use of `setjmp(3)` and `longjmp(3)` one can achieve a simple try-catch block.  This is out of scope for this lab however.
 
 # Dynamically / Statically Linked Libraries
-In the past all of the code you have probably written was contained in `.c` files which you compiled into object files and linked together.  This is fine when all of the files are code written for one project, but what if you want to implement the same functionality into a lot of programs?  Instead we can compile the functionality into a library and then link against that library.  Now each time the program runs it will find those functions inside the library file.  This allows several programs on the computer to all share the same library code and not duplicate the functionality that the library provides.  Look in the directory `library` inside the git repository.  You will see two C files and a header file.  Let's compile `lib_hello.c` as a dynamically linked library.  Inside the `library` directory enter the following commands:
+In the past all of the code you have probably written was contained in `.c` files which you compiled into object files and linked together.  This is fine when all of the files are code written for one project, but what if you want to implement the same functionality into multiple programs?  Instead we can compile the functionality into a library and then link against that library.  Now each time the program runs it will find those functions inside the library file.  This allows several programs on the computer to all share the same library code and not duplicate the functionality that the library provides.  Look in the directory `library` inside the git repository.  You will see two C files and a header file.  Let's compile `lib_hello.c` as a dynamically linked library.  Inside the `library` directory enter the following commands:
 
 ~~~bash
 $ gcc -Wall -fPIC -c lib_hello.c
@@ -141,7 +139,7 @@ Now run the program `./lib_test` again and record the output in your lab report.
 
 
 # Tasks For This Lab
-The rest of this lab will be extending your code from last week.  Last week you created a print server program which would accept jobs from the standard input and serve those jobs to printers.  This has a clear problem: only one process can send print jobs to the print server at a time.  In a real system we want to have our print server running in the background as a _daemon_.  Anytime a program has a file it wants printed it should be able to send it to the printer using an IPC method.  Additionally, programs which want to print should not need to worry about the internal workings of the print server or the IPC calls, it should be able to link in a library and use that to do printing.  Please read all of the tasks before starting as they will each effect the others.
+The rest of this lab will be extending your code from last week.  Last week you created a print server program which would accept jobs from the standard input and serve those jobs to printers.  This has a clear problem: only one process can send print jobs to the print server at a time.  In a real system we want to have our print server running in the background as a _daemon_(see section `Print Server as Daemon` below for more details on daemons and how to turn a process into a daemon).  Anytime a program has a file it wants printed it should be able to send it to the printer using an IPC method.  Additionally, programs which want to print should not need to worry about the internal workings of the print server or the IPC calls, it should be able to link in a library and use that to do printing.  _Please read all of the tasks before starting as they will each effect the others_.
 
 ## Print Server IPC
 In this lab you have seen several different ways to do interprocess communication.  You will now apply one or more of the above methods in your print server program.  Some of the methods make more sense than others; however, most of the above methods of IPC can be applied to this problem.  Here is a list of possible ways to complete this task:
@@ -152,7 +150,7 @@ In this lab you have seen several different ways to do interprocess communicatio
 - A local domain socket with print jobs sent as network packets
 - Any other combination or method you feel best solves the problem
 
-This a very open ended problem and there is no one right way to solve it.  Some of the solutions might be more efficient others may be easier or simpler while others yet might be more extendable if the server was used in a real system.  Use what you have learned from this lab and what you feel most comfortable with to solve this problem.  Note that with some solutions you can turn the print server into a multiple writer problem.  If you choose to do this you will need to ensure that you properly protect any shared memory that all the writers will use.
+This a very open ended problem and there is no one right way to solve it.  Some of the solutions might be more efficient, others may be easier or simpler, while others yet might be more extendable if the server was used in a real system.  Use what you have learned from this lab and what you feel most comfortable with to solve this problem.  Note that with some solutions you can turn the print server into a multiple writer problem.  If you choose to do this you will need to ensure that you properly protect any shared memory that all the writers will use.
 
 ## Print Server Client Library
 Users of your print server should not have to worry about your internal implementation of the print server when they are writing software.  Instead they should be able to include a single header file and link against your pre-compiled library.  Provided in the `src\libprintserver` directory of the git repository is a header file called `print_server_client.h`.  Write a statically link library that provides this public API called `libprintserver.so`.  Your library must implement all of the function prototypes listed in `print_server_client.h` and will do all IPC calls to the print server daemon.
@@ -163,7 +161,7 @@ There are several functions listed in `print_server_client.h` which you can choo
 ## Print Server as Daemon
 As stated in `daemon(7)` "a daemon is a service process that runs in the background and supervises the system or provides functionality to other processes."  Daemons are processes which run in the background and often as the root user.  All interaction with daemons is done through some form of IPC calls, often times on modern systems using an IPC library and standard called `DBUS`.  Although this lab has not talked about the `DBUS` due to its complexity and higher level implementation, it is worth noting that on most modern Linux distributions most IPC is done using the `DBUS`.  On most modern distributions daemons are controlled using a program called `systemd` which allows the user to start, stop, and otherwise change the settings of running daemons.  Examples of daemons on modern systems include the network manager, audio subsystem, and much more.  The man page `daemon(7)` lists a lot of information about how modern daemons should run; however, to minimize the complexity of this lab (and because you do not have permissions to edit daemons running on the lab machines) you will be implementing a much simpler daemon system.  The man page `daemon(3)` provides a library call which will switch a userspace process to a background daemon.  
 
-A command line argument should be added to your print server program which is `-d` or `--daemon`.  Whenever this flag is provided your program should switch itself to a daemon by calling `daemon(3)`. 
+A command line argument should be added to your print server program such as `-d` or `--daemon`.  Whenever this flag is provided your program should switch itself to a daemon by calling `daemon(3)`. 
 
 ## Command Line Printer Program
 The last requirement for this lab is a program called `cli-printer`.  The program should take the all of the following command line arguments:
@@ -200,7 +198,7 @@ Make sure that you answer **ALL** of the questions asked in this lab in your rep
 
 All code should be well documented using `doxygen` style comments.
 
-**This is a two week lab**.  There are a lot of requirements for this lab so make sure you work on it early and don't put it off to the last minute.  Lab 7 will build on top of it so it is vital that you get it finished on time.
+There are a lot of requirements for this lab so make sure you work on it early and don't put it off to the last minute.  Lab 7 will build on top of it so it is vital that you get it finished on time.
 
 # License
 This lab write up and all accompany materials are distributed under the MIT License.  For more information, read the accompaning LICENSE file distributed with the source code.
