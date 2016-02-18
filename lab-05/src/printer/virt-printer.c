@@ -95,11 +95,6 @@ int main(int argc, char* argv[])
 		perror("calloc");
 		abort();
 	}
-	temp = calloc(512, sizeof(char));
-	if(temp == NULL){
-		perror("calloc");
-		abort();
-	}
 	
 	// replace the constant string with `printer_name` later	
 	rv = mkfifo(printer_name_r, PRINT_STREAM_MODE);
@@ -252,11 +247,14 @@ int main(int argc, char* argv[])
 	}
 	
 	free(line);
-	free(temp);
-	fclose(print_stream_in);
+	if(-1 != lseek(fileno(print_stream_in), 1, SEEK_CUR)){
+		fclose(print_stream_in);
+	}
 	fclose(print_stream_out);
 	unlink(printer_name_r);
 	unlink(printer_name_w);
+	free(printer_name_r);
+	free(printer_name_w);
 	return 0;
 }
 
