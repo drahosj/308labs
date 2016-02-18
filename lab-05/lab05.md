@@ -99,7 +99,7 @@ return 0;
 }
 ~~~
 
-For more information regarding the init, lock, and unlock calls, consult `man 3 pthread_mutex_init`, `man 3 pthread_mutex_lock`, and `man 3 pthread_mutex_unlock` respectively.  As seen above, the variable `lock` is declared as a global variable so that all the threads can get access to it.  It is initialized in the main thread using `pthread_mutex_init`, and the threads use it to lock critical sections using `pthread_mutex_lock`.  Once the critical section is complete, the critical section is unlocked using `pthread_mutex_unlock`. Finally, before the program exits, destroy the mutex using the `pthread_mutex_destroy` function call.
+For more information regarding the init, lock, and unlock calls, consult `man 3p pthread_mutex_init`, `man 3p pthread_mutex_lock`, and `man 3p pthread_mutex_unlock` respectively.  As seen above, the variable `lock` is declared as a global variable so that all the threads can get access to it.  It is initialized in the main thread using `pthread_mutex_init`, and the threads use it to lock critical sections using `pthread_mutex_lock`.  Once the critical section is complete, the critical section is unlocked using `pthread_mutex_unlock`. Finally, before the program exits, destroy the mutex using the `pthread_mutex_destroy` function call.
 
 Now, add the mutex and the calls to `pthread_mutex_lock` and `pthread_mutex_unlock` to the counting thread functions in `threaded_count.c`, compile it, run it, and answer the following questions:
 
@@ -270,6 +270,19 @@ The print server gets its print jobs from stdin by default.  The jobs are given 
 
 ## What you should do
 First read all of the code and understand what it currently does and read the rest of this document.  Go through the code and fix all of the `warning` tags and implement the functionality of the program.  The provided test script only tests a very basic case; you should write a better test script that will test all of the features of the code.  You should also take in a `-l` flag from the command line that sets a log file output.  In that file you should have the consumer threads print detailed information about each print job including it's arrival time, finish time, and elapsed time.
+
+To ensure that the printers are created before running `main`, navigate to the `printer` directory, and run the following commands
+
+~~~bash
+# make the drivers directory
+$ mkdir drivers
+# compile the virtual printer
+$ make
+# to run the virtual printer; replace X with a positive number that matches with what's in the `config.rc` file
+$ ./virt-printer -n printerX
+~~~
+
+The `drivers` directory only needs to be run once, along with the call to compile the printer.  For each printer in the rc file, the command to run the printer should be called.  This will guarantee that files are printed correctly, and that no errors occur when starting up `main`.
 
 You should write a report answering all questions in this lab write up and detailing how you solved this problem.  If you made any changes to the code explain what you changed and why.  Talk about any issues you ran into and how you overcame them.
 
