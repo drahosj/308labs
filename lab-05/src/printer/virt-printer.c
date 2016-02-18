@@ -173,8 +173,9 @@ int main(int argc, char* argv[])
 			temp = strtok(NULL, ": ");
 			if(temp != NULL){
 				temp[strlen(temp) - 3] = '\0';
-				printf("temp: %s\n", temp); fflush(stdout);
+				if(verbose_flag) printf("temp: %s\n", temp); fflush(stdout);
 			}else{
+				fprintf(stderr, "invalid name for output file\n"); fflush(stderr);
 				continue;
 			}
 
@@ -235,7 +236,7 @@ int main(int argc, char* argv[])
 					if(verbose_flag) printf("line: %s", line); fflush(stdout);
 				}
 				// once "##END##" is reached, read one last time, and close the write end of pipe
-				printf("reached the ##END##\n");
+				if(verbose_flag) printf("reached the ##END##\n"); fflush(stdout);
 				fclose(write_end);
 				write_end = 0;
 				// wait for child to exit
