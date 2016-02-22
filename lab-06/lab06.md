@@ -3,6 +3,8 @@ title: 'Lab 6: Interprocess Comunication'
 ---
 Last week you created a print server application which would take in jobs from the `stdin` of the application and printed to a single backend driver.  This has a very clear flaw: it can only print jobs from programs piped into it at start time.  This week you will modify the program so any program can send print jobs to it at any time using interprocess communication (IPC).
 
+Please note that this is a **TWO WEEK LAB**.  The code and report are due two weeks after your scheduled lab section.  This is also twice as long as a normal lab so you should work on it early and not put it off to the last minute.
+
 # Types of IPC
 There are various methods of IPC in a system.  At their root all IPC methods are simply a way for one process to comunicate some information to another process.  By this definition, what you implemented last week is IPC by piping data from the test script into the server, but that only allowed one program to talk to one other program.  Now we want to make any number of processes be able to talk to the server program.  All of the following example programs can be found in the `ipc-types` subdirectory of the Lab 6 repository.
 
@@ -141,6 +143,8 @@ Now run the program `./lib_test` again and record the output in your lab report.
 
 
 # Tasks For This Lab
+**This is a two week lab**.  There are a lot of requirements for this lab so make sure you work on it early and don't put it off to the last minute.  Lab 7 will build on top of it so it is vital that you get it finished on time.
+
 The rest of this lab will be extending your code from last week.  Last week you created a print server program which would accept jobs from the standard input and serve those jobs to printers.  This has a clear problem: only one process can send print jobs to the print server at a time.  In a real system we want to have our print server running in the background as a _daemon_(see section `Print Server as Daemon` below for more details on daemons and how to turn a process into a daemon).  Anytime a program has a file it wants printed it should be able to send it to the printer using an IPC method.  Additionally, programs which want to print should not need to worry about the internal workings of the print server or the IPC calls, it should be able to link in a library and use that to do printing.  _Please read all of the tasks before starting as they will each effect the others_.
 
 ## Print Server IPC
