@@ -1,4 +1,6 @@
-# Interprocess Comunication
+---
+title: 'Lab 6: Interprocess Comunication'
+---
 Last week you created a print server application which would take in jobs from the `stdin` of the application and printed to a single backend driver.  This has a very clear flaw: it can only print jobs from programs piped into it at start time.  This week you will modify the program so any program can send print jobs to it at any time using interprocess communication (IPC).
 
 # Types of IPC
