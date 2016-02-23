@@ -1,8 +1,8 @@
 EXE=main
 SRC=main.c printer_driver.c
-CFLAGS=-D_GNU_SOURCE
+CFLAGS=-D_GNU_SOURCE -Wall -Wextra -Wpedantic -Werror -std=gnu11
 LFLAGS=-pthread
-DEBUG=-g -Wall
+DEBUG=-g
 
 
 OBJ := $(patsubst %.c,%.o,$(SRC))
