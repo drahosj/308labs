@@ -430,6 +430,9 @@ static void catch_error(int err)
 	}
 }
 
+/** Puts (pushes) a job to the job queue atomically
+ * This function increments the queue size semaphore.
+ */
 static void put_job(struct print_job_list * list, struct print_job * job)
 {
 	catch_error(pthread_mutex_lock(&list->lock));
@@ -449,6 +452,12 @@ static void put_job(struct print_job_list * list, struct print_job * job)
 	catch_error(pthread_mutex_unlock(&(list->lock)));
 }
 
+/** Retrieve an item from the queue (atomically)
+ * 
+ * This function doesn't do any internal checking on
+ * the queue semaphore. Make sure that is handled outside, or
+ * NULL can be returned if there are no elements.
+ */
 static struct print_job * get_job(struct print_job_list * list)
 {
 	catch_error(pthread_mutex_lock(&list->lock));
@@ -476,6 +485,7 @@ static struct print_job * get_job(struct print_job_list * list)
 	return ret;
 }
 
+/** Helper function since this code happens in 2 places */
 static void handle_job(struct printer * this)
 {
 	struct print_job * job = get_job(this->job_queue);

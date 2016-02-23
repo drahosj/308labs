@@ -36,4 +36,55 @@ The condition can be named 'produced'. A consumer thread will obtain the mutex, 
 the produced condition if there is nothing available. If a second consumer thread reaches this same point,
 only one will be unblocked by the pthread_cond_signal, and will then finish running.
 
+## Print Server
 
+### Design Philosophy
+
+Two static functions were created to handle queue operations (put and get).
+The queue is protected by a simple mutex lock. The put operation increments the
+size semaphore.
+
+The producer thread, when applicable, will create a job and post it to the queue.
+The consumer threads do a delicate yet efficient dance to check the state of the
+job queues and a kill flag. When commanded to exit, the main thread will
+set the kill flag.
+
+The consumer threads will handle any pending jobs before responding to the kill
+flag. This is accomplished by doing a sem_trywait on the job queue to check
+for pending jobs. If the sem_trywait indicates a pending job, an internal flag will
+be set to defer that job until the kill flag mutex can be released.
+If there is no pending job, the kill flag is then checked. If the kill
+flag is set at this point, the thread will return.
+
+If the sem_trywait defferred a job to handle, that job will now be handled. The 
+busy loop will then repeat. If the busy loop indicates no immediately waiting job
+and no kill flag, the thread will then enter a one-second wait period on the
+job queue semaphore. If a job appears in this time, it will be handled immediately.
+Otherwise, after the timeout, the busy loop will be repeated to check for 
+the kill flag.
+
+
+### Problems Identified and Solved
+
+#### Jobs not finished prior to exit
+
+The check for immediately pending jobs and the kill flag must be atomic, otherwise
+the producer thread can create a job and set the kill flag at the "same time". This
+will cause a race condition and all sorts of weirdness, resulting in no clear
+way to tell whether or not a job will be completed if it created near the
+issuance of the EXIT command.
+
+#### Excessive time spent holding kill_flag lock.
+
+In a previous implementation, the handle_job routine was performed while holding
+a mutex for the kill_flag lock. This prevented other threads from checking
+for the kill flag, and effectively allowed only one thread to process at once.
+
+With the current implementation, the only actions that occur while the kill_flag
+lock is held is the checking of the kill flag and the semaphore check for an immediately
+pending job. If a job is found, its handling is deferred until the mutex is released.
+
+
+### Testing
+
+See src/readme.md
