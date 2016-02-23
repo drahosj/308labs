@@ -62,4 +62,23 @@ echo "DESCRIPTION:The first test file"
 echo "PRINTER:black_white"
 echo "PRINT"
 
+## Massively spam it to get a bunch of print jobs flowing
+
+for i in $(seq 1 20)
+do
+	echo "NEW"
+	echo "NAME:output_spam_c${i}.pdf"
+	echo "FILE:samplec.ps"
+	echo "DESCRIPTION:A spam file"
+	echo "PRINTER:color"
+	echo "PRINT"
+
+	echo "NEW"
+	echo "NAME:output_spam_bw${i}.pdf"
+	echo "FILE:samplec.ps"
+	echo "DESCRIPTION:A spam file"
+	echo "PRINTER:black_white"
+	echo "PRINT"
+done
+
 echo "EXIT"

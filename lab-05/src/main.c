@@ -104,6 +104,16 @@ void *printer_thread(void* param)
 	printf("Thread started for %s\n", this->driver.name);
 	while(1)
 	{
+		/* Basic flow:
+		 *
+		 * - Handle as many jobs as are currently waiting
+		 * - Once all pending jobs are handled, check the kill flag. If the 
+		 *   kill flag is set, terminate the thread.
+		 * - Go into a one second sleep. If a job appears during this sleep,
+		 *   wake up and handle it immediately.
+		 */
+
+
 		/* Lock the kill flag, do an instantaneous check for
 		 * pending jobs, then check the kill flag.
 		 *
@@ -111,31 +121,50 @@ void *printer_thread(void* param)
 		 * because the kill flag can't change between checking for jobs
 		 * and checking it.
 		 */
-		catch_error(pthread_mutex_lock(&kill_lock));
 
-		if (sem_trywait(&this->job_queue->num_jobs)) {
-			if (errno != EAGAIN) {
-				perror("sem_trywait");
-				abort();
+		int job_pending = 0;
+		do {
+			catch_error(pthread_mutex_lock(&kill_lock));
+
+			/* Determine if a job is pending */
+			if (sem_trywait(&this->job_queue->num_jobs)) {
+				if (errno != EAGAIN) {
+					perror("sem_trywait");
+					abort();
+				}
+
+				job_pending = 0;
+
+				/* No job is pending. Check the kill flag. */
+				if (kill_flag) {
+					catch_error(pthread_mutex_unlock(&kill_lock));
+					return NULL;
+				}
+			} else {
+				/* Just set a local flag here. We can't do anything
+				 * slow while we hold the kill_lock mutex
+				 */
+				job_pending = 1;
 			}
-		} else {
-			handle_job(this);
-		}
 
-		if (kill_flag) {
 			catch_error(pthread_mutex_unlock(&kill_lock));
-			break;
-		}
-		catch_error(pthread_mutex_unlock(&kill_lock));
+
+			/* Now that we released the mutex, handle a job if needed */
+			if (job_pending) {
+				handle_job(this);
+			}
+
+		} while (job_pending);
+
+		/* All immediately pending jobs handled and kill flag checked.
+		 * Go into a one second sleep, waking upon a new job
+		 */
 
 		/* Create a 1 second timeout */
 		struct timespec timeout;
 		clock_gettime(CLOCK_REALTIME, &timeout);
 		timeout.tv_sec += 1;
 
-		/* Check for an item in the queue. Break every 1 second
-		 * to see if we need to die from the kill flag
-		 */
 		if (sem_timedwait(&this->job_queue->num_jobs, &timeout)) {
 			if (errno != ETIMEDOUT) {
 				perror("sem_timedwait");
@@ -312,8 +341,6 @@ static void parse_command_line(int argc, char * argv[])
 					perror("fopen");
 					abort();
 				}
-				fprintf(logfile, "Began logging session!\n");
-				fflush(logfile);
 				break;
 		}
 	}
@@ -457,9 +484,9 @@ static void handle_job(struct printer * this)
 
 	if (logfile != NULL) {
 		flockfile(logfile);
-		fprintf(logfile, "-----[%s]-----\n", this->driver.name);
-		fprintf(logfile, "Began job %s at %s\n", job->job_name, asctime(localtime(&start_time)));
-		fprintf(logfile, "------------------\n");
+		fprintf(logfile, "\n-----[%s]-----\n", this->driver.name);
+		fprintf(logfile, "Began job %s at %s", job->job_name, asctime(localtime(&start_time)));
+		fprintf(logfile, "---------------------------------\n");
 		fflush(logfile);
 		funlockfile(logfile);
 	}
@@ -469,10 +496,10 @@ static void handle_job(struct printer * this)
 	if (logfile != NULL) {
 		time_t finish_time = time(NULL);
 		flockfile(logfile);
-		fprintf(logfile, "-----[%s]-----\n", this->driver.name);
-		fprintf(logfile, "Finished job %s at %s (%ds elapsed)\n", job->job_name,
+		fprintf(logfile, "\n-----[%s]-----\n", this->driver.name);
+		fprintf(logfile, "Finished job %s at %s(%ds elapsed)\n", job->job_name,
 				asctime(localtime(&finish_time)), (int) (finish_time - start_time));
-		fprintf(logfile, "------------------\n");
+		fprintf(logfile, "--------------------------------\n");
 		fflush(logfile);
 		funlockfile(logfile);
 	}
