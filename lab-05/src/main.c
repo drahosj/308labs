@@ -100,7 +100,7 @@ void *printer_thread(void* param)
 	struct print_job * job;
 	struct print_job * prev;
 	
-	printf("I am a thread\n");
+	printf("Thread started for %s\n", this->driver.name);
 	while(1)
 	{
 		if (kill_flag) {
@@ -389,11 +389,23 @@ static void put_job(struct print_job_list * list, struct print_job * job)
 
 static struct print_job * get_job(struct print_job_list * list)
 {
-	catch_error(sem_wait(&list->num_jobs));
 	catch_error(pthread_mutex_lock(&list->lock));
 
+	/* No-jobs case */
+	if (list->head == NULL) {
+		return NULL;
+	}
+
+	/* One job case */
+	if (list->head->next_job == NULL) {
+		struct print_job * ret = list->head;
+		list->head = NULL;
+		return ret;
+	}
+
+	/* More than one job case */
 	struct print_job * cursor;
-	for(cursor = list->head; cursor->next_job != NULL; cursor = cursor->next_job) {
+	for(cursor = list->head; cursor->next_job->next_job != NULL; cursor = cursor->next_job) {
 		/* Advance pointer to tail */
 	}
 
