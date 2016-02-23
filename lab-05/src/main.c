@@ -90,9 +90,11 @@ static void parse_rc_file(FILE* fp);
 static struct print_job * get_job(struct print_job_list * list);
 static void put_job(struct print_job_list * list, struct print_job * job);
 static void catch_error(int error);
+static void handle_job(struct printer * this);
 
 /** Tell all printers to exit */
 static int kill_flag = 0;
+static pthread_mutex_t kill_lock = PTHREAD_MUTEX_INITIALIZER;
 
 
 void *printer_thread(void* param)
@@ -102,9 +104,29 @@ void *printer_thread(void* param)
 	printf("Thread started for %s\n", this->driver.name);
 	while(1)
 	{
+		/* Lock the kill flag, do an instantaneous check for
+		 * pending jobs, then check the kill flag.
+		 *
+		 * By locking it, we know we won't miss out on any pending jobs
+		 * because the kill flag can't change between checking for jobs
+		 * and checking it.
+		 */
+		catch_error(pthread_mutex_lock(&kill_lock));
+
+		if (sem_trywait(&this->job_queue->num_jobs)) {
+			if (errno != EAGAIN) {
+				perror("sem_trywait");
+				abort();
+			}
+		} else {
+			handle_job(this);
+		}
+
 		if (kill_flag) {
+			catch_error(pthread_mutex_unlock(&kill_lock));
 			break;
 		}
+		catch_error(pthread_mutex_unlock(&kill_lock));
 
 		/* Create a 1 second timeout */
 		struct timespec timeout;
@@ -115,39 +137,13 @@ void *printer_thread(void* param)
 		 * to see if we need to die from the kill flag
 		 */
 		if (sem_timedwait(&this->job_queue->num_jobs, &timeout)) {
-			if (errno == ETIMEDOUT) {
-				continue;
-			} else {
+			if (errno != ETIMEDOUT) {
 				perror("sem_timedwait");
 				abort();
 			}
 		} else {
 			/* Semaphore got set, not timed out */
-			struct print_job * job = get_job(this->job_queue);
-
-			time_t start_time = time(NULL);
-
-			if (logfile != NULL) {
-				flockfile(logfile);
-				fprintf(logfile, "-----[%s]-----\n", this->driver.name);
-				fprintf(logfile, "Began job %s at %s\n", job->job_name, asctime(localtime(&start_time)));
-				fprintf(logfile, "------------------\n");
-				fflush(logfile);
-				funlockfile(logfile);
-			}
-
-			printer_print(&this->driver, job);
-
-			if (logfile != NULL) {
-				time_t finish_time = time(NULL);
-				flockfile(logfile);
-				fprintf(logfile, "-----[%s]-----\n", this->driver.name);
-				fprintf(logfile, "Finished job %s at %s (%ds elapsed)\n", job->job_name,
-						asctime(localtime(&finish_time)), (int) (finish_time - start_time));
-				fprintf(logfile, "------------------\n");
-				fflush(logfile);
-				funlockfile(logfile);
-			}
+			handle_job(this);
 		}
 	}
 	return NULL;
@@ -269,8 +265,13 @@ int main(int argc, char* argv[])
 	void * ret;
 	pthread_join(producer_tid, &ret);
 
-	/** Command all threads to die */
+	/** Command all threads to die 
+	 * The lock is used to give threads a
+	 * chance to do a final check for pending jobs
+	 * without risking getting killed.*/
+	catch_error(pthread_mutex_lock(&kill_lock));
 	kill_flag = 1;
+	catch_error(pthread_mutex_unlock(&kill_lock));
 
 	printf("Waiting for all printer threads to finish and terminate\n");
 
@@ -446,4 +447,33 @@ static struct print_job * get_job(struct print_job_list * list)
 
 	catch_error(pthread_mutex_unlock(&list->lock));
 	return ret;
+}
+
+static void handle_job(struct printer * this)
+{
+	struct print_job * job = get_job(this->job_queue);
+
+	time_t start_time = time(NULL);
+
+	if (logfile != NULL) {
+		flockfile(logfile);
+		fprintf(logfile, "-----[%s]-----\n", this->driver.name);
+		fprintf(logfile, "Began job %s at %s\n", job->job_name, asctime(localtime(&start_time)));
+		fprintf(logfile, "------------------\n");
+		fflush(logfile);
+		funlockfile(logfile);
+	}
+
+	printer_print(&this->driver, job);
+
+	if (logfile != NULL) {
+		time_t finish_time = time(NULL);
+		flockfile(logfile);
+		fprintf(logfile, "-----[%s]-----\n", this->driver.name);
+		fprintf(logfile, "Finished job %s at %s (%ds elapsed)\n", job->job_name,
+				asctime(localtime(&finish_time)), (int) (finish_time - start_time));
+		fprintf(logfile, "------------------\n");
+		fflush(logfile);
+		funlockfile(logfile);
+	}
 }
