@@ -24,6 +24,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 #include <assert.h>
 #include <string.h>
 #include <semaphore.h>
+#include <errno.h>
+#include <time.h>
 
 
 #include "print_job.h"
@@ -36,11 +38,6 @@ int exit_flag = 0;
 
 // -- STATIC VARIABLES -- //
 static struct printer_group * printer_group_head;
-
-// -- FUNCTION PROTOTYPES -- //
-static void parse_command_line(int argc, char * argv[]);
-static void parse_rc_file(FILE* fp);
-
 
 /**
  * A list of print jobs that must be kept thread safe
@@ -86,6 +83,15 @@ struct printer_group
 	struct print_job_list job_queue;
 };
 
+// -- FUNCTION PROTOTYPES -- //
+static void parse_command_line(int argc, char * argv[]);
+static void parse_rc_file(FILE* fp);
+static struct print_job * get_job(struct print_job_list * list);
+static void put_job(struct print_job_list * list, struct print_job * job);
+static void catch_error(int error);
+
+/** Tell all printers to exit */
+static int kill_flag = 0;
 
 
 void *printer_thread(void* param)
@@ -95,19 +101,35 @@ void *printer_thread(void* param)
 	struct print_job * prev;
 	
 	printf("I am a thread\n");
-	//return NULL;
 	while(1)
 	{
-#warning The student should implement the consumer thread
-// In this loop the thread should wait for the producer to add something to the 
-// this->job_queue list.  It should then in a thread safe way pull that job
-// out of the queue
+		if (kill_flag) {
+			break;
+		}
+
+		/* Create a 1 second timeout */
+		struct timespec timeout;
+		clock_gettime(CLOCK_REALTIME, &timeout);
+		timeout.tv_sec += 1;
+
+		if (sem_timedwait(&this->job_queue->num_jobs, &timeout)) {
+			if (errno == ETIMEDOUT) {
+				continue;
+			} else {
+				perror("sem_timedwait");
+				abort();
+			}
+		} else {
+			/* Semaphore got set, not timed out */
+			struct print_job * job = get_job(this->job_queue);
+			printer_print(&this->driver, job);
+		}
 	}
 	return NULL;
 }
 
 
-void * producer_thread(void * param)
+void * producer_thread(void * param __attribute__ ((unused)))
 {
 	struct printer_group * g;
 	struct print_job * job;
@@ -148,28 +170,26 @@ void * producer_thread(void * param)
 		}
 		else if(job && strncmp(line, "PRINT", 5) == 0)
 		{
+			int group_found = 0;
 			if(!job->group_name)
 			{
-				eprintf("Trying to print without setting printer\n");
+				eprintf0("Trying to print without setting printer\n");
 				continue;
 			}
 			if(!job->file_name)
 			{
-				eprintf("Trying to print without providing input file\n");
+				eprintf0("Trying to print without providing input file\n");
 				continue;
 			}
 			for(g = printer_group_head; g; g=g->next_group)
 			{
 				if(strcmp(job->group_name, g->name) == 0)
 				{
-
-#warning The student should push the job into the queue
-// At this point the job has been created and should be pushed into the job_queue
-// for group `g`.  This should also signal the consumer that the job is ready to
-// be consumed.
+					put_job(&g->job_queue, job);
+					group_found = 1;
 				}
 			}
-			if(job)
+			if(job && !group_found)
 			{
 				eprintf("Invalid printer group name given: %s\n", job->group_name);
 				continue;
@@ -221,8 +241,20 @@ int main(int argc, char* argv[])
 	pthread_t producer_tid;
 	pthread_create(&producer_tid, NULL, producer_thread, NULL);
 
+	void * ret;
+	pthread_join(producer_tid, &ret);
 
-#warning The student should take care to handle the exit case and join the threads
+	/** Command all threads to die */
+	kill_flag = 1;
+
+	printf("Waiting for all printer threads to finish and terminate\n");
+
+	for (g = printer_group_head; g != NULL; g = g->next_group) {
+		for(p = g->printer_queue; p != NULL; p = p->next) {
+			void * ret;
+			pthread_join(p->tid, &ret);
+		}
+	}
 
 	return 0;
 }
@@ -310,7 +342,7 @@ static void parse_rc_file(FILE* fp)
 	}
 
 	// print out the printer groups
-	dprintf("\n--- Printers ---\n"); 
+	dprintf0("\n--- Printers ---\n"); 
 	for(g = printer_group_head; g; g = g->next_group)
 	{
 		dprintf("Printer Group %s\n", g->name);
@@ -319,7 +351,55 @@ static void parse_rc_file(FILE* fp)
 			dprintf("\tPrinter %s\n", p->driver.name);
 		}
 	}
-	dprintf("----------------\n\n");
+	dprintf0("----------------\n\n");
 
 }
 
+/* Simple error catching for teh lulz */
+static void catch_error(int err)
+{
+	if (err) {
+		/* Figure that if err is -1, errno is probably already set */
+		if (err != -1) {
+			errno = err;
+		}
+		perror("PThread error");
+		abort();
+	}
+}
+
+static void put_job(struct print_job_list * list, struct print_job * job)
+{
+	catch_error(pthread_mutex_lock(&list->lock));
+
+	struct print_job * cursor;
+	if (list->head == NULL) {
+		list->head = job;
+	} else {
+		for(cursor = list->head; cursor->next_job != NULL; cursor = cursor->next_job) {
+			/* Advance pointer to tail */
+		}
+		cursor->next_job = job;
+	}
+
+	catch_error(sem_post(&list->num_jobs));
+
+	catch_error(pthread_mutex_unlock(&(list->lock)));
+}
+
+static struct print_job * get_job(struct print_job_list * list)
+{
+	catch_error(sem_wait(&list->num_jobs));
+	catch_error(pthread_mutex_lock(&list->lock));
+
+	struct print_job * cursor;
+	for(cursor = list->head; cursor->next_job != NULL; cursor = cursor->next_job) {
+		/* Advance pointer to tail */
+	}
+
+	struct print_job * ret = cursor->next_job;
+	cursor->next_job = NULL;
+
+	catch_error(pthread_mutex_unlock(&list->lock));
+	return ret;
+}

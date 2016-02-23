@@ -3,9 +3,10 @@
 
 PRINTER_GROUP black_white
 PRINTER printer/drivers/printer0
-#PRINTER printer0
-#PRINTER printer1
-#PRINTER printer2
+#PRINTER printer/drivers/printer1
+#PRINTER printer/drivers/printer2
+#PRINTER printer/drivers/printer3
 
 PRINTER_GROUP color
-PRINTER printer3
+#PRINTER printer/drivers/printer4
+#PRINTER printer/drivers/printer5

@@ -1,7 +1,7 @@
 EXE=virt-printer
 SRC=virt-printer.c
 LFLAGS=
-CFLAGS=-Wall
+CFLAGS=-Wall -g
 
 OBJ := $(patsubst %.c,%.o,$(SRC))
 

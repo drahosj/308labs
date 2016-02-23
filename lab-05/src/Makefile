@@ -1,6 +1,6 @@
 EXE=main
 SRC=main.c printer_driver.c
-CFLAGS=-D_GNU_SOURCE -Wall -Wextra -Wpedantic -Werror -std=gnu11
+CFLAGS=-D_GNU_SOURCE -Wall -Wextra -Wpedantic -Werror -std=gnu11 -Wno-unused -Wno-unused
 LFLAGS=-pthread
 DEBUG=-g
 
