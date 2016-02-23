@@ -35,6 +35,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // -- GLOBAL VARIABLES -- //
 int verbose_flag = 0;
 int exit_flag = 0;
+FILE * logfile = NULL;
 
 // -- STATIC VARIABLES -- //
 static struct printer_group * printer_group_head;
@@ -97,9 +98,7 @@ static int kill_flag = 0;
 void *printer_thread(void* param)
 {
 	struct printer * this = param;
-	struct print_job * job;
-	struct print_job * prev;
-	
+
 	printf("Thread started for %s\n", this->driver.name);
 	while(1)
 	{
@@ -112,6 +111,9 @@ void *printer_thread(void* param)
 		clock_gettime(CLOCK_REALTIME, &timeout);
 		timeout.tv_sec += 1;
 
+		/* Check for an item in the queue. Break every 1 second
+		 * to see if we need to die from the kill flag
+		 */
 		if (sem_timedwait(&this->job_queue->num_jobs, &timeout)) {
 			if (errno == ETIMEDOUT) {
 				continue;
@@ -122,7 +124,30 @@ void *printer_thread(void* param)
 		} else {
 			/* Semaphore got set, not timed out */
 			struct print_job * job = get_job(this->job_queue);
+
+			time_t start_time = time(NULL);
+
+			if (logfile != NULL) {
+				flockfile(logfile);
+				fprintf(logfile, "-----[%s]-----\n", this->driver.name);
+				fprintf(logfile, "Began job %s at %s\n", job->job_name, asctime(localtime(&start_time)));
+				fprintf(logfile, "------------------\n");
+				fflush(logfile);
+				funlockfile(logfile);
+			}
+
 			printer_print(&this->driver, job);
+
+			if (logfile != NULL) {
+				time_t finish_time = time(NULL);
+				flockfile(logfile);
+				fprintf(logfile, "-----[%s]-----\n", this->driver.name);
+				fprintf(logfile, "Finished job %s at %s (%ds elapsed)\n", job->job_name,
+						asctime(localtime(&finish_time)), (int) (finish_time - start_time));
+				fprintf(logfile, "------------------\n");
+				fflush(logfile);
+				funlockfile(logfile);
+			}
 		}
 	}
 	return NULL;
@@ -269,7 +294,7 @@ int main(int argc, char* argv[])
 static void parse_command_line(int argc, char * argv[])
 {
 	int c;
-	while((c = getopt(argc, argv, "v?")) != -1)
+	while((c = getopt(argc, argv, "v?l:")) != -1)
 	{
 		switch(c)
 		{
@@ -279,6 +304,15 @@ static void parse_command_line(int argc, char * argv[])
 			case '?': // print help information
 				fprintf(stdout, "Usage: %s [options]\n", argv[0]);
 				exit(0);
+				break;
+			case 'l': // set log file
+				logfile = fopen(optarg, "w");
+				if (logfile == NULL) {
+					perror("fopen");
+					abort();
+				}
+				fprintf(logfile, "Began logging session!\n");
+				fflush(logfile);
 				break;
 		}
 	}
@@ -355,7 +389,7 @@ static void parse_rc_file(FILE* fp)
 
 }
 
-/* Simple error catching for teh lulz */
+/** Simple error catching for teh lulz */
 static void catch_error(int err)
 {
 	if (err) {
@@ -390,27 +424,25 @@ static void put_job(struct print_job_list * list, struct print_job * job)
 static struct print_job * get_job(struct print_job_list * list)
 {
 	catch_error(pthread_mutex_lock(&list->lock));
+	struct print_job * ret;
 
-	/* No-jobs case */
 	if (list->head == NULL) {
-		return NULL;
-	}
-
-	/* One job case */
-	if (list->head->next_job == NULL) {
-		struct print_job * ret = list->head;
+		/* No-jobs case */
+		ret = NULL;
+	} else if (list->head->next_job == NULL) {
+		/* One job case */
+		ret = list->head;
 		list->head = NULL;
-		return ret;
-	}
+	} else {
+		/* More than one job case */
+		struct print_job * cursor;
+		for(cursor = list->head; cursor->next_job->next_job != NULL; cursor = cursor->next_job) {
+			/* Advance pointer to tail */
+		}
 
-	/* More than one job case */
-	struct print_job * cursor;
-	for(cursor = list->head; cursor->next_job->next_job != NULL; cursor = cursor->next_job) {
-		/* Advance pointer to tail */
+		ret = cursor->next_job;
+		cursor->next_job = NULL;
 	}
-
-	struct print_job * ret = cursor->next_job;
-	cursor->next_job = NULL;
 
 	catch_error(pthread_mutex_unlock(&list->lock));
 	return ret;
