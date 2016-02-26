@@ -2,7 +2,9 @@
 
 The latest stable linux kernel at the time of writing the lab was 4.4.3 which was released on February 25, 2016.  There is most likely a new kernel at the time you are doing this but for consistancy please use the 4.4.3 kernel.
 
-Due to the size of the linux kernel and the relatively slow file access speeds of the network drives it is recommended that you download and work with the linux source tree purely in RAM.  While this will greatly speed up this lab it also opens up the risk for loosing work.  If the machine you are working on looses power or if you want to stop working and later come back to this lab you will have to re-download and compile the kernel.
+Due to the size of the linux kernel and the relatively slow file access speeds of the network drives it is recommended that you download and work with the linux source tree purely in RAM.  While this will greatly speed up this lab it also opens up the risk for losing work.  If the machine you are working on loses power or if you want to stop working and later come back to this lab you will have to re-download and compile the kernel.
+
+If you are working on this lab on your own machine, then there is no real benefit to download and work on the linux source in RAM and the next step is not required.
 
 Linux makes it easy to work with files stored only in RAM by providing the `/tmp` directory.  Any file or folder in this directory will be stored in RAM and will never be stored in non-volatile memory.  Create a directory in `/tmp` that is your NETID to work in.
 
@@ -31,8 +33,8 @@ If you see "Can't check signature" that means that you do not have the key insta
 
 ~~~bash
 $ gpg --keyserver hkp://keys.gnupg.net --recv-keys 6092693E
-$ gpg --verify linux-3.18.8.tar.sign 
-gpg: assuming signed data in 'linux-3.18.8.tar'
+$ gpg --verify linux-4.4.3.tar.sign 
+gpg: assuming signed data in 'linux-4.4.3.tar'
 gpg: Signature made Thu 26 Feb 2015 07:50:04 PM CST using RSA key ID 6092693E
 gpg: Good signature from "Greg Kroah-Hartman (Linux kernel stable release signing key) <greg@kroah.com>" [unknown]
 gpg: WARNING: This key is not certified with a trusted signature!
@@ -40,7 +42,7 @@ gpg:          There is no indication that the signature belongs to the owner.
 Primary key fingerprint: 647F 2865 4894 E3BD 4571  99BE 38DB BDC8 6092 693E
 ~~~
 
-Ideally we would now contact that the listed person or go and talk to other kernel developers in the "Web of Trust" to verify that this is a valid signature, but for this class that is entirely unesseccary.  We will assume that this signature is valid and move forward with the lab.
+Ideally we would now contact that the listed person or go and talk to other kernel developers in the "Web of Trust" to verify that this is a valid signature, but for this class that is entirely unnecessary.  We will assume that this signature is valid and move forward with the lab.
 
 ~~~bash
 $ tar -xvf linux-4.4.3.tar
@@ -83,10 +85,14 @@ drwxr-xr-x   2 vens vens   4096 Feb 26 19:49 usr
 drwxr-xr-x   3 vens vens   4096 Feb 26 19:49 virt
 ~~~
 
-The `arch` directory contains architecture specific code.  In your report list **five** architectures that the Linux kernel supports.  `Crypto` contains the code for cryptography used in security features built into the kernel.  `Documentation` contains a number of example code and description of how to do kernel development and module development.  `drivers` and `firmware` contain the code for hardware specific drivers and precompiled code for those drivers.  `fs` contains the code for filesystems.  In your report list **three** filesystem types Linux supports.  `include` contains the header files which are included to interface with the kernel such as to use system calls or pthreads.  `init` is the initialization and start up code that is used during the kernel boot sequence.  `ipc` contains the code for interprocess comunication.  `kernel` contains the actual kernel code.  All of the core features of the kernel are contained in this directory.  `net` contains all of the networking code.  `samples` has example code and documentation.  `scripts` contains helper scripts which are used during the build process along with some of the `tools`.  And finally `virt` contains the virtualization code that allows one operating system to run inside of another.
+The `arch` directory contains architecture specific code.  `Crypto` contains the code for cryptography used in security features built into the kernel.  `Documentation` contains a number of example code and description of how to do kernel development and module development.  `drivers` and `firmware` contain the code for hardware specific drivers and precompiled code for those drivers.  `fs` contains the code for filesystems.  `include` contains the header files which are included to interface with the kernel such as to use system calls or pthreads.  `init` is the initialization and start up code that is used during the kernel boot sequence.  `ipc` contains the code for interprocess comunication.  `kernel` contains the actual kernel code.  All of the core features of the kernel are contained in this directory.  `net` contains all of the networking code.  `samples` has example code and documentation.  `scripts` contains helper scripts which are used during the build process along with some of the `tools`.  And finally `virt` contains the virtualization code that allows one operating system to run inside of another.
+
+In your lab report:
+ - list **five** architectures that the Linux kernel supports.
+ - In your report list **three** filesystem types Linux supports.
 
 # Compile the kernel
-Now that you have looked around the source code a little bit let's compile the kernel.  The steps are fairly straight forward but if you fail to type a command exactly correct you may waste a lot of time or run into problems later on.  Please read all instructions very carefully.  (Note, you really can't break anything in this process so don't worry about that).  
+Now that you have looked around the source code a little bit let's compile the kernel.  The steps are fairly straight forward but if you fail to type a command exactly correct you may waste a lot of time or run into problems later on.  **Please read all instructions very carefully.**  (Note, you really can't break anything in this process so don't worry about that).  
 
 Because you don't have the privilages to install your own kernel on the lab machines we are going to compile the kernel for `user mode`.  This is different from a virtualized kernel.  Instead we are running the kernel as if it was another program on the system.  This will be easier to debug with and test in lab.  In the Linux kernel user mode is a architecture so we simple need to compile the kernel for that architecture by including `ARCH=um` in all of the make steps.  First we will make a default configuration by running the following in the root directory of the kernel:
 
@@ -112,7 +118,9 @@ Now select `Save` to save the configuration and then `Exit`.
 
 Before moving on we will save the configuration so if in the future we need to recompile the kernel we won't have to repeate all the above steps.  Please save the `.config` file in the `lab-07` directory of you labs repository.
 
-Now it is time to actually compile the kernel.  For fun we can time the compile time using the `time` program.  The output is a little cryptic; the `real` time is the time from when it started to when it finished, the `user` time is the time it spent in user mode, and `sys` is the time it spent making system calls.  One thing we can do to greatly speed up the compile process is to use more than one thread to do the compilation.  A good rule of thumb is a couple more threads than the number of cores the CPU has.  The lab machines have 8 core processors so we will compile with 10 threads using the `-j` flag.  The compile command is thus
+Now it is time to actually compile the kernel.  For fun, we can time the compile time using the `time` program.  The output is a little cryptic; the `real` time is the time from when it started to when it finished, the `user` time is the time it spent in user mode, and `sys` is the time it spent making system calls.
+
+One thing we can do to greatly speed up the compile process is to use more than one thread to do the compilation.  A good rule of thumb is a couple more threads than the number of cores the CPU has.  The lab machines have 8 core processors so we will compile with 10 threads using the `-j` flag.  The compile command is thus
 
 ~~~bash
 $ time make -j10 ARCH=um
@@ -127,7 +135,7 @@ $ wget http://fs.devloop.org.uk/filesystems/Debian-Jessie/Debian-Jessie-AMD64-ro
 $ wget http://fs.devloop.org.uk/filesystems/Debian-Jessie/Debian-Jessie-AMD64-root_fs.bz2.md5
 ~~~
 
-Next we want to check that the download's checksum to make sure the download was successful.  To do this, run the following command:
+Next we want to check the download's checksum to make sure the download was successful.  To do this, run the following command:
 
 ~~~bash
 $ md5sum -c Debian-Jessie-AMD64-root_fs.bz2.md5 
@@ -142,7 +150,7 @@ Debian-Jessie-AMD64-root_fs.bz2: done
 ~~~
 
 # Running The Kernel
-So you now have a linux filesystem and a compiled kernel.  It is now time to boot it!  Go to the `\tmp\NETID` directory and run the following command:
+So you now have a linux filesystem and a compiled kernel.  It is now time to boot it!  Go to the `/tmp/NETID` directory and run the following command:
 
 ~~~bash
 $ ./linux-4.4.3/linux ubda=Debian-Jessie-AMD64-root_fs mem=512M single
@@ -218,18 +226,6 @@ Before running the module please read through the code and make sure you underst
 ~~~
 
 ## Printer Module
-Now we can write a kernel module for the print server you have been working on for the last few labs.  Create a new directory in `Lab7` called `printer-driver`.  In that folder create a new file called `printer_driver.c`.  This driver should be a character device loaded at `/dev/printer-n` where `n` is a consecutive number for each printer of this type installed.  The driver should only support being written to and should return error if a user tries to read from it.  When data (the post script data) is written to the file it will be of the following format: the first line is the print job name and starting from the second line to the end is the post script data.  You should use `kprint` to print a meassage that the job has been printed.  You should then just discard the rest of the data (unless you really want to send it on to a real printer).  To test you can create a test script file such as this:
-
-~~~
-Print Job Name
-Lorem ipsum dolor sit amet, mel ea wisi augue appareat, 
-eu assentior comprehensam sea, primis graeco molestiae ex 
-mei. Cum noster insolens no, tantas platonem scriptorem sed 
-ne, sit in graeco nominavi persecuti. Sed denique copiosae 
-cu, has persius ornatus salutandi et. Quo propriae adolescens ut.
-~~~
-
-And send this to the driver using `cat test_file > /dev/printer-0`. 
 
 # Extra credit
 Create another backend driver in the Lab 5 / Lab 6 code that sends the print job to the Linux kernel module created in this lab in addition to the pdf printer.  
