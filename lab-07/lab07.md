@@ -1,19 +1,28 @@
 # Linux Kernel
 
-The latest kernel at the time of writing the lab was 3.18.8 which was released on February 27, 2015.  There is most likely a new kernel at the time you are doing this but for consistancy please use the 3.18.8 kernel.
+The latest stable linux kernel at the time of writing the lab was 4.4.3 which was released on February 25, 2016.  There is most likely a new kernel at the time you are doing this but for consistancy please use the 4.4.3 kernel.
+
+Due to the size of the linux kernel and the relatively slow file access speeds of the network drives it is recommended that you download and work with the linux source tree purely in RAM.  While this will greatly speed up this lab it also opens up the risk for loosing work.  If the machine you are working on looses power or if you want to stop working and later come back to this lab you will have to re-download and compile the kernel.
+
+Linux makes it easy to work with files stored only in RAM by providing the `/tmp` directory.  Any file or folder in this directory will be stored in RAM and will never be stored in non-volatile memory.  Create a directory in `/tmp` that is your NETID to work in.
+
+~~~bash
+$ mkdir /tmp/NETID
+$ cd /tmp/NETID
+~~~
 
 First, download and unzip the kernel by running these commands:
 
 ~~~bash
-$ wget https://www.kernel.org/pub/linux/kernel/v3.x/linux-3.18.8.tar.xz
-$ wget https://www.kernel.org/pub/linux/kernel/v3.x/linux-3.18.8.tar.sign
-$ unxz linux-3.18.8.tar.xz
+$ wget https://www.kernel.org/pub/linux/kernel/v4.x/linux-4.4.3.tar.xz
+$ wget https://www.kernel.org/pub/linux/kernel/v4.x/linux-4.4.3.tar.sign
+$ unxz linux-4.4.3.tar.xz
 ~~~
 
-Next we should verify the kernel to make sure that it has not been tampered with.  This is done using `gpg`.  Run these commands:
+Next we should verify the kernel to make sure that it has not been tampered with.  This is done using `gpg`.  Run this command and you should see an output similar to this:
 
 ~~~bash
-$ gpg --verify linux-3.18.8.tar.sign
+$ gpg --verify linux-4.4.3.tar.sign
 gpg: Signature made Thu 26 Feb 2015 07:50:04 PM CST using RSA key ID 6092693E
 gpg: Cant check signature: No public key
 ~~~
@@ -34,8 +43,8 @@ Primary key fingerprint: 647F 2865 4894 E3BD 4571  99BE 38DB BDC8 6092 693E
 Ideally we would now contact that the listed person or go and talk to other kernel developers in the "Web of Trust" to verify that this is a valid signature, but for this class that is entirely unesseccary.  We will assume that this signature is valid and move forward with the lab.
 
 ~~~bash
-$ tar -xvf linux-3.18.8.tar
-$ cd linux-3.18.8
+$ tar -xvf linux-4.4.3.tar
+$ cd linux-4.4.3
 $ ls
 ~~~
 
@@ -101,6 +110,8 @@ The default configuration is mostly good enough for what we are doing, but there
 
 Now select `Save` to save the configuration and then `Exit`.
 
+Before moving on we will save the configuration so if in the future we need to recompile the kernel we won't have to repeate all the above steps.  Please save the `.config` file in the `lab-07` directory of you labs repository.
+
 Now it is time to actually compile the kernel.  For fun we can time the compile time using the `time` program.  The output is a little cryptic; the `real` time is the time from when it started to when it finished, the `user` time is the time it spent in user mode, and `sys` is the time it spent making system calls.  One thing we can do to greatly speed up the compile process is to use more than one thread to do the compilation.  A good rule of thumb is a couple more threads than the number of cores the CPU has.  The lab machines have 8 core processors so we will compile with 10 threads using the `-j` flag.  The compile command is thus
 
 ~~~bash
@@ -108,9 +119,10 @@ $ time make -j10 ARCH=um
 ~~~
 
 # Filesystem
-You now have a compiled kernel but to run it you need a file system.  For this lab we will use the Debian Jessie image.  Note that at the end of the lab is a number of other file systems that you are welcome to try out if you are so inclined.  All of them are `bz2` and have the `md5` checksum by appending `.md5`.  First return to the `Lab7` directory and then run the following lines.
+You now have a compiled kernel but to run it you need a file system.  For this lab we will use the Debian Jessie image.  Note that at the end of the lab is a number of other file systems that you are welcome to try out if you are so inclined.  All of them are `bz2` and have the `md5` checksum by appending `.md5`.  First return to the `/tmp/NEDID` directory and then run the following lines.
 
 ~~~bash
+$ cd /tmp/NEDID
 $ wget http://fs.devloop.org.uk/filesystems/Debian-Jessie/Debian-Jessie-AMD64-root_fs.bz2
 $ wget http://fs.devloop.org.uk/filesystems/Debian-Jessie/Debian-Jessie-AMD64-root_fs.bz2.md5
 ~~~
@@ -130,13 +142,13 @@ Debian-Jessie-AMD64-root_fs.bz2: done
 ~~~
 
 # Running The Kernel
-So you now have a root partition and a compiled kernel.  It is now time to boot it!  Go to the `Lab7` directory and run the following command:
+So you now have a linux filesystem and a compiled kernel.  It is now time to boot it!  Go to the `\tmp\NETID` directory and run the following command:
 
 ~~~bash
-$ ./linux/linux ubda=Debian-Jessie-AMD64-root_fs mem=512M
+$ ./linux-4.4.3/linux ubda=Debian-Jessie-AMD64-root_fs mem=512M single
 ~~~
 
-You will see a lot of kernel boot messages followed by a login request.  To login type `root` as the user name.  Now you can use the normal `ls` and `cd` to look around.  You should notice that you are not on the host file system but instead you are inside the Debian filesystem.  Note that you have root permissions on this user mode kernel which gives you unlimited control.  This is shown by the the prompt ending with a `#` instead of the `$`.  You will be able to tell which system to type commands into by checking if the command starts with `#` or `$`.
+You will see a lot of kernel boot messages followed root prompt.  Now you can use the normal `ls` and `cd` to look around.  You should notice that you are not on the host file system but instead you are inside the Debian filesystem.  Note that you have root permissions on this user mode kernel which gives you unlimited control.  This is shown by the the prompt ending with a `#` instead of the `$`.  You will be able to tell which system to type commands into by checking if the command starts with `#` or `$`.
 
 ## Mount Host Filesystem
 We now want to be able to access the UDrive from within the usermode linux kernel so we can write our own driver.  To do that we need to mount the host file system inside the user mode filesystem.  This is accomplished by running the following commands changing `NETID` to **your** NetID.
