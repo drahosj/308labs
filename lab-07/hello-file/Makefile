@@ -1,4 +1,4 @@
-obj-m += hello_world.o
+obj-m += hello_file.o
 
 LINUX_SRC = ../linux-4.4.3/
 
