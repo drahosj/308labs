@@ -205,7 +205,7 @@ You shouldn't see any errors or warnings if everything is correct.  Now let's te
 ~~~
 
 ## File Example
-Now that you have a little bit of experience with loading and unloading a custom made module it is time to do something more interesting than just printing hello world.  In UNIX _everything_ is a file where the kernel is concerned.  For example, to write data to a serial port is just writing the data to the file `/dev/USB0`.  There are two types of devices in Linux: block devices and character devices.  Block devices are things like filesystems which buffer a lot of data and write it all at once whereas character devices handle the data as it comes in.  For this lab we will limit ourselves to character devices only.  Go to the `hello-file` directory in the `Lab7` directory and open `hello_file.c`.  
+Now that you have a little bit of experience with loading and unloading a custom made module it is time to do something more interesting than just printing hello world.  In UNIX _everything_ is a file where the kernel is concerned.  For example, to write data to a serial port is just writing the data to the file `/dev/USB0`.  There are two types of devices in Linux: block devices and character devices.  Block devices are things like filesystems which buffer a lot of data and write it all at once whereas character devices handle the data as it comes in.  For this lab we will limit ourselves to character devices only.  Go to the `hello-file` directory in the `lab-07` directory and open `hello_file.c`.
 
 The first thing you should notice about this file is the line `static struct file_operations fops`.  This structure defines how the driver should handle operations on the file associated with it.  It contains a number of function pointers which are called during a system call on that file.  For example, when the file is read from the function pointed to by the `.read` element is invoked.  The prototype of this function is `static ssize_t read(struct file *file, char *buffer, size_t length, loff_t *offset)`.  You should notice the similarity of this prototype to the system call `read` which has prototype `ssize_t read(int fd, void *buf, size_t count);`.  In your lab report comment on why the prototypes are not identical and what the extra paramaters are for (use your intuition to help answer this question).
 
@@ -225,10 +225,8 @@ Before running the module please read through the code and make sure you underst
 # cat /dev/cpre308-0
 ~~~
 
-## Printer Module
-
-# Extra credit
-Create another backend driver in the Lab 5 / Lab 6 code that sends the print job to the Linux kernel module created in this lab in addition to the pdf printer.  
+## Task for this lab
+Note that the function `device_write` in `hello-file.c` only prints out an alert message saying that such an operation is not supported yet.  The task for this lab will be for the student to complete the `device_write` function.  Create a new directory in your `lab-07` folder called `hello-file-complete`. Copy `hello-file.c` over into the newly created folder, and this version should be worked on.
 
 # Conclusion
 With the extra credit included you will have developed an almost complete print server application which clients can use the server by including a single `.h` file and linking against a single shared library.  When they print a file that job is sent to the server running as a system daemon.  The daemon chooses which printer it can send the job to and handles getting it to that printer.  The job is sent to the kernel through a character device and in theory from the kernel it could easily be transmitted over a USB port or network to a physical printer.  Note that this is not just a made up lab example.  Although somewhat simplified, this is in fact how many systems actually work on Linux including `CUPS` print server, `Wayland` display server, `X11` display server, `Apache2` web server, `DBUS` IPC protocol, and many other Linux programs.
