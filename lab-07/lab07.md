@@ -1,4 +1,6 @@
-# Linux Kernel
+---
+title: 'Linux Kernel'
+---
 
 The latest stable linux kernel at the time of writing the lab was 4.4.3 which was released on February 25, 2016.  There is most likely a new kernel at the time you are doing this but for consistancy please use the 4.4.3 kernel.
 
@@ -226,7 +228,12 @@ Before running the module please read through the code and make sure you underst
 ~~~
 
 ## Task for this lab
-Note that the function `device_write` in `hello-file.c` only prints out an alert message saying that such an operation is not supported yet.  The task for this lab will be for the student to complete the `device_write` function.  Create a new directory in your `lab-07` folder called `hello-file-complete`. Copy `hello-file.c` over into the newly created folder, and this version should be worked on.
+Note that the function `device_write` in `hello-file.c` only prints out an alert message saying that such an operation is not supported yet.  The task for this lab will be for the student to complete the `device_write` function in `hello-file.c` so that:
+ - What was written to the device is read by the kernel module
+ - The kernel module then prints back out what was written, but in reverse order
+   - For example, if "Hello world!" was written to the device(i.e., echo "Hello world!" > /dev/cpre308), the kernel module should print out "!dlrow olleH"
+
+Create a new directory in your `lab-07` folder called `hello-file-complete`. Copy `hello-file.c` over into the newly created folder, and complete the function `device_write` in this version of `hello-file.c`.
 
 # Conclusion
 With the extra credit included you will have developed an almost complete print server application which clients can use the server by including a single `.h` file and linking against a single shared library.  When they print a file that job is sent to the server running as a system daemon.  The daemon chooses which printer it can send the job to and handles getting it to that printer.  The job is sent to the kernel through a character device and in theory from the kernel it could easily be transmitted over a USB port or network to a physical printer.  Note that this is not just a made up lab example.  Although somewhat simplified, this is in fact how many systems actually work on Linux including `CUPS` print server, `Wayland` display server, `X11` display server, `Apache2` web server, `DBUS` IPC protocol, and many other Linux programs.
