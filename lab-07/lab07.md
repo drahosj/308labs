@@ -129,10 +129,10 @@ $ time make -j10 ARCH=um
 ~~~
 
 # Filesystem
-You now have a compiled kernel but to run it you need a file system.  For this lab we will use the Debian Jessie image.  Note that at the end of the lab is a number of other file systems that you are welcome to try out if you are so inclined.  All of them are `bz2` and have the `md5` checksum by appending `.md5`.  First return to the `/tmp/NEDID` directory and then run the following lines.
+You now have a compiled kernel but to run it you need a file system.  For this lab we will use the Debian Jessie image.  Note that at the end of the lab is a number of other file systems that you are welcome to try out if you are so inclined.  All of them are `bz2` and have the `md5` checksum by appending `.md5`.  First return to the `/tmp/NETID` directory and then run the following lines.
 
 ~~~bash
-$ cd /tmp/NEDID
+$ cd /tmp/NETID
 $ wget http://fs.devloop.org.uk/filesystems/Debian-Jessie/Debian-Jessie-AMD64-root_fs.bz2
 $ wget http://fs.devloop.org.uk/filesystems/Debian-Jessie/Debian-Jessie-AMD64-root_fs.bz2.md5
 ~~~
@@ -189,7 +189,33 @@ Whenever you want to shutdown the usermode linux run the command `halt` in the u
 The linux kernel by itself doesn't do very much.  Most of the interesting stuff happens inside kernel modules which are drivers or other low-level pieces of software.  This lab just scratches the surface on how to do kernel module development.  If you are interested an want to learn more a great resource is [http://www.tldp.org/LDP/lkmpg/2.6/lkmpg.pdf](http://www.tldp.org/LDP/lkmpg/2.6/lkmpg.pdf).
 
 ## Hello World
-As is the tradition among all software developers we shall start with the sacred hello world program.  On the host machine go into the `hello-world` directory and look at `hello_world.c`.  Change the author to yourself and change it to printing out something interesting in the `init` and `exit` functions.  Note that there is no comma after the `KERN_INFO` macro.  Now we can compile the kernel module.  A makefile has been provided to compile the module for you.  In the host terminal run the command
+As is the tradition among all software developers we shall start with the sacred hello world program.  On the host machine go into the `hello-world` directory and look at `hello_world.c`.  Change the author to yourself and change it to printing out something interesting in the `init` and `exit` functions.  Note that there is no comma after the `KERN_INFO` macro.  Now we can compile the kernel module.  A makefile has been provided to compile the module for you.  Before you run the `make` command, open the file `Makefile` with your favorite text editor.  You will notice that there is a line in the form:
+
+~~~Makefile
+LINUX_SRC =
+~~~
+
+This line creates the variable `LINUX_SRC` to be used by `make`.  This line needs to be completed to point to where the linux kernel source files are in the system.  If you are working on the lab machines, this line should look like:
+
+~~~Makefile
+LINUX_SRC = /tmp/NETID/
+~~~
+
+Where NETID is your netID.  If you are working on this lab on your own machine, it should look like:
+
+~~~Makefile
+LINUX_SRC = /absolute/path/to/linux/
+~~~
+
+or
+
+~~~Makefile
+LINUX_SRC = ../relative/path/to/linux
+~~~
+
+**Do note that you will have to do this for the Makefile in `hello-file` as well.**
+
+Now, in the host terminal, run the command
 
 ~~~bash
 $ make ARCH=um

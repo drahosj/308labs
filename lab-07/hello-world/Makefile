@@ -1,6 +1,6 @@
 obj-m += hello_world.o
 
-LINUX_SRC = ../linux-4.4.3/
+LINUX_SRC = 
 
 all:
 	make -C $(LINUX_SRC) M=$(PWD) modules
