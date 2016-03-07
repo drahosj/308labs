@@ -7,7 +7,74 @@
 #include "printserver.h"
 #include "print_server_client.h"
 
-FILE * connect_to_server();
+static FILE * connect_to_server();
+
+printer_driver_t ** printer_list_drivers(int *number)
+{
+	FILE * conn = connect_to_server();
+
+	if (fwrite("LIST\n", 1, 5, conn) < 5) {
+		perror("write");
+	}
+
+	char * line = NULL;
+	size_t len = 0;
+	ssize_t count = getline(&line, &len, conn);
+	if (count == -1) {
+		perror("getline");
+		fprintf(stderr, "Protocol error\n");
+		return NULL;
+	}
+
+	*number = 0;
+	scanf("NUMBER:%d\n", number);
+	if (number == 0) {
+		fprintf(stderr, "Protocol error\n");
+		fclose(conn);
+		return NULL;
+	}
+
+	printer_driver_t ** drivers = malloc(sizeof(printer_driver_t *) * (*number + 1));
+	drivers[*number] = NULL;
+
+	for (int i = 0; i < *number; i++) {
+		count = getline(&line, &len, conn);
+		if (count == -1) {
+			perror("getline");
+			fprintf(stderr, "Protocol error\n");
+			return NULL;
+		}
+		char * printer_name = strtok(line, ":");
+		if (printer_name == NULL) {
+			fprintf(stderr, "Protocol error\n");
+			continue;
+		}
+
+		char * driver_name = strtok(NULL, ":");
+		if (driver_name == NULL) {
+			fprintf(stderr, "Protocol error\n");
+			continue;
+		}
+
+		char * driver_version = strtok(NULL, ":");
+		if (driver_version == NULL) {
+			fprintf(stderr, "Protocol error\n");
+			continue;
+		}
+
+		drivers[i] = malloc(sizeof(printer_driver_t));
+		drivers[i]->printer_name = printer_name;
+		drivers[i]->driver_name = driver_name;
+		drivers[i]->driver_version = driver_version;
+
+		/* Next call to getline will create a new buffer */
+		line = NULL;
+		len = 0;
+	}
+
+	fclose(conn);
+	return drivers;
+}
 
 int printer_print(int * handle __attribute__ ((unused)), char * driver, 
 		char * job_name, char * description, char * data)
@@ -70,7 +137,7 @@ int printer_print(int * handle __attribute__ ((unused)), char * driver,
 	return 0;
 }
 
-FILE * connect_to_server()
+static FILE * connect_to_server()
 {
 	/* Open a connection to the socket and send the job */
 	int sock = socket(AF_UNIX, SOCK_STREAM, 0);

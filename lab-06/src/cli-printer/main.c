@@ -11,10 +11,10 @@ const struct option longopts[] = {
 	{ "driver", 1, NULL, 'd' },
 	{ "output", 1, NULL, 'o' },
 	{ "description", 1, NULL, 's' },
-	{ "list", 1, NULL, 'l' },
-	{ "version", 1, NULL, 'v' },
-	{ "usage", 1, NULL, 'u' },
-	{ "help", 1, NULL, 'h' },
+	{ "list", 0, NULL, 'l' },
+	{ "version", 0, NULL, 'v' },
+	{ "usage", 0, NULL, 'u' },
+	{ "help", 0, NULL, 'h' },
 	{ NULL, 0, NULL, 0 }
 };
 
@@ -135,7 +135,18 @@ static ssize_t get_file_size(FILE * f)
 
 static int print_list()
 {
-	printf("List lol\n");
+	int number = 0;
+	printer_driver_t ** list = printer_list_drivers(&number);
+
+	if ((list == NULL) || (number == 0)) {
+		return -1;
+	}
+
+	printf(" Driver | Name | Driver Version \n");
+	for(int i = 0; i < number; i++) {
+		printf("%s | %s | %s\n", list[i]->driver_name, 
+				list[i]->printer_name, list[i]->driver_version);
+	}
 	return 0;
 }
 
