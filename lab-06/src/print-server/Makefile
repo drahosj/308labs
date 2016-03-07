@@ -1,6 +1,6 @@
 EXE=printserver
 SRC=main.c printer_driver.c
-CFLAGS=-D_GNU_SOURCE -Wall -Wextra -Wpedantic -Werror -std=gnu11
+CFLAGS=-D_GNU_SOURCE -Wall -Wextra -Wpedantic -Werror -std=gnu11 -I../libprintserver
 LFLAGS=-pthread
 DEBUG=-g
 

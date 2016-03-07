@@ -32,8 +32,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 #include "print_job.h"
 #include "printer_driver.h"
 #include "debug.h"
+#include "printserver.h"
 
-#define SOCKET_PATH "printsocket"
 #define ACCEPT_WELCOME "Connected to print server. Enter commands\n"
 
 // -- GLOBAL VARIABLES -- //
@@ -287,6 +287,7 @@ void * producer_thread(void * param __attribute__ ((unused)))
 			} else if (strncmp(line, "SHUTDOWN", 8) == 0) {
 				exit_flag = 1;
 				fclose(stream);
+				free(line);
 				return NULL;
 			} else if (strncmp(line, "EXIT", 4) == 0) {
 				puts("Client logged out.");
@@ -450,6 +451,7 @@ static void parse_rc_file(FILE* fp)
 			}
 		}
 	}
+	free(line);
 
 	// print out the printer groups
 	dprintf0("\n--- Printers ---\n"); 
@@ -561,4 +563,9 @@ static void handle_job(struct printer * this)
 		fflush(logfile);
 		funlockfile(logfile);
 	}
+	free(job->job_name);
+	free(job->file_name);
+	free(job->description);
+	free(job->group_name);
+	free(job);
 }
