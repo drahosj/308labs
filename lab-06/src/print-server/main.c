@@ -26,11 +26,15 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 #include <semaphore.h>
 #include <errno.h>
 #include <time.h>
-
+#include <sys/socket.h>
+#include <sys/un.h>
 
 #include "print_job.h"
 #include "printer_driver.h"
 #include "debug.h"
+
+#define SOCKET_PATH "printsocket"
+#define ACCEPT_WELCOME "Connected to print server. Enter commands\n"
 
 // -- GLOBAL VARIABLES -- //
 int verbose_flag = 0;
@@ -181,77 +185,116 @@ void *printer_thread(void* param)
 
 void * producer_thread(void * param __attribute__ ((unused)))
 {
-	struct printer_group * g;
-	struct print_job * job;
+	/* Create Unix domain socket */
+	int sock = socket(AF_UNIX, SOCK_STREAM, 0);
+	struct sockaddr_un addr;
+
+	/* Initialize to 0 */
+	memset(&addr, 0, sizeof(struct sockaddr_un));
+	addr.sun_family = AF_UNIX;
+
+	/* Set socket path */
+	strncpy(addr.sun_path, SOCKET_PATH, sizeof(addr.sun_path));
+
+	/* Delete socket if it already exists */
+	unlink(SOCKET_PATH);
+
+	/* Bind... */
+	if (bind(sock, (struct sockaddr *) &addr, sizeof(addr))) {
+		perror("bind");
+		return NULL;
+	}
+
+	/* ...and listen. */
+	if (listen(sock, 10)) {
+		perror("listen");
+		return NULL;
+	}
+	
 	char * line = NULL;
 	size_t n = 0;
-	long long job_number = 0;
+	for (;;) {
+		/* Accept connection and handle service
+		 * Note that only one client can be serviced at a time. Ideally
+		 * this would accept -> fork, but that would be a big damn pain to fit
+		 * into the existing threaded architecture.
+		 */
+		int conn = accept(sock, NULL, NULL);
+		if (conn == -1) {
+			perror("accept");
+			continue;
+		}
+
+		FILE * stream = fdopen(conn, "r+");
 	
-	while(getline(&line, &n, stdin) > 0)
-	{
-		if(strncmp(line, "NEW", 3) == 0)
-		{
-			job = calloc(1, sizeof(struct print_job));
-			job->job_number = job_number++;
-		}
-		else if(job && strncmp(line, "FILE", 4) == 0)
-		{
-			strtok(line, ": ");
-			job->file_name = malloc(n);
-			strncpy(job->file_name, strtok(NULL, "\n"), n);
-		}
-		else if(job && strncmp(line, "NAME", 4) == 0)
-		{
-			strtok(line, ": ");
-			job->job_name = malloc(n);
-			strncpy(job->job_name, strtok(NULL, "\n"), n);
-		}
-		else if(job && strncmp(line, "DESCRIPTION", 11) == 0)
-		{
-			strtok(line, ": ");
-			job->description = malloc(n);
-			strncpy(job->description, strtok(NULL, "\n"), n);
-		}
-		else if(job && strncmp(line, "PRINTER", 7) == 0)
-		{
-			strtok(line, ": ");
-			job->group_name = malloc(n);	
-			strncpy(job->group_name, strtok(NULL, "\n"), n);
-		}
-		else if(job && strncmp(line, "PRINT", 5) == 0)
-		{
-			int group_found = 0;
-			if(!job->group_name)
-			{
-				eprintf0("Trying to print without setting printer\n");
-				continue;
-			}
-			if(!job->file_name)
-			{
-				eprintf0("Trying to print without providing input file\n");
-				continue;
-			}
-			for(g = printer_group_head; g; g=g->next_group)
-			{
-				if(strcmp(job->group_name, g->name) == 0)
-				{
-					put_job(&g->job_queue, job);
-					group_found = 1;
+		puts("Client logged in.");
+		fprintf(stream, ACCEPT_WELCOME);
+
+		struct printer_group * g;
+		struct print_job * job;
+		long long job_number = 0;
+		for(;;) {
+			ssize_t count = getline(&line, &n, stream);
+			if (count == -1) {
+				if (errno == 0) {
+					fputs("Client unexpectedly hung up.\n", stderr);
+				} else {
+					perror("getline");
 				}
+				fclose(stream);
+				break;
 			}
-			if(job && !group_found)
-			{
-				eprintf("Invalid printer group name given: %s\n", job->group_name);
-				continue;
+
+			if (strncmp(line, "NEW", 3) == 0) {
+				job = calloc(1, sizeof(struct print_job));
+				job->job_number = job_number++;
+			} else if (job && strncmp(line, "FILE", 4) == 0) {
+				strtok(line, ": ");
+				job->file_name = malloc(n);
+				strncpy(job->file_name, strtok(NULL, "\n"), n);
+			} else if (job && strncmp(line, "NAME", 4) == 0) {
+				strtok(line, ": ");
+				job->job_name = malloc(n);
+				strncpy(job->job_name, strtok(NULL, "\n"), n);
+			} else if (job && strncmp(line, "DESCRIPTION", 11) == 0) {
+				strtok(line, ": ");
+				job->description = malloc(n);
+				strncpy(job->description, strtok(NULL, "\n"), n);
+			} else if (job && strncmp(line, "PRINTER", 7) == 0) {
+				strtok(line, ": ");
+				job->group_name = malloc(n);	
+				strncpy(job->group_name, strtok(NULL, "\n"), n);
+			} else if (job && strncmp(line, "PRINT", 5) == 0) {
+				int group_found = 0;
+				if (!job->group_name) {
+					eprintf0("Trying to print without setting printer\n");
+					continue;
+				}
+				if (!job->file_name) {
+					eprintf0("Trying to print without providing input file\n");
+					continue;
+				}
+				for (g = printer_group_head; g; g=g->next_group) {
+					if(strcmp(job->group_name, g->name) == 0) {
+						put_job(&g->job_queue, job);
+						group_found = 1;
+					}
+				}
+				if (job && !group_found) {
+					eprintf("Invalid printer group name given: %s\n", job->group_name);
+					continue;
+				}
+			} else if (strncmp(line, "SHUTDOWN", 8) == 0) {
+				exit_flag = 1;
+				fclose(stream);
+				return NULL;
+			} else if (strncmp(line, "EXIT", 4) == 0) {
+				puts("Client logged out.");
+				fclose(stream);
+				break;
 			}
-		}
-		else if(strncmp(line, "EXIT", 4) == 0)
-		{
-			exit_flag = 1;
-			return NULL;
 		}
 	}
-	return NULL;
 }
 
 
@@ -262,6 +305,8 @@ int main(int argc, char* argv[])
 
 	// parse the command line arguments
 	parse_command_line(argc, argv);
+
+	puts("Starting print server. If it hangs, the drivers probably aren't started.");
 
 	// open the runtime config file
 	FILE* config = fopen("config.rc", "r");
