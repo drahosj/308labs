@@ -14,7 +14,7 @@ int printer_install(struct printer_driver * printer, const char * driver)
 	char driver_name[500];
 	char line[1024];
 	snprintf(driver_name, 500, "%s-r", driver);
-	printer->driver_write = fopen(driver_name, "w");
+	printer->driver_write = fopen(driver_name, "r+");
 	if(printer->driver_write == NULL)
 	{
 		eprintf("Failed to open printer driver %s\n", driver);
