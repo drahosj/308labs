@@ -225,10 +225,10 @@ void * producer_thread(void * param __attribute__ ((unused)))
 			continue;
 		}
 
-		FILE * stream = fdopen(conn, "r+");
+		FILE * stream = fdopen(conn, "w+");
+		//fprintf(stream, ACCEPT_WELCOME);
 	
-		puts("Client logged in.");
-		fprintf(stream, ACCEPT_WELCOME);
+		puts("Client connected.");
 
 		struct printer_group * g;
 		struct print_job * job;
@@ -244,6 +244,8 @@ void * producer_thread(void * param __attribute__ ((unused)))
 				fclose(stream);
 				break;
 			}
+
+			dprintf("RECV: %s", line);
 
 			if (strncmp(line, "NEW", 3) == 0) {
 				job = calloc(1, sizeof(struct print_job));
@@ -356,6 +358,8 @@ int main(int argc, char* argv[])
 			pthread_join(p->tid, &ret);
 		}
 	}
+
+	unlink(SOCKET_PATH);
 
 	return 0;
 }

@@ -1,15 +1,13 @@
-EXE=printserver
-SRC=main.c printer_driver.c
+EXE=cli-printer
+SRC=main.c
 CFLAGS=-D_GNU_SOURCE -Wall -Wextra -Wpedantic -Werror -std=gnu11 -I../libprintserver
-LFLAGS=-pthread
+LFLAGS=-L../libprintserver -lprintserver
 DEBUG=-g
 
 
 OBJ := $(patsubst %.c,%.o,$(SRC))
 
 all: $(EXE)
-	@echo "Building printer drivers (virt-printer)"
-	cd printer && make
 
 $(EXE): $(OBJ)
 	gcc -o $@ $^ $(LFLAGS)
@@ -17,11 +15,9 @@ $(EXE): $(OBJ)
 %.o: %.c *.h
 	gcc -c $< $(CFLAGS) $(DEBUG)
 
-doc: 
+doc:
 	doxygen
 
 clean:
 	rm -rf *.o
 	rm -rf $(EXE)
-	
-.PHONY: doc

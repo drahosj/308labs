@@ -1,4 +1,4 @@
-CFLAGS=-D_GNU_SOURCE -Wall -Wextra -Wpedantic -Werror -std=gnu11 -I../libprintserver
+CFLAGS=-D_GNU_SOURCE -g -Wall -Wextra -Wpedantic -Werror -std=gnu11 -I../libprintserver
 
 all: libprintserver.a
 

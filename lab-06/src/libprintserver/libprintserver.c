@@ -60,6 +60,7 @@ int printer_print(int * handle __attribute__ ((unused)), char * driver,
 	}
 	fprintf(conn, "PRINTER:%s\n",driver);
 	fprintf(conn, "PRINT\n");
+	fprintf(conn, "EXIT\n");
 	   
 	/* Cleanup */
 	free(tmpfile_name);
@@ -87,7 +88,7 @@ FILE * connect_to_server()
 		abort();
 	}
 
-	FILE * conn = fdopen(sock, "rw");
+	FILE * conn = fdopen(sock, "w+");
 	
 	return conn;
 }
