@@ -27,18 +27,23 @@ int printer_print(int * handle __attribute__ ((unused)), char * driver,
 	FILE * tmpfile = fopen(tmpfile_name, "w");
 	if (tmpfile == NULL) {
 		perror("fopen");
+		free(tmpfile_name);
 		abort();
 	}
 
 	size_t count = fwrite(data, 1, datasize, tmpfile);
 	if (count != datasize) {
 		perror("fwrite");
+		fclose(tmpfile);
+		free(tmpfile_name);
 		abort();
 	}
 	
 	if(fclose(tmpfile)) {
 		perror("fclose");
-		abort();
+		fclose(tmpfile);
+		free(tmpfile_name);
+		return -1;
 	}
 
 	/* Done. Data written to TMPFILE_PREFIX~job_name */
@@ -59,6 +64,9 @@ int printer_print(int * handle __attribute__ ((unused)), char * driver,
 	/* Cleanup */
 	free(tmpfile_name);
 	fclose(conn);
+
+	/* Success */
+	return 0;
 }
 
 FILE * connect_to_server()
