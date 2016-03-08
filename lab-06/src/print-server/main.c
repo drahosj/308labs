@@ -327,6 +327,9 @@ int main(int argc, char* argv[])
 
 	if (daemon_flag) {
 		daemon(1,0);
+		FILE * pidfile = fopen("/tmp/printserver.pid", "w");
+		fprintf(pidfile, "%d", getpid());
+		fclose(pidfile);
 	}
 
 

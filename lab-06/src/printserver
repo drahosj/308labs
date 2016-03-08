@@ -10,9 +10,9 @@ case "$1" in
 		then
 			echo "Pidfile exists. Is the printserver running? Stop it or delete $PIDFILE"
 		else
-			pushd $SERVERDIR
+			cd $SERVERDIR
 			./start_drivers.sh > /dev/null 2> /dev/null
-			./printserver -d & echo $! > $PIDFILE
+			./printserver -d
 		fi
 		;;
 	stop)
@@ -23,6 +23,7 @@ case "$1" in
 			rm $PIDFILE
 		else
 			echo "Pidfile does not exist. Printserver is probably not running."
+			echo "If it is, check ps and kill it manually."
 		fi
 		;;
 	*)
