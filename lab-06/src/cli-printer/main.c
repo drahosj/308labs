@@ -82,7 +82,26 @@ int main(int argc, char ** argv)
 	}
 
 	if (driver == NULL) {
-		printf("Choose a driver:\n");
+		print_list();
+		printf("Enter driver name: ");
+		
+		size_t n = 0;
+		getline(&driver, &n, stdin);
+		strtok(driver, "\n");
+	}
+
+	/* Validate driver */
+	int num_drivers = 0;
+	int found = 0;
+	printer_driver_t ** list = printer_list_drivers(&num_drivers);
+	for (int i = 0; i < num_drivers; i++) {
+		if (!strcmp(driver, list[i]->driver_name)) {
+			found = 1;
+			break;
+		}
+	}
+	if (!found) {
+		fprintf(stderr, "Invalid driver selected. Valid drivers:\n");
 		print_list();
 		return -1;
 	}
@@ -146,6 +165,8 @@ static int print_list()
 	for(int i = 0; i < number; i++) {
 		printf("%s | %s | %s\n", list[i]->driver_name, 
 				list[i]->printer_name, list[i]->driver_version);
+		free(list[i]->printer_name);
+		free(list[i]);
 	}
 	return 0;
 }

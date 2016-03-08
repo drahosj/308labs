@@ -43,6 +43,7 @@ FILE * logfile = NULL;
 
 // -- STATIC VARIABLES -- //
 static struct printer_group * printer_group_head;
+static int num_printers = 0;
 
 /**
  * A list of print jobs that must be kept thread safe
@@ -95,6 +96,7 @@ static struct print_job * get_job(struct print_job_list * list);
 static void put_job(struct print_job_list * list, struct print_job * job);
 static void catch_error(int error);
 static void handle_job(struct printer * this);
+static void send_list(FILE * conn);
 
 /** Tell all printers to exit */
 static int kill_flag = 0;
@@ -226,7 +228,6 @@ void * producer_thread(void * param __attribute__ ((unused)))
 		}
 
 		FILE * stream = fdopen(conn, "w+");
-		//fprintf(stream, ACCEPT_WELCOME);
 	
 		puts("Client connected.");
 
@@ -295,7 +296,12 @@ void * producer_thread(void * param __attribute__ ((unused)))
 				puts("Client logged out.");
 				fclose(stream);
 				break;
+			} else if (strncmp(line, "LIST", 4) == 0) {
+				send_list(stream);
+				fclose(stream);
+				break;
 			}
+
 		}
 	}
 }
@@ -453,6 +459,7 @@ static void parse_rc_file(FILE* fp)
 					group->printer_queue = printer;
 
 			}
+			num_printers += 1;
 		}
 	}
 	free(line);
@@ -572,4 +579,21 @@ static void handle_job(struct printer * this)
 	free(job->description);
 	free(job->group_name);
 	free(job);
+}
+
+static void send_list(FILE * conn)
+{
+	fprintf(conn, "NUMBER:%d\n", num_printers);
+
+	struct printer_group * gcur = printer_group_head;
+
+	while (gcur != NULL) {
+		struct printer * cur = gcur->printer_queue;
+		
+		while (cur != NULL) {
+			fprintf(conn, "%s:%s:%s\n", cur->driver.name, gcur->name, "V1.0-0");
+			cur = cur->next;
+		}
+		gcur = gcur->next_group;
+	}
 }

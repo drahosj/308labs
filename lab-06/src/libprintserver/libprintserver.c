@@ -27,7 +27,7 @@ printer_driver_t ** printer_list_drivers(int *number)
 	}
 
 	*number = 0;
-	scanf("NUMBER:%d\n", number);
+	sscanf(line, "NUMBER:%d", number);
 	if (number == 0) {
 		fprintf(stderr, "Protocol error\n");
 		fclose(conn);
@@ -61,6 +61,8 @@ printer_driver_t ** printer_list_drivers(int *number)
 			fprintf(stderr, "Protocol error\n");
 			continue;
 		}
+
+		strtok(driver_version, "\n");
 
 		drivers[i] = malloc(sizeof(printer_driver_t));
 		drivers[i]->printer_name = printer_name;
