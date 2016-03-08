@@ -34,6 +34,6 @@ int print_world(int num)
 	{
 		printf("World\n");
 	}
-	return 42;
+	return 69;
 }
 

@@ -173,8 +173,80 @@ to 'fix' this would be ask the kernel to map the shared memory to the same base 
 in each process, and then only pass pointers that point to shared memory. But that is not
 a guaranteed fix, so the best way is to just avoid passing pointers through shared memory.
 
-### What happens if
+### What happens if two applications both try to read and set a variable at the same time?
+This is a classic read-modify-write concurrency problem. It can either work out okay (first one runs,
+then the other runs), or only one modification will stick because the other process grabbed
+the variable before the modifiction was written, causing the earlier modification to be lost.
 
+### How can a shared memory space be deleted from the system?
+Shared memory space is marked as deletable with shm_unlink(). It will be deleted once no processes
+are attached to it. If there is zombie shared memory space as a result of poorly-written applications
+or processes with unexpected termination, the icprm tool can be used to call shm_unlink(), which will
+free the space if (or as soon as) no more processes are attached to it.
+
+## Unnamed Semaphores
+An unnamed semaphore with initial value 5 can be created in shared memory space as follows:
+~~~
+sem_init(shared_mem->my_sem, 1, 5);
+~~~
+The only secret sauce here is making sure the second argument (pshared) is non-zero, meaning
+the semaphore is shared across processes.
+
+## Named Semaphores
+### How long do semaphores last in the kernel?
+Semaphores last in the kernel until sem_unlink() is called and no more processes have the
+semaphore opened. Similar to shared memory space, the ipcrm tool can be used to sem_unlink() 
+named semaphores manually.
+
+### What causes them to be destroyed?
+A semaphore will be destroyed once the following conditions are met:
+- sem_unlink() has been called on it
+- All processes which called sem_open() on it have since called sem_close() or exited.
+
+### What is the basic process for creating and using named semaphores?
+Named semaphores are very simple to create. sem_open() must be called, with the name of the
+semaphore, O_CREAT, a mode, and an initial value. This creates the semaphore. Then, other
+processes/threads can call sem_open() without O_CREAT or any additional options. All threads which
+have opened the semaphore may then call sem_post() and sem_wait().
+
+The semaphore should be sem_unlink()ed once it looks like no more processes will be opening it. It will
+then be freed once all processes exit or release it by calling sem_close().
+
+## Signals
+### What happens when you try to use Ctrl-c to break out of the infinite loop?
+When ctrl-c is pressed, it sends the SIGINT signal. This is registered to my_quit_handler, which
+does not quit.
+
+### What is the signal number that Ctrl-c sends?
+Ctrl-c sends SIGINT (value 2).
+
+### When a process forks, does the child still use the same signal handler?
+Across a fork(), the signal dispositions remain the same.
+
+### Hom about during an exec call?
+When a process exec()s, handled signals have their handlers reset to the default. However, 
+ignored signals remain ignored.
+
+## Dynamic Libraries
+When the library was changed, the output of lib_test changed without needing recompilation. If
+libhello were created as a statically linked library (.a instead of .so, also different compilation flags),
+libhello would need to be re-linked, but not re-compiled.
+
+LD_LIBRARY_PATH is an important environment variable because it (and its friends including LD_PRELOAD)
+can drastically change the behavior of dynamically linked executables. This is especially relevant
+when security is concerned. LD_LIBRARY_PATH and LD_PRELOAD are ignored for Set-UID executables like
+sudo, su, ping, and mount. This prevents malicious library code from being linked into those binaries
+and then executing with elevated permissions. 
+
+The configuration file equivalents of LD_LIBRARY_PATH and LD_PRELOAD (/etc/ld.so.conf and 
+/etc/ld.so.preload, respectively) still apply even to SUID binaries and can be used
+to override normal linking priorities universally, across all binaries.
+
+Another way around LD_LIBRARY_PATH is to use linker flags to set hardcoded library paths within
+the output binary itself. This can be done on a per-library basis, which will make the binary use a specific
+library and not do any searching within LD_LIBRARY_PATH or otherwise. ELF binaries can also simply contain
+additional library search paths, which operate in an almost identical fashion to the LD_LIBRARY_PATH environment
+variable.
 
 # Lab Tasks
 ## Print Server IPC
