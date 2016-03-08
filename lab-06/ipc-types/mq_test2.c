@@ -110,12 +110,20 @@ int main(int argc, char** argv)
 	
 	free(buf);
 	
-	char my_string[] = "I am Clara";
+	char * my_string = "I am Clara";
 	
 	if( mq_send(msg_queue, my_string, strlen(my_string), 12))
 	{
 		perror("mq_send\n");
 		return -1;
 	}
+
+	char * my_string2 = "I am Amelia";
+	if( mq_send(msg_queue, my_string2, strlen(my_string2), 20))
+	{
+		perror("mq_send\n");
+		return -1;
+	}
+
 	return 0;
 }
