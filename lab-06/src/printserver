@@ -1,0 +1,30 @@
+#! /bin/sh
+
+PIDFILE="/tmp/printserver.pid"
+SERVERDIR="./print-server/"
+
+case "$1" in
+	start)
+		echo "Starting printserver"
+		if [ -a "$PIDFILE" ]
+		then
+			echo "Pidfile exists. Is the printserver running? Stop it or delete $PIDFILE"
+		else
+			pushd $SERVERDIR
+			./start_drivers.sh > /dev/null 2> /dev/null
+			./printserver -d & echo $! > $PIDFILE
+		fi
+		;;
+	stop)
+		echo "Stopping printserver"
+		if [ -a "$PIDFILE" ]
+		then
+			kill `cat $PIDFILE`
+			rm $PIDFILE
+		else
+			echo "Pidfile does not exist. Printserver is probably not running."
+		fi
+		;;
+	*)
+		echo "Usage: $0 {start|stop}"
+esac

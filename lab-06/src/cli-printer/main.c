@@ -126,6 +126,11 @@ int main(int argc, char ** argv)
 	}
 	
 	int result = printer_print(NULL, driver, output, description, data);
+	if (result == 0) {
+		printf("Job submitted\n");
+	} else {
+		printf("An error occurred (%d)\n", result);
+	}
 
 	free(data);
 
@@ -162,6 +167,7 @@ static int print_list()
 	}
 
 	printf(" Driver | Name | Driver Version \n");
+	printf("--------------------------------\n");
 	for(int i = 0; i < number; i++) {
 		printf("%s | %s | %s\n", list[i]->driver_name, 
 				list[i]->printer_name, list[i]->driver_version);
