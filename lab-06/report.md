@@ -67,7 +67,7 @@ Used to implement things like ICMP ping in userspace.
 AF_UNIX and AF_LOCAL are intended for local communication. AF_LOCAL is obsolete.
 AF_INET is often used for local communications via IP localhost (127.0.0.1), quite possibly
 more often than AF_UNIX - definitely with more publicity. AF_INET6 can also be used for local
-communications via IPv6 loopback (::1), which is used from time to time. Other domains may also feature
+communications via IPv6 loopback (::1), which crops up from time to time. Other domains may also feature
 loopback functionality, but they see very little use.
 
 ## Message Queues
@@ -124,9 +124,22 @@ printers and drivers.
 Sockets provided an easy, simple, safe, and extendable solution. Multiple clients can connect to
 the server at the same time. The nature of binding and listening to a socket prevents any
 multiple-writer problems, since each connection gets a unique file descriptor on the server. The
-client simply needs to connect to the socket, then issue commands just as in Lab 05. Minimal
-changes were needed to the server as well, since a getline loop can be used with a socket, rather
-than stdin, if a libc stream is attached to the socket using fdopen(3).
+client simply needs to connect to the socket, then issue commands just as in Lab 05.
+
+Another reason for my preference of sockets is the fact that they can be wrapped in to libc 
+file streams. Because an active connection (from listen() or accept()) is simply a file descriptor,
+it can be attached to a stream with fdopen(3). This allows the use of fprintf() and getline(), which
+greatly reduce the manual memory management overhead of solutions such as manually sprintf()-ing
+into a buffer before calling a send function. In particular, getline() is probably near the 
+easiest, most convenienc, and *safe* way to receive from anything ever, so being able to use
+it with sockets is a major plus.
+
+The only other forms of IPC that can be used with fdopen() are pipe-based (anonymous pipes and
+named FIFOs). Both of these have drawbacks: with anonymous pipes, there must be a parent-child relationship
+between client and server, or the file descriptors must be sent across a Unix-domain socket anyway. With
+named pipes, it can be difficult to distinguish between messages coming from multiple simultaneous clients, and
+even more difficult to send messages to the appropriate client. With stream sockets (Unix or otherwise),
+listen() and accept() make handling multiple clients a breeze.
 
 ## Print Server Client Library
 The two required functions were implemented, without the implementation of handle in print_server_print.
@@ -145,4 +158,4 @@ can be run with either the 'start' or 'stop' command to start and stop the print
 
 ## Command Line Printer Program
 cli-printer was implemented, with full support for all required and optional arguments. It does not have
-an interactive mode. Usage information can be printed with -u, and 
+an interactive mode. Usage information can be printed with -u, and full help is available with -h.
