@@ -154,8 +154,91 @@ worrying about resource leaks internal to the library.
 ## Print Server as Daemon
 The print server was daemonized for this lab, using the -d flag. However, the print server
 should not be started manually. An init-style script (printserverctl) is provided in the src directory. This script
-can be run with either the 'start' or 'stop' command to start and stop the printserver daemon.
+can be run with either the 'start' or 'stop' command to start and stop the printserver daemon. A pidfile
+is used to track the status of the printserver daemon.
 
 ## Command Line Printer Program
 cli-printer was implemented, with full support for all required and optional arguments. It does not have
 an interactive mode. Usage information can be printed with -u, and full help is available with -h.
+
+# Building, Running, and Testing
+## Building
+Build all programs as follows:
+~~~
+cd src
+make
+~~~
+The top-level Makefile will build all three subfolders. It also supports the clean target.
+
+## Running
+NOTE: Do not run the printserver binary as a daemon directly. Use printserverctl. See Print Server as Daemon 
+for more infurmation.
+
+Start the printserver daemon with the following command (assuming you are in the src directory).
+~~~
+./printserverctl start
+~~~
+This will keep track of the printserver daemon pid, as well as automatically manage the printer drivers.
+
+To stop the daemon, just run
+~~~
+./printserverctl stop
+~~~
+
+The client can be run as expected, with all basic flags supported and functional.
+
+## Testing
+samplec.ps is provided in the src directory for testing. Print outputs (pdf files) appear in
+src/print-server/printer. 
+
+Some example tests:
+~~~
+jake at gilliam in ~/308/lab-06/src on master*
+$ ./printserverctl start
+Starting printserver
+Starting print server. If it hangs, the drivers probably are not started.
+~~~
+The print server is now running.
+
+~~~
+jake at gilliam in ~/308/lab-06/src/cli-printer on master*
+$ ./cli-printer --list
+ Driver | Name | Driver Version
+--------------------------------
+black_white | ./drivers/printer0-r | V1.0-0
+black_white | ./drivers/printer1-r | V1.0-0
+black_white | ./drivers/printer2-r | V1.0-0
+black_white | ./drivers/printer3-r | V1.0-0
+color | ./drivers/printer4-r | V1.0-0
+color | ./drivers/printer5-r | V1.0-0
+~~~
+
+~~~
+jake at gilliam in ~/308/lab-06/src/cli-printer on master*
+$ ./cli-printer -o example.pdf -d black_white ../samplec.ps
+Job submitted
+~~~
+The file example.pdf is created in ../print-server/printer.
+
+~~~
+jake at gilliam in ~/308/lab-06/src/cli-printer on master*
+$ ./cli-printer -o example2.pdf ../samplec.ps
+ Driver | Name | Driver Version
+--------------------------------
+black_white | ./drivers/printer0-r | V1.0-0
+black_white | ./drivers/printer1-r | V1.0-0
+black_white | ./drivers/printer2-r | V1.0-0
+black_white | ./drivers/printer3-r | V1.0-0
+color | ./drivers/printer4-r | V1.0-0
+color | ./drivers/printer5-r | V1.0-0
+Enter driver name: color
+Job submitted
+~~~
+The file example2.pdf is created in ../print-server/printer.
+
+~~~
+jake at gilliam in ~/308/lab-06/src on master*
+$ ./printserverctl stop
+Stopping printserver
+~~~
+The print server is now stopped
