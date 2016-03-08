@@ -38,7 +38,6 @@ int main(int argc, char** argv)
 		// this is the child
 		close(my_pipe[PIPE_READ_END]);
 		FILE* out = fdopen(my_pipe[PIPE_WRITE_END], "w"); // open up as a file stream
-		sleep(2); // sleep for a little bit
 		fprintf(out, "Are you my mummy?"); // print something
 		return 42;
 	}
@@ -48,6 +47,7 @@ int main(int argc, char** argv)
 		close(my_pipe[PIPE_WRITE_END]);
 		FILE* in = fdopen(my_pipe[PIPE_READ_END], "r"); // open up as a file stream
 		char buffer[100];
+		sleep(2); // sleep for a little bit
 		fgets(buffer, 100, in);
 		printf("My child asked \"%s\"\n", buffer);
 		int status;
