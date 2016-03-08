@@ -173,13 +173,20 @@ static int print_list()
 
 static int print_usage()
 {
-	fprintf(stderr, "Usage lol\n");
+	fprintf(stderr, "Usage: cli-printer [options] <input-file.ps>\n");
+	fprintf(stderr, "       cli-printer -l, --list\n");
+	fprintf(stderr, "       cli-printer -h, --help\n");
+	fprintf(stderr, "       cli-printer -u, --usage\n");
 	return -1;
 }
 
 static int print_help()
 {
-	fprintf(stderr, "Help lol\n");
+	print_usage();
+	fprintf(stderr, "\n");
+	fprintf(stderr, "Options: -d, --driver <driver>: Specify driver (from cli-printer --list)\n");
+	fprintf(stderr, "         -o, --output <name>: Output file name\n");
+	fprintf(stderr, "         -s, --description <description>: Job description\n");
 	return -1;
 }
 

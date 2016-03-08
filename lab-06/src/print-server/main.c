@@ -44,6 +44,7 @@ FILE * logfile = NULL;
 // -- STATIC VARIABLES -- //
 static struct printer_group * printer_group_head;
 static int num_printers = 0;
+static int daemon_flag = 0;
 
 /**
  * A list of print jobs that must be kept thread safe
@@ -324,6 +325,10 @@ int main(int argc, char* argv[])
 	// close the config file
 	fclose(config);
 
+	if (daemon_flag) {
+		daemon(1,0);
+	}
+
 
 	//-- Create the consumer threads
 	// for each printer group
@@ -380,15 +385,20 @@ int main(int argc, char* argv[])
 static void parse_command_line(int argc, char * argv[])
 {
 	int c;
-	while((c = getopt(argc, argv, "v?l:")) != -1)
+	while((c = getopt(argc, argv, "vhdl:")) != -1)
 	{
 		switch(c)
 		{
 			case 'v': // turn on verbose mode
 				verbose_flag = 1;
 				break;
+			case 'h':
 			case '?': // print help information
 				fprintf(stdout, "Usage: %s [options]\n", argv[0]);
+				fprintf(stdout, "Options: -d daemon\n");
+				fprintf(stdout, "         -v verbose\n");
+				fprintf(stdout, "         -l <logfile> log\n");
+				fprintf(stdout, "         -h help\n");
 				exit(0);
 				break;
 			case 'l': // set log file
@@ -397,6 +407,9 @@ static void parse_command_line(int argc, char * argv[])
 					perror("fopen");
 					abort();
 				}
+				break;
+			case 'd': /* daemon */
+				daemon_flag = 1;
 				break;
 		}
 	}
