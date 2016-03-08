@@ -112,6 +112,68 @@ The second message prints before the first. This is because of the higher priori
 the second message.
 
 ## Shared Memory Space
+### What is the output if you run both at the same time calling shm_test1 first?
+~~~
+jake at gilliam in ~/308/lab-06/ipc-types on master*
+$ ./shm_test1
+a_string = "I am a buffer in the shared memory area"
+an_array[] = {42, 1, 4, 9, 16}
+a_ptr = 140731380823312 = "I am a string allocated on main's stack!"
+~~~
+~~~
+jake at gilliam in ~/308/lab-06/ipc-types on master*
+$ ./shm_test2
+a_string = "I am a buffer in the shared memory area"
+an_array[] = {42, 1, 4, 9, 16}
+Segmentation fault
+~~~
+shm_test2 segfaults.
+
+### What is the output if you run both at the same time calling shm_test2 first?
+~~~
+jake at gilliam in ~/308/lab-06/ipc-types on master*
+$ ./shm_test1
+a_string = "I am a buffer in the shared memory area"
+an_array[] = {0, 1, 4, 9, 16}
+a_ptr = 140722746569056 = "I am a string allocated on main's stack!"
+~~~
+~~~
+jake at gilliam in ~/308/lab-06/ipc-types on master*
+$ ./shm_test2
+a_string = "I am a buffer in the shared memory area"
+an_array[] = {0, 1, 4, 9, 16}
+Segmentation fault
+~~~
+The array element is 0 because test2 sets it to 42 before test1 sets it to 0.
+
+### Running each one alone.
+~~~
+jake at gilliam in ~/308/lab-06/ipc-types on master*
+$ ./shm_test1
+a_string = "I am a buffer in the shared memory area"
+an_array[] = {0, 1, 4, 9, 16}
+a_ptr = 140735920912608 = "I am a string allocated on main's stack!"
+~~~
+~~~
+jake at gilliam in ~/308/lab-06/ipc-types on master*
+$ ./shm_test2
+a_string = "I am a buffer in the shared memory area"
+an_array[] = {42, 1, 4, 9, 16}
+Segmentation fault
+~~~
+For the shm_test2 alon, the rest of the buffer is 1, 4, 9, 16 as
+a result of uninitialized data, rather than anything actually setting them
+to those values.
+
+### Why is shm_test2 causing a segfault? How could this be fixed?
+shm_test2 segfaults when it tries to read the pointer passed through shared memory. This
+fails, because the pointer is set by shm_test1 to point somewhere in its address space.
+This pointer is meaningless in the context of the address space of shm_test2. A way to try
+to 'fix' this would be ask the kernel to map the shared memory to the same base address
+in each process, and then only pass pointers that point to shared memory. But that is not
+a guaranteed fix, so the best way is to just avoid passing pointers through shared memory.
+
+### What happens if
 
 
 # Lab Tasks
@@ -159,7 +221,8 @@ is used to track the status of the printserver daemon.
 
 ## Command Line Printer Program
 cli-printer was implemented, with full support for all required and optional arguments. It does not have
-an interactive mode. Usage information can be printed with -u, and full help is available with -h.
+an interactive mode. Usage information can be printed with -u, and full help is available with -h. Note
+that the short option flag -s was used for -description, rather than -d (which is taken by --driver).
 
 # Building, Running, and Testing
 ## Building
