@@ -246,7 +246,7 @@ Before running the module please read through the code and make sure you underst
 # mknod /dev/cpre308-0 c 254 0
 # cat /dev/cpre308-0
 # cat /dev/cpre308-0
-# echo "hello" > /dev/cpre308
+# echo "hello" > /dev/cpre308-0
 # mknod /dev/cpre308-1 c 254 1
 # cat /dev/cpre308-0
 # cat /dev/cpre308-1
