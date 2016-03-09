@@ -198,7 +198,7 @@ LINUX_SRC =
 This line creates the variable `LINUX_SRC` to be used by `make`.  This line needs to be completed to point to where the linux kernel source files are in the system.  If you are working on the lab machines, this line should look like:
 
 ~~~Makefile
-LINUX_SRC = /tmp/NETID/
+LINUX_SRC = /tmp/NETID/linux-4.4.3/
 ~~~
 
 Where NETID is your netID.  If you are working on this lab on your own machine, it should look like:
