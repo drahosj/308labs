@@ -256,9 +256,9 @@ Before running the module please read through the code and make sure you underst
 
 ## Task for this lab
 Note that the function `device_write` in `hello-file.c` only prints out an alert message saying that such an operation is not supported yet.  The task for this lab will be for the student to complete the `device_write` function in `hello-file.c` so that:
- - What was written to the device is read by the kernel module
- - The kernel module then prints back out what was written, but in reverse order
-   - For example, if "Hello world!" was written to the device(i.e., echo "Hello world!" > /dev/cpre308), the kernel module should print out "!dlrow olleH"
+- What was written to the device is read by the kernel module
+- The kernel module then prints back out what was written, but in reverse order
+  - For example, if "Hello world!" was written to the device(i.e., echo "Hello world!" > /dev/cpre308), the kernel module should print out "!dlrow olleH"
 
 Create a new directory in your `lab-07` folder called `hello-file-complete`. Copy `hello-file.c` over into the newly created folder, and complete the function `device_write` in this version of `hello-file.c`.
 
