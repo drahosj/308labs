@@ -2,6 +2,7 @@
 title: 'Linux Kernel'
 ---
 
+# The Linux Kernel
 The latest stable linux kernel at the time of writing the lab was 4.4.3 which was released on February 25, 2016.  There is most likely a new kernel at the time you are doing this but for consistancy please use the 4.4.3 kernel.
 
 Due to the size of the linux kernel and the relatively slow file access speeds of the network drives it is recommended that you download and work with the linux source tree purely in RAM.  While this will greatly speed up this lab it also opens up the risk for losing work.  If the machine you are working on loses power or if you want to stop working and later come back to this lab you will have to re-download and compile the kernel.
@@ -198,7 +199,7 @@ LINUX_SRC =
 This line creates the variable `LINUX_SRC` to be used by `make`.  This line needs to be completed to point to where the linux kernel source files are in the system.  If you are working on the lab machines, this line should look like:
 
 ~~~Makefile
-LINUX_SRC = /tmp/NETID/
+LINUX_SRC = /tmp/NETID/linux-4.4.3
 ~~~
 
 Where NETID is your netID.  If you are working on this lab on your own machine, it should look like:
