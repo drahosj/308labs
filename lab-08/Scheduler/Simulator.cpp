@@ -53,10 +53,27 @@ void Simulator::RunTick()
 {
 	std::list<SimTask*>::iterator it;
 
-	for(std::list<SimTask*>::iterator it = not_arrived_list.begin(); it != not_arrived_list.end(); ++it)
+
+	// for each task in system
+	// call OnTick(sys_time)
+		// Task handels own lifecycle by calling scheduler directly
+		// returns its state (not_arrived, ready, running, blocked, finished);
+
+
+
+
+
+
+
+
+
+
+
+
+	/*for(std::list<SimTask*>::iterator it = not_arrived_list.begin(); it != not_arrived_list.end(); ++it)
 	{
 		std::cout << (*it)->name << std::endl;
-	}
+	}*/
 
 	// for each task in the not arrived list, see if it has arrived and if so move it to ready
 	for(it=this->not_arrived_list.begin(); it != this->not_arrived_list.end(); )
