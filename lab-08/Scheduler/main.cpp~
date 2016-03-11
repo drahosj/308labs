@@ -95,23 +95,27 @@ int main(int argc, const char * argv[])
 {
 	Simulator simulator;
 
-	
-	// install the scheduler module
 	module::Module mod("../sched-fcfs.mod");
-
-	// open the task_list json file
 	ifstream task_list_file("task_list.json");
 	task_list_file.seekg(0, task_list_file.end);
 	int length = task_list_file.tellg();
 	task_list_file.seekg(0, task_list_file.beg);
-	char * buf = new char [length];
-	task_list_file.read(buf, length);
-	task_list_file.close();
 
-	// parse the task_list_file
+	char * buf = new char [length];
+
+	task_list_file.read(buf, length);
+
+	//const char* buf = "{\"name\": \"task name\",\"priority\": 1,\"arrive-time\": 100,\"run-times\": [ 1,4,3,5],\"block-times\": [2,3,1],\"deadline\":  125}";
+	//size_t len = strlen(buf);
+
 	json_value * task_list = json_parse(buf, length);
 
-	// add the task list to the simulator
+	//int length, x;
+	length = task_list->u.object.length;
+	cout << "length=" << length << endl;
+	cout << "name=" << task_list->u.object.values[0].name;
+	//make_task_list(task_list->u.object.values[0].value, list);
+
 	simulator.MakeTaskList(task_list->u.object.values[0].value);
 
 	for(int i=0;i<5;i++)

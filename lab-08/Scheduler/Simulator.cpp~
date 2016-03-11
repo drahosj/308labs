@@ -16,7 +16,8 @@ Simulator::Simulator()
 	this->wave_running = this->wave_root.AddSignal("Running");
 	this->running_task = 0;
 	this->num_tasks = 0;
-	this->sys_time = 0; 
+	this->sys_time = 0;
+//	this->wave_running = 
 }
 
 Simulator::~Simulator() {
@@ -46,27 +47,10 @@ void Simulator::RunTick()
 {
 	std::list<SimTask*>::iterator it;
 
-
-	// for each task in system
-	// call OnTick(sys_time)
-		// Task handels own lifecycle by calling scheduler directly
-		// returns its state (not_arrived, ready, running, blocked, finished);
-
-
-
-
-
-
-
-
-
-
-
-
-	/*for(std::list<SimTask*>::iterator it = not_arrived_list.begin(); it != not_arrived_list.end(); ++it)
+	for(std::list<SimTask*>::iterator it = not_arrived_list.begin(); it != not_arrived_list.end(); ++it)
 	{
 		std::cout << (*it)->name << std::endl;
-	}*/
+	}
 
 	// for each task in the not arrived list, see if it has arrived and if so move it to ready
 	for(it=this->not_arrived_list.begin(); it != this->not_arrived_list.end(); )

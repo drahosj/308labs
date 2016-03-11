@@ -8,7 +8,7 @@
 #include "SchedulerAlgorithm.h"
 
 SchedulerAlgorithm::SchedulerAlgorithm(std::string _name, const struct scheduler_operations * _sops)
-	: name(_name), sops(_sops), ticks(0)
+	: name(_name), sops(_sops), ticks(0), handle(0)
 {
 
 }

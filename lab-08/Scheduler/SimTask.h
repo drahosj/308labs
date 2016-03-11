@@ -45,7 +45,7 @@ private:
 	unsigned long deadline;
 	unsigned long times[20];
 	int num_runs;
-	Task * task = 0;
+	Task * task;
 
 	wavedrom::Signal* wave;
 };
