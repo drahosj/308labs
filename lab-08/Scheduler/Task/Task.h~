@@ -19,16 +19,16 @@ public:
 	virtual ~Task();
 
 	// called when this task blocks
-	void MoveBlocked();
+	//void MoveBlocked();
 
 	// called when this task is ready to run
-	void MoveReady();
+	//void MoveReady();
 
 	// called when this task is given the cpu
-	void MoveRunning();
+	//void MoveRunning();
 
 	// called on every system tick while the task is running
-	void RunTick();
+	//void RunTick();
 
 private:
 	struct task task;

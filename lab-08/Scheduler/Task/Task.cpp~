@@ -8,8 +8,6 @@
 //#include "Kernel.h"
 #include "Task.h"
 
-Task Task::idle_task("Idle", 0);
-
 Task::Task(std::string name, unsigned char priority) {
 	std::size_t len = name.copy(this->task_info.name, 128, 0);
 	this->task_info.name[len] = '\0';

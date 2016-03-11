@@ -16,7 +16,8 @@ Simulator::Simulator()
 	this->wave_running = this->wave_root.AddSignal("Running");
 	this->running_task = 0;
 	this->num_tasks = 0;
-	this->sys_time = 0; 
+	this->sys_time = 0;
+//	this->wave_running = 
 }
 
 Simulator::~Simulator() {
