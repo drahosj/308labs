@@ -32,12 +32,12 @@ private:
 	std::list<SimTask*> ready_list;
 	std::list<SimTask*> blocked_list;
 	std::list<SimTask*> finished_list;
-	SimTask* running_task = 0;
+	SimTask* running_task;
 
-	unsigned int num_tasks = 0;
-	unsigned int remaining_tasks = 0;
+	unsigned int num_tasks;
+	unsigned int remaining_tasks;
 
-	unsigned long sys_time = 0;
+	unsigned long sys_time;
 
 	wavedrom::Wavedrom wave_root;
 	wavedrom::Signal * wave_running;

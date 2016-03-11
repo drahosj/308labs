@@ -19,6 +19,7 @@
 
 using namespace std;
 
+/*
 static void print_depth_shift(int depth)
 {
         int j;
@@ -88,7 +89,7 @@ static void process_value(json_value* value, int depth)
                         printf("bool: %d\n", value->u.boolean);
                         break;
         }
-}
+}*/
 
 /*void make_task_list(json_value* array, list<SimTask> & list)
 {

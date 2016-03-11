@@ -32,7 +32,7 @@ private:
 	const struct scheduler_operations * sops;
 	unsigned long ticks;
 
-	int handle = 0;
+	int handle;
 };
 
 

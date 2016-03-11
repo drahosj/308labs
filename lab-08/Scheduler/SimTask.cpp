@@ -83,13 +83,15 @@ SimTask::SimTask(json_value * task, wavedrom::Group * wave_grp)
 
 	this->wave = wave_grp->AddSignal(this->name.c_str());
 
-	std::cout << "name: " << this->name << std::endl;
-	std::cout << "prior: " << this->priority << std::endl;
-	std::cout << "arrive: " << this->next_arrival_time << std::endl;
-	std::cout << "times: ";
-	for(int i=0;i<this->num_runs * 2;i++) std::cout << this->times[i] << ", ";
-	std::cout << std::endl;
-	std::cout << "deadline: " << this->deadline << std::endl;
+	this->task = 0;
+
+//	std::cout << "name: " << this->name << std::endl;
+//	std::cout << "prior: " << this->priority << std::endl;
+//	std::cout << "arrive: " << this->next_arrival_time << std::endl;
+//	std::cout << "times: ";
+//	for(int i=0;i<this->num_runs * 2;i++) std::cout << this->times[i] << ", ";
+//	std::cout << std::endl;
+//	std::cout << "deadline: " << this->deadline << std::endl;
 }
 
 
@@ -124,3 +126,12 @@ bool SimTask::IsFinished()
 	return false;
 }
 
+void SimTask::SwapIn(unsigned long sys_time)
+{
+
+}
+
+void SimTask::SwapOut(unsigned long sys_time)
+{
+
+}

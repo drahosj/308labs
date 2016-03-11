@@ -13,7 +13,7 @@ $(EXE): $(CPPOBJ) $(COBJ)
 	g++ -rdynamic -ldl -o $@ $^
 
 %.cpp.o: %.cpp
-	g++ -std=c++11 -g -o $@ -c $<
+	g++ -std=c++0x -g -o $@ -c $<
 
 %.c.o: %.c
 	gcc -o $@ -c $<

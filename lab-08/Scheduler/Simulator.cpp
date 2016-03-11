@@ -10,16 +10,14 @@
 #include "Scheduler/Scheduler.h"
 #include "Simulator.h"
 
-/*
-std::list<SimTask*> not_arrived_list;
-	std::list<SimTask*> ready_list;
-	std::list<SimTask*> blocked_list;
-	std::list<SimTask*> finished_list;
-*/
 Simulator::Simulator()
 {
 	// TODO Auto-generated constructor stub
 	this->wave_root.AddSignal("Running");
+	this->running_task = 0;
+	this->num_tasks = 0;
+	this->sys_time = 0;
+//	this->wave_running = 
 }
 
 Simulator::~Simulator() {
@@ -38,10 +36,6 @@ void Simulator::MakeTaskList(json_value * array)
 
 	this->not_arrived_list.sort();
 
-//	for(std::list<SimTask*>::iterator it = not_arrived_list.begin(); it != not_arrived_list.end(); ++it)
-//	{
-//		std::cout << (*it)->name << std::endl;
-//	}
 }
 
 bool Simulator::IsDone()
