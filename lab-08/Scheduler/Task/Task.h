@@ -12,11 +12,20 @@
 #include "Context.h"
 #include "../task.h"
 
-class Task {
+class Task : public Context{
 	friend class Scheduler;
 public:
-	Task(std::string name, unsigned char priority);
+	//Task(std::string name, unsigned char priority);
+	Task();
 	virtual ~Task();
+
+	void OnArrive(unsigned long sys_time);
+
+	void SetPriority(int p);
+
+	void SetName(std::string name);
+
+	void SetDeadline(unsigned long t);
 
 	// called when this task blocks
 	void MoveBlocked();
@@ -33,11 +42,11 @@ public:
 private:
 	struct task task;
 	struct task_info task_info;
-	Context * context;
+	//Context * context;
 
 	/// The system idle task.  This task is never added to the scheduler queue,
-	/// but will be run anytime the scheduler has nothing else to run
-	static Task idle_task;
+	/// but will be run any time the scheduler has nothing else to run
+	//static Task idle_task;
 };
 
 #endif /* TASK_H_ */

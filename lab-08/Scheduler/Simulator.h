@@ -31,7 +31,7 @@ public:
 	void ExportWaveform(std::ofstream& out);
 
 private:
-	std::list<SimTask*> not_arrived_list;
+	std::list<SimTask*> sim_task_list;
 	std::list<SimTask*> ready_list;
 	std::list<SimTask*> blocked_list;
 	std::list<SimTask*> finished_list;

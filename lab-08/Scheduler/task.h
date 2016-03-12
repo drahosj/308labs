@@ -31,6 +31,9 @@ struct task_info
 	/// The time the task was first created
 	unsigned long time_arive;
 
+	/// The time the task must be completely finished by
+	unsigned long deadline;
+
 	enum task_state
 	{
 		/// The task is currently running on the CPU

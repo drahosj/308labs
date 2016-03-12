@@ -18,6 +18,7 @@ namespace NODE
 		UP = 'u',
 		DOWN = 'd',
 		CONTINUE = '.',
+		X = 'x',
 		PCLK = 'p',
 		PCLK_ARROW = 'P',
 		NCLK = 'n',
@@ -57,7 +58,7 @@ public:
 	 * @param      name
 	 *                  The name of the node to add.
 	 */
-	void AddNode(enum NODE::node_data_type type, const char * name);
+	void AddNode(enum NODE::node_data_type type, const char * name = "");
 	/**
 	 * @brief      Continue the previously created node n more times
 	 * @param      n
