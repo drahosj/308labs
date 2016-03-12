@@ -8,17 +8,16 @@
 //#include "Kernel.h"
 #include "Task.h"
 
-Task Task::idle_task("Idle", 0);
+//Task Task::idle_task("Idle", 0);
 
-Task::Task(std::string name, unsigned char priority) {
-	std::size_t len = name.copy(this->task_info.name, 128, 0);
-	this->task_info.name[len] = '\0';
-	this->task_info.priority = priority;
-//	this->task_info.time_arive = Kernel::GetSysTime();
+
+
+Task::Task() {
 	this->task_info.block_time = 0;
 	this->task_info.run_time = 0;
 	this->task_info.state = task_info::TASK_READY;
 	this->task_info.parrent = (void*) this;
+	this->task_info.deadline = 0;
 
 	this->task.task_info = &this->task_info;
 	this->task.next = 0;
@@ -28,6 +27,27 @@ Task::Task(std::string name, unsigned char priority) {
 
 Task::~Task() {
 	// TODO Auto-generated destructor stub
+}
+
+void Task::OnArrive(unsigned long sys_time)
+{
+	this->task_info.time_arive = sys_time;
+}
+
+void Task::SetPriority(int p)
+{
+	this->task_info.priority = p;
+}
+
+void Task::SetName(std::string name)
+{
+	std::size_t len = name.copy(this->task_info.name, 128, 0);
+	this->task_info.name[len] = '\0';
+}
+
+void Task::SetDeadline(unsigned long t)
+{
+	this->task_info.deadline = t;
 }
 
 void Task::MoveBlocked()

@@ -18,8 +18,19 @@
 
 
 
-class SimTask : public Context {
+class SimTask : public Task {
 public:
+
+	enum State
+	{
+		INIT,
+		NOT_ARRIVED,
+		READY,
+		RUNNING,
+		BLOCKED,
+		FINISHED
+	};
+
 	SimTask(json_value * task, wavedrom::Group * wave_grp);
 	virtual ~SimTask();
 
@@ -27,11 +38,10 @@ public:
 
 	bool operator < (const SimTask&);
 
-	void OnReady(unsigned long sys_time);
-	void OnBlock(unsigned long sys_time);
+	//void OnReady(unsigned long sys_time);
+	//void OnBlock(unsigned long sys_time);
 	void OnRunTick(unsigned long sys_time);
 	bool IsFinished();
-	std::string name;
 
 	// From Context
 	/// This is called by the scheduler when this task will be given time on the processor
@@ -39,13 +49,24 @@ public:
 	/// This is called by the scheduler when this task is being taken out of the processor
 	virtual void SwapOut(unsigned long sys_time);
 
+	void OnStartTick(unsigned long sys_time);
+	void OnSysTick(unsigned long sys_time);
+	void OnEndTick(unsigned long sys_time);
+
 private:
 	int priority;
 	unsigned long next_arrival_time;
 	unsigned long deadline;
 	unsigned long times[20];
+	int times_index;
 	int num_runs;
 	Task * task;
+	std::string name;
+
+	enum State state;
+	enum State last_state;
+
+	bool remove_flag;
 
 	wavedrom::Signal* wave;
 };

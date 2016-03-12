@@ -72,11 +72,11 @@ void Scheduler::AddTask(Task* task, unsigned long sys_time)
 	if(new_task != &Scheduler::running_task->task)
 	{
 		if(Scheduler::running_task)
-			Scheduler::running_task->context->SwapOut(sys_time);
+			Scheduler::running_task->SwapOut(sys_time);
 		if(new_task)
 		{
 			Scheduler::running_task = (Task*)new_task->task_info->parrent;
-			Scheduler::running_task->context->SwapIn(sys_time);
+			Scheduler::running_task->SwapIn(sys_time);
 		}
 		else
 		{
@@ -88,12 +88,12 @@ void Scheduler::AddTask(Task* task, unsigned long sys_time)
 void Scheduler::RemoveTask(unsigned long sys_time)
 {
 	struct task* new_task;
-	Scheduler::running_task->context->SwapOut(sys_time);
+	Scheduler::running_task->SwapOut(sys_time);
 	new_task = Scheduler::algorithm->DequeueTask(&Scheduler::running_task->task);
 	if(new_task)
 	{
 		Scheduler::running_task = (Task*)new_task->task_info->parrent;
-		Scheduler::running_task->context->SwapIn(sys_time);
+		Scheduler::running_task->SwapIn(sys_time);
 	}
 	else
 	{
@@ -108,11 +108,11 @@ void Scheduler::OnSysTick(unsigned long sys_time)
 	if(new_task != &Scheduler::running_task->task)
 	{
 		if(Scheduler::running_task)
-			Scheduler::running_task->context->SwapOut(sys_time);
+			Scheduler::running_task->SwapOut(sys_time);
 		if(new_task)
 		{
 			Scheduler::running_task = (Task*)new_task->task_info->parrent;
-			Scheduler::running_task->context->SwapIn(sys_time);
+			Scheduler::running_task->SwapIn(sys_time);
 		}
 		else
 		{

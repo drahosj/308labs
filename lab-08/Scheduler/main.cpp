@@ -114,11 +114,12 @@ int main(int argc, const char * argv[])
 	// add the task list to the simulator
 	simulator.MakeTaskList(task_list->u.object.values[0].value);
 
-	for(int i=0;i<5;i++)
-	//while(!simulator.IsDone())
+	//for(int i=0;i<100;i++)
+	while(!simulator.IsDone())
 	{
 		simulator.RunTick();
 	}
+	simulator.RunTick(); // run one last tick to close all the task ends.
 
 	ofstream out("wave.json");
 	simulator.ExportWaveform(out);
