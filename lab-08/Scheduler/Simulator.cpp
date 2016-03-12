@@ -22,6 +22,15 @@ Simulator::Simulator()
 
 Simulator::~Simulator() {
 	// TODO Auto-generated destructor stub
+	for(auto it=this->sim_task_list.begin(); it != this->sim_task_list.end();++it)
+	{
+		delete *it;
+	}
+
+	for(auto it=this->finished_list.begin(); it != this->finished_list.end();++it)
+	{
+		delete *it;
+	}
 }
 
 void Simulator::MakeTaskList(json_value * array)
@@ -49,11 +58,6 @@ void Simulator::RunTick()
 	static SimTask* running_task = 0;
 	SimTask* last_running_task = running_task;
 	running_task = 0;
-	// for each task in system
-	// call OnTick(sys_time)
-		// Task handels own lifecycle by calling scheduler directly
-		// returns its state (not_arrived, ready, running, blocked, finished);
-
 
 	for(it=this->sim_task_list.begin(); it != this->sim_task_list.end();++it)
 	{
@@ -112,14 +116,11 @@ void Simulator::RunTick()
 	{
 		this->wave_running->AddNode(wavedrom::NODE::WHITE, running_task->GetName().c_str());
 	}
-	//else
-	//{
-	//	this->wave_running->AddNode(wavedrom::NODE::Z);
-	//}
 }
 
 void Simulator::ExportWaveform(std::ofstream& out)
 {
 	char * buf = this->wave_root.Export();
 	out << std::string(buf);
+	delete[] buf;
 }

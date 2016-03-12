@@ -8,99 +8,145 @@
 #include <iostream>
 #include <fstream>
 #include <string.h>
-#include <list>
+#include <sstream>
+
+#include <argp.h>
 
 #include "Simulator.h"
-#include "SimTask.h"
 #include "libmodule/Module.h"
-
-#include <stdio.h>
 #include "libjson/json.h"
+
+
 
 using namespace std;
 
-/*
-static void print_depth_shift(int depth)
+
+const char *argp_program_version = "Scheduling Simulator 1.0.0";
+const char *argp_program_bug_address = "https://github.com/CprE308/lab-08/issues";
+static char doc[] = "Scheduling Simulator for CprE 308";
+static char args_doc[] = "";
+
+static struct argp_option options[] = {
+		{"verbose", 'v', 0, 0, "Produce verbose output"},
+		{"algorithm", 'a', "alg.mod", 0, "The algorithm to simulate"},
+		{"tasks", 't', "list.json", 0, "The task list workload to simulate"},
+		{"wave", 'w', "wave.json", 0, "The name of the output waveform file"},
+		{"log", 'l', "out.log", 0, "The name of the output log file"},
+		{"config", 'c', "FILE", 0, "Config file to use"},
+		{ 0 }
+};
+
+static struct arguments
 {
-        int j;
-        for (j=0; j < depth; j++) {
-                printf(" ");
-        }
+	bool verbose;
+	std::string algorithm;
+	std::string tasks;
+	std::string wave;
+	std::string log;
+	std::string cfg;
+}args;
+
+static void args_default(struct arguments *args)
+{
+	args->verbose = false;
+	args->algorithm = std::string("alg.mod");
+	args->tasks = std::string("tasks.json");
+	args->wave = std::string("wave.json");
+	args->log = std::string("out.log");
 }
 
-static void process_value(json_value* value, int depth);
-
-static void process_object(json_value* value, int depth)
+static void config_parse(std::string& file, struct arguments* args)
 {
-        int length, x;
-        if (value == NULL) {
-                return;
-        }
-        length = value->u.object.length;
-        for (x = 0; x < length; x++) {
-                print_depth_shift(depth);
-                printf("object[%d].name = %s\n", x, value->u.object.values[x].name);
-                process_value(value->u.object.values[x].value, depth+1);
-        }
+	std::ifstream cfg(file);
+	if(cfg.is_open())
+	{
+		std::string line;
+		while(std::getline(cfg, line))
+		{
+			std::istringstream is_line(line);
+			std::string key;
+			if(std::getline(is_line, key, '='))
+			{
+				std::string value;
+				if(std::getline(is_line, value))
+				{
+					if(key == "algorithm")
+						args->algorithm = value;
+					else if(key == "tasks")
+						args->tasks = value;
+					else if(key == "wave")
+						args->wave = value;
+					else if(key == "log")
+						args->wave = value;
+				}
+			}
+		}
+	}
+	else
+	{
+		std::cerr << "Failed to open config file " << file << std::endl;
+	}
 }
 
-static void process_array(json_value* value, int depth)
+static error_t parse_opt (int key, char *arg, struct argp_state * state)
 {
-        int length, x;
-        if (value == NULL) {
-                return;
-        }
-        length = value->u.array.length;
-        printf("array\n");
-        for (x = 0; x < length; x++) {
-                process_value(value->u.array.values[x], depth);
-        }
+	struct arguments * arguments = (struct arguments*)state->input;
+	switch (key)
+	{
+	case 'v':
+		arguments->verbose = true;
+		break;
+	case 'a':
+		arguments->algorithm = std::string(arg);
+		break;
+	case 't':
+		arguments->tasks = std::string(arg);
+		break;
+	case 'w':
+		arguments->wave = std::string(arg);
+		break;
+	case 'l':
+		arguments->log = std::string(arg);
+		break;
+	case 'c':
+		arguments->cfg = std::string(arg);
+		break;
+	case ARGP_KEY_ARG:
+		// too many arguments
+		break;
+	case ARGP_KEY_END:
+		break;
+	default:
+		return ARGP_ERR_UNKNOWN;
+	}
 }
 
-static void process_value(json_value* value, int depth)
-{
-        int j;
-        if (value == NULL) {
-                return;
-        }
-        if (value->type != json_object) {
-                print_depth_shift(depth);
-        }
-        switch (value->type) {
-                case json_none:
-                        printf("none\n");
-                        break;
-                case json_object:
-                        process_object(value, depth+1);
-                        break;
-                case json_array:
-                        process_array(value, depth+1);
-                        break;
-                case json_integer:
-                        printf("int: %10" PRId64 "\n", value->u.integer);
-                        break;
-                case json_double:
-                        printf("double: %f\n", value->u.dbl);
-                        break;
-                case json_string:
-                        printf("string: %s\n", value->u.string.ptr);
-                        break;
-                case json_boolean:
-                        printf("bool: %d\n", value->u.boolean);
-                        break;
-        }
-}*/
+static struct argp argp = {options, parse_opt, args_doc, doc };
 
-int main(int argc, const char * argv[])
+int main(int argc, char * argv[])
 {
 	Simulator simulator;
 
-	
+	args_default(&args);
+	argp_parse(&argp, argc, argv, 0, 0, &args);
+	if(args.cfg.size() > 0)
+	{
+		config_parse(args.cfg, &args);
+	}
+
+	if(args.verbose)
+	{
+		std::cout << "Algorithm = " << args.algorithm << std::endl;
+		std::cout << "Tasks = " << args.tasks << std::endl;
+		std::cout << "Wave = " << args.wave << std::endl;
+		std::cout << "Log = " << args.log << std::endl;
+	}
+
 	// install the scheduler module
-	module::Module mod("../sched-fcfs.mod");
+	module::Module* mod = new module::Module(args.algorithm);
 
 	// open the task_list json file
-	ifstream task_list_file("task_list.json");
+	ifstream task_list_file(args.tasks);
 	task_list_file.seekg(0, task_list_file.end);
 	int length = task_list_file.tellg();
 	task_list_file.seekg(0, task_list_file.beg);
@@ -111,24 +157,28 @@ int main(int argc, const char * argv[])
 	// parse the task_list_file
 	json_value * task_list = json_parse(buf, length);
 
+	delete[] buf;
+
 	// add the task list to the simulator
 	simulator.MakeTaskList(task_list->u.object.values[0].value);
 
-	//for(int i=0;i<100;i++)
+	json_value_free(task_list);
+
+	// run the simulator
 	while(!simulator.IsDone())
 	{
 		simulator.RunTick();
 	}
 	simulator.RunTick(); // run one last tick to close all the task ends.
 
-	ofstream out("wave.json");
+	// create the output file
+	ofstream out(args.wave);
 	simulator.ExportWaveform(out);
+	out.close();
 
-	//process_value(task, 0);
-
-	//SimTask t(task);
-
-	std::cout << "Hello World" << std::endl;
+	mod->Remove();
+	delete mod;
+//	std::cout << "Hello World" << std::endl;
 	return 0;
 }
 

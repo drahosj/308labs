@@ -1,0 +1,112 @@
+==8595== Memcheck, a memory error detector
+==8595== Copyright (C) 2002-2015, and GNU GPL'd, by Julian Seward et al.
+==8595== Using Valgrind-3.11.0 and LibVEX; rerun with -h for copyright info
+==8595== Command: ./main
+==8595== 
+--8595-- Valgrind options:
+--8595--    --leak-check=full
+--8595--    --show-leak-kinds=all
+--8595--    -v
+--8595-- Contents of /proc/version:
+--8595--   Linux version 4.4.3-1-ARCH (builduser@tobias) (gcc version 5.3.0 (GCC) ) #1 SMP PREEMPT Fri Feb 26 15:09:29 CET 2016
+--8595-- 
+--8595-- Arch and hwcaps: AMD64, LittleEndian, amd64-cx16-lzcnt-rdtscp-sse3-avx-avx2-bmi
+--8595-- Page sizes: currently 4096, max supported 4096
+--8595-- Valgrind library directory: /usr/lib/valgrind
+--8595-- Reading syms from /home/vens/Teaching/2016/lab-08/lab-08/Scheduler/main
+--8595-- Reading syms from /usr/lib/ld-2.23.so
+--8595-- Reading syms from /usr/lib/valgrind/memcheck-amd64-linux
+--8595--    object doesn't have a symbol table
+--8595--    object doesn't have a dynamic symbol table
+--8595-- Scheduler: using generic scheduler lock implementation.
+--8595-- Reading suppressions file: /usr/lib/valgrind/default.supp
+==8595== embedded gdbserver: reading from /tmp/vgdb-pipe-from-vgdb-to-8595-by-vens-on-???
+==8595== embedded gdbserver: writing to   /tmp/vgdb-pipe-to-vgdb-from-8595-by-vens-on-???
+==8595== embedded gdbserver: shared mem   /tmp/vgdb-pipe-shared-mem-vgdb-8595-by-vens-on-???
+==8595== 
+==8595== TO CONTROL THIS PROCESS USING vgdb (which you probably
+==8595== don't want to do, unless you know exactly what you're doing,
+==8595== or are doing some strange experiment):
+==8595==   /usr/lib/valgrind/../../bin/vgdb --pid=8595 ...command...
+==8595== 
+==8595== TO DEBUG THIS PROCESS USING GDB: start GDB like this
+==8595==   /path/to/gdb ./main
+==8595== and then give GDB the following command
+==8595==   target remote | /usr/lib/valgrind/../../bin/vgdb --pid=8595
+==8595== --pid is optional if only one valgrind process is running
+==8595== 
+--8595-- REDIR: 0x401a970 (ld-linux-x86-64.so.2:strlen) redirected to 0x3809e1b1 (???)
+--8595-- Reading syms from /usr/lib/valgrind/vgpreload_core-amd64-linux.so
+--8595--    object doesn't have a symbol table
+--8595-- Reading syms from /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so
+--8595--    object doesn't have a symbol table
+==8595== WARNING: new redirection conflicts with existing -- ignoring it
+--8595--     old: 0x0401a970 (strlen              ) R-> (0000.0) 0x3809e1b1 ???
+--8595--     new: 0x0401a970 (strlen              ) R-> (2007.0) 0x04c2dc60 strlen
+--8595-- REDIR: 0x40192c0 (ld-linux-x86-64.so.2:index) redirected to 0x4c2d800 (index)
+--8595-- REDIR: 0x40194e0 (ld-linux-x86-64.so.2:strcmp) redirected to 0x4c2ed10 (strcmp)
+--8595-- Reading syms from /usr/lib/libdl-2.23.so
+--8595--    object doesn't have a symbol table
+--8595-- Reading syms from /usr/lib/libstdc++.so.6.0.21
+--8595-- Reading syms from /usr/lib/libm-2.23.so
+--8595--    object doesn't have a symbol table
+--8595-- Reading syms from /usr/lib/libgcc_s.so.1
+--8595-- Reading syms from /usr/lib/libc-2.23.so
+--8595-- REDIR: 0x59597e0 (libc.so.6:strcasecmp) redirected to 0x4a266be (_vgnU_ifunc_wrapper)
+--8595-- REDIR: 0x5955160 (libc.so.6:strcspn) redirected to 0x4a266be (_vgnU_ifunc_wrapper)
+--8595-- REDIR: 0x595bad0 (libc.so.6:strncasecmp) redirected to 0x4a266be (_vgnU_ifunc_wrapper)
+--8595-- REDIR: 0x59575f0 (libc.so.6:strpbrk) redirected to 0x4a266be (_vgnU_ifunc_wrapper)
+--8595-- REDIR: 0x5957980 (libc.so.6:strspn) redirected to 0x4a266be (_vgnU_ifunc_wrapper)
+--8595-- REDIR: 0x5958f2a (libc.so.6:memcpy@GLIBC_2.2.5) redirected to 0x4a266be (_vgnU_ifunc_wrapper)
+--8595-- REDIR: 0x5957300 (libc.so.6:rindex) redirected to 0x4c2d4e0 (rindex)
+--8595-- REDIR: 0x594f8d0 (libc.so.6:malloc) redirected to 0x4c2ab49 (malloc)
+--8595-- REDIR: 0x5955620 (libc.so.6:strlen) redirected to 0x4c2dba0 (strlen)
+--8595-- REDIR: 0x59589d0 (libc.so.6:__GI_memcmp) redirected to 0x4c307d0 (__GI_memcmp)
+--8595-- REDIR: 0x5953bb0 (libc.so.6:strcmp) redirected to 0x4a266be (_vgnU_ifunc_wrapper)
+--8595-- REDIR: 0x5964f20 (libc.so.6:__strcmp_sse2_unaligned) redirected to 0x4c2ebd0 (strcmp)
+--8595-- REDIR: 0x50c7dd0 (libstdc++.so.6:operator new(unsigned long)) redirected to 0x4c2b051 (operator new(unsigned long))
+--8595-- REDIR: 0x595e1e0 (libc.so.6:memcpy@@GLIBC_2.14) redirected to 0x4a266be (_vgnU_ifunc_wrapper)
+--8595-- REDIR: 0x59fde50 (libc.so.6:__memcpy_avx_unaligned) redirected to 0x4c2f0e0 (memcpy@@GLIBC_2.14)
+--8595-- REDIR: 0x5950360 (libc.so.6:calloc) redirected to 0x4c2c8b1 (calloc)
+--8595-- REDIR: 0x5950080 (libc.so.6:realloc) redirected to 0x4c2ca53 (realloc)
+--8595-- Reading syms from /home/vens/Teaching/2016/lab-08/lab-08/Algorithms/fcfs/sched-fcfs.mod
+[34mRegistered scheduler FCFS
+[0m--8595-- REDIR: 0x50c5e90 (libstdc++.so.6:operator delete(void*)) redirected to 0x4c2c07d (operator delete(void*))
+--8595-- REDIR: 0x5957f60 (libc.so.6:__GI_strstr) redirected to 0x4c32110 (__strstr_sse2)
+--8595-- REDIR: 0x50c7e80 (libstdc++.so.6:operator new[](unsigned long)) redirected to 0x4c2b6f6 (operator new[](unsigned long))
+--8595-- REDIR: 0x50c5ec0 (libstdc++.so.6:operator delete[](void*)) redirected to 0x4c2c52d (operator delete[](void*))
+--8595-- REDIR: 0x594ffe0 (libc.so.6:free) redirected to 0x4c2bc63 (free)
+--8595-- REDIR: 0x595e260 (libc.so.6:__GI_memcpy) redirected to 0x4c2f740 (__GI_memcpy)
+--8595-- REDIR: 0x5958990 (libc.so.6:bcmp) redirected to 0x4a266be (_vgnU_ifunc_wrapper)
+--8595-- REDIR: 0x5a1e3e0 (libc.so.6:__memcmp_sse4_1) redirected to 0x4c30910 (__memcmp_sse4_1)
+--8595-- REDIR: 0x59fd960 (libc.so.6:__memmove_avx_unaligned) redirected to 0x4c2ee70 (memcpy@GLIBC_2.2.5)
+--8595-- Discarding syms at 0x6078860-0x6078b31 in /home/vens/Teaching/2016/lab-08/lab-08/Algorithms/fcfs/sched-fcfs.mod due to munmap()
+==8595== 
+==8595== HEAP SUMMARY:
+==8595==     in use at exit: 72,704 bytes in 1 blocks
+==8595==   total heap usage: 285 allocs, 284 frees, 107,343 bytes allocated
+==8595== 
+==8595== Searching for pointers to 1 not-freed blocks
+==8595== Checked 110,392 bytes
+==8595== 
+==8595== 72,704 bytes in 1 blocks are still reachable in loss record 1 of 1
+==8595==    at 0x4C2ABD0: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==8595==    by 0x50C3E7F: pool (eh_alloc.cc:117)
+==8595==    by 0x50C3E7F: __static_initialization_and_destruction_0 (eh_alloc.cc:244)
+==8595==    by 0x50C3E7F: _GLOBAL__sub_I_eh_alloc.cc (eh_alloc.cc:307)
+==8595==    by 0x400F3B9: call_init.part.0 (in /usr/lib/ld-2.23.so)
+==8595==    by 0x400F4CA: _dl_init (in /usr/lib/ld-2.23.so)
+==8595==    by 0x4000DC9: ??? (in /usr/lib/ld-2.23.so)
+==8595== 
+==8595== LEAK SUMMARY:
+==8595==    definitely lost: 0 bytes in 0 blocks
+==8595==    indirectly lost: 0 bytes in 0 blocks
+==8595==      possibly lost: 0 bytes in 0 blocks
+==8595==    still reachable: 72,704 bytes in 1 blocks
+==8595==         suppressed: 0 bytes in 0 blocks
+==8595== 
+==8595== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 1 from 1)
+--8595-- 
+--8595-- used_suppression:      1 dl-hack3-cond-1 /usr/lib/valgrind/default.supp:1218
+==8595== 
+==8595== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 1 from 1)

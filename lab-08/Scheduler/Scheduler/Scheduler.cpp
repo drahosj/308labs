@@ -52,6 +52,8 @@ int Scheduler::RegisterAlgorithm(SchedulerAlgorithm *algorithm)
 
 int Scheduler::UnregisterAlgorithm(int handle)
 {
+	delete Scheduler::algorithm;
+	Scheduler::algorithm = 0;
 	/*for(std::vector<SchedulerAlgorithm*>::iterator it = Scheduler::algorithm_list.begin(); it != Scheduler::algorithm_list.end(); ++it)
 	{
 		if((*it)->handle == handle)
@@ -61,7 +63,8 @@ int Scheduler::UnregisterAlgorithm(int handle)
 		}
 	}*/
 
-	return -1;
+
+	return 0;
 }
 
 void Scheduler::AddTask(Task* task, unsigned long sys_time)

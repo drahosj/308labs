@@ -4,7 +4,7 @@
 "priority": 1,
 "arrive-time": 1,
 "run-times": [ 1,4,3,5],
-"block-times": [2,3,1],
+"block-times": [2,3,7],
 "deadline":  125
 },
 {
@@ -12,7 +12,7 @@
 "priority": 1,
 "arrive-time": 2,
 "run-times": [ 1,4,3,5],
-"block-times": [2,3,1],
+"block-times": [2,3,5],
 "deadline":  125
 },
 {
@@ -20,7 +20,7 @@
 "priority": 1,
 "arrive-time": 2,
 "run-times": [ 1,4,3,5],
-"block-times": [2,3,1],
+"block-times": [2,3,2],
 "deadline":  125
 }
 ]}

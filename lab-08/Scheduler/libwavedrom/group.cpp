@@ -17,6 +17,14 @@ Group::Group(const char * name)
 	this->name = name;
 }
 
+Group::~Group()
+{
+	for(auto it=children.begin(); it != children.end(); ++it)
+	{
+		delete *it;
+	}
+}
+
 Group* Group::AddGroup(const char * name)
 {
 	Group *g = new Group(name);

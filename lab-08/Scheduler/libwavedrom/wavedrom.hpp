@@ -32,6 +32,9 @@ public:
 	 * @brief      Create a new wavedrom object.
 	 */
 	Wavedrom();
+
+	virtual ~Wavedrom();
+
 	/**
 	 * @brief      Export this wavedrom object to a Wavedrom JSON format
 	 * @details    This will allocate a new c string containing a valid

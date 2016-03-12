@@ -14,8 +14,10 @@ namespace module {
 
 class Module {
 public:
-	Module(const std::string name);
+	Module(const std::string& name);
 	virtual ~Module();
+
+	void Remove();
 
 private:
 	std::string module_name;

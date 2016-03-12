@@ -51,7 +51,7 @@ protected:
 	/**
 	 * @brief      Destroy this group and all of its children
 	 */
-	virtual ~Group() {};
+	virtual ~Group();
 
 private:
 	/**
