@@ -42,6 +42,8 @@ public:
 	//void OnBlock(unsigned long sys_time);
 	void OnRunTick(unsigned long sys_time);
 	bool IsFinished();
+	bool IsRunning();
+	std::string& GetName();
 
 	// From Context
 	/// This is called by the scheduler when this task will be given time on the processor

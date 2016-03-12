@@ -46,8 +46,9 @@ bool Simulator::IsDone()
 void Simulator::RunTick()
 {
 	std::list<SimTask*>::iterator it;
-
-
+	static SimTask* running_task = 0;
+	SimTask* last_running_task = running_task;
+	running_task = 0;
 	// for each task in system
 	// call OnTick(sys_time)
 		// Task handels own lifecycle by calling scheduler directly
@@ -70,6 +71,10 @@ void Simulator::RunTick()
 	for(it=this->sim_task_list.begin(); it != this->sim_task_list.end();++it)
 	{
 		SimTask* this_task = *it;
+		if(this_task->IsRunning())
+		{
+			running_task = this_task;
+		}
 		this_task->OnSysTick(this->sys_time);
 	}
 
@@ -95,6 +100,22 @@ void Simulator::RunTick()
 		}
 	}
 
+	if(running_task == 0)
+	{
+		this->wave_running->AddNode(wavedrom::NODE::Z);
+	}
+	else if(running_task == last_running_task)
+	{
+		this->wave_running->ContinueNode();
+	}
+	else if(running_task)
+	{
+		this->wave_running->AddNode(wavedrom::NODE::WHITE, running_task->GetName().c_str());
+	}
+	//else
+	//{
+	//	this->wave_running->AddNode(wavedrom::NODE::Z);
+	//}
 }
 
 void Simulator::ExportWaveform(std::ofstream& out)

@@ -132,6 +132,16 @@ bool SimTask::IsFinished()
 	return this->state == SimTask::FINISHED;
 }
 
+bool SimTask::IsRunning()
+{
+	return this->state == SimTask::RUNNING;
+}
+
+std::string& SimTask::GetName()
+{
+	return this->name;
+}
+
 //
 void SimTask::OnStartTick(unsigned long sys_time)
 {
@@ -197,10 +207,10 @@ void SimTask::OnSysTick(unsigned long sys_time)
 			this->wave->AddNode(wavedrom::NODE::X);
 			break;
 		case SimTask::RUNNING:
-			this->wave->AddNode(wavedrom::NODE::WHITE);
+			this->wave->AddNode(wavedrom::NODE::WHITE, this->name.c_str());
 			break;
 		case SimTask::BLOCKED:
-			this->wave->AddNode(wavedrom::NODE::RED);
+			this->wave->AddNode(wavedrom::NODE::RED, this->name.c_str());
 			break;
 		case SimTask::FINISHED:
 			this->wave->AddNode(wavedrom::NODE::LOW);
