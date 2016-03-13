@@ -33,18 +33,6 @@ struct task_info
 
 	/// The time the task must be completely finished by
 	unsigned long deadline;
-
-	enum task_state
-	{
-		/// The task is currently running on the CPU
-		TASK_RUNNING,
-		/// The task can be run on the CPU as soon as it is this tasks turn
-		TASK_READY,
-		/// The task is blocked waiting for some resource and cannot run
-		TASK_BLOCKED,
-		/// The task has finished running but hasn't yet been destroyed
-		TASK_ZOMBIE
-	} state;
 };
 
 struct task

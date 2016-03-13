@@ -42,9 +42,10 @@ struct task * SchedulerAlgorithm::OnTick(struct task * running_task)
 	if(this->sops->periodic_timer == 0)
 		return running_task;
 	this->ticks ++;
-	if(this->sops->period == this->ticks)
+	if(this->sops->period > 0 && this->sops->period == this->ticks)
 	{
-		return this->sops->periodic_timer(running_task, this->ticks);
+		this->ticks = 0;
+		return this->sops->periodic_timer(running_task);
 	}
 	return running_task;
 }

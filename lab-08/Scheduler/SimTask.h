@@ -38,12 +38,10 @@ public:
 
 	bool operator < (const SimTask&);
 
-	//void OnReady(unsigned long sys_time);
-	//void OnBlock(unsigned long sys_time);
-	void OnRunTick(unsigned long sys_time);
 	bool IsFinished();
 	bool IsRunning();
 	std::string& GetName();
+	int GetPriority() {return this->priority;};
 
 	// From Context
 	/// This is called by the scheduler when this task will be given time on the processor
@@ -51,8 +49,11 @@ public:
 	/// This is called by the scheduler when this task is being taken out of the processor
 	virtual void SwapOut(unsigned long sys_time);
 
+	/// called on this task at the beginning of every system tick
 	void OnStartTick(unsigned long sys_time);
+	/// called on this task during every system tick
 	void OnSysTick(unsigned long sys_time);
+	/// called on this task at the end of every system tick
 	void OnEndTick(unsigned long sys_time);
 
 private:
@@ -71,6 +72,7 @@ private:
 	bool remove_flag;
 
 	wavedrom::Signal* wave;
+	wavedrom::NODE::node_data_type color;
 };
 
 

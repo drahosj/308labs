@@ -70,6 +70,7 @@ static void config_parse(std::string& file, struct arguments* args)
 				std::string value;
 				if(std::getline(is_line, value))
 				{
+					std::cout << "key=" << key << ", value=" << value << std::endl;
 					if(key == "algorithm")
 						args->algorithm = value;
 					else if(key == "tasks")
@@ -77,7 +78,7 @@ static void config_parse(std::string& file, struct arguments* args)
 					else if(key == "wave")
 						args->wave = value;
 					else if(key == "log")
-						args->wave = value;
+						args->log = value;
 				}
 			}
 		}
@@ -94,6 +95,7 @@ static error_t parse_opt (int key, char *arg, struct argp_state * state)
 	switch (key)
 	{
 	case 'v':
+		std::cout << "setting verbose flag" << std::endl;
 		arguments->verbose = true;
 		break;
 	case 'a':
@@ -119,6 +121,7 @@ static error_t parse_opt (int key, char *arg, struct argp_state * state)
 	default:
 		return ARGP_ERR_UNKNOWN;
 	}
+	return 0;
 }
 
 static struct argp argp = {options, parse_opt, args_doc, doc };

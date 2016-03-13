@@ -27,7 +27,7 @@ struct scheduler_operations
 	/// Called periodically by the system.
 	/// @param r The currently running task
 	/// @param t The current system time in ticks
-	struct task * (*periodic_timer)(struct task* r, unsigned long t);
+	struct task * (*periodic_timer)(struct task* r);
 	/// The period of the calls to the timer method
 	unsigned long period;
 };

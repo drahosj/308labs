@@ -59,6 +59,7 @@ void Simulator::RunTick()
 	SimTask* last_running_task = running_task;
 	running_task = 0;
 
+	// run the OnStartTick for each task in the system
 	for(it=this->sim_task_list.begin(); it != this->sim_task_list.end();++it)
 	{
 		SimTask* this_task = *it;
@@ -66,28 +67,33 @@ void Simulator::RunTick()
 
 	}
 
-
+	// run the scheduler tick
 	Scheduler::OnSysTick(this->sys_time);
 
 	// advance the sys time to show the end of this tick
 	this->sys_time ++;
 
+	// run the system tick on every task in the system
 	for(it=this->sim_task_list.begin(); it != this->sim_task_list.end();++it)
 	{
 		SimTask* this_task = *it;
+		// if this is the task that ran this tick
 		if(this_task->IsRunning())
 		{
+			std::cout << "Running = " << this_task->GetName() << std::endl;
 			running_task = this_task;
 		}
 		this_task->OnSysTick(this->sys_time);
 	}
 
+	// run the system tick on every task that has finished
 	for(it=this->finished_list.begin(); it != this->finished_list.end(); ++it)
 	{
 		SimTask* this_task = *it;
 		this_task->OnSysTick(sys_time);
 	}
 
+	// run the on end tick for every task in the system
 	for(it=this->sim_task_list.begin(); it != this->sim_task_list.end();)
 	{
 		SimTask* this_task = *it;
@@ -97,6 +103,7 @@ void Simulator::RunTick()
 			it = this->sim_task_list.erase(it);
 			this->finished_list.push_back(this_task);
 			this->remaining_tasks --;
+			std::cout << "Finished " << this_task->GetName() << "Remaining=" << this->remaining_tasks << std::endl;
 		}
 		else
 		{
@@ -104,6 +111,7 @@ void Simulator::RunTick()
 		}
 	}
 
+	// print the running task info to the output wave
 	if(running_task == 0)
 	{
 		this->wave_running->AddNode(wavedrom::NODE::Z);
@@ -114,12 +122,60 @@ void Simulator::RunTick()
 	}
 	else if(running_task)
 	{
-		this->wave_running->AddNode(wavedrom::NODE::WHITE, running_task->GetName().c_str());
+		wavedrom::NODE::node_data_type color;
+		switch(running_task->GetPriority())
+		{
+		case 0:
+			// low prioirty
+			color = wavedrom::NODE::WHITE;
+			break;
+		case 1:
+			color = wavedrom::NODE::BLUE;
+			break;
+		case 2:
+			color = wavedrom::NODE::YELLOW;
+			break;
+		case 3:
+		default:
+			color = wavedrom::NODE::RED;
+			break;
+		}
+		this->wave_running->AddNode(color, running_task->GetName().c_str());
 	}
 }
 
-void Simulator::ExportWaveform(std::ofstream& out)
+void Simulator::ExportWaveform(std::ofstream& out, bool include_legend)
 {
+	if(include_legend)
+	{
+		wavedrom::Group* leg = this->wave_root.AddGroup("Legend");
+		wavedrom::Signal* sig;
+		sig = leg->AddSignal("Running");
+		sig->AddNode(wavedrom::NODE::WHITE, "Priority 0");
+		sig->ContinueNode(5);
+		sig = leg->AddSignal("Running");
+		sig->AddNode(wavedrom::NODE::BLUE, "Priority 1");
+		sig->ContinueNode(5);
+		sig = leg->AddSignal("Running");
+		sig->AddNode(wavedrom::NODE::YELLOW, "Priority 2");
+		sig->ContinueNode(5);
+		sig = leg->AddSignal("Running");
+		sig->AddNode(wavedrom::NODE::RED, "Priority 3");
+		sig->ContinueNode(5);
+		sig = leg->AddSignal("Blocked");
+		sig->AddNode(wavedrom::NODE::X);
+		sig->ContinueNode(5);
+		sig = leg->AddSignal("Ready");
+		sig->AddNode(wavedrom::NODE::Z);
+		sig->ContinueNode(5);
+		sig = leg->AddSignal("Not Arrived");
+		sig->AddNode(wavedrom::NODE::DOWN);
+		sig->ContinueNode(5);
+		sig = leg->AddSignal("Finished");
+		sig->AddNode(wavedrom::NODE::UP);
+		sig->ContinueNode(5);
+	}
+
 	char * buf = this->wave_root.Export();
 	out << std::string(buf);
 	delete[] buf;

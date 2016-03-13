@@ -15,7 +15,7 @@
 Task::Task() {
 	this->task_info.block_time = 0;
 	this->task_info.run_time = 0;
-	this->task_info.state = task_info::TASK_READY;
+	//this->task_info.state = task_info::TASK_READY;
 	this->task_info.parrent = (void*) this;
 	this->task_info.deadline = 0;
 
@@ -50,7 +50,4 @@ void Task::SetDeadline(unsigned long t)
 	this->task_info.deadline = t;
 }
 
-void Task::MoveBlocked()
-{
-	//this->task.task_info->block_time ++;
-}
+

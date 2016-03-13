@@ -28,20 +28,22 @@ public:
 	void SetDeadline(unsigned long t);
 
 	// called when this task blocks
-	void MoveBlocked();
+//	void MoveBlocked();
 
 	// called when this task is ready to run
-	void MoveReady();
+//	void MoveReady();
 
 	// called when this task is given the cpu
-	void MoveRunning();
+//	void MoveRunning();
 
 	// called on every system tick while the task is running
 	void RunTick();
 
+protected:
+	struct task_info task_info;
+
 private:
 	struct task task;
-	struct task_info task_info;
 	//Context * context;
 
 	/// The system idle task.  This task is never added to the scheduler queue,

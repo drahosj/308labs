@@ -46,7 +46,7 @@ SimTask::SimTask(json_value * task, wavedrom::Group * wave_grp)
 	{
 		json_value *value = task->u.object.values[i].value;
 		std::string val_name = task->u.object.values[i].name;
-		std::cout << "processing value: " << val_name << std::endl;
+		//std::cout << "processing value: " << val_name << std::endl;
 		switch(NameToField(val_name))
 		{
 		case NAME:
@@ -89,6 +89,24 @@ SimTask::SimTask(json_value * task, wavedrom::Group * wave_grp)
 
 	this->task = 0;
 
+	switch(this->GetPriority())
+	{
+	case 0:
+		// low prioirty
+		this->color = wavedrom::NODE::WHITE;
+		break;
+	case 1:
+		this->color = wavedrom::NODE::BLUE;
+		break;
+	case 2:
+		this->color = wavedrom::NODE::YELLOW;
+		break;
+	case 3:
+	default:
+		this->color = wavedrom::NODE::RED;
+		break;
+	}
+
 //	std::cout << "name: " << this->name << std::endl;
 //	std::cout << "prior: " << this->priority << std::endl;
 //	std::cout << "arrive: " << this->next_arrival_time << std::endl;
@@ -97,6 +115,7 @@ SimTask::SimTask(json_value * task, wavedrom::Group * wave_grp)
 //	std::cout << std::endl;
 //	std::cout << "deadline: " << this->deadline << std::endl;
 }
+
 
 
 bool SimTask::operator< (const SimTask& param)
@@ -109,23 +128,6 @@ unsigned long SimTask::GetArrivalTime()
 	return this->next_arrival_time;
 }
 
-/*
-// this is called when the task is moved to the ready queue
-void SimTask::OnReady(unsigned long sys_time)
-{
-	this->wave->AddNode(wavedrom::NODE::Z);
-}
-
-void SimTask::OnBlock(unsigned long sys_time)
-{
-	this->wave->AddNode(wavedrom::NODE::DOWN);
-}
-*/
-
-void SimTask::OnRunTick(unsigned long sys_time)
-{
-	this->wave->AddNode(wavedrom::NODE::HIGH);
-}
 
 bool SimTask::IsFinished()
 {
@@ -201,19 +203,19 @@ void SimTask::OnSysTick(unsigned long sys_time)
 		switch(this->state)
 		{
 		case SimTask::NOT_ARRIVED:
-			this->wave->AddNode(wavedrom::NODE::LOW);
+			this->wave->AddNode(wavedrom::NODE::DOWN);
 			break;
 		case SimTask::READY:
-			this->wave->AddNode(wavedrom::NODE::X);
+			this->wave->AddNode(wavedrom::NODE::Z);
 			break;
 		case SimTask::RUNNING:
-			this->wave->AddNode(wavedrom::NODE::WHITE, this->name.c_str());
+			this->wave->AddNode(this->color, this->name.c_str());
 			break;
 		case SimTask::BLOCKED:
-			this->wave->AddNode(wavedrom::NODE::RED, this->name.c_str());
+			this->wave->AddNode(wavedrom::NODE::X);
 			break;
 		case SimTask::FINISHED:
-			this->wave->AddNode(wavedrom::NODE::LOW);
+			this->wave->AddNode(wavedrom::NODE::UP);
 			break;
 		}
 		this->last_state = this->state;
@@ -222,6 +224,7 @@ void SimTask::OnSysTick(unsigned long sys_time)
 	this->remove_flag = false;
 	if(this->state == SimTask::RUNNING)
 	{
+		this->task_info.run_time ++;
 		this->times[this->times_index]--;
 		if(this->times[this->times_index] == 0)
 		{
@@ -241,6 +244,10 @@ void SimTask::OnSysTick(unsigned long sys_time)
 				this->state = SimTask::FINISHED;
 			}
 		}
+	}
+	else if(this->state == SimTask::BLOCKED)
+	{
+		this->task_info.block_time ++;
 	}
 }
 

@@ -24,16 +24,15 @@ public:
 
 	// return true if all the tasks in the task list are finished
 	bool IsDone();
+
 	// run one system tick on the scheduler
 	void RunTick();
 
 	// export the json waveform file
-	void ExportWaveform(std::ofstream& out);
+	void ExportWaveform(std::ofstream& out, bool include_legend = true);
 
 private:
 	std::list<SimTask*> sim_task_list;
-	std::list<SimTask*> ready_list;
-	std::list<SimTask*> blocked_list;
 	std::list<SimTask*> finished_list;
 	SimTask* running_task;
 
