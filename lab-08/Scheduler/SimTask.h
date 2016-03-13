@@ -56,6 +56,8 @@ public:
 	/// called on this task at the end of every system tick
 	void OnEndTick(unsigned long sys_time);
 
+	std::string GetLogString();
+
 private:
 	int priority;
 	unsigned long next_arrival_time;
@@ -73,6 +75,10 @@ private:
 
 	wavedrom::Signal* wave;
 	wavedrom::NODE::node_data_type color;
+
+	unsigned long finish_time;
+	int num_context_switches;
+	int num_bursts;
 };
 
 

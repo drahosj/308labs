@@ -7,16 +7,20 @@ CSRC := $(wildcard *.c) $(wildcard */*.c)
 COBJ := $(patsubst %.c,%.c.o,$(CSRC))
 
 
+CFLAGS = -I. -Wall
+CXXFLAGS = -I. -Wall -std=c++0x -g
+LFLAGS = -rdynamic -ldl
+
 all: $(EXE)
 	
 $(EXE): $(CPPOBJ) $(COBJ)
-	g++ -rdynamic -ldl -o $@ $^
+	g++ $(LFLAGS) -o $@ $^
 
 %.cpp.o: %.cpp
-	g++ -std=c++0x -g -o $@ -c $<
+	g++ $(CXXFLAGS) -o $@ -c $<
 
 %.c.o: %.c
-	gcc -o $@ -c $<
+	gcc $(CFLAGS) -o $@ -c $<
 
 
 clean:

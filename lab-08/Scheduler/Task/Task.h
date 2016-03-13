@@ -10,7 +10,7 @@
 
 #include <string>
 #include "Context.h"
-#include "../task.h"
+#include "include/task.h"
 
 class Task : public Context{
 	friend class Scheduler;
@@ -26,18 +26,6 @@ public:
 	void SetName(std::string name);
 
 	void SetDeadline(unsigned long t);
-
-	// called when this task blocks
-//	void MoveBlocked();
-
-	// called when this task is ready to run
-//	void MoveReady();
-
-	// called when this task is given the cpu
-//	void MoveRunning();
-
-	// called on every system tick while the task is running
-	void RunTick();
 
 protected:
 	struct task_info task_info;

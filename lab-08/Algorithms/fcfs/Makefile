@@ -1,6 +1,6 @@
-MOD_NAME = sched-fcfs.mod
-SRC = fcfs.c
-CFLAGS = -Wall -g -I../../Scheduler
+MOD_NAME = sched.mod
+SRC = $(wildcard *.c)
+CFLAGS = -Wall -g -I../../Scheduler/include
 LFLAGS = 
 
 OBJS := $(patsubst %c,%o,$(SRC))
@@ -16,5 +16,4 @@ $(MOD_NAME): $(OBJS)
 clean:
 	rm -f $(OBJS)
 	rm -f $(MOD_NAME)
-
 

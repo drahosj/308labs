@@ -6,6 +6,7 @@
  */
 
 //#include "Kernel.h"
+#include <stdlib.h>
 #include "Task.h"
 
 //Task Task::idle_task("Idle", 0);
@@ -26,7 +27,10 @@ Task::Task() {
 }
 
 Task::~Task() {
-	// TODO Auto-generated destructor stub
+	if(this->task.scheduler_data)
+	{
+		free(this->task.scheduler_data);
+	}
 }
 
 void Task::OnArrive(unsigned long sys_time)

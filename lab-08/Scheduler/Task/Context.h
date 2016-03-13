@@ -13,7 +13,9 @@ public:
 	Context() {};
 	virtual ~Context() {};
 
+	/// Called by the scheduler to swap in this context
 	virtual void SwapIn(unsigned long sys_time) {};
+	/// Called by the scheduler to swap out this context
 	virtual void SwapOut(unsigned long sys_time) {};
 };
 

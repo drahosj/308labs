@@ -9,6 +9,7 @@
 #include "SimTask.h"
 #include "Scheduler/Scheduler.h"
 #include "Simulator.h"
+#include "Debug.h"
 
 Simulator::Simulator()
 	: remaining_tasks(0)
@@ -36,7 +37,7 @@ Simulator::~Simulator() {
 void Simulator::MakeTaskList(json_value * array)
 {
 	this->num_tasks = array->u.array.length;
-	for(int x=0;x<this->num_tasks;x++)
+	for(unsigned int x=0;x<this->num_tasks;x++)
 	{
 		SimTask * task = new SimTask(array->u.array.values[x], &this->wave_root);
 		this->sim_task_list.push_back(task);
@@ -80,7 +81,7 @@ void Simulator::RunTick()
 		// if this is the task that ran this tick
 		if(this_task->IsRunning())
 		{
-			std::cout << "Running = " << this_task->GetName() << std::endl;
+			//std::cout << "Running = " << this_task->GetName() << std::endl;
 			running_task = this_task;
 		}
 		this_task->OnSysTick(this->sys_time);
@@ -103,7 +104,7 @@ void Simulator::RunTick()
 			it = this->sim_task_list.erase(it);
 			this->finished_list.push_back(this_task);
 			this->remaining_tasks --;
-			std::cout << "Finished " << this_task->GetName() << "Remaining=" << this->remaining_tasks << std::endl;
+			//std::cout << "Finished " << this_task->GetName() << "Remaining=" << this->remaining_tasks << std::endl;
 		}
 		else
 		{
@@ -141,6 +142,15 @@ void Simulator::RunTick()
 			break;
 		}
 		this->wave_running->AddNode(color, running_task->GetName().c_str());
+	}
+}
+
+void Simulator::PrintLogData()
+{
+	this->finished_list.sort();
+	for(auto it = finished_list.begin(); it != finished_list.end(); ++it)
+	{
+		Debug::AppendLog((*it)->GetLogString());
 	}
 }
 

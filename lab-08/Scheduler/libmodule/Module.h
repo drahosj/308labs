@@ -14,9 +14,11 @@ namespace module {
 
 class Module {
 public:
+	/// Open a new dynamically loaded module
 	Module(const std::string& name);
 	virtual ~Module();
 
+	/// Remove an open module
 	void Remove();
 
 private:

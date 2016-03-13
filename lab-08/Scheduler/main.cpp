@@ -16,6 +16,8 @@
 #include "libmodule/Module.h"
 #include "libjson/json.h"
 
+#include "Debug.h"
+
 
 
 using namespace std;
@@ -70,7 +72,7 @@ static void config_parse(std::string& file, struct arguments* args)
 				std::string value;
 				if(std::getline(is_line, value))
 				{
-					std::cout << "key=" << key << ", value=" << value << std::endl;
+					//std::cout << "key=" << key << ", value=" << value << std::endl;
 					if(key == "algorithm")
 						args->algorithm = value;
 					else if(key == "tasks")
@@ -95,7 +97,7 @@ static error_t parse_opt (int key, char *arg, struct argp_state * state)
 	switch (key)
 	{
 	case 'v':
-		std::cout << "setting verbose flag" << std::endl;
+		//std::cout << "setting verbose flag" << std::endl;
 		arguments->verbose = true;
 		break;
 	case 'a':
@@ -137,13 +139,16 @@ int main(int argc, char * argv[])
 		config_parse(args.cfg, &args);
 	}
 
-	if(args.verbose)
-	{
-		std::cout << "Algorithm = " << args.algorithm << std::endl;
-		std::cout << "Tasks = " << args.tasks << std::endl;
-		std::cout << "Wave = " << args.wave << std::endl;
-		std::cout << "Log = " << args.log << std::endl;
-	}
+	Debug::SetVerbose(args.verbose);
+
+	//std::string alg = std::string("Algorithm = ") + args.algorithm;
+	Debug::PrintMsg(std::string("Algorithm = ") + args.algorithm);
+	Debug::PrintMsg(std::string("Tasks = ") + args.tasks);
+	Debug::PrintMsg(std::string("Wave = ") + args.wave);
+	Debug::PrintMsg(std::string("Log = ") + args.log);
+
+	ofstream log_stream(args.log);
+	Debug::SetLogFile(&log_stream);
 
 	// install the scheduler module
 	module::Module* mod = new module::Module(args.algorithm);
@@ -174,6 +179,8 @@ int main(int argc, char * argv[])
 	}
 	simulator.RunTick(); // run one last tick to close all the task ends.
 
+	simulator.PrintLogData();
+
 	// create the output file
 	ofstream out(args.wave);
 	simulator.ExportWaveform(out);
@@ -181,7 +188,7 @@ int main(int argc, char * argv[])
 
 	mod->Remove();
 	delete mod;
-//	std::cout << "Hello World" << std::endl;
+
 	return 0;
 }
 

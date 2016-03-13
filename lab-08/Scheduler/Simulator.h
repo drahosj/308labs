@@ -15,20 +15,27 @@
 
 class SimTask;
 
+/**
+ * This simulator handles generating and sending simulated tasks to the scheduler.
+ */
 class Simulator {
 public:
+	/// Create a new simulator
 	Simulator();
 	virtual ~Simulator();
 
+	/// Convert a JSON array into a new task list to simulate
 	void MakeTaskList(json_value * array);
 
-	// return true if all the tasks in the task list are finished
+	/// return true if all the tasks in the task list are finished
 	bool IsDone();
 
-	// run one system tick on the scheduler
+	/// run one system tick on the scheduler
 	void RunTick();
 
-	// export the json waveform file
+	void PrintLogData();
+
+	/// export the json waveform file
 	void ExportWaveform(std::ofstream& out, bool include_legend = true);
 
 private:

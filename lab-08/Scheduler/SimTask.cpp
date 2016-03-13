@@ -9,6 +9,8 @@
 #include "Scheduler/Scheduler.h"
 #include "SimTask.h"
 #include "Task/Task.h"
+#include "Debug.h"
+#include <string>
 
 enum TaskJsonField
 {
@@ -38,7 +40,8 @@ SimTask::~SimTask() {
 }
 
 SimTask::SimTask(json_value * task, wavedrom::Group * wave_grp)
-	: state(SimTask::INIT), last_state(SimTask::INIT), times_index(0), remove_flag(false)
+	: times_index(0), state(SimTask::INIT), last_state(SimTask::INIT), remove_flag(false),
+	  finish_time(0), num_context_switches(0), num_bursts(0)
 {
 	int length, array_len;
 	length = task->u.object.length;
@@ -107,6 +110,8 @@ SimTask::SimTask(json_value * task, wavedrom::Group * wave_grp)
 		break;
 	}
 
+
+
 //	std::cout << "name: " << this->name << std::endl;
 //	std::cout << "prior: " << this->priority << std::endl;
 //	std::cout << "arrive: " << this->next_arrival_time << std::endl;
@@ -155,9 +160,13 @@ void SimTask::OnStartTick(unsigned long sys_time)
 
 	if(this->next_arrival_time == sys_time)
 	{
+		num_bursts += 1;
 		switch(this->state)
 		{
+		case SimTask::INIT:
 		case SimTask::NOT_ARRIVED:
+			Debug::AppendLog
+			(std::string("Task ") + this->name + " arrived at " + std::to_string(sys_time));
 			this->last_state = this->state;
 			this->state = SimTask::READY;
 			this->OnArrive(sys_time);
@@ -169,6 +178,7 @@ void SimTask::OnStartTick(unsigned long sys_time)
 		case SimTask::READY:
 			break;
 		case SimTask::BLOCKED:
+			Debug::AppendLog(std::string("Task ") + this->name + " unblocked at " + std::to_string(sys_time));
 			this->last_state = this->state;
 			this->state = SimTask::READY;
 			Scheduler::AddTask(this, sys_time);
@@ -202,16 +212,21 @@ void SimTask::OnSysTick(unsigned long sys_time)
 	{
 		switch(this->state)
 		{
+		case SimTask::INIT:
 		case SimTask::NOT_ARRIVED:
 			this->wave->AddNode(wavedrom::NODE::DOWN);
 			break;
 		case SimTask::READY:
+			//if (this->last_state == SimTask::RUNNING)
+			//	this->num_context_switches += 1;
 			this->wave->AddNode(wavedrom::NODE::Z);
 			break;
 		case SimTask::RUNNING:
+			this->num_context_switches += 1;
 			this->wave->AddNode(this->color, this->name.c_str());
 			break;
 		case SimTask::BLOCKED:
+			this->num_context_switches += 1;
 			this->wave->AddNode(wavedrom::NODE::X);
 			break;
 		case SimTask::FINISHED:
@@ -232,6 +247,7 @@ void SimTask::OnSysTick(unsigned long sys_time)
 			this->times_index++;
 			if(this->times[this->times_index] > 0)
 			{
+				Debug::AppendLog(std::string("Task ") + this->name + " blocked at " + std::to_string(sys_time));
 				this->last_state = this->state;
 				this->state = SimTask::BLOCKED;
 				this->next_arrival_time = sys_time + this->times[this->times_index];
@@ -240,6 +256,8 @@ void SimTask::OnSysTick(unsigned long sys_time)
 			}
 			else
 			{
+				Debug::AppendLog(std::string("Task ") + this->name + " finished at " + std::to_string(sys_time));
+				this->finish_time = sys_time;
 				this->last_state = this->state;
 				this->state = SimTask::FINISHED;
 			}
@@ -259,4 +277,19 @@ void SimTask::OnEndTick(unsigned long sys_time)
 		Scheduler::RemoveTask(sys_time);
 		this->state = tmp;
 	}
+}
+
+std::string SimTask::GetLogString()
+{
+	std::string str("");
+	str += "Task " + this->name + ": ";
+	str += "priority=" + std::to_string(task_info.priority) + ", ";
+	str += "start=" + std::to_string(task_info.time_arive) + ", ";
+	str += "finish=" + std::to_string(finish_time) + ", ";
+	str += "deadline=" + std::to_string(task_info.deadline) + ", ";
+	str += "runtime=" + std::to_string(task_info.run_time) + ", ";
+	str += "blocktime=" + std::to_string(task_info.block_time) + ", ";
+	str += "switches=" + std::to_string(num_context_switches) + ", ";
+	str += "bursts=" + std::to_string(num_bursts);
+	return str;
 }

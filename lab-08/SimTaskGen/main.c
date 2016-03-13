@@ -36,7 +36,7 @@ struct option long_options[] = {
 	{0, 0, 0, 0}
 };
 
-int main(int argc, const char * argv[])
+int main(int argc, char * argv[])
 {
 	int c;
 	int opt_idx;
@@ -51,7 +51,7 @@ int main(int argc, const char * argv[])
 	while(c != -1){
 		switch(c){
 			case 0: if(long_options[opt_idx].flag != 0){
-					printf("Option %s was called, setting value to %lu\n", long_options[opt_idx].name, long_options[opt_idx].val);
+					printf("Option %s was called, setting value to %d\n", long_options[opt_idx].name, long_options[opt_idx].val);
 					break;
 				}
 				if(optarg){

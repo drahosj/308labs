@@ -7,14 +7,12 @@
 
 //#include "Kernel.h"
 
-#include "../Task/Task.h"
+#include "Task/Task.h"
 #include "Scheduler.h"
 #include "SchedulerAlgorithm.h"
 //#include "Task.h"
 
-#include "../scheduler_algorithm.h"
-
-//std::vector<SchedulerAlgorithm*> Scheduler::algorithm_list;
+#include "include/scheduler_algorithm.h"
 
 #ifdef __cplusplus
 extern "C"{
@@ -23,7 +21,7 @@ extern "C"{
 int register_scheduler(const char * name, const struct scheduler_operations * sops)
 {
 	SchedulerAlgorithm *alg = new SchedulerAlgorithm(name, sops);
-	Scheduler::RegisterAlgorithm(alg);
+	return Scheduler::RegisterAlgorithm(alg);
 	//Kernel::GetCurrentKernel()->GetScheduler()->RegisterAlgorithm(alg);
 }
 

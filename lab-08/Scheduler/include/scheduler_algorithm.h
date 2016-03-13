@@ -5,8 +5,8 @@
  *      Author: vens
  */
 
-#ifndef SCHEDULER_ALGORITHM_H_
-#define SCHEDULER_ALGORITHM_H_
+#ifndef SCHEDULER_ALGORITHM_H
+#define SCHEDULER_ALGORITHM_H
 
 #ifdef __cplusplus
 extern "C"{
