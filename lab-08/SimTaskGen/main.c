@@ -8,7 +8,7 @@ int interactive = 0;
 unsigned long minimum = 1;
 unsigned long maximum = 5;
 int num_tasks = 26;
-int deadline = 20;
+int deadline = 120;
 int seed = 5;
 
 /**
@@ -26,8 +26,8 @@ struct option long_options[] = {
 	// these options set a flag
 	{"interactive", no_argument, &interactive, 1},
 	{"batch", no_argument, &interactive, 0},
-	{"strict", no_argument, &deadline, 10},
-	{"loose", no_argument, &deadline, 30},
+	{"strict", no_argument, &deadline, 110},
+	{"loose", no_argument, &deadline, 130},
 	// these options do not set a flag
 	{"min", required_argument, 0, 'm'},
 	{"max", required_argument, 0, 'M'},
@@ -45,6 +45,7 @@ int main(int argc, const char * argv[])
 	int last_arrive_time;
 	int times_num;
 	struct sim_task *task = NULL;
+	int run_time;
 
 	c = getopt_long(argc, argv, "m:M:n:s:?", long_options, &opt_idx);
 	while(c != -1){
@@ -114,6 +115,7 @@ int main(int argc, const char * argv[])
 			times_num--;
 		}
 		printf("\ttimes_num: %d\n", times_num);
+		run_time = 0;
 		for(j = 0; j < times_num; j++){
 			if(interactive){
 				if(j % 2){
@@ -140,13 +142,13 @@ int main(int argc, const char * argv[])
 					}
 				}
 			}
-
+			run_time += task->times[j];
 			printf("\t\ttimes[%d]: %lu\n", j, task->times[j]); 
 		}
 		task->times[j] = 0;
 
 		// set the deadline
-		task->deadline = (unsigned long)deadline;
+		task->deadline = (unsigned long)((run_time * deadline)/100) + task->arrive_time;
 		printf("\tDeadline: %lu\n", task->deadline);
 		
 		// add this task to the json
