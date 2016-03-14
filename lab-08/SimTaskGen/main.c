@@ -21,6 +21,7 @@ int seed = 5;
  * - `--batch`: batch workload
  * - `--strict`: strict deadline for the tasks(+ 10%)[default is 20%]
  * - `--loose`: loose deadline for the tasks(+ 30%)[default is 20%]
+ * - `--output`: set the name of the output file [efault is `out.json`]
  */
 struct option long_options[] = {
 	// these options set a flag
@@ -33,6 +34,7 @@ struct option long_options[] = {
 	{"max", required_argument, 0, 'M'},
 	{"num-tasks", required_argument, 0, 'n'},
 	{"seed", required_argument, 0, 's'},
+	{"output", required_argument, 0, 'o'},
 	{0, 0, 0, 0}
 };
 
@@ -46,6 +48,7 @@ int main(int argc, char * argv[])
 	int times_num;
 	struct sim_task *task = NULL;
 	int run_time;
+	char * out_name = "out.json";
 
 	c = getopt_long(argc, argv, "m:M:n:s:?", long_options, &opt_idx);
 	while(c != -1){
@@ -59,21 +62,25 @@ int main(int argc, char * argv[])
 				}
 				break;
 			case 'm': // set the minumum time
-				  minimum = atol(optarg);
-				  printf("Minimum run time set to: %lu\n", minimum);
-				  break;
+				minimum = atol(optarg);
+				printf("Minimum run time set to: %lu\n", minimum);
+				break;
 			case 'M': // set the maximum time
-				  maximum = atol(optarg);
-				  printf("Maximum run time set to: %lu\n", maximum);
-				  break;
+				maximum = atol(optarg);
+				printf("Maximum run time set to: %lu\n", maximum);
+				break;
 			case 'n': // set the number of tasks to create
-				  num_tasks = atoi(optarg);
-				  printf("Number of tasks to generate: %d\n", num_tasks);
-				  break;
+				num_tasks = atoi(optarg);
+				printf("Number of tasks to generate: %d\n", num_tasks);
+				break;
 			case 's': // set the seed for the random number generator
-				  seed = atoi(optarg);
-				  printf("New seed set to: %d\n", seed);
-				  break;
+				seed = atoi(optarg);
+				printf("New seed set to: %d\n", seed);
+				break;
+			case 'o': // set the name of the output file
+				out_name = optarg;
+				printf("Output file set to %s\n", out_name);
+				break;
 		}
 		c = getopt_long(argc, argv, "m:M:n:s:?", long_options, &opt_idx);
 	}
@@ -157,7 +164,7 @@ int main(int argc, char * argv[])
 		task = NULL;
 	}
 
-	FILE* fp = fopen("out.json", "w");
+	FILE* fp = fopen(out_name, "w");
 	export_json_tasklist(fp);
 	fclose(fp);
 	return 0;
