@@ -119,9 +119,9 @@ int main(int argc, char * argv[])
 		for(j = 0; j < times_num; j++){
 			if(interactive){
 				if(j % 2){
-					task->times[j] = (rand() + minimum) % maximum;
+					task->times[j] = (rand() + minimum) % ((4 - task->priority) * maximum);
 					while(task->times[j] == 0){
-						task->times[j] = (rand() + minimum) % maximum;
+						task->times[j] = (rand() + minimum) % ((4 - task->priority) * maximum);
 					}
 				}else{
 					task->times[j] = (rand() + minimum) % (2 * maximum);
@@ -131,9 +131,9 @@ int main(int argc, char * argv[])
 				}
 			}else{
 				if(j % 2){
-					task->times[j] = (rand() + (2 * minimum)) % (2 * maximum);
+					task->times[j] = (rand() + (2 * minimum)) % ((6 - task->priority) * maximum);
 					while(task->times[j] == 0){
-						task->times[j] = (rand() + (2 * minimum)) % (2 * maximum);
+						task->times[j] = (rand() + (2 * minimum)) % ((6 - task->priority) * maximum);
 					}
 				}else{
 					task->times[j] = (rand() + minimum) % maximum;
