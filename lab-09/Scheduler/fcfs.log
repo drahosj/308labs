@@ -1,0 +1,276 @@
+Task A arrived at 0
+Task A finished at 3
+Task B arrived at 7
+Task B blocked at 11
+Task C arrived at 12
+Task B unblocked at 14
+Task C blocked at 16
+Task B blocked at 18
+Task D arrived at 18
+Task E arrived at 18
+Task D blocked at 19
+Task B unblocked at 20
+Task C unblocked at 20
+Task F arrived at 21
+Task E finished at 23
+Task D unblocked at 24
+Task B blocked at 27
+Task B unblocked at 29
+Task C blocked at 30
+Task F blocked at 34
+Task G arrived at 35
+Task H arrived at 36
+Task D blocked at 37
+Task B blocked at 38
+Task C unblocked at 38
+Task B unblocked at 40
+Task G finished at 41
+Task D unblocked at 42
+Task F unblocked at 43
+Task H blocked at 45
+Task C blocked at 48
+Task H unblocked at 49
+Task I arrived at 49
+Task J arrived at 49
+Task B blocked at 50
+Task D blocked at 51
+Task F blocked at 54
+Task C unblocked at 54
+Task H blocked at 58
+Task B unblocked at 58
+Task D unblocked at 58
+Task F unblocked at 59
+Task K arrived at 59
+Task I blocked at 60
+Task J blocked at 63
+Task H unblocked at 66
+Task J unblocked at 66
+Task C blocked at 67
+Task L arrived at 67
+Task B blocked at 68
+Task C unblocked at 68
+Task B unblocked at 69
+Task I unblocked at 69
+Task D blocked at 72
+Task M arrived at 72
+Task F blocked at 74
+Task K blocked at 75
+Task H blocked at 77
+Task J blocked at 79
+Task L blocked at 80
+Task D unblocked at 81
+Task L unblocked at 81
+Task C finished at 82
+Task N arrived at 82
+Task F unblocked at 83
+Task H unblocked at 83
+Task K unblocked at 84
+Task B finished at 86
+Task J unblocked at 86
+Task I blocked at 88
+Task O arrived at 89
+Task I unblocked at 90
+Task M blocked at 92
+Task D blocked at 95
+Task M unblocked at 95
+Task L blocked at 97
+Task D unblocked at 98
+Task N blocked at 99
+Task P arrived at 100
+Task F blocked at 103
+Task L unblocked at 104
+Task H blocked at 105
+Task N unblocked at 106
+Task F unblocked at 108
+Task K finished at 109
+Task Q arrived at 110
+Task J blocked at 113
+Task H unblocked at 113
+Task O blocked at 117
+Task R arrived at 117
+Task J unblocked at 118
+Task I blocked at 120
+Task M blocked at 121
+Task S arrived at 121
+Task D finished at 122
+Task O unblocked at 122
+Task T arrived at 123
+Task P finished at 126
+Task U arrived at 126
+Task I unblocked at 129
+Task M unblocked at 129
+Task L blocked at 130
+Task N blocked at 131
+Task F blocked at 132
+Task Q blocked at 133
+Task H blocked at 134
+Task F unblocked at 134
+Task N unblocked at 134
+Task V arrived at 134
+Task H unblocked at 137
+Task R blocked at 138
+Task L unblocked at 139
+Task W arrived at 139
+Task J blocked at 140
+Task Q unblocked at 140
+Task J unblocked at 143
+Task S blocked at 144
+Task O blocked at 146
+Task S unblocked at 146
+Task X arrived at 146
+Task T finished at 147
+Task R unblocked at 147
+Task U finished at 150
+Task O unblocked at 152
+Task I blocked at 153
+Task M blocked at 155
+Task M unblocked at 157
+Task F blocked at 158
+Task N finished at 159
+Task Y arrived at 159
+Task I unblocked at 161
+Task V blocked at 163
+Task F unblocked at 163
+Task H blocked at 164
+Task L blocked at 165
+Task H unblocked at 165
+Task Z arrived at 166
+Task W blocked at 168
+Task V unblocked at 170
+Task Q blocked at 172
+Task L unblocked at 173
+Task J blocked at 176
+Task W unblocked at 177
+Task Q unblocked at 178
+Task S blocked at 179
+Task J unblocked at 179
+Task X blocked at 182
+Task R blocked at 183
+Task O blocked at 185
+Task M blocked at 186
+Task S unblocked at 186
+Task R unblocked at 187
+Task O unblocked at 188
+Task Y blocked at 190
+Task X unblocked at 191
+Task I blocked at 193
+Task M unblocked at 194
+Task F blocked at 195
+Task H blocked at 197
+Task Y unblocked at 198
+Task I unblocked at 199
+Task Z blocked at 201
+Task F unblocked at 201
+Task H unblocked at 201
+Task Z unblocked at 202
+Task V blocked at 204
+Task L blocked at 208
+Task W blocked at 209
+Task V unblocked at 209
+Task W unblocked at 210
+Task Q blocked at 212
+Task Q unblocked at 214
+Task J finished at 215
+Task L unblocked at 216
+Task S finished at 219
+Task R blocked at 223
+Task O finished at 226
+Task R unblocked at 226
+Task X blocked at 227
+Task M blocked at 230
+Task X unblocked at 230
+Task Y finished at 231
+Task M unblocked at 232
+Task I blocked at 233
+Task F blocked at 237
+Task H blocked at 239
+Task I unblocked at 239
+Task Z finished at 241
+Task F unblocked at 242
+Task V blocked at 245
+Task H unblocked at 245
+Task W blocked at 247
+Task Q blocked at 248
+Task W unblocked at 248
+Task L blocked at 252
+Task V unblocked at 252
+Task Q unblocked at 254
+Task R blocked at 256
+Task X blocked at 259
+Task L unblocked at 260
+Task M blocked at 262
+Task R unblocked at 262
+Task X unblocked at 263
+Task I blocked at 264
+Task M unblocked at 264
+Task I unblocked at 266
+Task F finished at 268
+Task H finished at 271
+Task W blocked at 275
+Task W unblocked at 276
+Task V blocked at 278
+Task Q finished at 279
+Task L finished at 283
+Task V unblocked at 283
+Task R blocked at 287
+Task R unblocked at 288
+Task X blocked at 291
+Task M blocked at 292
+Task I blocked at 293
+Task W blocked at 294
+Task I unblocked at 296
+Task V blocked at 298
+Task X unblocked at 298
+Task V unblocked at 299
+Task W unblocked at 299
+Task R finished at 300
+Task M unblocked at 301
+Task I finished at 302
+Task X blocked at 303
+Task V blocked at 305
+Task W blocked at 307
+Task M blocked at 308
+Task X unblocked at 309
+Task X blocked at 310
+Task V unblocked at 310
+Task V blocked at 311
+Task M unblocked at 311
+Task M finished at 312
+Task W unblocked at 313
+Task W blocked at 316
+Task W unblocked at 317
+Task X unblocked at 318
+Task W blocked at 319
+Task V unblocked at 319
+Task X finished at 320
+Task W unblocked at 321
+Task V blocked at 324
+Task W finished at 328
+Task V unblocked at 328
+Task V finished at 332
+Task A: priority=3, start=0, finish=3, deadline=3, runtime=3, blocktime=0, switches=1, bursts=1
+Task B: priority=0, start=7, finish=86, deadline=50, runtime=18, blocktime=18, switches=13, bursts=7
+Task C: priority=3, start=12, finish=82, deadline=54, runtime=16, blocktime=19, switches=9, bursts=5
+Task D: priority=0, start=18, finish=122, deadline=68, runtime=13, blocktime=29, switches=11, bursts=6
+Task E: priority=1, start=18, finish=23, deadline=22, runtime=4, blocktime=0, switches=1, bursts=1
+Task F: priority=0, start=21, finish=268, deadline=108, runtime=27, blocktime=46, switches=17, bursts=9
+Task G: priority=3, start=35, finish=41, deadline=38, runtime=3, blocktime=0, switches=1, bursts=1
+Task H: priority=2, start=36, finish=271, deadline=109, runtime=21, blocktime=40, switches=17, bursts=9
+Task I: priority=1, start=49, finish=302, deadline=127, runtime=20, blocktime=45, switches=17, bursts=9
+Task J: priority=3, start=49, finish=215, deadline=95, runtime=18, blocktime=21, switches=11, bursts=6
+Task K: priority=3, start=59, finish=109, deadline=75, runtime=5, blocktime=9, switches=3, bursts=2
+Task L: priority=0, start=67, finish=283, deadline=140, runtime=20, blocktime=41, switches=13, bursts=7
+Task M: priority=3, start=72, finish=312, deadline=136, runtime=17, blocktime=37, switches=17, bursts=9
+Task N: priority=0, start=82, finish=159, deadline=98, runtime=4, blocktime=10, switches=5, bursts=3
+Task O: priority=1, start=89, finish=226, deadline=119, runtime=11, blocktime=14, switches=7, bursts=4
+Task P: priority=3, start=100, finish=126, deadline=104, runtime=4, blocktime=0, switches=1, bursts=1
+Task Q: priority=1, start=110, finish=279, deadline=147, runtime=10, blocktime=21, switches=9, bursts=5
+Task R: priority=3, start=117, finish=300, deadline=167, runtime=19, blocktime=23, switches=11, bursts=6
+Task S: priority=0, start=121, finish=219, deadline=145, runtime=11, blocktime=9, switches=5, bursts=3
+Task T: priority=0, start=123, finish=147, deadline=124, runtime=1, blocktime=0, switches=1, bursts=1
+Task U: priority=3, start=126, finish=150, deadline=129, runtime=3, blocktime=0, switches=1, bursts=1
+Task V: priority=2, start=134, finish=332, deadline=219, runtime=29, blocktime=42, switches=17, bursts=9
+Task W: priority=3, start=139, finish=328, deadline=196, runtime=22, blocktime=26, switches=17, bursts=9
+Task X: priority=1, start=146, finish=320, deadline=207, runtime=14, blocktime=37, switches=13, bursts=7
+Task Y: priority=3, start=159, finish=231, deadline=174, runtime=5, blocktime=8, switches=3, bursts=2
+Task Z: priority=0, start=166, finish=241, deadline=174, runtime=6, blocktime=1, switches=3, bursts=2
