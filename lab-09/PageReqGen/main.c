@@ -2,35 +2,29 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <getopt.h>
-#include "sim_task.h"
+#include "sim_page_req.h"
 
-int interactive = 0;
-unsigned long minimum = 1;
-unsigned long maximum = 5;
-int num_tasks = 26;
-int deadline = 120;
+// 0 is random; 1 is sequential; 2 is temporal
+int mem_access = 0;
+int num_tasks = 100;
 int seed = 5;
 
 /**
  * Recognized arguments:
- * - `-m`: the minimum amount of time that a task will run
- * - `-M`: the maximum amount of time that a task will run
- * - `-n`: number of tasks to generate
+ * - `-n`: number of page requests to generate
  * - `-s`: sets the seed
- * - `--interactive': interactive workload
- * - `--batch`: batch workload
- * - `--strict`: strict deadline for the tasks(+ 10%)[default is 20%]
- * - `--loose`: loose deadline for the tasks(+ 30%)[default is 20%]
+ * - `--temporal': temporal locality, i.e., there is a 90% chance that the next
+ *   		   memory request will be from the same page as one of the last
+ *   		   5 page requests
+ * - `--sequential`: sequential memory access, i.e., page 1, page 2, page 3, ...
+ * - `--random`: random memory access
  */
 struct option long_options[] = {
 	// these options set a flag
-	{"interactive", no_argument, &interactive, 1},
-	{"batch", no_argument, &interactive, 0},
-	{"strict", no_argument, &deadline, 110},
-	{"loose", no_argument, &deadline, 130},
+	{"temporal", no_argument, &mem_access, 2},
+	{"sequential", no_argument, &mem_access, 1},
+	{"random", no_argument, &mem_access, 0},
 	// these options do not set a flag
-	{"min", required_argument, 0, 'm'},
-	{"max", required_argument, 0, 'M'},
 	{"num-tasks", required_argument, 0, 'n'},
 	{"seed", required_argument, 0, 's'},
 	{0, 0, 0, 0}
@@ -43,11 +37,12 @@ int main(int argc, char * argv[])
 	int i;
 	int j;
 	int last_arrive_time;
-	int times_num;
-	struct sim_task *task = NULL;
-	int run_time;
+	int last_pages_filled = 0;
+	unsigned int last_page = 0;
+	int last_pages[5] = {-1, -1, -1, -1, -1};
+	struct sim_page_req *page_req = NULL;
 
-	c = getopt_long(argc, argv, "m:M:n:s:?", long_options, &opt_idx);
+	c = getopt_long(argc, argv, "n:s:?", long_options, &opt_idx);
 	while(c != -1){
 		switch(c){
 			case 0: if(long_options[opt_idx].flag != 0){
@@ -58,14 +53,6 @@ int main(int argc, char * argv[])
 					
 				}
 				break;
-			case 'm': // set the minumum time
-				  minimum = atol(optarg);
-				  printf("Minimum run time set to: %lu\n", minimum);
-				  break;
-			case 'M': // set the maximum time
-				  maximum = atol(optarg);
-				  printf("Maximum run time set to: %lu\n", maximum);
-				  break;
 			case 'n': // set the number of tasks to create
 				  num_tasks = atoi(optarg);
 				  printf("Number of tasks to generate: %d\n", num_tasks);
@@ -87,74 +74,57 @@ int main(int argc, char * argv[])
 	// populate the task list
 	for(i = 0; i < num_tasks; i++){
 		// first allocate memory for the task
-		task = calloc(1, sizeof(struct sim_task));
+		page_req = calloc(1, sizeof(struct sim_page_req));
 		printf("generated a task\n");
-
-		// name the task, times that the task will be running/blocking, and set the deadline
-		if(i < 26){
-			task->name[0] = 'A' + i;
-		}
-		printf("\tName: %s\n", task->name);
-
-		// give it priority
-		task->priority = (unsigned char)(rand() % 4);
-		printf("\tPriority: %d\n", task->priority);
 
 		// set arrival time
 		if(i == 0){
-			task->arrive_time = (unsigned long)(rand() % 5);
+			page_req->arrive_time = (unsigned long)(rand() % 5);
 		}else{
-			task->arrive_time = last_arrive_time + (rand() % 15);
+			page_req->arrive_time = last_arrive_time + (rand() % 15);
 		}
-		last_arrive_time = task->arrive_time;
-		printf("\tArrival time: %lu\n", task->arrive_time);
+		last_arrive_time = page_req->arrive_time;
+		printf("\tArrival time: %lu\n", page_req->arrive_time);
 
-		// set up times for the task to run/block
-		times_num = (rand() + 1) % 19;
-		if(0 == times_num % 2){
-			times_num--;
-		}
-		printf("\ttimes_num: %d\n", times_num);
-		run_time = 0;
-		for(j = 0; j < times_num; j++){
-			if(interactive){
-				if(j % 2){
-					task->times[j] = (rand() + minimum) % ((4 - task->priority) * maximum);
-					while(task->times[j] == 0){
-						task->times[j] = (rand() + minimum) % ((4 - task->priority) * maximum);
+		// set page to be requested
+		switch(mem_access){
+
+		// if random
+		case 0:	page_req->page = rand() % 32;
+			break;
+
+		// if sequential
+		case 1:	page_req->page = last_page++ % 32;
+			break;
+
+		// if temporal
+		case 2:	if(last_pages_filled < 5 || (rand() % 10) > 8){
+				page_req->page = (unsigned long)(rand() % 32);
+				while(j < 5){
+					while((int)page_req->page == last_pages[j]){
+						page_req->page = (unsigned long)(rand() % 32);
 					}
-				}else{
-					task->times[j] = (rand() + minimum) % (2 * maximum);
-					while(task->times[j] == 0){
-						task->times[j] = (rand() + minimum) % (2 * maximum);
-					}
+					j++;
 				}
+				if(last_pages_filled < 5) last_pages_filled++;
 			}else{
-				if(j % 2){
-					task->times[j] = (rand() + (2 * minimum)) % ((6 - task->priority) * maximum);
-					while(task->times[j] == 0){
-						task->times[j] = (rand() + (2 * minimum)) % ((6 - task->priority) * maximum);
-					}
-				}else{
-					task->times[j] = (rand() + minimum) % maximum;
-					while(task->times[j] == 0){
-						task->times[j] = (rand() + minimum) % maximum;
-					}
-				}
+				page_req->page = (unsigned long)last_pages[rand() % 5];
 			}
-			run_time += task->times[j];
-			printf("\t\ttimes[%d]: %lu\n", j, task->times[j]); 
+			// add current page to the list of pages
+			for(j = 0; j < 4; j++){
+				last_pages[j] = last_pages[j + 1];
+				printf("\t\tlast_pages[%d] = %d\n", j, last_pages[j]);
+			}
+			last_pages[j] = (int)page_req->page;
+			printf("\t\tlast_pages[%d] = %d\n", j, last_pages[j]);
+			break;
 		}
-		task->times[j] = 0;
-
-		// set the deadline
-		task->deadline = (unsigned long)((run_time * deadline)/100) + task->arrive_time;
-		printf("\tDeadline: %lu\n", task->deadline);
+		printf("\tpage: %lu\n", page_req->page);
 		
 		// add this task to the json
-		add_sim_task_to_json(task);
+		add_sim_task_to_json(page_req);
 		// "let go" of the task
-		task = NULL;
+		page_req = NULL;
 	}
 
 	FILE* fp = fopen("out.json", "w");
