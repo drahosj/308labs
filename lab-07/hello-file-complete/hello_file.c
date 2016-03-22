@@ -1,6 +1,6 @@
 /**
  * @file      hello_file.c
- * @author    Jeramie Vens
+ * @author    Jake Drahos
  * @date      2015-03-08: Last updated
  * @brief     Character driver example
  * @copyright MIT License (c) 2015
@@ -38,8 +38,8 @@ static ssize_t device_write(struct file*, const char*, size_t, loff_t*);
 ///--- Global Variables ---///
 static int Major;			// Major number assigned to this device driver
 static int Device_Open = 0;	// is the device open already?
-static char msg[BUF_LEN];	// The message the device will return
-static char *msg_ptr;
+static char buf[BUF_LEN];	// The message the device will return
+static char *buf_ptr;		// Position for readback
 
 ///--- Register Callbacks ---///
 static struct file_operations fops = {
@@ -66,6 +66,8 @@ int __init device_init(void)
 	printk(KERN_INFO "Try various minor numbers. Try to cat and echo to\n");
 	printk(KERN_INFO "the device file.\n");
 
+	buf_ptr = buf;
+
 	return SUCCESS;
 }
 
@@ -82,14 +84,10 @@ module_exit(device_exit);
 ///--- Device Open ---///
 static int device_open(struct inode *inode, struct file *file)
 {
-	static int counter = 0;
-	
 	if (Device_Open)
 		return -EBUSY;
 	
 	Device_Open++;
-	sprintf(msg, "I already told you %d times Hello World!\n", counter++);
-	msg_ptr = msg;
 	try_module_get(THIS_MODULE);
 	return SUCCESS;
 }
@@ -105,19 +103,17 @@ static int device_release(struct inode *inode, struct file *file)
 ///--- Device Read ---///
 static ssize_t device_read(struct file *file, char *buffer, size_t length, loff_t *offset)
 {
-	int bytes_read = 0;
+	ssize_t bytes_read = 0;
 	
-	// if we are at the end of the message return 0 signifying end of file
-	if (*msg_ptr == 0)
-		return 0;
-
-	while (length && *msg_ptr)
-	{
-		// the buffer is in the user data segment, not the kernel
-		// segment so "*" assignment won't work.  We have to use
-		// put_user which copies data from the kernel data segment
-		// to the user data segment.
-		put_user(*(msg_ptr++), buffer++);
+	/* Read back-to-front until buf_ptr is at the beginning of the stored message.
+	 * This will cause it to return 0 if the buf_ptr points to the
+	 * beginning of the message already. This covers two cases: Nothing has
+	 * been written yet, and everything has already been read. Note that
+	 * this means reads are destructive: Once read and reversed, data must
+	 * be written before it can be read again
+	 */
+	while (length && (buf_ptr != buf)) {
+		put_user(*(--buf_ptr), buffer++);
 		
 		length--;
 		bytes_read++;
@@ -129,22 +125,14 @@ static ssize_t device_read(struct file *file, char *buffer, size_t length, loff_
 ///--- Device Write ---///
 static ssize_t device_write(struct file *file, const char *buffer, size_t len, loff_t *offset)
 {
-	printk(KERN_ALERT "Sorry, this operation isn't supported.\n");
-	return -EINVAL;
+	ssize_t bytes_written = 0;
+
+	/* Copy len (or BUF_LEN) bytes into buf */
+	while (len && (bytes_written <= BUF_LEN)) {
+		get_user(*(buf_ptr++), buffer++);
+		len--;
+		bytes_written++;
+	}
+
+	return bytes_written;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -164,3 +164,56 @@ this use case.
 
 To get complete multi-open support, offp would have to be combined with per-open-instance memory
 allocation and message formatting/preparation.
+
+# Lab Task: hello-file-complete
+## Implementation notes
+The reverser device driver is implemented as a stack. write() syscalls push bytes to the stack, while
+read() syscalls pop them. This means that, once read and emptied, the device must be written to
+before a read will return any bytes. Since cat reads as much as possible, some examples using head are
+provided as well.
+
+This implementation does not treat newlines differently than any other character, so output
+read from the module can end up looking somewhat funky unless a newline is prepended to
+the input.
+
+## Building
+Ensure that the LINUX_SRC variable is configured properly in the Makefile, then `make ARCH=um`.
+The module retains the name hello_file.ko.
+
+## Testing
+Test the driver as follows:
+```
+# Setup
+insmod hello_file.ko
+mknod /dev/reverser c 254 0
+
+# Stack is empty
+cat /dev/reverser
+
+# Put a newline at the bottom of the stack
+echo > /dev/reverser
+# Put 'Hello' on the stack
+echo -n 'Hello' > /dev/reverser
+# Put ' World!' on the stack
+echo -n ' World!' > /dev/reverser
+
+# cat the stack
+cat /dev/reverser
+# Now the stack is empty again
+cat /dev/reverser
+
+# Now test with partial reads
+# Same setup as a one-liner
+# The newline comes at the beginning of the input so it comes after the output
+echo -n -e '\nHello\nWorld!' > /dev/reverser
+# First read
+head -c 7 /dev/reverser
+# Put it back
+echo -n -e ' Planet!' > /dev/reverser
+# Finish it
+cat /dev/reverser
+
+# Cleanup
+rmmod hello_file.ko
+unlink /dev/reverser
+```
