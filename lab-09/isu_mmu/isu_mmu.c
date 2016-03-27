@@ -32,6 +32,9 @@ struct ISU_MEM_PAGE_STRUCT{
 	/// reference bit
 	char ref;
 
+	/// modified bit
+	char mod;
+
 	/// the page number
 	int page;
 
@@ -97,7 +100,7 @@ int isu_mmu_handle_req(isu_mmu_t mem, isu_mem_req_t req, unsigned long long *t){
 		break;
 	case 2: ret = isu_mmu_page_rep_clock(mem, req, t);
 		break;
-	case 3: /// This is left here for the second chance algorithm
+	case 3: ret = isu_mmu_page_rep_second_chance(mem, req, t);
 		break;
 	default: ret = isu_mmu_page_rep_fifo(mem, req, t);
 		break;
@@ -151,8 +154,8 @@ int isu_mmu_page_rep_fifo(isu_mmu_t mem, isu_mem_req_t req, unsigned long long *
 
 	//once we have the page number, check if it is in memory
 	//if the page is in the working set, it is a hit, otherwise it is a miss
-	//	if it is a miss, but it is still in memory, we swap it out
-	//	if it is not in memory, we have to go fetch it
+	//	find the page that has been placed in the working set the earliest and
+	//	replace it with the new page
 	char hit = (char)isu_mmu_page_check(mem, page);
 	/// if `hit` is 1, it is a hit, and that the memory page is already in the working set
 	if(hit){

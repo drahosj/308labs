@@ -50,6 +50,7 @@ int main(int argc, char **argv){
 		printf("\t\t0 - FIFO\n");
 		printf("\t\t1 - LRU\n");
 		printf("\t\t2 - clock\n");
+		printf("\t\t3 - second chance\n");
 		printf("pattern:\tspecifies which memory access pattern to test the\n");
 		printf("\t\talgorithm with.\n");
 		printf("\t\t0 - sequential\n");
@@ -74,8 +75,10 @@ int main(int argc, char **argv){
 		strncpy(name, "fifo-", (size_t)5);
 	}else if(mode == 1){
 		strncpy(name, "lru-", (size_t)4);
-	}else{
+	}else if(mode == 2){
 		strncpy(name, "clock-", (size_t)6);
+	}else{
+		strncpy(name, "second-", (size_t)7);
 	}
 
 	if(pattern == 0){
