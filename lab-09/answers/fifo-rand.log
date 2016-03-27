@@ -1,1002 +1,1001 @@
-memory address: 43079 in page: 10 requested at time: 0 handled at time: 5000000 and was a miss
-memory address: 41365 in page: 10 requested at time: 5000000 handled at time: 5000000 and was a hit
-memory address: 7149 in page: 1 requested at time: 5000000 handled at time: 10000000 and was a miss
-memory address: 53051 in page: 12 requested at time: 10000000 handled at time: 15000000 and was a miss
-memory address: 33377 in page: 8 requested at time: 15000000 handled at time: 20000000 and was a miss
-memory address: 25040 in page: 6 requested at time: 20000000 handled at time: 25000007 and was a miss
-memory address: 449 in page: 0 requested at time: 25000007 handled at time: 30000014 and was a miss
-memory address: 59598 in page: 14 requested at time: 30000014 handled at time: 35000021 and was a miss
-memory address: 40344 in page: 9 requested at time: 35000021 handled at time: 40000028 and was a miss
-memory address: 61432 in page: 14 requested at time: 40000028 handled at time: 40000028 and was a hit
-memory address: 27 in page: 0 requested at time: 40000028 handled at time: 40000028 and was a hit
-memory address: 33601 in page: 8 requested at time: 40000028 handled at time: 40000042 and was a miss
-memory address: 47129 in page: 11 requested at time: 40000042 handled at time: 45000049 and was a miss
-memory address: 35093 in page: 8 requested at time: 45000049 handled at time: 45000049 and was a hit
-memory address: 38286 in page: 9 requested at time: 45000049 handled at time: 45000049 and was a hit
-memory address: 37589 in page: 9 requested at time: 45000049 handled at time: 45000049 and was a hit
-memory address: 20946 in page: 5 requested at time: 45000049 handled at time: 50000056 and was a miss
-memory address: 41920 in page: 10 requested at time: 50000056 handled at time: 50000070 and was a miss
-memory address: 9865 in page: 2 requested at time: 50000070 handled at time: 55000077 and was a miss
-memory address: 31416 in page: 7 requested at time: 55000077 handled at time: 60000084 and was a miss
-memory address: 49625 in page: 12 requested at time: 60000084 handled at time: 60000098 and was a miss
-memory address: 54691 in page: 13 requested at time: 60000098 handled at time: 65000180 and was a miss
-memory address: 60204 in page: 14 requested at time: 65000180 handled at time: 65000194 and was a miss
-memory address: 25662 in page: 6 requested at time: 65000194 handled at time: 65000208 and was a miss
-memory address: 10955 in page: 2 requested at time: 65000208 handled at time: 65000222 and was a miss
-memory address: 33035 in page: 8 requested at time: 65000222 handled at time: 65000236 and was a miss
-memory address: 46819 in page: 11 requested at time: 65000236 handled at time: 65000250 and was a miss
-memory address: 41046 in page: 10 requested at time: 65000250 handled at time: 65000264 and was a miss
-memory address: 49025 in page: 11 requested at time: 65000264 handled at time: 65000264 and was a hit
-memory address: 36675 in page: 8 requested at time: 65000264 handled at time: 65000264 and was a hit
-memory address: 24205 in page: 5 requested at time: 65000264 handled at time: 65000278 and was a miss
-memory address: 26568 in page: 6 requested at time: 65000278 handled at time: 65000292 and was a miss
-memory address: 12505 in page: 3 requested at time: 65000292 handled at time: 70000374 and was a miss
-memory address: 31355 in page: 7 requested at time: 70000374 handled at time: 70000388 and was a miss
-memory address: 14083 in page: 3 requested at time: 70000388 handled at time: 70000388 and was a hit
-memory address: 45882 in page: 11 requested at time: 70000388 handled at time: 70000402 and was a miss
-memory address: 56395 in page: 13 requested at time: 70000402 handled at time: 70000416 and was a miss
-memory address: 14532 in page: 3 requested at time: 70000416 handled at time: 70000416 and was a hit
-memory address: 39945 in page: 9 requested at time: 70000416 handled at time: 70000430 and was a miss
-memory address: 31203 in page: 7 requested at time: 70000430 handled at time: 70000430 and was a hit
-memory address: 10428 in page: 2 requested at time: 70000430 handled at time: 70000444 and was a miss
-memory address: 39972 in page: 9 requested at time: 70000444 handled at time: 70000444 and was a hit
-memory address: 64804 in page: 15 requested at time: 70000444 handled at time: 75000526 and was a miss
-memory address: 57557 in page: 14 requested at time: 75000526 handled at time: 75000540 and was a miss
-memory address: 9529 in page: 2 requested at time: 75000540 handled at time: 75000540 and was a hit
-memory address: 37554 in page: 9 requested at time: 75000540 handled at time: 75000540 and was a hit
-memory address: 29610 in page: 7 requested at time: 75000540 handled at time: 75000554 and was a miss
-memory address: 30475 in page: 7 requested at time: 75000554 handled at time: 75000554 and was a hit
-memory address: 13938 in page: 3 requested at time: 75000554 handled at time: 75000568 and was a miss
-memory address: 39475 in page: 9 requested at time: 75000568 handled at time: 75000582 and was a miss
-memory address: 61891 in page: 15 requested at time: 75000582 handled at time: 75000596 and was a miss
-memory address: 63563 in page: 15 requested at time: 75000596 handled at time: 75000596 and was a hit
-memory address: 28630 in page: 6 requested at time: 75000596 handled at time: 75000610 and was a miss
-memory address: 56559 in page: 13 requested at time: 75000610 handled at time: 75000624 and was a miss
-memory address: 23689 in page: 5 requested at time: 75000624 handled at time: 75000638 and was a miss
-memory address: 39585 in page: 9 requested at time: 75000638 handled at time: 75000652 and was a miss
-memory address: 24059 in page: 5 requested at time: 75000652 handled at time: 75000652 and was a hit
-memory address: 4972 in page: 1 requested at time: 75000652 handled at time: 75000802 and was a miss
-memory address: 15095 in page: 3 requested at time: 75000802 handled at time: 75000816 and was a miss
-memory address: 7548 in page: 1 requested at time: 75000816 handled at time: 75000816 and was a hit
-memory address: 41648 in page: 10 requested at time: 75000816 handled at time: 75000830 and was a miss
-memory address: 39301 in page: 9 requested at time: 75000830 handled at time: 75000830 and was a hit
-memory address: 34116 in page: 8 requested at time: 75000830 handled at time: 75000844 and was a miss
-memory address: 54153 in page: 13 requested at time: 75000844 handled at time: 75000858 and was a miss
-memory address: 5120 in page: 1 requested at time: 75000858 handled at time: 75000872 and was a miss
-memory address: 48199 in page: 11 requested at time: 75000872 handled at time: 75000886 and was a miss
-memory address: 34499 in page: 8 requested at time: 75000886 handled at time: 75000886 and was a hit
-memory address: 61515 in page: 15 requested at time: 75000886 handled at time: 75000900 and was a miss
-memory address: 62731 in page: 15 requested at time: 75000900 handled at time: 75000900 and was a hit
-memory address: 8908 in page: 2 requested at time: 75000900 handled at time: 75000914 and was a miss
-memory address: 27182 in page: 6 requested at time: 75000914 handled at time: 75001064 and was a miss
-memory address: 7623 in page: 1 requested at time: 75001064 handled at time: 75001214 and was a miss
-memory address: 48880 in page: 11 requested at time: 75001214 handled at time: 75001364 and was a miss
-memory address: 26450 in page: 6 requested at time: 75001364 handled at time: 75001364 and was a hit
-memory address: 65180 in page: 15 requested at time: 75001364 handled at time: 75001514 and was a miss
-memory address: 58409 in page: 14 requested at time: 75001514 handled at time: 75001528 and was a miss
-memory address: 64004 in page: 15 requested at time: 75001528 handled at time: 75001528 and was a hit
-memory address: 29254 in page: 7 requested at time: 75001528 handled at time: 75001542 and was a miss
-memory address: 23348 in page: 5 requested at time: 75001542 handled at time: 75001556 and was a miss
-memory address: 12406 in page: 3 requested at time: 75001556 handled at time: 75001570 and was a miss
-memory address: 3193 in page: 0 requested at time: 75001570 handled at time: 75001720 and was a miss
-memory address: 19704 in page: 4 requested at time: 75001720 handled at time: 80001802 and was a miss
-memory address: 10434 in page: 2 requested at time: 80001802 handled at time: 80001952 and was a miss
-memory address: 31824 in page: 7 requested at time: 80001952 handled at time: 80001966 and was a miss
-memory address: 10727 in page: 2 requested at time: 80001966 handled at time: 80001966 and was a hit
-memory address: 34123 in page: 8 requested at time: 80001966 handled at time: 80001980 and was a miss
-memory address: 5873 in page: 1 requested at time: 80001980 handled at time: 80001994 and was a miss
-memory address: 34786 in page: 8 requested at time: 80001994 handled at time: 80001994 and was a hit
-memory address: 39096 in page: 9 requested at time: 80001994 handled at time: 80002144 and was a miss
-memory address: 20969 in page: 5 requested at time: 80002144 handled at time: 80002294 and was a miss
-memory address: 42334 in page: 10 requested at time: 80002294 handled at time: 80002308 and was a miss
-memory address: 15208 in page: 3 requested at time: 80002308 handled at time: 80002322 and was a miss
-memory address: 60270 in page: 14 requested at time: 80002322 handled at time: 80002472 and was a miss
-memory address: 10914 in page: 2 requested at time: 80002472 handled at time: 80002622 and was a miss
-memory address: 3825 in page: 0 requested at time: 80002622 handled at time: 80002636 and was a miss
-memory address: 65390 in page: 15 requested at time: 80002636 handled at time: 80002650 and was a miss
-memory address: 59113 in page: 14 requested at time: 80002650 handled at time: 80002650 and was a hit
-memory address: 38324 in page: 9 requested at time: 80002650 handled at time: 80002800 and was a miss
-memory address: 61369 in page: 14 requested at time: 80002800 handled at time: 80002950 and was a miss
-memory address: 56308 in page: 13 requested at time: 80002950 handled at time: 80002964 and was a miss
-memory address: 47233 in page: 11 requested at time: 80002964 handled at time: 80002978 and was a miss
-memory address: 23015 in page: 5 requested at time: 80002978 handled at time: 80003128 and was a miss
-memory address: 63931 in page: 15 requested at time: 80003128 handled at time: 80003142 and was a miss
-memory address: 30577 in page: 7 requested at time: 80003142 handled at time: 80003292 and was a miss
-memory address: 49465 in page: 12 requested at time: 80003292 handled at time: 80003442 and was a miss
-memory address: 63575 in page: 15 requested at time: 80003442 handled at time: 80003442 and was a hit
-memory address: 23451 in page: 5 requested at time: 80003442 handled at time: 80003442 and was a hit
-memory address: 47933 in page: 11 requested at time: 80003442 handled at time: 80003592 and was a miss
-memory address: 27293 in page: 6 requested at time: 80003592 handled at time: 80003606 and was a miss
-memory address: 46799 in page: 11 requested at time: 80003606 handled at time: 80003606 and was a hit
-memory address: 60339 in page: 14 requested at time: 80003606 handled at time: 80003620 and was a miss
-memory address: 30487 in page: 7 requested at time: 80003620 handled at time: 80003634 and was a miss
-memory address: 967 in page: 0 requested at time: 80003634 handled at time: 80003648 and was a miss
-memory address: 5237 in page: 1 requested at time: 80003648 handled at time: 80003662 and was a miss
-memory address: 62311 in page: 15 requested at time: 80003662 handled at time: 80003676 and was a miss
-memory address: 11695 in page: 2 requested at time: 80003676 handled at time: 80003826 and was a miss
-memory address: 39361 in page: 9 requested at time: 80003826 handled at time: 80003976 and was a miss
-memory address: 2648 in page: 0 requested at time: 80003976 handled at time: 80004126 and was a miss
-memory address: 46481 in page: 11 requested at time: 80004126 handled at time: 80004140 and was a miss
-memory address: 12921 in page: 3 requested at time: 80004140 handled at time: 80004154 and was a miss
-memory address: 23617 in page: 5 requested at time: 80004154 handled at time: 80004304 and was a miss
-memory address: 23280 in page: 5 requested at time: 80004304 handled at time: 80004304 and was a hit
-memory address: 28129 in page: 6 requested at time: 80004304 handled at time: 80004318 and was a miss
-memory address: 18351 in page: 4 requested at time: 80004318 handled at time: 80004332 and was a miss
-memory address: 34194 in page: 8 requested at time: 80004332 handled at time: 80004346 and was a miss
-memory address: 31954 in page: 7 requested at time: 80004346 handled at time: 80004496 and was a miss
-memory address: 18205 in page: 4 requested at time: 80004496 handled at time: 80004496 and was a hit
-memory address: 27772 in page: 6 requested at time: 80004496 handled at time: 80004496 and was a hit
-memory address: 4742 in page: 1 requested at time: 80004496 handled at time: 80004646 and was a miss
-memory address: 14038 in page: 3 requested at time: 80004646 handled at time: 80004660 and was a miss
-memory address: 18544 in page: 4 requested at time: 80004660 handled at time: 80004674 and was a miss
-memory address: 51975 in page: 12 requested at time: 80004674 handled at time: 80004688 and was a miss
-memory address: 37053 in page: 9 requested at time: 80004688 handled at time: 80004838 and was a miss
-memory address: 16940 in page: 4 requested at time: 80004838 handled at time: 80004838 and was a hit
-memory address: 17017 in page: 4 requested at time: 80004838 handled at time: 80004838 and was a hit
-memory address: 20982 in page: 5 requested at time: 80004838 handled at time: 80004988 and was a miss
-memory address: 14979 in page: 3 requested at time: 80004988 handled at time: 80005138 and was a miss
-memory address: 40468 in page: 9 requested at time: 80005138 handled at time: 80005138 and was a hit
-memory address: 3379 in page: 0 requested at time: 80005138 handled at time: 80005152 and was a miss
-memory address: 42273 in page: 10 requested at time: 80005152 handled at time: 80005166 and was a miss
-memory address: 21731 in page: 5 requested at time: 80005166 handled at time: 80005166 and was a hit
-memory address: 63719 in page: 15 requested at time: 80005166 handled at time: 80005180 and was a miss
-memory address: 7224 in page: 1 requested at time: 80005180 handled at time: 80005330 and was a miss
-memory address: 22699 in page: 5 requested at time: 80005330 handled at time: 80005344 and was a miss
-memory address: 3420 in page: 0 requested at time: 80005344 handled at time: 80005358 and was a miss
-memory address: 3999 in page: 0 requested at time: 80005358 handled at time: 80005358 and was a hit
-memory address: 34394 in page: 8 requested at time: 80005358 handled at time: 80005372 and was a miss
-memory address: 42781 in page: 10 requested at time: 80005372 handled at time: 80005386 and was a miss
-memory address: 6647 in page: 1 requested at time: 80005386 handled at time: 80005400 and was a miss
-memory address: 15339 in page: 3 requested at time: 80005400 handled at time: 80005550 and was a miss
-memory address: 55702 in page: 13 requested at time: 80005550 handled at time: 80005700 and was a miss
-memory address: 30265 in page: 7 requested at time: 80005700 handled at time: 80005714 and was a miss
-memory address: 38619 in page: 9 requested at time: 80005714 handled at time: 80005728 and was a miss
-memory address: 18295 in page: 4 requested at time: 80005728 handled at time: 80005878 and was a miss
-memory address: 48616 in page: 11 requested at time: 80005878 handled at time: 80005892 and was a miss
-memory address: 7278 in page: 1 requested at time: 80005892 handled at time: 80005906 and was a miss
-memory address: 50249 in page: 12 requested at time: 80005906 handled at time: 80005920 and was a miss
-memory address: 1286 in page: 0 requested at time: 80005920 handled at time: 80006070 and was a miss
-memory address: 35050 in page: 8 requested at time: 80006070 handled at time: 80006220 and was a miss
-memory address: 54992 in page: 13 requested at time: 80006220 handled at time: 80006234 and was a miss
-memory address: 15324 in page: 3 requested at time: 80006234 handled at time: 80006384 and was a miss
-memory address: 53594 in page: 13 requested at time: 80006384 handled at time: 80006384 and was a hit
-memory address: 41431 in page: 10 requested at time: 80006384 handled at time: 80006398 and was a miss
-memory address: 52378 in page: 12 requested at time: 80006398 handled at time: 80006548 and was a miss
-memory address: 4998 in page: 1 requested at time: 80006548 handled at time: 80006562 and was a miss
-memory address: 58448 in page: 14 requested at time: 80006562 handled at time: 80006576 and was a miss
-memory address: 7824 in page: 1 requested at time: 80006576 handled at time: 80006576 and was a hit
-memory address: 19978 in page: 4 requested at time: 80006576 handled at time: 80006726 and was a miss
-memory address: 33380 in page: 8 requested at time: 80006726 handled at time: 80006876 and was a miss
-memory address: 11204 in page: 2 requested at time: 80006876 handled at time: 80006890 and was a miss
-memory address: 62251 in page: 15 requested at time: 80006890 handled at time: 80006904 and was a miss
-memory address: 55112 in page: 13 requested at time: 80006904 handled at time: 80006918 and was a miss
-memory address: 9387 in page: 2 requested at time: 80006918 handled at time: 80006918 and was a hit
-memory address: 3939 in page: 0 requested at time: 80006918 handled at time: 80006932 and was a miss
-memory address: 12275 in page: 2 requested at time: 80006932 handled at time: 80006932 and was a hit
-memory address: 12807 in page: 3 requested at time: 80006932 handled at time: 80006946 and was a miss
-memory address: 7938 in page: 1 requested at time: 80006946 handled at time: 80006960 and was a miss
-memory address: 46669 in page: 11 requested at time: 80006960 handled at time: 80007110 and was a miss
-memory address: 55589 in page: 13 requested at time: 80007110 handled at time: 80007260 and was a miss
-memory address: 14585 in page: 3 requested at time: 80007260 handled at time: 80007260 and was a hit
-memory address: 62008 in page: 15 requested at time: 80007260 handled at time: 80007274 and was a miss
-memory address: 45755 in page: 11 requested at time: 80007274 handled at time: 80007274 and was a hit
-memory address: 44850 in page: 10 requested at time: 80007274 handled at time: 80007424 and was a miss
-memory address: 35092 in page: 8 requested at time: 80007424 handled at time: 80007438 and was a miss
-memory address: 64051 in page: 15 requested at time: 80007438 handled at time: 80007438 and was a hit
-memory address: 27931 in page: 6 requested at time: 80007438 handled at time: 80007588 and was a miss
-memory address: 42370 in page: 10 requested at time: 80007588 handled at time: 80007588 and was a hit
-memory address: 48764 in page: 11 requested at time: 80007588 handled at time: 80007602 and was a miss
-memory address: 29217 in page: 7 requested at time: 80007602 handled at time: 80007616 and was a miss
-memory address: 11884 in page: 2 requested at time: 80007616 handled at time: 80007630 and was a miss
-memory address: 38220 in page: 9 requested at time: 80007630 handled at time: 80007644 and was a miss
-memory address: 44541 in page: 10 requested at time: 80007644 handled at time: 80007658 and was a miss
-memory address: 65478 in page: 15 requested at time: 80007658 handled at time: 80007672 and was a miss
-memory address: 14116 in page: 3 requested at time: 80007672 handled at time: 80007686 and was a miss
-memory address: 31383 in page: 7 requested at time: 80007686 handled at time: 80007700 and was a miss
-memory address: 4941 in page: 1 requested at time: 80007700 handled at time: 80007850 and was a miss
-memory address: 7028 in page: 1 requested at time: 80007850 handled at time: 80007850 and was a hit
-memory address: 39208 in page: 9 requested at time: 80007850 handled at time: 80007864 and was a miss
-memory address: 24919 in page: 6 requested at time: 80007864 handled at time: 80007878 and was a miss
-memory address: 40409 in page: 9 requested at time: 80007878 handled at time: 80007878 and was a hit
-memory address: 50412 in page: 12 requested at time: 80007878 handled at time: 80008028 and was a miss
-memory address: 21634 in page: 5 requested at time: 80008028 handled at time: 80008042 and was a miss
-memory address: 29985 in page: 7 requested at time: 80008042 handled at time: 80008192 and was a miss
-memory address: 59799 in page: 14 requested at time: 80008192 handled at time: 80008206 and was a miss
-memory address: 25573 in page: 6 requested at time: 80008206 handled at time: 80008220 and was a miss
-memory address: 42260 in page: 10 requested at time: 80008220 handled at time: 80008370 and was a miss
-memory address: 7070 in page: 1 requested at time: 80008370 handled at time: 80008384 and was a miss
-memory address: 33511 in page: 8 requested at time: 80008384 handled at time: 80008398 and was a miss
-memory address: 23393 in page: 5 requested at time: 80008398 handled at time: 80008548 and was a miss
-memory address: 62659 in page: 15 requested at time: 80008548 handled at time: 80008562 and was a miss
-memory address: 48096 in page: 11 requested at time: 80008562 handled at time: 80008576 and was a miss
-memory address: 19865 in page: 4 requested at time: 80008576 handled at time: 80008590 and was a miss
-memory address: 42879 in page: 10 requested at time: 80008590 handled at time: 80008604 and was a miss
-memory address: 27411 in page: 6 requested at time: 80008604 handled at time: 80008754 and was a miss
-memory address: 54957 in page: 13 requested at time: 80008754 handled at time: 80008904 and was a miss
-memory address: 41394 in page: 10 requested at time: 80008904 handled at time: 80008904 and was a hit
-memory address: 55342 in page: 13 requested at time: 80008904 handled at time: 80008904 and was a hit
-memory address: 31791 in page: 7 requested at time: 80008904 handled at time: 80008918 and was a miss
-memory address: 24622 in page: 6 requested at time: 80008918 handled at time: 80008918 and was a hit
-memory address: 19023 in page: 4 requested at time: 80008918 handled at time: 80008932 and was a miss
-memory address: 43675 in page: 10 requested at time: 80008932 handled at time: 80008946 and was a miss
-memory address: 62843 in page: 15 requested at time: 80008946 handled at time: 80009096 and was a miss
-memory address: 63564 in page: 15 requested at time: 80009096 handled at time: 80009096 and was a hit
-memory address: 43618 in page: 10 requested at time: 80009096 handled at time: 80009096 and was a hit
-memory address: 11423 in page: 2 requested at time: 80009096 handled at time: 80009110 and was a miss
-memory address: 29412 in page: 7 requested at time: 80009110 handled at time: 80009124 and was a miss
-memory address: 48559 in page: 11 requested at time: 80009124 handled at time: 80009274 and was a miss
-memory address: 18451 in page: 4 requested at time: 80009274 handled at time: 80009288 and was a miss
-memory address: 3084 in page: 0 requested at time: 80009288 handled at time: 80009438 and was a miss
-memory address: 7942 in page: 1 requested at time: 80009438 handled at time: 80009452 and was a miss
-memory address: 58860 in page: 14 requested at time: 80009452 handled at time: 80009466 and was a miss
-memory address: 53496 in page: 13 requested at time: 80009466 handled at time: 80009616 and was a miss
-memory address: 29576 in page: 7 requested at time: 80009616 handled at time: 80009630 and was a miss
-memory address: 23309 in page: 5 requested at time: 80009630 handled at time: 80009644 and was a miss
-memory address: 47759 in page: 11 requested at time: 80009644 handled at time: 80009658 and was a miss
-memory address: 55149 in page: 13 requested at time: 80009658 handled at time: 80009658 and was a hit
-memory address: 33 in page: 0 requested at time: 80009658 handled at time: 80009672 and was a miss
-memory address: 54829 in page: 13 requested at time: 80009672 handled at time: 80009686 and was a miss
-memory address: 23124 in page: 5 requested at time: 80009686 handled at time: 80009686 and was a hit
-memory address: 23426 in page: 5 requested at time: 80009686 handled at time: 80009686 and was a hit
-memory address: 51953 in page: 12 requested at time: 80009686 handled at time: 80009700 and was a miss
-memory address: 5684 in page: 1 requested at time: 80009700 handled at time: 80009714 and was a miss
-memory address: 43292 in page: 10 requested at time: 80009714 handled at time: 80009864 and was a miss
-memory address: 29296 in page: 7 requested at time: 80009864 handled at time: 80009878 and was a miss
-memory address: 33095 in page: 8 requested at time: 80009878 handled at time: 80009892 and was a miss
-memory address: 32713 in page: 7 requested at time: 80009892 handled at time: 80009892 and was a hit
-memory address: 5154 in page: 1 requested at time: 80009892 handled at time: 80009892 and was a hit
-memory address: 22901 in page: 5 requested at time: 80009892 handled at time: 80009906 and was a miss
-memory address: 64505 in page: 15 requested at time: 80009906 handled at time: 80009920 and was a miss
-memory address: 29776 in page: 7 requested at time: 80009920 handled at time: 80009920 and was a hit
-memory address: 41924 in page: 10 requested at time: 80009920 handled at time: 80009934 and was a miss
-memory address: 42644 in page: 10 requested at time: 80009934 handled at time: 80009934 and was a hit
-memory address: 27083 in page: 6 requested at time: 80009934 handled at time: 80009948 and was a miss
-memory address: 39953 in page: 9 requested at time: 80009948 handled at time: 80010098 and was a miss
-memory address: 20726 in page: 5 requested at time: 80010098 handled at time: 80010248 and was a miss
-memory address: 38506 in page: 9 requested at time: 80010248 handled at time: 80010248 and was a hit
-memory address: 3829 in page: 0 requested at time: 80010248 handled at time: 80010398 and was a miss
-memory address: 3749 in page: 0 requested at time: 80010398 handled at time: 80010398 and was a hit
-memory address: 56958 in page: 13 requested at time: 80010398 handled at time: 80010412 and was a miss
-memory address: 6913 in page: 1 requested at time: 80010412 handled at time: 80010426 and was a miss
-memory address: 11691 in page: 2 requested at time: 80010426 handled at time: 80010576 and was a miss
-memory address: 50282 in page: 12 requested at time: 80010576 handled at time: 80010590 and was a miss
-memory address: 60409 in page: 14 requested at time: 80010590 handled at time: 80010604 and was a miss
-memory address: 41267 in page: 10 requested at time: 80010604 handled at time: 80010754 and was a miss
-memory address: 8056 in page: 1 requested at time: 80010754 handled at time: 80010904 and was a miss
-memory address: 42632 in page: 10 requested at time: 80010904 handled at time: 80010904 and was a hit
-memory address: 30880 in page: 7 requested at time: 80010904 handled at time: 80010918 and was a miss
-memory address: 8089 in page: 1 requested at time: 80010918 handled at time: 80010918 and was a hit
-memory address: 31925 in page: 7 requested at time: 80010918 handled at time: 80010918 and was a hit
-memory address: 54004 in page: 13 requested at time: 80010918 handled at time: 80010932 and was a miss
-memory address: 31516 in page: 7 requested at time: 80010932 handled at time: 80010932 and was a hit
-memory address: 18342 in page: 4 requested at time: 80010932 handled at time: 80011082 and was a miss
-memory address: 59689 in page: 14 requested at time: 80011082 handled at time: 80011096 and was a miss
-memory address: 9272 in page: 2 requested at time: 80011096 handled at time: 80011246 and was a miss
-memory address: 47638 in page: 11 requested at time: 80011246 handled at time: 80011260 and was a miss
-memory address: 27248 in page: 6 requested at time: 80011260 handled at time: 80011274 and was a miss
-memory address: 41985 in page: 10 requested at time: 80011274 handled at time: 80011424 and was a miss
-memory address: 52792 in page: 12 requested at time: 80011424 handled at time: 80011438 and was a miss
-memory address: 50150 in page: 12 requested at time: 80011438 handled at time: 80011438 and was a hit
-memory address: 40954 in page: 9 requested at time: 80011438 handled at time: 80011452 and was a miss
-memory address: 17033 in page: 4 requested at time: 80011452 handled at time: 80011466 and was a miss
-memory address: 26538 in page: 6 requested at time: 80011466 handled at time: 80011480 and was a miss
-memory address: 18063 in page: 4 requested at time: 80011480 handled at time: 80011480 and was a hit
-memory address: 44116 in page: 10 requested at time: 80011480 handled at time: 80011494 and was a miss
-memory address: 955 in page: 0 requested at time: 80011494 handled at time: 80011508 and was a miss
-memory address: 38789 in page: 9 requested at time: 80011508 handled at time: 80011522 and was a miss
-memory address: 17087 in page: 4 requested at time: 80011522 handled at time: 80011536 and was a miss
-memory address: 4784 in page: 1 requested at time: 80011536 handled at time: 80011550 and was a miss
-memory address: 42539 in page: 10 requested at time: 80011550 handled at time: 80011564 and was a miss
-memory address: 8509 in page: 2 requested at time: 80011564 handled at time: 80011578 and was a miss
-memory address: 11697 in page: 2 requested at time: 80011578 handled at time: 80011578 and was a hit
-memory address: 54230 in page: 13 requested at time: 80011578 handled at time: 80011592 and was a miss
-memory address: 58791 in page: 14 requested at time: 80011592 handled at time: 80011742 and was a miss
-memory address: 6570 in page: 1 requested at time: 80011742 handled at time: 80011892 and was a miss
-memory address: 29962 in page: 7 requested at time: 80011892 handled at time: 80012042 and was a miss
-memory address: 1311 in page: 0 requested at time: 80012042 handled at time: 80012056 and was a miss
-memory address: 49202 in page: 12 requested at time: 80012056 handled at time: 80012070 and was a miss
-memory address: 60842 in page: 14 requested at time: 80012070 handled at time: 80012084 and was a miss
-memory address: 9401 in page: 2 requested at time: 80012084 handled at time: 80012234 and was a miss
-memory address: 15592 in page: 3 requested at time: 80012234 handled at time: 80012248 and was a miss
-memory address: 49311 in page: 12 requested at time: 80012248 handled at time: 80012248 and was a hit
-memory address: 40917 in page: 9 requested at time: 80012248 handled at time: 80012262 and was a miss
-memory address: 33934 in page: 8 requested at time: 80012262 handled at time: 80012276 and was a miss
-memory address: 43464 in page: 10 requested at time: 80012276 handled at time: 80012426 and was a miss
-memory address: 50189 in page: 12 requested at time: 80012426 handled at time: 80012440 and was a miss
-memory address: 16037 in page: 3 requested at time: 80012440 handled at time: 80012454 and was a miss
-memory address: 5176 in page: 1 requested at time: 80012454 handled at time: 80012468 and was a miss
-memory address: 26638 in page: 6 requested at time: 80012468 handled at time: 80012482 and was a miss
-memory address: 3293 in page: 0 requested at time: 80012482 handled at time: 80012496 and was a miss
-memory address: 55326 in page: 13 requested at time: 80012496 handled at time: 80012510 and was a miss
-memory address: 2057 in page: 0 requested at time: 80012510 handled at time: 80012510 and was a hit
-memory address: 20326 in page: 4 requested at time: 80012510 handled at time: 80012524 and was a miss
-memory address: 16329 in page: 3 requested at time: 80012524 handled at time: 80012538 and was a miss
-memory address: 20120 in page: 4 requested at time: 80012538 handled at time: 80012538 and was a hit
-memory address: 64443 in page: 15 requested at time: 80012538 handled at time: 80012688 and was a miss
-memory address: 17284 in page: 4 requested at time: 80012688 handled at time: 80012688 and was a hit
-memory address: 58909 in page: 14 requested at time: 80012688 handled at time: 80012702 and was a miss
-memory address: 15994 in page: 3 requested at time: 80012702 handled at time: 80012702 and was a hit
-memory address: 22069 in page: 5 requested at time: 80012702 handled at time: 80012852 and was a miss
-memory address: 35912 in page: 8 requested at time: 80012852 handled at time: 80012866 and was a miss
-memory address: 24503 in page: 5 requested at time: 80012866 handled at time: 80012866 and was a hit
-memory address: 33766 in page: 8 requested at time: 80012866 handled at time: 80012866 and was a hit
-memory address: 24607 in page: 6 requested at time: 80012866 handled at time: 80012880 and was a miss
-memory address: 17758 in page: 4 requested at time: 80012880 handled at time: 80013030 and was a miss
-memory address: 40337 in page: 9 requested at time: 80013030 handled at time: 80013044 and was a miss
-memory address: 54569 in page: 13 requested at time: 80013044 handled at time: 80013058 and was a miss
-memory address: 19070 in page: 4 requested at time: 80013058 handled at time: 80013058 and was a hit
-memory address: 24003 in page: 5 requested at time: 80013058 handled at time: 80013072 and was a miss
-memory address: 49875 in page: 12 requested at time: 80013072 handled at time: 80013086 and was a miss
-memory address: 28471 in page: 6 requested at time: 80013086 handled at time: 80013100 and was a miss
-memory address: 39595 in page: 9 requested at time: 80013100 handled at time: 80013114 and was a miss
-memory address: 33650 in page: 8 requested at time: 80013114 handled at time: 80013128 and was a miss
-memory address: 3852 in page: 0 requested at time: 80013128 handled at time: 80013278 and was a miss
-memory address: 7994 in page: 1 requested at time: 80013278 handled at time: 80013292 and was a miss
-memory address: 11578 in page: 2 requested at time: 80013292 handled at time: 80013442 and was a miss
-memory address: 54041 in page: 13 requested at time: 80013442 handled at time: 80013456 and was a miss
-memory address: 24031 in page: 5 requested at time: 80013456 handled at time: 80013470 and was a miss
-memory address: 16755 in page: 4 requested at time: 80013470 handled at time: 80013484 and was a miss
-memory address: 15143 in page: 3 requested at time: 80013484 handled at time: 80013498 and was a miss
-memory address: 27324 in page: 6 requested at time: 80013498 handled at time: 80013512 and was a miss
-memory address: 6545 in page: 1 requested at time: 80013512 handled at time: 80013526 and was a miss
-memory address: 17200 in page: 4 requested at time: 80013526 handled at time: 80013526 and was a hit
-memory address: 47651 in page: 11 requested at time: 80013526 handled at time: 80013540 and was a miss
-memory address: 22874 in page: 5 requested at time: 80013540 handled at time: 80013554 and was a miss
-memory address: 37320 in page: 9 requested at time: 80013554 handled at time: 80013704 and was a miss
-memory address: 46558 in page: 11 requested at time: 80013704 handled at time: 80013704 and was a hit
-memory address: 40159 in page: 9 requested at time: 80013704 handled at time: 80013704 and was a hit
-memory address: 30694 in page: 7 requested at time: 80013704 handled at time: 80013854 and was a miss
-memory address: 62552 in page: 15 requested at time: 80013854 handled at time: 80013868 and was a miss
-memory address: 62228 in page: 15 requested at time: 80013868 handled at time: 80013868 and was a hit
-memory address: 1070 in page: 0 requested at time: 80013868 handled at time: 80013882 and was a miss
-memory address: 21519 in page: 5 requested at time: 80013882 handled at time: 80013896 and was a miss
-memory address: 30458 in page: 7 requested at time: 80013896 handled at time: 80013896 and was a hit
-memory address: 25677 in page: 6 requested at time: 80013896 handled at time: 80014046 and was a miss
-memory address: 39277 in page: 9 requested at time: 80014046 handled at time: 80014060 and was a miss
-memory address: 5259 in page: 1 requested at time: 80014060 handled at time: 80014210 and was a miss
-memory address: 14710 in page: 3 requested at time: 80014210 handled at time: 80014224 and was a miss
-memory address: 58347 in page: 14 requested at time: 80014224 handled at time: 80014374 and was a miss
-memory address: 29263 in page: 7 requested at time: 80014374 handled at time: 80014524 and was a miss
-memory address: 64586 in page: 15 requested at time: 80014524 handled at time: 80014538 and was a miss
-memory address: 21282 in page: 5 requested at time: 80014538 handled at time: 80014552 and was a miss
-memory address: 3322 in page: 0 requested at time: 80014552 handled at time: 80014702 and was a miss
-memory address: 32700 in page: 7 requested at time: 80014702 handled at time: 80014702 and was a hit
-memory address: 25134 in page: 6 requested at time: 80014702 handled at time: 80014852 and was a miss
-memory address: 11316 in page: 2 requested at time: 80014852 handled at time: 80014866 and was a miss
-memory address: 44279 in page: 10 requested at time: 80014866 handled at time: 80014880 and was a miss
-memory address: 13639 in page: 3 requested at time: 80014880 handled at time: 80014894 and was a miss
-memory address: 35347 in page: 8 requested at time: 80014894 handled at time: 80014908 and was a miss
-memory address: 61034 in page: 14 requested at time: 80014908 handled at time: 80015058 and was a miss
-memory address: 28783 in page: 7 requested at time: 80015058 handled at time: 80015208 and was a miss
-memory address: 62672 in page: 15 requested at time: 80015208 handled at time: 80015222 and was a miss
-memory address: 2043 in page: 0 requested at time: 80015222 handled at time: 80015236 and was a miss
-memory address: 45983 in page: 11 requested at time: 80015236 handled at time: 80015250 and was a miss
-memory address: 44787 in page: 10 requested at time: 80015250 handled at time: 80015400 and was a miss
-memory address: 24918 in page: 6 requested at time: 80015400 handled at time: 80015414 and was a miss
-memory address: 17768 in page: 4 requested at time: 80015414 handled at time: 80015428 and was a miss
-memory address: 25809 in page: 6 requested at time: 80015428 handled at time: 80015428 and was a hit
-memory address: 65077 in page: 15 requested at time: 80015428 handled at time: 80015442 and was a miss
-memory address: 48462 in page: 11 requested at time: 80015442 handled at time: 80015456 and was a miss
-memory address: 22825 in page: 5 requested at time: 80015456 handled at time: 80015470 and was a miss
-memory address: 61769 in page: 15 requested at time: 80015470 handled at time: 80015470 and was a hit
-memory address: 49532 in page: 12 requested at time: 80015470 handled at time: 80015620 and was a miss
-memory address: 44344 in page: 10 requested at time: 80015620 handled at time: 80015634 and was a miss
-memory address: 26691 in page: 6 requested at time: 80015634 handled at time: 80015648 and was a miss
-memory address: 9674 in page: 2 requested at time: 80015648 handled at time: 80015798 and was a miss
-memory address: 18085 in page: 4 requested at time: 80015798 handled at time: 80015948 and was a miss
-memory address: 31951 in page: 7 requested at time: 80015948 handled at time: 80016098 and was a miss
-memory address: 24384 in page: 5 requested at time: 80016098 handled at time: 80016248 and was a miss
-memory address: 10897 in page: 2 requested at time: 80016248 handled at time: 80016248 and was a hit
-memory address: 61214 in page: 14 requested at time: 80016248 handled at time: 80016262 and was a miss
-memory address: 23434 in page: 5 requested at time: 80016262 handled at time: 80016262 and was a hit
-memory address: 32179 in page: 7 requested at time: 80016262 handled at time: 80016262 and was a hit
-memory address: 64536 in page: 15 requested at time: 80016262 handled at time: 80016276 and was a miss
-memory address: 56135 in page: 13 requested at time: 80016276 handled at time: 80016290 and was a miss
-memory address: 57314 in page: 13 requested at time: 80016290 handled at time: 80016290 and was a hit
-memory address: 10317 in page: 2 requested at time: 80016290 handled at time: 80016304 and was a miss
-memory address: 34878 in page: 8 requested at time: 80016304 handled at time: 80016318 and was a miss
-memory address: 5417 in page: 1 requested at time: 80016318 handled at time: 80016332 and was a miss
-memory address: 45664 in page: 11 requested at time: 80016332 handled at time: 80016346 and was a miss
-memory address: 30376 in page: 7 requested at time: 80016346 handled at time: 80016360 and was a miss
-memory address: 34200 in page: 8 requested at time: 80016360 handled at time: 80016360 and was a hit
-memory address: 42800 in page: 10 requested at time: 80016360 handled at time: 80016510 and was a miss
-memory address: 32419 in page: 7 requested at time: 80016510 handled at time: 80016510 and was a hit
-memory address: 14648 in page: 3 requested at time: 80016510 handled at time: 80016524 and was a miss
-memory address: 22051 in page: 5 requested at time: 80016524 handled at time: 80016538 and was a miss
-memory address: 57337 in page: 13 requested at time: 80016538 handled at time: 80016552 and was a miss
-memory address: 32416 in page: 7 requested at time: 80016552 handled at time: 80016566 and was a miss
-memory address: 47860 in page: 11 requested at time: 80016566 handled at time: 80016580 and was a miss
-memory address: 56878 in page: 13 requested at time: 80016580 handled at time: 80016580 and was a hit
-memory address: 15342 in page: 3 requested at time: 80016580 handled at time: 80016594 and was a miss
-memory address: 5149 in page: 1 requested at time: 80016594 handled at time: 80016608 and was a miss
-memory address: 53111 in page: 12 requested at time: 80016608 handled at time: 80016758 and was a miss
-memory address: 64874 in page: 15 requested at time: 80016758 handled at time: 80016772 and was a miss
-memory address: 49493 in page: 12 requested at time: 80016772 handled at time: 80016772 and was a hit
-memory address: 14267 in page: 3 requested at time: 80016772 handled at time: 80016772 and was a hit
-memory address: 9012 in page: 2 requested at time: 80016772 handled at time: 80016786 and was a miss
-memory address: 2043 in page: 0 requested at time: 80016786 handled at time: 80016800 and was a miss
-memory address: 46218 in page: 11 requested at time: 80016800 handled at time: 80016814 and was a miss
-memory address: 33397 in page: 8 requested at time: 80016814 handled at time: 80016964 and was a miss
-memory address: 12940 in page: 3 requested at time: 80016964 handled at time: 80016978 and was a miss
-memory address: 41896 in page: 10 requested at time: 80016978 handled at time: 80016992 and was a miss
-memory address: 56831 in page: 13 requested at time: 80016992 handled at time: 80017006 and was a miss
-memory address: 45119 in page: 11 requested at time: 80017006 handled at time: 80017020 and was a miss
-memory address: 40896 in page: 9 requested at time: 80017020 handled at time: 80017170 and was a miss
-memory address: 47430 in page: 11 requested at time: 80017170 handled at time: 80017170 and was a hit
-memory address: 36897 in page: 9 requested at time: 80017170 handled at time: 80017170 and was a hit
-memory address: 51213 in page: 12 requested at time: 80017170 handled at time: 80017184 and was a miss
-memory address: 16772 in page: 4 requested at time: 80017184 handled at time: 80017198 and was a miss
-memory address: 42315 in page: 10 requested at time: 80017198 handled at time: 80017212 and was a miss
-memory address: 31342 in page: 7 requested at time: 80017212 handled at time: 80017362 and was a miss
-memory address: 47148 in page: 11 requested at time: 80017362 handled at time: 80017376 and was a miss
-memory address: 10979 in page: 2 requested at time: 80017376 handled at time: 80017390 and was a miss
-memory address: 8606 in page: 2 requested at time: 80017390 handled at time: 80017390 and was a hit
-memory address: 14032 in page: 3 requested at time: 80017390 handled at time: 80017540 and was a miss
-memory address: 25627 in page: 6 requested at time: 80017540 handled at time: 80017690 and was a miss
-memory address: 30658 in page: 7 requested at time: 80017690 handled at time: 80017840 and was a miss
-memory address: 5833 in page: 1 requested at time: 80017840 handled at time: 80017854 and was a miss
-memory address: 58043 in page: 14 requested at time: 80017854 handled at time: 80017868 and was a miss
-memory address: 12982 in page: 3 requested at time: 80017868 handled at time: 80017882 and was a miss
-memory address: 62712 in page: 15 requested at time: 80017882 handled at time: 80018032 and was a miss
-memory address: 7849 in page: 1 requested at time: 80018032 handled at time: 80018032 and was a hit
-memory address: 18132 in page: 4 requested at time: 80018032 handled at time: 80018046 and was a miss
-memory address: 50287 in page: 12 requested at time: 80018046 handled at time: 80018060 and was a miss
-memory address: 7188 in page: 1 requested at time: 80018060 handled at time: 80018074 and was a miss
-memory address: 2089 in page: 0 requested at time: 80018074 handled at time: 80018088 and was a miss
-memory address: 64554 in page: 15 requested at time: 80018088 handled at time: 80018102 and was a miss
-memory address: 16200 in page: 3 requested at time: 80018102 handled at time: 80018116 and was a miss
-memory address: 4132 in page: 1 requested at time: 80018116 handled at time: 80018116 and was a hit
-memory address: 45236 in page: 11 requested at time: 80018116 handled at time: 80018266 and was a miss
-memory address: 49597 in page: 12 requested at time: 80018266 handled at time: 80018280 and was a miss
-memory address: 17072 in page: 4 requested at time: 80018280 handled at time: 80018294 and was a miss
-memory address: 21596 in page: 5 requested at time: 80018294 handled at time: 80018308 and was a miss
-memory address: 40893 in page: 9 requested at time: 80018308 handled at time: 80018458 and was a miss
-memory address: 62192 in page: 15 requested at time: 80018458 handled at time: 80018472 and was a miss
-memory address: 62493 in page: 15 requested at time: 80018472 handled at time: 80018472 and was a hit
-memory address: 22787 in page: 5 requested at time: 80018472 handled at time: 80018472 and was a hit
-memory address: 33553 in page: 8 requested at time: 80018472 handled at time: 80018486 and was a miss
-memory address: 48170 in page: 11 requested at time: 80018486 handled at time: 80018636 and was a miss
-memory address: 39560 in page: 9 requested at time: 80018636 handled at time: 80018636 and was a hit
-memory address: 10332 in page: 2 requested at time: 80018636 handled at time: 80018650 and was a miss
-memory address: 13976 in page: 3 requested at time: 80018650 handled at time: 80018664 and was a miss
-memory address: 21172 in page: 5 requested at time: 80018664 handled at time: 80018814 and was a miss
-memory address: 21312 in page: 5 requested at time: 80018814 handled at time: 80018814 and was a hit
-memory address: 22583 in page: 5 requested at time: 80018814 handled at time: 80018814 and was a hit
-memory address: 35204 in page: 8 requested at time: 80018814 handled at time: 80018964 and was a miss
-memory address: 46939 in page: 11 requested at time: 80018964 handled at time: 80019114 and was a miss
-memory address: 53241 in page: 12 requested at time: 80019114 handled at time: 80019128 and was a miss
-memory address: 41038 in page: 10 requested at time: 80019128 handled at time: 80019278 and was a miss
-memory address: 39447 in page: 9 requested at time: 80019278 handled at time: 80019292 and was a miss
-memory address: 687 in page: 0 requested at time: 80019292 handled at time: 80019306 and was a miss
-memory address: 38214 in page: 9 requested at time: 80019306 handled at time: 80019306 and was a hit
-memory address: 47296 in page: 11 requested at time: 80019306 handled at time: 80019320 and was a miss
-memory address: 18819 in page: 4 requested at time: 80019320 handled at time: 80019334 and was a miss
-memory address: 22965 in page: 5 requested at time: 80019334 handled at time: 80019484 and was a miss
-memory address: 54484 in page: 13 requested at time: 80019484 handled at time: 80019498 and was a miss
-memory address: 20909 in page: 5 requested at time: 80019498 handled at time: 80019498 and was a hit
-memory address: 21984 in page: 5 requested at time: 80019498 handled at time: 80019498 and was a hit
-memory address: 5149 in page: 1 requested at time: 80019498 handled at time: 80019648 and was a miss
-memory address: 25041 in page: 6 requested at time: 80019648 handled at time: 80019662 and was a miss
-memory address: 1684 in page: 0 requested at time: 80019662 handled at time: 80019676 and was a miss
-memory address: 54746 in page: 13 requested at time: 80019676 handled at time: 80019676 and was a hit
-memory address: 42114 in page: 10 requested at time: 80019676 handled at time: 80019690 and was a miss
-memory address: 23281 in page: 5 requested at time: 80019690 handled at time: 80019704 and was a miss
-memory address: 30103 in page: 7 requested at time: 80019704 handled at time: 80019854 and was a miss
-memory address: 38770 in page: 9 requested at time: 80019854 handled at time: 80020004 and was a miss
-memory address: 20238 in page: 4 requested at time: 80020004 handled at time: 80020018 and was a miss
-memory address: 52891 in page: 12 requested at time: 80020018 handled at time: 80020032 and was a miss
-memory address: 6787 in page: 1 requested at time: 80020032 handled at time: 80020046 and was a miss
-memory address: 2872 in page: 0 requested at time: 80020046 handled at time: 80020196 and was a miss
-memory address: 26915 in page: 6 requested at time: 80020196 handled at time: 80020346 and was a miss
-memory address: 17120 in page: 4 requested at time: 80020346 handled at time: 80020496 and was a miss
-memory address: 16849 in page: 4 requested at time: 80020496 handled at time: 80020496 and was a hit
-memory address: 48087 in page: 11 requested at time: 80020496 handled at time: 80020646 and was a miss
-memory address: 38432 in page: 9 requested at time: 80020646 handled at time: 80020796 and was a miss
-memory address: 39432 in page: 9 requested at time: 80020796 handled at time: 80020796 and was a hit
-memory address: 17756 in page: 4 requested at time: 80020796 handled at time: 80020796 and was a hit
-memory address: 19835 in page: 4 requested at time: 80020796 handled at time: 80020796 and was a hit
-memory address: 27137 in page: 6 requested at time: 80020796 handled at time: 80020796 and was a hit
-memory address: 58794 in page: 14 requested at time: 80020796 handled at time: 80020810 and was a miss
-memory address: 59282 in page: 14 requested at time: 80020810 handled at time: 80020810 and was a hit
-memory address: 27824 in page: 6 requested at time: 80020810 handled at time: 80020824 and was a miss
-memory address: 31472 in page: 7 requested at time: 80020824 handled at time: 80020838 and was a miss
-memory address: 41043 in page: 10 requested at time: 80020838 handled at time: 80020852 and was a miss
-memory address: 46644 in page: 11 requested at time: 80020852 handled at time: 80020866 and was a miss
-memory address: 54437 in page: 13 requested at time: 80020866 handled at time: 80020880 and was a miss
-memory address: 29991 in page: 7 requested at time: 80020880 handled at time: 80020880 and was a hit
-memory address: 2017 in page: 0 requested at time: 80020880 handled at time: 80021030 and was a miss
-memory address: 10885 in page: 2 requested at time: 80021030 handled at time: 80021180 and was a miss
-memory address: 35140 in page: 8 requested at time: 80021180 handled at time: 80021194 and was a miss
-memory address: 27058 in page: 6 requested at time: 80021194 handled at time: 80021208 and was a miss
-memory address: 12570 in page: 3 requested at time: 80021208 handled at time: 80021222 and was a miss
-memory address: 24351 in page: 5 requested at time: 80021222 handled at time: 80021236 and was a miss
-memory address: 3636 in page: 0 requested at time: 80021236 handled at time: 80021250 and was a miss
-memory address: 35851 in page: 8 requested at time: 80021250 handled at time: 80021264 and was a miss
-memory address: 54454 in page: 13 requested at time: 80021264 handled at time: 80021278 and was a miss
-memory address: 42406 in page: 10 requested at time: 80021278 handled at time: 80021428 and was a miss
-memory address: 56089 in page: 13 requested at time: 80021428 handled at time: 80021428 and was a hit
-memory address: 41809 in page: 10 requested at time: 80021428 handled at time: 80021428 and was a hit
-memory address: 49194 in page: 12 requested at time: 80021428 handled at time: 80021578 and was a miss
-memory address: 58961 in page: 14 requested at time: 80021578 handled at time: 80021592 and was a miss
-memory address: 3188 in page: 0 requested at time: 80021592 handled at time: 80021742 and was a miss
-memory address: 778 in page: 0 requested at time: 80021742 handled at time: 80021742 and was a hit
-memory address: 10274 in page: 2 requested at time: 80021742 handled at time: 80021756 and was a miss
-memory address: 51276 in page: 12 requested at time: 80021756 handled at time: 80021756 and was a hit
-memory address: 39210 in page: 9 requested at time: 80021756 handled at time: 80021770 and was a miss
-memory address: 49706 in page: 12 requested at time: 80021770 handled at time: 80021784 and was a miss
-memory address: 3496 in page: 0 requested at time: 80021784 handled at time: 80021784 and was a hit
-memory address: 59045 in page: 14 requested at time: 80021784 handled at time: 80021798 and was a miss
-memory address: 11307 in page: 2 requested at time: 80021798 handled at time: 80021798 and was a hit
-memory address: 62290 in page: 15 requested at time: 80021798 handled at time: 80021812 and was a miss
-memory address: 52792 in page: 12 requested at time: 80021812 handled at time: 80021812 and was a hit
-memory address: 39132 in page: 9 requested at time: 80021812 handled at time: 80021812 and was a hit
-memory address: 28226 in page: 6 requested at time: 80021812 handled at time: 80021826 and was a miss
-memory address: 28299 in page: 6 requested at time: 80021826 handled at time: 80021826 and was a hit
-memory address: 20240 in page: 4 requested at time: 80021826 handled at time: 80021840 and was a miss
-memory address: 17127 in page: 4 requested at time: 80021840 handled at time: 80021840 and was a hit
-memory address: 58290 in page: 14 requested at time: 80021840 handled at time: 80021840 and was a hit
-memory address: 22257 in page: 5 requested at time: 80021840 handled at time: 80021990 and was a miss
-memory address: 28013 in page: 6 requested at time: 80021990 handled at time: 80021990 and was a hit
-memory address: 27895 in page: 6 requested at time: 80021990 handled at time: 80021990 and was a hit
-memory address: 49315 in page: 12 requested at time: 80021990 handled at time: 80022004 and was a miss
-memory address: 40583 in page: 9 requested at time: 80022004 handled at time: 80022018 and was a miss
-memory address: 52246 in page: 12 requested at time: 80022018 handled at time: 80022018 and was a hit
-memory address: 52952 in page: 12 requested at time: 80022018 handled at time: 80022018 and was a hit
-memory address: 10898 in page: 2 requested at time: 80022018 handled at time: 80022032 and was a miss
-memory address: 41164 in page: 10 requested at time: 80022032 handled at time: 80022046 and was a miss
-memory address: 29822 in page: 7 requested at time: 80022046 handled at time: 80022196 and was a miss
-memory address: 1451 in page: 0 requested at time: 80022196 handled at time: 80022210 and was a miss
-memory address: 17438 in page: 4 requested at time: 80022210 handled at time: 80022224 and was a miss
-memory address: 13480 in page: 3 requested at time: 80022224 handled at time: 80022238 and was a miss
-memory address: 60412 in page: 14 requested at time: 80022238 handled at time: 80022388 and was a miss
-memory address: 20626 in page: 5 requested at time: 80022388 handled at time: 80022402 and was a miss
-memory address: 14258 in page: 3 requested at time: 80022402 handled at time: 80022402 and was a hit
-memory address: 5151 in page: 1 requested at time: 80022402 handled at time: 80022552 and was a miss
-memory address: 6366 in page: 1 requested at time: 80022552 handled at time: 80022552 and was a hit
-memory address: 53468 in page: 13 requested at time: 80022552 handled at time: 80022702 and was a miss
-memory address: 54857 in page: 13 requested at time: 80022702 handled at time: 80022702 and was a hit
-memory address: 9862 in page: 2 requested at time: 80022702 handled at time: 80022716 and was a miss
-memory address: 46978 in page: 11 requested at time: 80022716 handled at time: 80022730 and was a miss
-memory address: 629 in page: 0 requested at time: 80022730 handled at time: 80022744 and was a miss
-memory address: 6616 in page: 1 requested at time: 80022744 handled at time: 80022758 and was a miss
-memory address: 34234 in page: 8 requested at time: 80022758 handled at time: 80022772 and was a miss
-memory address: 39761 in page: 9 requested at time: 80022772 handled at time: 80022786 and was a miss
-memory address: 34842 in page: 8 requested at time: 80022786 handled at time: 80022786 and was a hit
-memory address: 62533 in page: 15 requested at time: 80022786 handled at time: 80022800 and was a miss
-memory address: 60001 in page: 14 requested at time: 80022800 handled at time: 80022814 and was a miss
-memory address: 51970 in page: 12 requested at time: 80022814 handled at time: 80022964 and was a miss
-memory address: 55287 in page: 13 requested at time: 80022964 handled at time: 80022978 and was a miss
-memory address: 16722 in page: 4 requested at time: 80022978 handled at time: 80023128 and was a miss
-memory address: 14447 in page: 3 requested at time: 80023128 handled at time: 80023278 and was a miss
-memory address: 17646 in page: 4 requested at time: 80023278 handled at time: 80023278 and was a hit
-memory address: 501 in page: 0 requested at time: 80023278 handled at time: 80023292 and was a miss
-memory address: 55030 in page: 13 requested at time: 80023292 handled at time: 80023292 and was a hit
-memory address: 4356 in page: 1 requested at time: 80023292 handled at time: 80023306 and was a miss
-memory address: 53453 in page: 13 requested at time: 80023306 handled at time: 80023320 and was a miss
-memory address: 392 in page: 0 requested at time: 80023320 handled at time: 80023320 and was a hit
-memory address: 45521 in page: 11 requested at time: 80023320 handled at time: 80023334 and was a miss
-memory address: 17740 in page: 4 requested at time: 80023334 handled at time: 80023348 and was a miss
-memory address: 1843 in page: 0 requested at time: 80023348 handled at time: 80023362 and was a miss
-memory address: 62959 in page: 15 requested at time: 80023362 handled at time: 80023512 and was a miss
-memory address: 31220 in page: 7 requested at time: 80023512 handled at time: 80023662 and was a miss
-memory address: 62255 in page: 15 requested at time: 80023662 handled at time: 80023662 and was a hit
-memory address: 18049 in page: 4 requested at time: 80023662 handled at time: 80023662 and was a hit
-memory address: 45479 in page: 11 requested at time: 80023662 handled at time: 80023812 and was a miss
-memory address: 1870 in page: 0 requested at time: 80023812 handled at time: 80023812 and was a hit
-memory address: 24416 in page: 5 requested at time: 80023812 handled at time: 80023826 and was a miss
-memory address: 33411 in page: 8 requested at time: 80023826 handled at time: 80023976 and was a miss
-memory address: 56728 in page: 13 requested at time: 80023976 handled at time: 80024126 and was a miss
-memory address: 34278 in page: 8 requested at time: 80024126 handled at time: 80024126 and was a hit
-memory address: 14853 in page: 3 requested at time: 80024126 handled at time: 80024140 and was a miss
-memory address: 57357 in page: 14 requested at time: 80024140 handled at time: 80024290 and was a miss
-memory address: 40895 in page: 9 requested at time: 80024290 handled at time: 80024304 and was a miss
-memory address: 49087 in page: 11 requested at time: 80024304 handled at time: 80024318 and was a miss
-memory address: 31582 in page: 7 requested at time: 80024318 handled at time: 80024468 and was a miss
-memory address: 10201 in page: 2 requested at time: 80024468 handled at time: 80024482 and was a miss
-memory address: 46084 in page: 11 requested at time: 80024482 handled at time: 80024482 and was a hit
-memory address: 26047 in page: 6 requested at time: 80024482 handled at time: 80024496 and was a miss
-memory address: 62171 in page: 15 requested at time: 80024496 handled at time: 80024646 and was a miss
-memory address: 35836 in page: 8 requested at time: 80024646 handled at time: 80024660 and was a miss
-memory address: 42769 in page: 10 requested at time: 80024660 handled at time: 80024674 and was a miss
-memory address: 11082 in page: 2 requested at time: 80024674 handled at time: 80024688 and was a miss
-memory address: 53482 in page: 13 requested at time: 80024688 handled at time: 80024702 and was a miss
-memory address: 43270 in page: 10 requested at time: 80024702 handled at time: 80024702 and was a hit
-memory address: 576 in page: 0 requested at time: 80024702 handled at time: 80024716 and was a miss
-memory address: 57839 in page: 14 requested at time: 80024716 handled at time: 80024730 and was a miss
-memory address: 31188 in page: 7 requested at time: 80024730 handled at time: 80024744 and was a miss
-memory address: 968 in page: 0 requested at time: 80024744 handled at time: 80024744 and was a hit
-memory address: 37824 in page: 9 requested at time: 80024744 handled at time: 80024758 and was a miss
-memory address: 48928 in page: 11 requested at time: 80024758 handled at time: 80024908 and was a miss
-memory address: 2811 in page: 0 requested at time: 80024908 handled at time: 80025058 and was a miss
-memory address: 35247 in page: 8 requested at time: 80025058 handled at time: 80025072 and was a miss
-memory address: 14612 in page: 3 requested at time: 80025072 handled at time: 80025222 and was a miss
-memory address: 65067 in page: 15 requested at time: 80025222 handled at time: 80025236 and was a miss
-memory address: 53296 in page: 13 requested at time: 80025236 handled at time: 80025250 and was a miss
-memory address: 60091 in page: 14 requested at time: 80025250 handled at time: 80025400 and was a miss
-memory address: 1401 in page: 0 requested at time: 80025400 handled at time: 80025414 and was a miss
-memory address: 12176 in page: 2 requested at time: 80025414 handled at time: 80025428 and was a miss
-memory address: 27967 in page: 6 requested at time: 80025428 handled at time: 80025442 and was a miss
-memory address: 58129 in page: 14 requested at time: 80025442 handled at time: 80025442 and was a hit
-memory address: 46455 in page: 11 requested at time: 80025442 handled at time: 80025456 and was a miss
-memory address: 42820 in page: 10 requested at time: 80025456 handled at time: 80025470 and was a miss
-memory address: 49950 in page: 12 requested at time: 80025470 handled at time: 80025484 and was a miss
-memory address: 21814 in page: 5 requested at time: 80025484 handled at time: 80025634 and was a miss
-memory address: 26372 in page: 6 requested at time: 80025634 handled at time: 80025784 and was a miss
-memory address: 15996 in page: 3 requested at time: 80025784 handled at time: 80025798 and was a miss
-memory address: 32015 in page: 7 requested at time: 80025798 handled at time: 80025812 and was a miss
-memory address: 6920 in page: 1 requested at time: 80025812 handled at time: 80025826 and was a miss
-memory address: 42043 in page: 10 requested at time: 80025826 handled at time: 80025840 and was a miss
-memory address: 28651 in page: 6 requested at time: 80025840 handled at time: 80025854 and was a miss
-memory address: 42756 in page: 10 requested at time: 80025854 handled at time: 80025854 and was a hit
-memory address: 19276 in page: 4 requested at time: 80025854 handled at time: 80026004 and was a miss
-memory address: 39733 in page: 9 requested at time: 80026004 handled at time: 80026154 and was a miss
-memory address: 30703 in page: 7 requested at time: 80026154 handled at time: 80026304 and was a miss
-memory address: 62547 in page: 15 requested at time: 80026304 handled at time: 80026318 and was a miss
-memory address: 40310 in page: 9 requested at time: 80026318 handled at time: 80026318 and was a hit
-memory address: 23006 in page: 5 requested at time: 80026318 handled at time: 80026332 and was a miss
-memory address: 28199 in page: 6 requested at time: 80026332 handled at time: 80026346 and was a miss
-memory address: 41278 in page: 10 requested at time: 80026346 handled at time: 80026496 and was a miss
-memory address: 60830 in page: 14 requested at time: 80026496 handled at time: 80026510 and was a miss
-memory address: 11591 in page: 2 requested at time: 80026510 handled at time: 80026524 and was a miss
-memory address: 44090 in page: 10 requested at time: 80026524 handled at time: 80026524 and was a hit
-memory address: 30541 in page: 7 requested at time: 80026524 handled at time: 80026674 and was a miss
-memory address: 26203 in page: 6 requested at time: 80026674 handled at time: 80026824 and was a miss
-memory address: 43621 in page: 10 requested at time: 80026824 handled at time: 80026974 and was a miss
-memory address: 18301 in page: 4 requested at time: 80026974 handled at time: 80026988 and was a miss
-memory address: 20759 in page: 5 requested at time: 80026988 handled at time: 80027002 and was a miss
-memory address: 45022 in page: 10 requested at time: 80027002 handled at time: 80027002 and was a hit
-memory address: 30478 in page: 7 requested at time: 80027002 handled at time: 80027016 and was a miss
-memory address: 48726 in page: 11 requested at time: 80027016 handled at time: 80027166 and was a miss
-memory address: 37616 in page: 9 requested at time: 80027166 handled at time: 80027180 and was a miss
-memory address: 11397 in page: 2 requested at time: 80027180 handled at time: 80027194 and was a miss
-memory address: 26010 in page: 6 requested at time: 80027194 handled at time: 80027208 and was a miss
-memory address: 22030 in page: 5 requested at time: 80027208 handled at time: 80027222 and was a miss
-memory address: 33211 in page: 8 requested at time: 80027222 handled at time: 80027372 and was a miss
-memory address: 52382 in page: 12 requested at time: 80027372 handled at time: 80027386 and was a miss
-memory address: 38027 in page: 9 requested at time: 80027386 handled at time: 80027536 and was a miss
-memory address: 65226 in page: 15 requested at time: 80027536 handled at time: 80027550 and was a miss
-memory address: 59303 in page: 14 requested at time: 80027550 handled at time: 80027700 and was a miss
-memory address: 14534 in page: 3 requested at time: 80027700 handled at time: 80027714 and was a miss
-memory address: 28341 in page: 6 requested at time: 80027714 handled at time: 80027864 and was a miss
-memory address: 36523 in page: 8 requested at time: 80027864 handled at time: 80028014 and was a miss
-memory address: 33811 in page: 8 requested at time: 80028014 handled at time: 80028014 and was a hit
-memory address: 2539 in page: 0 requested at time: 80028014 handled at time: 80028028 and was a miss
-memory address: 1690 in page: 0 requested at time: 80028028 handled at time: 80028028 and was a hit
-memory address: 30822 in page: 7 requested at time: 80028028 handled at time: 80028042 and was a miss
-memory address: 42849 in page: 10 requested at time: 80028042 handled at time: 80028192 and was a miss
-memory address: 24696 in page: 6 requested at time: 80028192 handled at time: 80028342 and was a miss
-memory address: 59021 in page: 14 requested at time: 80028342 handled at time: 80028356 and was a miss
-memory address: 18591 in page: 4 requested at time: 80028356 handled at time: 80028370 and was a miss
-memory address: 19990 in page: 4 requested at time: 80028370 handled at time: 80028370 and was a hit
-memory address: 5076 in page: 1 requested at time: 80028370 handled at time: 80028520 and was a miss
-memory address: 62681 in page: 15 requested at time: 80028520 handled at time: 80028670 and was a miss
-memory address: 50531 in page: 12 requested at time: 80028670 handled at time: 80028684 and was a miss
-memory address: 31279 in page: 7 requested at time: 80028684 handled at time: 80028698 and was a miss
-memory address: 40766 in page: 9 requested at time: 80028698 handled at time: 80028848 and was a miss
-memory address: 3297 in page: 0 requested at time: 80028848 handled at time: 80028862 and was a miss
-memory address: 52038 in page: 12 requested at time: 80028862 handled at time: 80028862 and was a hit
-memory address: 20253 in page: 4 requested at time: 80028862 handled at time: 80028876 and was a miss
-memory address: 33775 in page: 8 requested at time: 80028876 handled at time: 80029026 and was a miss
-memory address: 35228 in page: 8 requested at time: 80029026 handled at time: 80029026 and was a hit
-memory address: 57869 in page: 14 requested at time: 80029026 handled at time: 80029040 and was a miss
-memory address: 45172 in page: 11 requested at time: 80029040 handled at time: 80029054 and was a miss
-memory address: 61239 in page: 14 requested at time: 80029054 handled at time: 80029054 and was a hit
-memory address: 14363 in page: 3 requested at time: 80029054 handled at time: 80029068 and was a miss
-memory address: 12847 in page: 3 requested at time: 80029068 handled at time: 80029068 and was a hit
-memory address: 48085 in page: 11 requested at time: 80029068 handled at time: 80029068 and was a hit
-memory address: 52390 in page: 12 requested at time: 80029068 handled at time: 80029082 and was a miss
-memory address: 12537 in page: 3 requested at time: 80029082 handled at time: 80029082 and was a hit
-memory address: 41852 in page: 10 requested at time: 80029082 handled at time: 80029232 and was a miss
-memory address: 1389 in page: 0 requested at time: 80029232 handled at time: 80029246 and was a miss
-memory address: 40879 in page: 9 requested at time: 80029246 handled at time: 80029260 and was a miss
-memory address: 12840 in page: 3 requested at time: 80029260 handled at time: 80029274 and was a miss
-memory address: 35200 in page: 8 requested at time: 80029274 handled at time: 80029288 and was a miss
-memory address: 43418 in page: 10 requested at time: 80029288 handled at time: 80029302 and was a miss
-memory address: 14530 in page: 3 requested at time: 80029302 handled at time: 80029302 and was a hit
-memory address: 486 in page: 0 requested at time: 80029302 handled at time: 80029316 and was a miss
-memory address: 20731 in page: 5 requested at time: 80029316 handled at time: 80029330 and was a miss
-memory address: 39227 in page: 9 requested at time: 80029330 handled at time: 80029344 and was a miss
-memory address: 59507 in page: 14 requested at time: 80029344 handled at time: 80029494 and was a miss
-memory address: 39322 in page: 9 requested at time: 80029494 handled at time: 80029494 and was a hit
-memory address: 59217 in page: 14 requested at time: 80029494 handled at time: 80029494 and was a hit
-memory address: 64583 in page: 15 requested at time: 80029494 handled at time: 80029508 and was a miss
-memory address: 36468 in page: 8 requested at time: 80029508 handled at time: 80029522 and was a miss
-memory address: 44213 in page: 10 requested at time: 80029522 handled at time: 80029672 and was a miss
-memory address: 30326 in page: 7 requested at time: 80029672 handled at time: 80029822 and was a miss
-memory address: 11698 in page: 2 requested at time: 80029822 handled at time: 80029836 and was a miss
-memory address: 47510 in page: 11 requested at time: 80029836 handled at time: 80029850 and was a miss
-memory address: 16829 in page: 4 requested at time: 80029850 handled at time: 80029864 and was a miss
-memory address: 31951 in page: 7 requested at time: 80029864 handled at time: 80029864 and was a hit
-memory address: 15749 in page: 3 requested at time: 80029864 handled at time: 80029878 and was a miss
-memory address: 52057 in page: 12 requested at time: 80029878 handled at time: 80029892 and was a miss
-memory address: 24284 in page: 5 requested at time: 80029892 handled at time: 80029906 and was a miss
-memory address: 60921 in page: 14 requested at time: 80029906 handled at time: 80030056 and was a miss
-memory address: 47760 in page: 11 requested at time: 80030056 handled at time: 80030070 and was a miss
-memory address: 38648 in page: 9 requested at time: 80030070 handled at time: 80030220 and was a miss
-memory address: 8232 in page: 2 requested at time: 80030220 handled at time: 80030234 and was a miss
-memory address: 30310 in page: 7 requested at time: 80030234 handled at time: 80030248 and was a miss
-memory address: 25502 in page: 6 requested at time: 80030248 handled at time: 80030398 and was a miss
-memory address: 20769 in page: 5 requested at time: 80030398 handled at time: 80030412 and was a miss
-memory address: 6626 in page: 1 requested at time: 80030412 handled at time: 80030562 and was a miss
-memory address: 26891 in page: 6 requested at time: 80030562 handled at time: 80030562 and was a hit
-memory address: 61648 in page: 15 requested at time: 80030562 handled at time: 80030576 and was a miss
-memory address: 19466 in page: 4 requested at time: 80030576 handled at time: 80030726 and was a miss
-memory address: 62091 in page: 15 requested at time: 80030726 handled at time: 80030726 and was a hit
-memory address: 39530 in page: 9 requested at time: 80030726 handled at time: 80030740 and was a miss
-memory address: 33997 in page: 8 requested at time: 80030740 handled at time: 80030754 and was a miss
-memory address: 62577 in page: 15 requested at time: 80030754 handled at time: 80030754 and was a hit
-memory address: 60261 in page: 14 requested at time: 80030754 handled at time: 80030768 and was a miss
-memory address: 7688 in page: 1 requested at time: 80030768 handled at time: 80030782 and was a miss
-memory address: 56548 in page: 13 requested at time: 80030782 handled at time: 80030796 and was a miss
-memory address: 34048 in page: 8 requested at time: 80030796 handled at time: 80030796 and was a hit
-memory address: 1369 in page: 0 requested at time: 80030796 handled at time: 80030810 and was a miss
-memory address: 55595 in page: 13 requested at time: 80030810 handled at time: 80030810 and was a hit
-memory address: 4980 in page: 1 requested at time: 80030810 handled at time: 80030810 and was a hit
-memory address: 45582 in page: 11 requested at time: 80030810 handled at time: 80030960 and was a miss
-memory address: 20386 in page: 4 requested at time: 80030960 handled at time: 80030974 and was a miss
-memory address: 16678 in page: 4 requested at time: 80030974 handled at time: 80030974 and was a hit
-memory address: 27556 in page: 6 requested at time: 80030974 handled at time: 80031124 and was a miss
-memory address: 37215 in page: 9 requested at time: 80031124 handled at time: 80031138 and was a miss
-memory address: 48630 in page: 11 requested at time: 80031138 handled at time: 80031138 and was a hit
-memory address: 43305 in page: 10 requested at time: 80031138 handled at time: 80031152 and was a miss
-memory address: 23736 in page: 5 requested at time: 80031152 handled at time: 80031166 and was a miss
-memory address: 7378 in page: 1 requested at time: 80031166 handled at time: 80031180 and was a miss
-memory address: 38690 in page: 9 requested at time: 80031180 handled at time: 80031180 and was a hit
-memory address: 5961 in page: 1 requested at time: 80031180 handled at time: 80031180 and was a hit
-memory address: 46026 in page: 11 requested at time: 80031180 handled at time: 80031194 and was a miss
-memory address: 46922 in page: 11 requested at time: 80031194 handled at time: 80031194 and was a hit
-memory address: 36271 in page: 8 requested at time: 80031194 handled at time: 80031208 and was a miss
-memory address: 5993 in page: 1 requested at time: 80031208 handled at time: 80031208 and was a hit
-memory address: 2156 in page: 0 requested at time: 80031208 handled at time: 80031222 and was a miss
-memory address: 42897 in page: 10 requested at time: 80031222 handled at time: 80031236 and was a miss
-memory address: 32884 in page: 8 requested at time: 80031236 handled at time: 80031236 and was a hit
-memory address: 63804 in page: 15 requested at time: 80031236 handled at time: 80031250 and was a miss
-memory address: 62364 in page: 15 requested at time: 80031250 handled at time: 80031250 and was a hit
-memory address: 29440 in page: 7 requested at time: 80031250 handled at time: 80031264 and was a miss
-memory address: 37799 in page: 9 requested at time: 80031264 handled at time: 80031278 and was a miss
-memory address: 30825 in page: 7 requested at time: 80031278 handled at time: 80031278 and was a hit
-memory address: 26481 in page: 6 requested at time: 80031278 handled at time: 80031292 and was a miss
-memory address: 32524 in page: 7 requested at time: 80031292 handled at time: 80031292 and was a hit
-memory address: 38513 in page: 9 requested at time: 80031292 handled at time: 80031292 and was a hit
-memory address: 17494 in page: 4 requested at time: 80031292 handled at time: 80031306 and was a miss
-memory address: 1036 in page: 0 requested at time: 80031306 handled at time: 80031320 and was a miss
-memory address: 39882 in page: 9 requested at time: 80031320 handled at time: 80031320 and was a hit
-memory address: 7553 in page: 1 requested at time: 80031320 handled at time: 80031334 and was a miss
-memory address: 6016 in page: 1 requested at time: 80031334 handled at time: 80031334 and was a hit
-memory address: 19929 in page: 4 requested at time: 80031334 handled at time: 80031334 and was a hit
-memory address: 27939 in page: 6 requested at time: 80031334 handled at time: 80031334 and was a hit
-memory address: 22695 in page: 5 requested at time: 80031334 handled at time: 80031348 and was a miss
-memory address: 47485 in page: 11 requested at time: 80031348 handled at time: 80031362 and was a miss
-memory address: 65154 in page: 15 requested at time: 80031362 handled at time: 80031376 and was a miss
-memory address: 5789 in page: 1 requested at time: 80031376 handled at time: 80031376 and was a hit
-memory address: 25255 in page: 6 requested at time: 80031376 handled at time: 80031390 and was a miss
-memory address: 23355 in page: 5 requested at time: 80031390 handled at time: 80031390 and was a hit
-memory address: 13167 in page: 3 requested at time: 80031390 handled at time: 80031404 and was a miss
-memory address: 63945 in page: 15 requested at time: 80031404 handled at time: 80031404 and was a hit
-memory address: 29316 in page: 7 requested at time: 80031404 handled at time: 80031418 and was a miss
-memory address: 59194 in page: 14 requested at time: 80031418 handled at time: 80031568 and was a miss
-memory address: 45332 in page: 11 requested at time: 80031568 handled at time: 80031582 and was a miss
-memory address: 51 in page: 0 requested at time: 80031582 handled at time: 80031596 and was a miss
-memory address: 65187 in page: 15 requested at time: 80031596 handled at time: 80031746 and was a miss
-memory address: 47488 in page: 11 requested at time: 80031746 handled at time: 80031746 and was a hit
-memory address: 42948 in page: 10 requested at time: 80031746 handled at time: 80031760 and was a miss
-memory address: 32535 in page: 7 requested at time: 80031760 handled at time: 80031910 and was a miss
-memory address: 45756 in page: 11 requested at time: 80031910 handled at time: 80032060 and was a miss
-memory address: 39776 in page: 9 requested at time: 80032060 handled at time: 80032074 and was a miss
-memory address: 61975 in page: 15 requested at time: 80032074 handled at time: 80032088 and was a miss
-memory address: 18019 in page: 4 requested at time: 80032088 handled at time: 80032102 and was a miss
-memory address: 5065 in page: 1 requested at time: 80032102 handled at time: 80032116 and was a miss
-memory address: 22921 in page: 5 requested at time: 80032116 handled at time: 80032130 and was a miss
-memory address: 50544 in page: 12 requested at time: 80032130 handled at time: 80032280 and was a miss
-memory address: 43578 in page: 10 requested at time: 80032280 handled at time: 80032294 and was a miss
-memory address: 40415 in page: 9 requested at time: 80032294 handled at time: 80032308 and was a miss
-memory address: 51580 in page: 12 requested at time: 80032308 handled at time: 80032308 and was a hit
-memory address: 17925 in page: 4 requested at time: 80032308 handled at time: 80032322 and was a miss
-memory address: 47968 in page: 11 requested at time: 80032322 handled at time: 80032336 and was a miss
-memory address: 57597 in page: 14 requested at time: 80032336 handled at time: 80032350 and was a miss
-memory address: 37854 in page: 9 requested at time: 80032350 handled at time: 80032350 and was a hit
-memory address: 10372 in page: 2 requested at time: 80032350 handled at time: 80032500 and was a miss
-memory address: 14756 in page: 3 requested at time: 80032500 handled at time: 80032514 and was a miss
-memory address: 19803 in page: 4 requested at time: 80032514 handled at time: 80032528 and was a miss
-memory address: 9990 in page: 2 requested at time: 80032528 handled at time: 80032528 and was a hit
-memory address: 20545 in page: 5 requested at time: 80032528 handled at time: 80032542 and was a miss
-memory address: 45058 in page: 11 requested at time: 80032542 handled at time: 80032556 and was a miss
-memory address: 33345 in page: 8 requested at time: 80032556 handled at time: 80032570 and was a miss
-memory address: 33712 in page: 8 requested at time: 80032570 handled at time: 80032570 and was a hit
-memory address: 43468 in page: 10 requested at time: 80032570 handled at time: 80032584 and was a miss
-memory address: 62661 in page: 15 requested at time: 80032584 handled at time: 80032734 and was a miss
-memory address: 27370 in page: 6 requested at time: 80032734 handled at time: 80032748 and was a miss
-memory address: 23264 in page: 5 requested at time: 80032748 handled at time: 80032898 and was a miss
-memory address: 62712 in page: 15 requested at time: 80032898 handled at time: 80032898 and was a hit
-memory address: 27021 in page: 6 requested at time: 80032898 handled at time: 80032898 and was a hit
-memory address: 5216 in page: 1 requested at time: 80032898 handled at time: 80032912 and was a miss
-memory address: 40125 in page: 9 requested at time: 80032912 handled at time: 80033062 and was a miss
-memory address: 59557 in page: 14 requested at time: 80033062 handled at time: 80033076 and was a miss
-memory address: 50972 in page: 12 requested at time: 80033076 handled at time: 80033090 and was a miss
-memory address: 14365 in page: 3 requested at time: 80033090 handled at time: 80033104 and was a miss
-memory address: 55996 in page: 13 requested at time: 80033104 handled at time: 80033254 and was a miss
-memory address: 3456 in page: 0 requested at time: 80033254 handled at time: 80033404 and was a miss
-memory address: 19431 in page: 4 requested at time: 80033404 handled at time: 80033418 and was a miss
-memory address: 13381 in page: 3 requested at time: 80033418 handled at time: 80033418 and was a hit
-memory address: 54000 in page: 13 requested at time: 80033418 handled at time: 80033418 and was a hit
-memory address: 63009 in page: 15 requested at time: 80033418 handled at time: 80033568 and was a miss
-memory address: 53796 in page: 13 requested at time: 80033568 handled at time: 80033568 and was a hit
-memory address: 40044 in page: 9 requested at time: 80033568 handled at time: 80033718 and was a miss
-memory address: 15398 in page: 3 requested at time: 80033718 handled at time: 80033868 and was a miss
-memory address: 36229 in page: 8 requested at time: 80033868 handled at time: 80034018 and was a miss
-memory address: 32105 in page: 7 requested at time: 80034018 handled at time: 80034032 and was a miss
-memory address: 53252 in page: 13 requested at time: 80034032 handled at time: 80034182 and was a miss
-memory address: 46601 in page: 11 requested at time: 80034182 handled at time: 80034196 and was a miss
-memory address: 46861 in page: 11 requested at time: 80034196 handled at time: 80034196 and was a hit
-memory address: 7520 in page: 1 requested at time: 80034196 handled at time: 80034210 and was a miss
-memory address: 56591 in page: 13 requested at time: 80034210 handled at time: 80034210 and was a hit
-memory address: 1870 in page: 0 requested at time: 80034210 handled at time: 80034360 and was a miss
-memory address: 52578 in page: 12 requested at time: 80034360 handled at time: 80034374 and was a miss
-memory address: 24401 in page: 5 requested at time: 80034374 handled at time: 80034388 and was a miss
-memory address: 35583 in page: 8 requested at time: 80034388 handled at time: 80034402 and was a miss
-memory address: 30510 in page: 7 requested at time: 80034402 handled at time: 80034552 and was a miss
-memory address: 21526 in page: 5 requested at time: 80034552 handled at time: 80034552 and was a hit
-memory address: 62953 in page: 15 requested at time: 80034552 handled at time: 80034566 and was a miss
-memory address: 53774 in page: 13 requested at time: 80034566 handled at time: 80034580 and was a miss
-memory address: 18703 in page: 4 requested at time: 80034580 handled at time: 80034730 and was a miss
-memory address: 24439 in page: 5 requested at time: 80034730 handled at time: 80034744 and was a miss
-memory address: 58990 in page: 14 requested at time: 80034744 handled at time: 80034894 and was a miss
-memory address: 58828 in page: 14 requested at time: 80034894 handled at time: 80034894 and was a hit
-memory address: 18460 in page: 4 requested at time: 80034894 handled at time: 80034894 and was a hit
-memory address: 44427 in page: 10 requested at time: 80034894 handled at time: 80034908 and was a miss
-memory address: 7657 in page: 1 requested at time: 80034908 handled at time: 80034922 and was a miss
-memory address: 8920 in page: 2 requested at time: 80034922 handled at time: 80034936 and was a miss
-memory address: 47883 in page: 11 requested at time: 80034936 handled at time: 80034950 and was a miss
-memory address: 27088 in page: 6 requested at time: 80034950 handled at time: 80034964 and was a miss
-memory address: 22302 in page: 5 requested at time: 80034964 handled at time: 80034978 and was a miss
-memory address: 36347 in page: 8 requested at time: 80034978 handled at time: 80035128 and was a miss
-memory address: 24562 in page: 5 requested at time: 80035128 handled at time: 80035128 and was a hit
-memory address: 10562 in page: 2 requested at time: 80035128 handled at time: 80035278 and was a miss
-memory address: 10855 in page: 2 requested at time: 80035278 handled at time: 80035278 and was a hit
-memory address: 39960 in page: 9 requested at time: 80035278 handled at time: 80035428 and was a miss
-memory address: 46791 in page: 11 requested at time: 80035428 handled at time: 80035578 and was a miss
-memory address: 42961 in page: 10 requested at time: 80035578 handled at time: 80035592 and was a miss
-memory address: 27677 in page: 6 requested at time: 80035592 handled at time: 80035742 and was a miss
-memory address: 27856 in page: 6 requested at time: 80035742 handled at time: 80035742 and was a hit
-memory address: 24286 in page: 5 requested at time: 80035742 handled at time: 80035892 and was a miss
-memory address: 35197 in page: 8 requested at time: 80035892 handled at time: 80035906 and was a miss
-memory address: 18912 in page: 4 requested at time: 80035906 handled at time: 80035920 and was a miss
-memory address: 26157 in page: 6 requested at time: 80035920 handled at time: 80035920 and was a hit
-memory address: 22239 in page: 5 requested at time: 80035920 handled at time: 80035920 and was a hit
-memory address: 43313 in page: 10 requested at time: 80035920 handled at time: 80035934 and was a miss
-memory address: 61740 in page: 15 requested at time: 80035934 handled at time: 80036084 and was a miss
-memory address: 52750 in page: 12 requested at time: 80036084 handled at time: 80036098 and was a miss
-memory address: 64839 in page: 15 requested at time: 80036098 handled at time: 80036098 and was a hit
-memory address: 59157 in page: 14 requested at time: 80036098 handled at time: 80036112 and was a miss
-memory address: 40988 in page: 10 requested at time: 80036112 handled at time: 80036112 and was a hit
-memory address: 18006 in page: 4 requested at time: 80036112 handled at time: 80036126 and was a miss
-memory address: 18060 in page: 4 requested at time: 80036126 handled at time: 80036126 and was a hit
-memory address: 34443 in page: 8 requested at time: 80036126 handled at time: 80036140 and was a miss
-memory address: 11298 in page: 2 requested at time: 80036140 handled at time: 80036290 and was a miss
-memory address: 36520 in page: 8 requested at time: 80036290 handled at time: 80036290 and was a hit
-memory address: 13334 in page: 3 requested at time: 80036290 handled at time: 80036304 and was a miss
-memory address: 18956 in page: 4 requested at time: 80036304 handled at time: 80036304 and was a hit
-memory address: 45441 in page: 11 requested at time: 80036304 handled at time: 80036318 and was a miss
-memory address: 61217 in page: 14 requested at time: 80036318 handled at time: 80036332 and was a miss
-memory address: 46044 in page: 11 requested at time: 80036332 handled at time: 80036332 and was a hit
-memory address: 2207 in page: 0 requested at time: 80036332 handled at time: 80036482 and was a miss
-memory address: 32028 in page: 7 requested at time: 80036482 handled at time: 80036496 and was a miss
-memory address: 5070 in page: 1 requested at time: 80036496 handled at time: 80036510 and was a miss
-memory address: 12769 in page: 3 requested at time: 80036510 handled at time: 80036524 and was a miss
-memory address: 42883 in page: 10 requested at time: 80036524 handled at time: 80036538 and was a miss
-memory address: 45031 in page: 10 requested at time: 80036538 handled at time: 80036538 and was a hit
-memory address: 59561 in page: 14 requested at time: 80036538 handled at time: 80036552 and was a miss
-memory address: 20308 in page: 4 requested at time: 80036552 handled at time: 80036566 and was a miss
-memory address: 7172 in page: 1 requested at time: 80036566 handled at time: 80036580 and was a miss
-memory address: 21881 in page: 5 requested at time: 80036580 handled at time: 80036730 and was a miss
-memory address: 44595 in page: 10 requested at time: 80036730 handled at time: 80036880 and was a miss
-memory address: 42369 in page: 10 requested at time: 80036880 handled at time: 80036880 and was a hit
-memory address: 40793 in page: 9 requested at time: 80036880 handled at time: 80037030 and was a miss
-memory address: 5216 in page: 1 requested at time: 80037030 handled at time: 80037030 and was a hit
-memory address: 64608 in page: 15 requested at time: 80037030 handled at time: 80037044 and was a miss
-memory address: 18570 in page: 4 requested at time: 80037044 handled at time: 80037194 and was a miss
-memory address: 1420 in page: 0 requested at time: 80037194 handled at time: 80037208 and was a miss
-memory address: 51822 in page: 12 requested at time: 80037208 handled at time: 80037358 and was a miss
-memory address: 17874 in page: 4 requested at time: 80037358 handled at time: 80037358 and was a hit
-memory address: 60577 in page: 14 requested at time: 80037358 handled at time: 80037508 and was a miss
-memory address: 27275 in page: 6 requested at time: 80037508 handled at time: 80037522 and was a miss
-memory address: 35880 in page: 8 requested at time: 80037522 handled at time: 80037536 and was a miss
-memory address: 13102 in page: 3 requested at time: 80037536 handled at time: 80037550 and was a miss
-memory address: 61718 in page: 15 requested at time: 80037550 handled at time: 80037700 and was a miss
-memory address: 47179 in page: 11 requested at time: 80037700 handled at time: 80037714 and was a miss
-memory address: 49622 in page: 12 requested at time: 80037714 handled at time: 80037728 and was a miss
-memory address: 9516 in page: 2 requested at time: 80037728 handled at time: 80037878 and was a miss
-memory address: 599 in page: 0 requested at time: 80037878 handled at time: 80037892 and was a miss
-memory address: 29527 in page: 7 requested at time: 80037892 handled at time: 80037906 and was a miss
-memory address: 5197 in page: 1 requested at time: 80037906 handled at time: 80037920 and was a miss
-memory address: 46643 in page: 11 requested at time: 80037920 handled at time: 80037934 and was a miss
-memory address: 31734 in page: 7 requested at time: 80037934 handled at time: 80037934 and was a hit
-memory address: 37225 in page: 9 requested at time: 80037934 handled at time: 80038084 and was a miss
-memory address: 51714 in page: 12 requested at time: 80038084 handled at time: 80038098 and was a miss
-memory address: 44504 in page: 10 requested at time: 80038098 handled at time: 80038112 and was a miss
-memory address: 14572 in page: 3 requested at time: 80038112 handled at time: 80038262 and was a miss
-memory address: 31209 in page: 7 requested at time: 80038262 handled at time: 80038276 and was a miss
-memory address: 38529 in page: 9 requested at time: 80038276 handled at time: 80038290 and was a miss
-memory address: 34881 in page: 8 requested at time: 80038290 handled at time: 80038304 and was a miss
-memory address: 38381 in page: 9 requested at time: 80038304 handled at time: 80038304 and was a hit
-memory address: 60410 in page: 14 requested at time: 80038304 handled at time: 80038454 and was a miss
-memory address: 13940 in page: 3 requested at time: 80038454 handled at time: 80038604 and was a miss
-memory address: 15214 in page: 3 requested at time: 80038604 handled at time: 80038604 and was a hit
-memory address: 35668 in page: 8 requested at time: 80038604 handled at time: 80038604 and was a hit
-memory address: 19156 in page: 4 requested at time: 80038604 handled at time: 80038618 and was a miss
-memory address: 14286 in page: 3 requested at time: 80038618 handled at time: 80038618 and was a hit
-memory address: 54238 in page: 13 requested at time: 80038618 handled at time: 80038632 and was a miss
-memory address: 20576 in page: 5 requested at time: 80038632 handled at time: 80038782 and was a miss
-memory address: 573 in page: 0 requested at time: 80038782 handled at time: 80038932 and was a miss
-memory address: 6576 in page: 1 requested at time: 80038932 handled at time: 80038946 and was a miss
-memory address: 15617 in page: 3 requested at time: 80038946 handled at time: 80039096 and was a miss
-memory address: 27848 in page: 6 requested at time: 80039096 handled at time: 80039110 and was a miss
-memory address: 42457 in page: 10 requested at time: 80039110 handled at time: 80039124 and was a miss
-memory address: 28719 in page: 7 requested at time: 80039124 handled at time: 80039274 and was a miss
-memory address: 24030 in page: 5 requested at time: 80039274 handled at time: 80039288 and was a miss
-memory address: 24100 in page: 5 requested at time: 80039288 handled at time: 80039288 and was a hit
-memory address: 12806 in page: 3 requested at time: 80039288 handled at time: 80039302 and was a miss
-memory address: 33546 in page: 8 requested at time: 80039302 handled at time: 80039316 and was a miss
-memory address: 24699 in page: 6 requested at time: 80039316 handled at time: 80039330 and was a miss
-memory address: 42333 in page: 10 requested at time: 80039330 handled at time: 80039344 and was a miss
-memory address: 38743 in page: 9 requested at time: 80039344 handled at time: 80039358 and was a miss
-memory address: 5806 in page: 1 requested at time: 80039358 handled at time: 80039508 and was a miss
-memory address: 8532 in page: 2 requested at time: 80039508 handled at time: 80039522 and was a miss
-memory address: 10432 in page: 2 requested at time: 80039522 handled at time: 80039522 and was a hit
-memory address: 57520 in page: 14 requested at time: 80039522 handled at time: 80039672 and was a miss
-memory address: 53036 in page: 12 requested at time: 80039672 handled at time: 80039686 and was a miss
-memory address: 25004 in page: 6 requested at time: 80039686 handled at time: 80039700 and was a miss
-memory address: 23193 in page: 5 requested at time: 80039700 handled at time: 80039714 and was a miss
-memory address: 26029 in page: 6 requested at time: 80039714 handled at time: 80039714 and was a hit
-memory address: 59885 in page: 14 requested at time: 80039714 handled at time: 80039714 and was a hit
-memory address: 61574 in page: 15 requested at time: 80039714 handled at time: 80039728 and was a miss
-memory address: 20903 in page: 5 requested at time: 80039728 handled at time: 80039728 and was a hit
-memory address: 8289 in page: 2 requested at time: 80039728 handled at time: 80039742 and was a miss
-memory address: 11252 in page: 2 requested at time: 80039742 handled at time: 80039742 and was a hit
-memory address: 56571 in page: 13 requested at time: 80039742 handled at time: 80039892 and was a miss
-memory address: 27445 in page: 6 requested at time: 80039892 handled at time: 80040042 and was a miss
-memory address: 25539 in page: 6 requested at time: 80040042 handled at time: 80040042 and was a hit
-memory address: 45274 in page: 11 requested at time: 80040042 handled at time: 80040192 and was a miss
-memory address: 48021 in page: 11 requested at time: 80040192 handled at time: 80040192 and was a hit
-memory address: 26112 in page: 6 requested at time: 80040192 handled at time: 80040192 and was a hit
-memory address: 51850 in page: 12 requested at time: 80040192 handled at time: 80040206 and was a miss
-memory address: 63639 in page: 15 requested at time: 80040206 handled at time: 80040356 and was a miss
-memory address: 53960 in page: 13 requested at time: 80040356 handled at time: 80040506 and was a miss
-memory address: 28771 in page: 7 requested at time: 80040506 handled at time: 80040520 and was a miss
-memory address: 26822 in page: 6 requested at time: 80040520 handled at time: 80040670 and was a miss
-memory address: 12454 in page: 3 requested at time: 80040670 handled at time: 80040684 and was a miss
-memory address: 52871 in page: 12 requested at time: 80040684 handled at time: 80040834 and was a miss
-memory address: 39628 in page: 9 requested at time: 80040834 handled at time: 80040848 and was a miss
-memory address: 46000 in page: 11 requested at time: 80040848 handled at time: 80040862 and was a miss
-memory address: 12034 in page: 2 requested at time: 80040862 handled at time: 80040876 and was a miss
-memory address: 16426 in page: 4 requested at time: 80040876 handled at time: 80040890 and was a miss
-memory address: 19207 in page: 4 requested at time: 80040890 handled at time: 80040890 and was a hit
-memory address: 17841 in page: 4 requested at time: 80040890 handled at time: 80040890 and was a hit
-memory address: 24958 in page: 6 requested at time: 80040890 handled at time: 80040904 and was a miss
-memory address: 29639 in page: 7 requested at time: 80040904 handled at time: 80040918 and was a miss
-memory address: 9825 in page: 2 requested at time: 80040918 handled at time: 80040918 and was a hit
-memory address: 12458 in page: 3 requested at time: 80040918 handled at time: 80040932 and was a miss
-memory address: 54643 in page: 13 requested at time: 80040932 handled at time: 80041082 and was a miss
-memory address: 33019 in page: 8 requested at time: 80041082 handled at time: 80041232 and was a miss
-memory address: 38487 in page: 9 requested at time: 80041232 handled at time: 80041246 and was a miss
-memory address: 48993 in page: 11 requested at time: 80041246 handled at time: 80041260 and was a miss
-memory address: 29057 in page: 7 requested at time: 80041260 handled at time: 80041274 and was a miss
-memory address: 59390 in page: 14 requested at time: 80041274 handled at time: 80041288 and was a miss
-memory address: 57282 in page: 13 requested at time: 80041288 handled at time: 80041302 and was a miss
-memory address: 40310 in page: 9 requested at time: 80041302 handled at time: 80041316 and was a miss
-memory address: 50426 in page: 12 requested at time: 80041316 handled at time: 80041330 and was a miss
-memory address: 19192 in page: 4 requested at time: 80041330 handled at time: 80041480 and was a miss
-memory address: 313 in page: 0 requested at time: 80041480 handled at time: 80041494 and was a miss
-memory address: 30164 in page: 7 requested at time: 80041494 handled at time: 80041508 and was a miss
-memory address: 1677 in page: 0 requested at time: 80041508 handled at time: 80041508 and was a hit
-memory address: 26425 in page: 6 requested at time: 80041508 handled at time: 80041658 and was a miss
-memory address: 16478 in page: 4 requested at time: 80041658 handled at time: 80041658 and was a hit
-memory address: 65316 in page: 15 requested at time: 80041658 handled at time: 80041672 and was a miss
-memory address: 14849 in page: 3 requested at time: 80041672 handled at time: 80041686 and was a miss
-memory address: 45250 in page: 11 requested at time: 80041686 handled at time: 80041700 and was a miss
-memory address: 26603 in page: 6 requested at time: 80041700 handled at time: 80041700 and was a hit
-memory address: 27303 in page: 6 requested at time: 80041700 handled at time: 80041700 and was a hit
-memory address: 32585 in page: 7 requested at time: 80041700 handled at time: 80041714 and was a miss
-memory address: 695 in page: 0 requested at time: 80041714 handled at time: 80041728 and was a miss
-1000 memory access requests were handled in 80041728 nanoseconds
-Of the 1000 memory access requests, 764 were misses, making it a hit rate of 0.236000
+0:	| -1	| -1	| -1	| -1	| -1	| -1	| -1	| -1	|: page requested: 7 :  miss
+1:	| 7	| -1	| -1	| -1	| -1	| -1	| -1	| -1	|: page requested: 21 :  miss
+2:	| 21	| -1	| -1	| -1	| -1	| -1	| -1	| -1	|: page requested: 13 :  miss
+3:	| 21	| 13	| -1	| -1	| -1	| -1	| -1	| -1	|: page requested: 27 :  miss
+4:	| 21	| 13	| 27	| -1	| -1	| -1	| -1	| -1	|: page requested: 1 :  miss
+5:	| 21	| 13	| 27	| 1	| -1	| -1	| -1	| -1	|: page requested: 16 :  miss
+6:	| 21	| 13	| 27	| 1	| 16	| -1	| -1	| -1	|: page requested: 1 :  hit
+7:	| 21	| 13	| 27	| 1	| 16	| -1	| -1	| -1	|: page requested: 14 :  miss
+8:	| 21	| 13	| 27	| 1	| 16	| 14	| -1	| -1	|: page requested: 24 :  miss
+9:	| 21	| 13	| 27	| 1	| 16	| 14	| 24	| -1	|: page requested: 24 :  hit
+10:	| 21	| 13	| 27	| 1	| 16	| 14	| 24	| -1	|: page requested: 27 :  hit
+11:	| 21	| 13	| 27	| 1	| 16	| 14	| 24	| -1	|: page requested: 1 :  hit
+12:	| 21	| 13	| 27	| 1	| 16	| 14	| 24	| -1	|: page requested: 25 :  miss
+13:	| 21	| 13	| 27	| 1	| 16	| 14	| 24	| 25	|: page requested: 21 :  hit
+14:	| 21	| 13	| 27	| 1	| 16	| 14	| 24	| 25	|: page requested: 14 :  hit
+15:	| 21	| 13	| 27	| 1	| 16	| 14	| 24	| 25	|: page requested: 21 :  hit
+16:	| 21	| 13	| 27	| 1	| 16	| 14	| 24	| 25	|: page requested: 18 :  miss
+17:	| 18	| 13	| 27	| 1	| 16	| 14	| 24	| 25	|: page requested: 0 :  miss
+18:	| 18	| 0	| 27	| 1	| 16	| 14	| 24	| 25	|: page requested: 9 :  miss
+19:	| 18	| 0	| 9	| 1	| 16	| 14	| 24	| 25	|: page requested: 24 :  hit
+20:	| 18	| 0	| 9	| 1	| 16	| 14	| 24	| 25	|: page requested: 25 :  hit
+21:	| 18	| 0	| 9	| 1	| 16	| 14	| 24	| 25	|: page requested: 3 :  miss
+22:	| 18	| 0	| 9	| 3	| 16	| 14	| 24	| 25	|: page requested: 12 :  miss
+23:	| 18	| 0	| 9	| 3	| 12	| 14	| 24	| 25	|: page requested: 30 :  miss
+24:	| 18	| 0	| 9	| 3	| 12	| 30	| 24	| 25	|: page requested: 11 :  miss
+25:	| 18	| 0	| 9	| 3	| 12	| 30	| 11	| 25	|: page requested: 11 :  hit
+26:	| 18	| 0	| 9	| 3	| 12	| 30	| 11	| 25	|: page requested: 3 :  hit
+27:	| 18	| 0	| 9	| 3	| 12	| 30	| 11	| 25	|: page requested: 22 :  miss
+28:	| 18	| 0	| 9	| 3	| 12	| 30	| 11	| 22	|: page requested: 1 :  miss
+29:	| 1	| 0	| 9	| 3	| 12	| 30	| 11	| 22	|: page requested: 3 :  hit
+30:	| 1	| 0	| 9	| 3	| 12	| 30	| 11	| 22	|: page requested: 13 :  miss
+31:	| 1	| 13	| 9	| 3	| 12	| 30	| 11	| 22	|: page requested: 8 :  miss
+32:	| 1	| 13	| 8	| 3	| 12	| 30	| 11	| 22	|: page requested: 25 :  miss
+33:	| 1	| 13	| 8	| 25	| 12	| 30	| 11	| 22	|: page requested: 27 :  miss
+34:	| 1	| 13	| 8	| 25	| 27	| 30	| 11	| 22	|: page requested: 3 :  miss
+35:	| 1	| 13	| 8	| 25	| 27	| 3	| 11	| 22	|: page requested: 26 :  miss
+36:	| 1	| 13	| 8	| 25	| 27	| 3	| 26	| 22	|: page requested: 11 :  miss
+37:	| 1	| 13	| 8	| 25	| 27	| 3	| 26	| 11	|: page requested: 4 :  miss
+38:	| 4	| 13	| 8	| 25	| 27	| 3	| 26	| 11	|: page requested: 9 :  miss
+39:	| 4	| 9	| 8	| 25	| 27	| 3	| 26	| 11	|: page requested: 3 :  hit
+40:	| 4	| 9	| 8	| 25	| 27	| 3	| 26	| 11	|: page requested: 28 :  miss
+41:	| 4	| 9	| 28	| 25	| 27	| 3	| 26	| 11	|: page requested: 4 :  hit
+42:	| 4	| 9	| 28	| 25	| 27	| 3	| 26	| 11	|: page requested: 4 :  hit
+43:	| 4	| 9	| 28	| 25	| 27	| 3	| 26	| 11	|: page requested: 21 :  miss
+44:	| 4	| 9	| 28	| 21	| 27	| 3	| 26	| 11	|: page requested: 25 :  miss
+45:	| 4	| 9	| 28	| 21	| 25	| 3	| 26	| 11	|: page requested: 18 :  miss
+46:	| 4	| 9	| 28	| 21	| 25	| 18	| 26	| 11	|: page requested: 10 :  miss
+47:	| 4	| 9	| 28	| 21	| 25	| 18	| 10	| 11	|: page requested: 11 :  hit
+48:	| 4	| 9	| 28	| 21	| 25	| 18	| 10	| 11	|: page requested: 18 :  hit
+49:	| 4	| 9	| 28	| 21	| 25	| 18	| 10	| 11	|: page requested: 19 :  miss
+50:	| 4	| 9	| 28	| 21	| 25	| 18	| 10	| 19	|: page requested: 3 :  miss
+51:	| 3	| 9	| 28	| 21	| 25	| 18	| 10	| 19	|: page requested: 11 :  miss
+52:	| 3	| 11	| 28	| 21	| 25	| 18	| 10	| 19	|: page requested: 22 :  miss
+53:	| 3	| 11	| 22	| 21	| 25	| 18	| 10	| 19	|: page requested: 15 :  miss
+54:	| 3	| 11	| 22	| 15	| 25	| 18	| 10	| 19	|: page requested: 9 :  miss
+55:	| 3	| 11	| 22	| 15	| 9	| 18	| 10	| 19	|: page requested: 1 :  miss
+56:	| 3	| 11	| 22	| 15	| 9	| 1	| 10	| 19	|: page requested: 27 :  miss
+57:	| 3	| 11	| 22	| 15	| 9	| 1	| 27	| 19	|: page requested: 12 :  miss
+58:	| 3	| 11	| 22	| 15	| 9	| 1	| 27	| 12	|: page requested: 23 :  miss
+59:	| 23	| 11	| 22	| 15	| 9	| 1	| 27	| 12	|: page requested: 28 :  miss
+60:	| 23	| 28	| 22	| 15	| 9	| 1	| 27	| 12	|: page requested: 16 :  miss
+61:	| 23	| 28	| 16	| 15	| 9	| 1	| 27	| 12	|: page requested: 5 :  miss
+62:	| 23	| 28	| 16	| 5	| 9	| 1	| 27	| 12	|: page requested: 4 :  miss
+63:	| 23	| 28	| 16	| 5	| 4	| 1	| 27	| 12	|: page requested: 9 :  miss
+64:	| 23	| 28	| 16	| 5	| 4	| 9	| 27	| 12	|: page requested: 0 :  miss
+65:	| 23	| 28	| 16	| 5	| 4	| 9	| 0	| 12	|: page requested: 7 :  miss
+66:	| 23	| 28	| 16	| 5	| 4	| 9	| 0	| 7	|: page requested: 3 :  miss
+67:	| 3	| 28	| 16	| 5	| 4	| 9	| 0	| 7	|: page requested: 11 :  miss
+68:	| 3	| 11	| 16	| 5	| 4	| 9	| 0	| 7	|: page requested: 11 :  hit
+69:	| 3	| 11	| 16	| 5	| 4	| 9	| 0	| 7	|: page requested: 12 :  miss
+70:	| 3	| 11	| 12	| 5	| 4	| 9	| 0	| 7	|: page requested: 14 :  miss
+71:	| 3	| 11	| 12	| 14	| 4	| 9	| 0	| 7	|: page requested: 7 :  hit
+72:	| 3	| 11	| 12	| 14	| 4	| 9	| 0	| 7	|: page requested: 16 :  miss
+73:	| 3	| 11	| 12	| 14	| 16	| 9	| 0	| 7	|: page requested: 18 :  miss
+74:	| 3	| 11	| 12	| 14	| 16	| 18	| 0	| 7	|: page requested: 28 :  miss
+75:	| 3	| 11	| 12	| 14	| 16	| 18	| 28	| 7	|: page requested: 9 :  miss
+76:	| 3	| 11	| 12	| 14	| 16	| 18	| 28	| 9	|: page requested: 4 :  miss
+77:	| 4	| 11	| 12	| 14	| 16	| 18	| 28	| 9	|: page requested: 6 :  miss
+78:	| 4	| 6	| 12	| 14	| 16	| 18	| 28	| 9	|: page requested: 20 :  miss
+79:	| 4	| 6	| 20	| 14	| 16	| 18	| 28	| 9	|: page requested: 22 :  miss
+80:	| 4	| 6	| 20	| 22	| 16	| 18	| 28	| 9	|: page requested: 25 :  miss
+81:	| 4	| 6	| 20	| 22	| 25	| 18	| 28	| 9	|: page requested: 24 :  miss
+82:	| 4	| 6	| 20	| 22	| 25	| 24	| 28	| 9	|: page requested: 2 :  miss
+83:	| 4	| 6	| 20	| 22	| 25	| 24	| 2	| 9	|: page requested: 16 :  miss
+84:	| 4	| 6	| 20	| 22	| 25	| 24	| 2	| 16	|: page requested: 7 :  miss
+85:	| 7	| 6	| 20	| 22	| 25	| 24	| 2	| 16	|: page requested: 11 :  miss
+86:	| 7	| 11	| 20	| 22	| 25	| 24	| 2	| 16	|: page requested: 17 :  miss
+87:	| 7	| 11	| 17	| 22	| 25	| 24	| 2	| 16	|: page requested: 2 :  hit
+88:	| 7	| 11	| 17	| 22	| 25	| 24	| 2	| 16	|: page requested: 24 :  hit
+89:	| 7	| 11	| 17	| 22	| 25	| 24	| 2	| 16	|: page requested: 9 :  miss
+90:	| 7	| 11	| 17	| 9	| 25	| 24	| 2	| 16	|: page requested: 30 :  miss
+91:	| 7	| 11	| 17	| 9	| 30	| 24	| 2	| 16	|: page requested: 8 :  miss
+92:	| 7	| 11	| 17	| 9	| 30	| 8	| 2	| 16	|: page requested: 14 :  miss
+93:	| 7	| 11	| 17	| 9	| 30	| 8	| 14	| 16	|: page requested: 2 :  miss
+94:	| 7	| 11	| 17	| 9	| 30	| 8	| 14	| 2	|: page requested: 17 :  hit
+95:	| 7	| 11	| 17	| 9	| 30	| 8	| 14	| 2	|: page requested: 14 :  hit
+96:	| 7	| 11	| 17	| 9	| 30	| 8	| 14	| 2	|: page requested: 9 :  hit
+97:	| 7	| 11	| 17	| 9	| 30	| 8	| 14	| 2	|: page requested: 20 :  miss
+98:	| 20	| 11	| 17	| 9	| 30	| 8	| 14	| 2	|: page requested: 25 :  miss
+99:	| 20	| 25	| 17	| 9	| 30	| 8	| 14	| 2	|: page requested: 20 :  hit
+100:	| 20	| 25	| 17	| 9	| 30	| 8	| 14	| 2	|: page requested: 1 :  miss
+101:	| 20	| 25	| 1	| 9	| 30	| 8	| 14	| 2	|: page requested: 7 :  miss
+102:	| 20	| 25	| 1	| 7	| 30	| 8	| 14	| 2	|: page requested: 27 :  miss
+103:	| 20	| 25	| 1	| 7	| 27	| 8	| 14	| 2	|: page requested: 17 :  miss
+104:	| 20	| 25	| 1	| 7	| 27	| 17	| 14	| 2	|: page requested: 25 :  hit
+105:	| 20	| 25	| 1	| 7	| 27	| 17	| 14	| 2	|: page requested: 23 :  miss
+106:	| 20	| 25	| 1	| 7	| 27	| 17	| 23	| 2	|: page requested: 27 :  hit
+107:	| 20	| 25	| 1	| 7	| 27	| 17	| 23	| 2	|: page requested: 29 :  miss
+108:	| 20	| 25	| 1	| 7	| 27	| 17	| 23	| 29	|: page requested: 29 :  hit
+109:	| 20	| 25	| 1	| 7	| 27	| 17	| 23	| 29	|: page requested: 15 :  miss
+110:	| 15	| 25	| 1	| 7	| 27	| 17	| 23	| 29	|: page requested: 19 :  miss
+111:	| 15	| 19	| 1	| 7	| 27	| 17	| 23	| 29	|: page requested: 23 :  hit
+112:	| 15	| 19	| 1	| 7	| 27	| 17	| 23	| 29	|: page requested: 7 :  hit
+113:	| 15	| 19	| 1	| 7	| 27	| 17	| 23	| 29	|: page requested: 21 :  miss
+114:	| 15	| 19	| 21	| 7	| 27	| 17	| 23	| 29	|: page requested: 7 :  hit
+115:	| 15	| 19	| 21	| 7	| 27	| 17	| 23	| 29	|: page requested: 15 :  hit
+116:	| 15	| 19	| 21	| 7	| 27	| 17	| 23	| 29	|: page requested: 1 :  miss
+117:	| 15	| 19	| 21	| 1	| 27	| 17	| 23	| 29	|: page requested: 24 :  miss
+118:	| 15	| 19	| 21	| 1	| 24	| 17	| 23	| 29	|: page requested: 17 :  hit
+119:	| 15	| 19	| 21	| 1	| 24	| 17	| 23	| 29	|: page requested: 25 :  miss
+120:	| 15	| 19	| 21	| 1	| 24	| 25	| 23	| 29	|: page requested: 1 :  hit
+121:	| 15	| 19	| 21	| 1	| 24	| 25	| 23	| 29	|: page requested: 16 :  miss
+122:	| 15	| 19	| 21	| 1	| 24	| 25	| 16	| 29	|: page requested: 1 :  hit
+123:	| 15	| 19	| 21	| 1	| 24	| 25	| 16	| 29	|: page requested: 15 :  hit
+124:	| 15	| 19	| 21	| 1	| 24	| 25	| 16	| 29	|: page requested: 18 :  miss
+125:	| 15	| 19	| 21	| 1	| 24	| 25	| 16	| 18	|: page requested: 18 :  hit
+126:	| 15	| 19	| 21	| 1	| 24	| 25	| 16	| 18	|: page requested: 29 :  miss
+127:	| 29	| 19	| 21	| 1	| 24	| 25	| 16	| 18	|: page requested: 28 :  miss
+128:	| 29	| 28	| 21	| 1	| 24	| 25	| 16	| 18	|: page requested: 6 :  miss
+129:	| 29	| 28	| 6	| 1	| 24	| 25	| 16	| 18	|: page requested: 22 :  miss
+130:	| 29	| 28	| 6	| 22	| 24	| 25	| 16	| 18	|: page requested: 16 :  hit
+131:	| 29	| 28	| 6	| 22	| 24	| 25	| 16	| 18	|: page requested: 7 :  miss
+132:	| 29	| 28	| 6	| 22	| 7	| 25	| 16	| 18	|: page requested: 29 :  hit
+133:	| 29	| 28	| 6	| 22	| 7	| 25	| 16	| 18	|: page requested: 12 :  miss
+134:	| 29	| 28	| 6	| 22	| 7	| 12	| 16	| 18	|: page requested: 25 :  miss
+135:	| 29	| 28	| 6	| 22	| 7	| 12	| 25	| 18	|: page requested: 22 :  hit
+136:	| 29	| 28	| 6	| 22	| 7	| 12	| 25	| 18	|: page requested: 3 :  miss
+137:	| 29	| 28	| 6	| 22	| 7	| 12	| 25	| 3	|: page requested: 20 :  miss
+138:	| 20	| 28	| 6	| 22	| 7	| 12	| 25	| 3	|: page requested: 19 :  miss
+139:	| 20	| 19	| 6	| 22	| 7	| 12	| 25	| 3	|: page requested: 1 :  miss
+140:	| 20	| 19	| 1	| 22	| 7	| 12	| 25	| 3	|: page requested: 3 :  hit
+141:	| 20	| 19	| 1	| 22	| 7	| 12	| 25	| 3	|: page requested: 7 :  hit
+142:	| 20	| 19	| 1	| 22	| 7	| 12	| 25	| 3	|: page requested: 24 :  miss
+143:	| 20	| 19	| 1	| 24	| 7	| 12	| 25	| 3	|: page requested: 11 :  miss
+144:	| 20	| 19	| 1	| 24	| 11	| 12	| 25	| 3	|: page requested: 28 :  miss
+145:	| 20	| 19	| 1	| 24	| 11	| 28	| 25	| 3	|: page requested: 31 :  miss
+146:	| 20	| 19	| 1	| 24	| 11	| 28	| 31	| 3	|: page requested: 26 :  miss
+147:	| 20	| 19	| 1	| 24	| 11	| 28	| 31	| 26	|: page requested: 29 :  miss
+148:	| 29	| 19	| 1	| 24	| 11	| 28	| 31	| 26	|: page requested: 23 :  miss
+149:	| 29	| 23	| 1	| 24	| 11	| 28	| 31	| 26	|: page requested: 11 :  hit
+150:	| 29	| 23	| 1	| 24	| 11	| 28	| 31	| 26	|: page requested: 22 :  miss
+151:	| 29	| 23	| 22	| 24	| 11	| 28	| 31	| 26	|: page requested: 25 :  miss
+152:	| 29	| 23	| 22	| 25	| 11	| 28	| 31	| 26	|: page requested: 27 :  miss
+153:	| 29	| 23	| 22	| 25	| 27	| 28	| 31	| 26	|: page requested: 23 :  hit
+154:	| 29	| 23	| 22	| 25	| 27	| 28	| 31	| 26	|: page requested: 8 :  miss
+155:	| 29	| 23	| 22	| 25	| 27	| 8	| 31	| 26	|: page requested: 14 :  miss
+156:	| 29	| 23	| 22	| 25	| 27	| 8	| 14	| 26	|: page requested: 9 :  miss
+157:	| 29	| 23	| 22	| 25	| 27	| 8	| 14	| 9	|: page requested: 6 :  miss
+158:	| 6	| 23	| 22	| 25	| 27	| 8	| 14	| 9	|: page requested: 10 :  miss
+159:	| 6	| 10	| 22	| 25	| 27	| 8	| 14	| 9	|: page requested: 16 :  miss
+160:	| 6	| 10	| 16	| 25	| 27	| 8	| 14	| 9	|: page requested: 28 :  miss
+161:	| 6	| 10	| 16	| 28	| 27	| 8	| 14	| 9	|: page requested: 26 :  miss
+162:	| 6	| 10	| 16	| 28	| 26	| 8	| 14	| 9	|: page requested: 23 :  miss
+163:	| 6	| 10	| 16	| 28	| 26	| 23	| 14	| 9	|: page requested: 26 :  hit
+164:	| 6	| 10	| 16	| 28	| 26	| 23	| 14	| 9	|: page requested: 6 :  hit
+165:	| 6	| 10	| 16	| 28	| 26	| 23	| 14	| 9	|: page requested: 16 :  hit
+166:	| 6	| 10	| 16	| 28	| 26	| 23	| 14	| 9	|: page requested: 16 :  hit
+167:	| 6	| 10	| 16	| 28	| 26	| 23	| 14	| 9	|: page requested: 10 :  hit
+168:	| 6	| 10	| 16	| 28	| 26	| 23	| 14	| 9	|: page requested: 4 :  miss
+169:	| 6	| 10	| 16	| 28	| 26	| 23	| 4	| 9	|: page requested: 4 :  hit
+170:	| 6	| 10	| 16	| 28	| 26	| 23	| 4	| 9	|: page requested: 11 :  miss
+171:	| 6	| 10	| 16	| 28	| 26	| 23	| 4	| 11	|: page requested: 8 :  miss
+172:	| 8	| 10	| 16	| 28	| 26	| 23	| 4	| 11	|: page requested: 11 :  hit
+173:	| 8	| 10	| 16	| 28	| 26	| 23	| 4	| 11	|: page requested: 3 :  miss
+174:	| 8	| 3	| 16	| 28	| 26	| 23	| 4	| 11	|: page requested: 19 :  miss
+175:	| 8	| 3	| 19	| 28	| 26	| 23	| 4	| 11	|: page requested: 7 :  miss
+176:	| 8	| 3	| 19	| 7	| 26	| 23	| 4	| 11	|: page requested: 2 :  miss
+177:	| 8	| 3	| 19	| 7	| 2	| 23	| 4	| 11	|: page requested: 13 :  miss
+178:	| 8	| 3	| 19	| 7	| 2	| 13	| 4	| 11	|: page requested: 5 :  miss
+179:	| 8	| 3	| 19	| 7	| 2	| 13	| 5	| 11	|: page requested: 25 :  miss
+180:	| 8	| 3	| 19	| 7	| 2	| 13	| 5	| 25	|: page requested: 24 :  miss
+181:	| 24	| 3	| 19	| 7	| 2	| 13	| 5	| 25	|: page requested: 27 :  miss
+182:	| 24	| 27	| 19	| 7	| 2	| 13	| 5	| 25	|: page requested: 18 :  miss
+183:	| 24	| 27	| 18	| 7	| 2	| 13	| 5	| 25	|: page requested: 20 :  miss
+184:	| 24	| 27	| 18	| 20	| 2	| 13	| 5	| 25	|: page requested: 19 :  miss
+185:	| 24	| 27	| 18	| 20	| 19	| 13	| 5	| 25	|: page requested: 27 :  hit
+186:	| 24	| 27	| 18	| 20	| 19	| 13	| 5	| 25	|: page requested: 2 :  miss
+187:	| 24	| 27	| 18	| 20	| 19	| 2	| 5	| 25	|: page requested: 28 :  miss
+188:	| 24	| 27	| 18	| 20	| 19	| 2	| 28	| 25	|: page requested: 1 :  miss
+189:	| 24	| 27	| 18	| 20	| 19	| 2	| 28	| 1	|: page requested: 12 :  miss
+190:	| 12	| 27	| 18	| 20	| 19	| 2	| 28	| 1	|: page requested: 12 :  hit
+191:	| 12	| 27	| 18	| 20	| 19	| 2	| 28	| 1	|: page requested: 29 :  miss
+192:	| 12	| 29	| 18	| 20	| 19	| 2	| 28	| 1	|: page requested: 6 :  miss
+193:	| 12	| 29	| 6	| 20	| 19	| 2	| 28	| 1	|: page requested: 4 :  miss
+194:	| 12	| 29	| 6	| 4	| 19	| 2	| 28	| 1	|: page requested: 23 :  miss
+195:	| 12	| 29	| 6	| 4	| 23	| 2	| 28	| 1	|: page requested: 13 :  miss
+196:	| 12	| 29	| 6	| 4	| 23	| 13	| 28	| 1	|: page requested: 20 :  miss
+197:	| 12	| 29	| 6	| 4	| 23	| 13	| 20	| 1	|: page requested: 8 :  miss
+198:	| 12	| 29	| 6	| 4	| 23	| 13	| 20	| 8	|: page requested: 23 :  hit
+199:	| 12	| 29	| 6	| 4	| 23	| 13	| 20	| 8	|: page requested: 25 :  miss
+200:	| 25	| 29	| 6	| 4	| 23	| 13	| 20	| 8	|: page requested: 12 :  miss
+201:	| 25	| 12	| 6	| 4	| 23	| 13	| 20	| 8	|: page requested: 2 :  miss
+202:	| 25	| 12	| 2	| 4	| 23	| 13	| 20	| 8	|: page requested: 1 :  miss
+203:	| 25	| 12	| 2	| 1	| 23	| 13	| 20	| 8	|: page requested: 23 :  hit
+204:	| 25	| 12	| 2	| 1	| 23	| 13	| 20	| 8	|: page requested: 5 :  miss
+205:	| 25	| 12	| 2	| 1	| 5	| 13	| 20	| 8	|: page requested: 20 :  hit
+206:	| 25	| 12	| 2	| 1	| 5	| 13	| 20	| 8	|: page requested: 30 :  miss
+207:	| 25	| 12	| 2	| 1	| 5	| 30	| 20	| 8	|: page requested: 7 :  miss
+208:	| 25	| 12	| 2	| 1	| 5	| 30	| 7	| 8	|: page requested: 1 :  hit
+209:	| 25	| 12	| 2	| 1	| 5	| 30	| 7	| 8	|: page requested: 3 :  miss
+210:	| 25	| 12	| 2	| 1	| 5	| 30	| 7	| 3	|: page requested: 0 :  miss
+211:	| 0	| 12	| 2	| 1	| 5	| 30	| 7	| 3	|: page requested: 25 :  miss
+212:	| 0	| 25	| 2	| 1	| 5	| 30	| 7	| 3	|: page requested: 31 :  miss
+213:	| 0	| 25	| 31	| 1	| 5	| 30	| 7	| 3	|: page requested: 19 :  miss
+214:	| 0	| 25	| 31	| 19	| 5	| 30	| 7	| 3	|: page requested: 13 :  miss
+215:	| 0	| 25	| 31	| 19	| 13	| 30	| 7	| 3	|: page requested: 18 :  miss
+216:	| 0	| 25	| 31	| 19	| 13	| 18	| 7	| 3	|: page requested: 14 :  miss
+217:	| 0	| 25	| 31	| 19	| 13	| 18	| 14	| 3	|: page requested: 15 :  miss
+218:	| 0	| 25	| 31	| 19	| 13	| 18	| 14	| 15	|: page requested: 14 :  hit
+219:	| 0	| 25	| 31	| 19	| 13	| 18	| 14	| 15	|: page requested: 15 :  hit
+220:	| 0	| 25	| 31	| 19	| 13	| 18	| 14	| 15	|: page requested: 27 :  miss
+221:	| 27	| 25	| 31	| 19	| 13	| 18	| 14	| 15	|: page requested: 27 :  hit
+222:	| 27	| 25	| 31	| 19	| 13	| 18	| 14	| 15	|: page requested: 12 :  miss
+223:	| 27	| 12	| 31	| 19	| 13	| 18	| 14	| 15	|: page requested: 2 :  miss
+224:	| 27	| 12	| 2	| 19	| 13	| 18	| 14	| 15	|: page requested: 31 :  miss
+225:	| 27	| 12	| 2	| 31	| 13	| 18	| 14	| 15	|: page requested: 4 :  miss
+226:	| 27	| 12	| 2	| 31	| 4	| 18	| 14	| 15	|: page requested: 15 :  hit
+227:	| 27	| 12	| 2	| 31	| 4	| 18	| 14	| 15	|: page requested: 19 :  miss
+228:	| 27	| 12	| 2	| 31	| 4	| 19	| 14	| 15	|: page requested: 12 :  hit
+229:	| 27	| 12	| 2	| 31	| 4	| 19	| 14	| 15	|: page requested: 6 :  miss
+230:	| 27	| 12	| 2	| 31	| 4	| 19	| 6	| 15	|: page requested: 12 :  hit
+231:	| 27	| 12	| 2	| 31	| 4	| 19	| 6	| 15	|: page requested: 24 :  miss
+232:	| 27	| 12	| 2	| 31	| 4	| 19	| 6	| 24	|: page requested: 8 :  miss
+233:	| 8	| 12	| 2	| 31	| 4	| 19	| 6	| 24	|: page requested: 13 :  miss
+234:	| 8	| 13	| 2	| 31	| 4	| 19	| 6	| 24	|: page requested: 15 :  miss
+235:	| 8	| 13	| 15	| 31	| 4	| 19	| 6	| 24	|: page requested: 13 :  hit
+236:	| 8	| 13	| 15	| 31	| 4	| 19	| 6	| 24	|: page requested: 1 :  miss
+237:	| 8	| 13	| 15	| 1	| 4	| 19	| 6	| 24	|: page requested: 13 :  hit
+238:	| 8	| 13	| 15	| 1	| 4	| 19	| 6	| 24	|: page requested: 20 :  miss
+239:	| 8	| 13	| 15	| 1	| 20	| 19	| 6	| 24	|: page requested: 2 :  miss
+240:	| 8	| 13	| 15	| 1	| 20	| 2	| 6	| 24	|: page requested: 17 :  miss
+241:	| 8	| 13	| 15	| 1	| 20	| 2	| 17	| 24	|: page requested: 20 :  hit
+242:	| 8	| 13	| 15	| 1	| 20	| 2	| 17	| 24	|: page requested: 28 :  miss
+243:	| 8	| 13	| 15	| 1	| 20	| 2	| 17	| 28	|: page requested: 16 :  miss
+244:	| 16	| 13	| 15	| 1	| 20	| 2	| 17	| 28	|: page requested: 7 :  miss
+245:	| 16	| 7	| 15	| 1	| 20	| 2	| 17	| 28	|: page requested: 9 :  miss
+246:	| 16	| 7	| 9	| 1	| 20	| 2	| 17	| 28	|: page requested: 2 :  hit
+247:	| 16	| 7	| 9	| 1	| 20	| 2	| 17	| 28	|: page requested: 21 :  miss
+248:	| 16	| 7	| 9	| 21	| 20	| 2	| 17	| 28	|: page requested: 25 :  miss
+249:	| 16	| 7	| 9	| 21	| 25	| 2	| 17	| 28	|: page requested: 16 :  hit
+250:	| 16	| 7	| 9	| 21	| 25	| 2	| 17	| 28	|: page requested: 4 :  miss
+251:	| 16	| 7	| 9	| 21	| 25	| 4	| 17	| 28	|: page requested: 20 :  miss
+252:	| 16	| 7	| 9	| 21	| 25	| 4	| 20	| 28	|: page requested: 11 :  miss
+253:	| 16	| 7	| 9	| 21	| 25	| 4	| 20	| 11	|: page requested: 17 :  miss
+254:	| 17	| 7	| 9	| 21	| 25	| 4	| 20	| 11	|: page requested: 22 :  miss
+255:	| 17	| 22	| 9	| 21	| 25	| 4	| 20	| 11	|: page requested: 10 :  miss
+256:	| 17	| 22	| 10	| 21	| 25	| 4	| 20	| 11	|: page requested: 21 :  hit
+257:	| 17	| 22	| 10	| 21	| 25	| 4	| 20	| 11	|: page requested: 5 :  miss
+258:	| 17	| 22	| 10	| 5	| 25	| 4	| 20	| 11	|: page requested: 30 :  miss
+259:	| 17	| 22	| 10	| 5	| 30	| 4	| 20	| 11	|: page requested: 1 :  miss
+260:	| 17	| 22	| 10	| 5	| 30	| 1	| 20	| 11	|: page requested: 11 :  hit
+261:	| 17	| 22	| 10	| 5	| 30	| 1	| 20	| 11	|: page requested: 10 :  hit
+262:	| 17	| 22	| 10	| 5	| 30	| 1	| 20	| 11	|: page requested: 25 :  miss
+263:	| 17	| 22	| 10	| 5	| 30	| 1	| 25	| 11	|: page requested: 19 :  miss
+264:	| 17	| 22	| 10	| 5	| 30	| 1	| 25	| 19	|: page requested: 24 :  miss
+265:	| 24	| 22	| 10	| 5	| 30	| 1	| 25	| 19	|: page requested: 8 :  miss
+266:	| 24	| 8	| 10	| 5	| 30	| 1	| 25	| 19	|: page requested: 0 :  miss
+267:	| 24	| 8	| 0	| 5	| 30	| 1	| 25	| 19	|: page requested: 25 :  hit
+268:	| 24	| 8	| 0	| 5	| 30	| 1	| 25	| 19	|: page requested: 21 :  miss
+269:	| 24	| 8	| 0	| 21	| 30	| 1	| 25	| 19	|: page requested: 20 :  miss
+270:	| 24	| 8	| 0	| 21	| 20	| 1	| 25	| 19	|: page requested: 28 :  miss
+271:	| 24	| 8	| 0	| 21	| 20	| 28	| 25	| 19	|: page requested: 6 :  miss
+272:	| 24	| 8	| 0	| 21	| 20	| 28	| 6	| 19	|: page requested: 9 :  miss
+273:	| 24	| 8	| 0	| 21	| 20	| 28	| 6	| 9	|: page requested: 24 :  hit
+274:	| 24	| 8	| 0	| 21	| 20	| 28	| 6	| 9	|: page requested: 22 :  miss
+275:	| 22	| 8	| 0	| 21	| 20	| 28	| 6	| 9	|: page requested: 16 :  miss
+276:	| 22	| 16	| 0	| 21	| 20	| 28	| 6	| 9	|: page requested: 1 :  miss
+277:	| 22	| 16	| 1	| 21	| 20	| 28	| 6	| 9	|: page requested: 24 :  miss
+278:	| 22	| 16	| 1	| 24	| 20	| 28	| 6	| 9	|: page requested: 6 :  hit
+279:	| 22	| 16	| 1	| 24	| 20	| 28	| 6	| 9	|: page requested: 26 :  miss
+280:	| 22	| 16	| 1	| 24	| 26	| 28	| 6	| 9	|: page requested: 9 :  hit
+281:	| 22	| 16	| 1	| 24	| 26	| 28	| 6	| 9	|: page requested: 10 :  miss
+282:	| 22	| 16	| 1	| 24	| 26	| 10	| 6	| 9	|: page requested: 15 :  miss
+283:	| 22	| 16	| 1	| 24	| 26	| 10	| 15	| 9	|: page requested: 20 :  miss
+284:	| 22	| 16	| 1	| 24	| 26	| 10	| 15	| 20	|: page requested: 27 :  miss
+285:	| 27	| 16	| 1	| 24	| 26	| 10	| 15	| 20	|: page requested: 5 :  miss
+286:	| 27	| 5	| 1	| 24	| 26	| 10	| 15	| 20	|: page requested: 31 :  miss
+287:	| 27	| 5	| 31	| 24	| 26	| 10	| 15	| 20	|: page requested: 16 :  miss
+288:	| 27	| 5	| 31	| 16	| 26	| 10	| 15	| 20	|: page requested: 11 :  miss
+289:	| 27	| 5	| 31	| 16	| 11	| 10	| 15	| 20	|: page requested: 29 :  miss
+290:	| 27	| 5	| 31	| 16	| 11	| 29	| 15	| 20	|: page requested: 17 :  miss
+291:	| 27	| 5	| 31	| 16	| 11	| 29	| 17	| 20	|: page requested: 22 :  miss
+292:	| 27	| 5	| 31	| 16	| 11	| 29	| 17	| 22	|: page requested: 7 :  miss
+293:	| 7	| 5	| 31	| 16	| 11	| 29	| 17	| 22	|: page requested: 10 :  miss
+294:	| 7	| 10	| 31	| 16	| 11	| 29	| 17	| 22	|: page requested: 10 :  hit
+295:	| 7	| 10	| 31	| 16	| 11	| 29	| 17	| 22	|: page requested: 31 :  hit
+296:	| 7	| 10	| 31	| 16	| 11	| 29	| 17	| 22	|: page requested: 18 :  miss
+297:	| 7	| 10	| 18	| 16	| 11	| 29	| 17	| 22	|: page requested: 10 :  hit
+298:	| 7	| 10	| 18	| 16	| 11	| 29	| 17	| 22	|: page requested: 25 :  miss
+299:	| 7	| 10	| 18	| 25	| 11	| 29	| 17	| 22	|: page requested: 8 :  miss
+300:	| 7	| 10	| 18	| 25	| 8	| 29	| 17	| 22	|: page requested: 31 :  miss
+301:	| 7	| 10	| 18	| 25	| 8	| 31	| 17	| 22	|: page requested: 21 :  miss
+302:	| 7	| 10	| 18	| 25	| 8	| 31	| 21	| 22	|: page requested: 14 :  miss
+303:	| 7	| 10	| 18	| 25	| 8	| 31	| 21	| 14	|: page requested: 8 :  hit
+304:	| 7	| 10	| 18	| 25	| 8	| 31	| 21	| 14	|: page requested: 13 :  miss
+305:	| 13	| 10	| 18	| 25	| 8	| 31	| 21	| 14	|: page requested: 5 :  miss
+306:	| 13	| 5	| 18	| 25	| 8	| 31	| 21	| 14	|: page requested: 24 :  miss
+307:	| 13	| 5	| 24	| 25	| 8	| 31	| 21	| 14	|: page requested: 14 :  hit
+308:	| 13	| 5	| 24	| 25	| 8	| 31	| 21	| 14	|: page requested: 29 :  miss
+309:	| 13	| 5	| 24	| 29	| 8	| 31	| 21	| 14	|: page requested: 30 :  miss
+310:	| 13	| 5	| 24	| 29	| 30	| 31	| 21	| 14	|: page requested: 9 :  miss
+311:	| 13	| 5	| 24	| 29	| 30	| 9	| 21	| 14	|: page requested: 6 :  miss
+312:	| 13	| 5	| 24	| 29	| 30	| 9	| 6	| 14	|: page requested: 9 :  hit
+313:	| 13	| 5	| 24	| 29	| 30	| 9	| 6	| 14	|: page requested: 24 :  hit
+314:	| 13	| 5	| 24	| 29	| 30	| 9	| 6	| 14	|: page requested: 27 :  miss
+315:	| 13	| 5	| 24	| 29	| 30	| 9	| 6	| 27	|: page requested: 4 :  miss
+316:	| 4	| 5	| 24	| 29	| 30	| 9	| 6	| 27	|: page requested: 29 :  hit
+317:	| 4	| 5	| 24	| 29	| 30	| 9	| 6	| 27	|: page requested: 26 :  miss
+318:	| 4	| 26	| 24	| 29	| 30	| 9	| 6	| 27	|: page requested: 21 :  miss
+319:	| 4	| 26	| 21	| 29	| 30	| 9	| 6	| 27	|: page requested: 8 :  miss
+320:	| 4	| 26	| 21	| 8	| 30	| 9	| 6	| 27	|: page requested: 23 :  miss
+321:	| 4	| 26	| 21	| 8	| 23	| 9	| 6	| 27	|: page requested: 6 :  hit
+322:	| 4	| 26	| 21	| 8	| 23	| 9	| 6	| 27	|: page requested: 31 :  miss
+323:	| 4	| 26	| 21	| 8	| 23	| 31	| 6	| 27	|: page requested: 30 :  miss
+324:	| 4	| 26	| 21	| 8	| 23	| 31	| 30	| 27	|: page requested: 17 :  miss
+325:	| 4	| 26	| 21	| 8	| 23	| 31	| 30	| 17	|: page requested: 9 :  miss
+326:	| 9	| 26	| 21	| 8	| 23	| 31	| 30	| 17	|: page requested: 30 :  hit
+327:	| 9	| 26	| 21	| 8	| 23	| 31	| 30	| 17	|: page requested: 3 :  miss
+328:	| 9	| 3	| 21	| 8	| 23	| 31	| 30	| 17	|: page requested: 19 :  miss
+329:	| 9	| 3	| 19	| 8	| 23	| 31	| 30	| 17	|: page requested: 23 :  hit
+330:	| 9	| 3	| 19	| 8	| 23	| 31	| 30	| 17	|: page requested: 11 :  miss
+331:	| 9	| 3	| 19	| 11	| 23	| 31	| 30	| 17	|: page requested: 18 :  miss
+332:	| 9	| 3	| 19	| 11	| 18	| 31	| 30	| 17	|: page requested: 12 :  miss
+333:	| 9	| 3	| 19	| 11	| 18	| 12	| 30	| 17	|: page requested: 26 :  miss
+334:	| 9	| 3	| 19	| 11	| 18	| 12	| 26	| 17	|: page requested: 26 :  hit
+335:	| 9	| 3	| 19	| 11	| 18	| 12	| 26	| 17	|: page requested: 25 :  miss
+336:	| 9	| 3	| 19	| 11	| 18	| 12	| 26	| 25	|: page requested: 31 :  miss
+337:	| 31	| 3	| 19	| 11	| 18	| 12	| 26	| 25	|: page requested: 19 :  hit
+338:	| 31	| 3	| 19	| 11	| 18	| 12	| 26	| 25	|: page requested: 7 :  miss
+339:	| 31	| 7	| 19	| 11	| 18	| 12	| 26	| 25	|: page requested: 28 :  miss
+340:	| 31	| 7	| 28	| 11	| 18	| 12	| 26	| 25	|: page requested: 17 :  miss
+341:	| 31	| 7	| 28	| 17	| 18	| 12	| 26	| 25	|: page requested: 16 :  miss
+342:	| 31	| 7	| 28	| 17	| 16	| 12	| 26	| 25	|: page requested: 3 :  miss
+343:	| 31	| 7	| 28	| 17	| 16	| 3	| 26	| 25	|: page requested: 26 :  hit
+344:	| 31	| 7	| 28	| 17	| 16	| 3	| 26	| 25	|: page requested: 8 :  miss
+345:	| 31	| 7	| 28	| 17	| 16	| 3	| 8	| 25	|: page requested: 30 :  miss
+346:	| 31	| 7	| 28	| 17	| 16	| 3	| 8	| 30	|: page requested: 31 :  hit
+347:	| 31	| 7	| 28	| 17	| 16	| 3	| 8	| 30	|: page requested: 6 :  miss
+348:	| 6	| 7	| 28	| 17	| 16	| 3	| 8	| 30	|: page requested: 24 :  miss
+349:	| 6	| 24	| 28	| 17	| 16	| 3	| 8	| 30	|: page requested: 20 :  miss
+350:	| 6	| 24	| 20	| 17	| 16	| 3	| 8	| 30	|: page requested: 14 :  miss
+351:	| 6	| 24	| 20	| 14	| 16	| 3	| 8	| 30	|: page requested: 15 :  miss
+352:	| 6	| 24	| 20	| 14	| 15	| 3	| 8	| 30	|: page requested: 26 :  miss
+353:	| 6	| 24	| 20	| 14	| 15	| 26	| 8	| 30	|: page requested: 13 :  miss
+354:	| 6	| 24	| 20	| 14	| 15	| 26	| 13	| 30	|: page requested: 13 :  hit
+355:	| 6	| 24	| 20	| 14	| 15	| 26	| 13	| 30	|: page requested: 11 :  miss
+356:	| 6	| 24	| 20	| 14	| 15	| 26	| 13	| 11	|: page requested: 22 :  miss
+357:	| 22	| 24	| 20	| 14	| 15	| 26	| 13	| 11	|: page requested: 11 :  hit
+358:	| 22	| 24	| 20	| 14	| 15	| 26	| 13	| 11	|: page requested: 15 :  hit
+359:	| 22	| 24	| 20	| 14	| 15	| 26	| 13	| 11	|: page requested: 10 :  miss
+360:	| 22	| 10	| 20	| 14	| 15	| 26	| 13	| 11	|: page requested: 2 :  miss
+361:	| 22	| 10	| 2	| 14	| 15	| 26	| 13	| 11	|: page requested: 26 :  hit
+362:	| 22	| 10	| 2	| 14	| 15	| 26	| 13	| 11	|: page requested: 28 :  miss
+363:	| 22	| 10	| 2	| 28	| 15	| 26	| 13	| 11	|: page requested: 14 :  miss
+364:	| 22	| 10	| 2	| 28	| 14	| 26	| 13	| 11	|: page requested: 20 :  miss
+365:	| 22	| 10	| 2	| 28	| 14	| 20	| 13	| 11	|: page requested: 23 :  miss
+366:	| 22	| 10	| 2	| 28	| 14	| 20	| 23	| 11	|: page requested: 7 :  miss
+367:	| 22	| 10	| 2	| 28	| 14	| 20	| 23	| 7	|: page requested: 19 :  miss
+368:	| 19	| 10	| 2	| 28	| 14	| 20	| 23	| 7	|: page requested: 10 :  hit
+369:	| 19	| 10	| 2	| 28	| 14	| 20	| 23	| 7	|: page requested: 15 :  miss
+370:	| 19	| 15	| 2	| 28	| 14	| 20	| 23	| 7	|: page requested: 16 :  miss
+371:	| 19	| 15	| 16	| 28	| 14	| 20	| 23	| 7	|: page requested: 27 :  miss
+372:	| 19	| 15	| 16	| 27	| 14	| 20	| 23	| 7	|: page requested: 31 :  miss
+373:	| 19	| 15	| 16	| 27	| 31	| 20	| 23	| 7	|: page requested: 19 :  hit
+374:	| 19	| 15	| 16	| 27	| 31	| 20	| 23	| 7	|: page requested: 22 :  miss
+375:	| 19	| 15	| 16	| 27	| 31	| 22	| 23	| 7	|: page requested: 8 :  miss
+376:	| 19	| 15	| 16	| 27	| 31	| 22	| 8	| 7	|: page requested: 17 :  miss
+377:	| 19	| 15	| 16	| 27	| 31	| 22	| 8	| 17	|: page requested: 21 :  miss
+378:	| 21	| 15	| 16	| 27	| 31	| 22	| 8	| 17	|: page requested: 14 :  miss
+379:	| 21	| 14	| 16	| 27	| 31	| 22	| 8	| 17	|: page requested: 9 :  miss
+380:	| 21	| 14	| 9	| 27	| 31	| 22	| 8	| 17	|: page requested: 9 :  hit
+381:	| 21	| 14	| 9	| 27	| 31	| 22	| 8	| 17	|: page requested: 28 :  miss
+382:	| 21	| 14	| 9	| 28	| 31	| 22	| 8	| 17	|: page requested: 24 :  miss
+383:	| 21	| 14	| 9	| 28	| 24	| 22	| 8	| 17	|: page requested: 3 :  miss
+384:	| 21	| 14	| 9	| 28	| 24	| 3	| 8	| 17	|: page requested: 10 :  miss
+385:	| 21	| 14	| 9	| 28	| 24	| 3	| 10	| 17	|: page requested: 5 :  miss
+386:	| 21	| 14	| 9	| 28	| 24	| 3	| 10	| 5	|: page requested: 15 :  miss
+387:	| 15	| 14	| 9	| 28	| 24	| 3	| 10	| 5	|: page requested: 0 :  miss
+388:	| 15	| 0	| 9	| 28	| 24	| 3	| 10	| 5	|: page requested: 17 :  miss
+389:	| 15	| 0	| 17	| 28	| 24	| 3	| 10	| 5	|: page requested: 30 :  miss
+390:	| 15	| 0	| 17	| 30	| 24	| 3	| 10	| 5	|: page requested: 10 :  hit
+391:	| 15	| 0	| 17	| 30	| 24	| 3	| 10	| 5	|: page requested: 19 :  miss
+392:	| 15	| 0	| 17	| 30	| 19	| 3	| 10	| 5	|: page requested: 24 :  miss
+393:	| 15	| 0	| 17	| 30	| 19	| 24	| 10	| 5	|: page requested: 7 :  miss
+394:	| 15	| 0	| 17	| 30	| 19	| 24	| 7	| 5	|: page requested: 2 :  miss
+395:	| 15	| 0	| 17	| 30	| 19	| 24	| 7	| 2	|: page requested: 13 :  miss
+396:	| 13	| 0	| 17	| 30	| 19	| 24	| 7	| 2	|: page requested: 30 :  hit
+397:	| 13	| 0	| 17	| 30	| 19	| 24	| 7	| 2	|: page requested: 9 :  miss
+398:	| 13	| 9	| 17	| 30	| 19	| 24	| 7	| 2	|: page requested: 0 :  miss
+399:	| 13	| 9	| 0	| 30	| 19	| 24	| 7	| 2	|: page requested: 8 :  miss
+400:	| 13	| 9	| 0	| 8	| 19	| 24	| 7	| 2	|: page requested: 24 :  hit
+401:	| 13	| 9	| 0	| 8	| 19	| 24	| 7	| 2	|: page requested: 16 :  miss
+402:	| 13	| 9	| 0	| 8	| 16	| 24	| 7	| 2	|: page requested: 3 :  miss
+403:	| 13	| 9	| 0	| 8	| 16	| 3	| 7	| 2	|: page requested: 24 :  miss
+404:	| 13	| 9	| 0	| 8	| 16	| 3	| 24	| 2	|: page requested: 3 :  hit
+405:	| 13	| 9	| 0	| 8	| 16	| 3	| 24	| 2	|: page requested: 25 :  miss
+406:	| 13	| 9	| 0	| 8	| 16	| 3	| 24	| 25	|: page requested: 0 :  hit
+407:	| 13	| 9	| 0	| 8	| 16	| 3	| 24	| 25	|: page requested: 20 :  miss
+408:	| 20	| 9	| 0	| 8	| 16	| 3	| 24	| 25	|: page requested: 14 :  miss
+409:	| 20	| 14	| 0	| 8	| 16	| 3	| 24	| 25	|: page requested: 14 :  hit
+410:	| 20	| 14	| 0	| 8	| 16	| 3	| 24	| 25	|: page requested: 29 :  miss
+411:	| 20	| 14	| 29	| 8	| 16	| 3	| 24	| 25	|: page requested: 23 :  miss
+412:	| 20	| 14	| 29	| 23	| 16	| 3	| 24	| 25	|: page requested: 10 :  miss
+413:	| 20	| 14	| 29	| 23	| 10	| 3	| 24	| 25	|: page requested: 21 :  miss
+414:	| 20	| 14	| 29	| 23	| 10	| 21	| 24	| 25	|: page requested: 27 :  miss
+415:	| 20	| 14	| 29	| 23	| 10	| 21	| 27	| 25	|: page requested: 20 :  hit
+416:	| 20	| 14	| 29	| 23	| 10	| 21	| 27	| 25	|: page requested: 27 :  hit
+417:	| 20	| 14	| 29	| 23	| 10	| 21	| 27	| 25	|: page requested: 10 :  hit
+418:	| 20	| 14	| 29	| 23	| 10	| 21	| 27	| 25	|: page requested: 21 :  hit
+419:	| 20	| 14	| 29	| 23	| 10	| 21	| 27	| 25	|: page requested: 12 :  miss
+420:	| 20	| 14	| 29	| 23	| 10	| 21	| 27	| 12	|: page requested: 8 :  miss
+421:	| 8	| 14	| 29	| 23	| 10	| 21	| 27	| 12	|: page requested: 31 :  miss
+422:	| 8	| 31	| 29	| 23	| 10	| 21	| 27	| 12	|: page requested: 31 :  hit
+423:	| 8	| 31	| 29	| 23	| 10	| 21	| 27	| 12	|: page requested: 0 :  miss
+424:	| 8	| 31	| 0	| 23	| 10	| 21	| 27	| 12	|: page requested: 6 :  miss
+425:	| 8	| 31	| 0	| 6	| 10	| 21	| 27	| 12	|: page requested: 1 :  miss
+426:	| 8	| 31	| 0	| 6	| 1	| 21	| 27	| 12	|: page requested: 13 :  miss
+427:	| 8	| 31	| 0	| 6	| 1	| 13	| 27	| 12	|: page requested: 4 :  miss
+428:	| 8	| 31	| 0	| 6	| 1	| 13	| 4	| 12	|: page requested: 11 :  miss
+429:	| 8	| 31	| 0	| 6	| 1	| 13	| 4	| 11	|: page requested: 14 :  miss
+430:	| 14	| 31	| 0	| 6	| 1	| 13	| 4	| 11	|: page requested: 12 :  miss
+431:	| 14	| 12	| 0	| 6	| 1	| 13	| 4	| 11	|: page requested: 3 :  miss
+432:	| 14	| 12	| 3	| 6	| 1	| 13	| 4	| 11	|: page requested: 30 :  miss
+433:	| 14	| 12	| 3	| 30	| 1	| 13	| 4	| 11	|: page requested: 16 :  miss
+434:	| 14	| 12	| 3	| 30	| 16	| 13	| 4	| 11	|: page requested: 27 :  miss
+435:	| 14	| 12	| 3	| 30	| 16	| 27	| 4	| 11	|: page requested: 2 :  miss
+436:	| 14	| 12	| 3	| 30	| 16	| 27	| 2	| 11	|: page requested: 9 :  miss
+437:	| 14	| 12	| 3	| 30	| 16	| 27	| 2	| 9	|: page requested: 27 :  hit
+438:	| 14	| 12	| 3	| 30	| 16	| 27	| 2	| 9	|: page requested: 22 :  miss
+439:	| 22	| 12	| 3	| 30	| 16	| 27	| 2	| 9	|: page requested: 24 :  miss
+440:	| 22	| 24	| 3	| 30	| 16	| 27	| 2	| 9	|: page requested: 9 :  hit
+441:	| 22	| 24	| 3	| 30	| 16	| 27	| 2	| 9	|: page requested: 20 :  miss
+442:	| 22	| 24	| 20	| 30	| 16	| 27	| 2	| 9	|: page requested: 15 :  miss
+443:	| 22	| 24	| 20	| 15	| 16	| 27	| 2	| 9	|: page requested: 20 :  hit
+444:	| 22	| 24	| 20	| 15	| 16	| 27	| 2	| 9	|: page requested: 9 :  hit
+445:	| 22	| 24	| 20	| 15	| 16	| 27	| 2	| 9	|: page requested: 10 :  miss
+446:	| 22	| 24	| 20	| 15	| 10	| 27	| 2	| 9	|: page requested: 8 :  miss
+447:	| 22	| 24	| 20	| 15	| 10	| 8	| 2	| 9	|: page requested: 4 :  miss
+448:	| 22	| 24	| 20	| 15	| 10	| 8	| 4	| 9	|: page requested: 20 :  hit
+449:	| 22	| 24	| 20	| 15	| 10	| 8	| 4	| 9	|: page requested: 29 :  miss
+450:	| 22	| 24	| 20	| 15	| 10	| 8	| 4	| 29	|: page requested: 16 :  miss
+451:	| 16	| 24	| 20	| 15	| 10	| 8	| 4	| 29	|: page requested: 28 :  miss
+452:	| 16	| 28	| 20	| 15	| 10	| 8	| 4	| 29	|: page requested: 29 :  hit
+453:	| 16	| 28	| 20	| 15	| 10	| 8	| 4	| 29	|: page requested: 16 :  hit
+454:	| 16	| 28	| 20	| 15	| 10	| 8	| 4	| 29	|: page requested: 29 :  hit
+455:	| 16	| 28	| 20	| 15	| 10	| 8	| 4	| 29	|: page requested: 3 :  miss
+456:	| 16	| 28	| 3	| 15	| 10	| 8	| 4	| 29	|: page requested: 17 :  miss
+457:	| 16	| 28	| 3	| 17	| 10	| 8	| 4	| 29	|: page requested: 10 :  hit
+458:	| 16	| 28	| 3	| 17	| 10	| 8	| 4	| 29	|: page requested: 8 :  hit
+459:	| 16	| 28	| 3	| 17	| 10	| 8	| 4	| 29	|: page requested: 28 :  hit
+460:	| 16	| 28	| 3	| 17	| 10	| 8	| 4	| 29	|: page requested: 24 :  miss
+461:	| 16	| 28	| 3	| 17	| 24	| 8	| 4	| 29	|: page requested: 20 :  miss
+462:	| 16	| 28	| 3	| 17	| 24	| 20	| 4	| 29	|: page requested: 0 :  miss
+463:	| 16	| 28	| 3	| 17	| 24	| 20	| 0	| 29	|: page requested: 23 :  miss
+464:	| 16	| 28	| 3	| 17	| 24	| 20	| 0	| 23	|: page requested: 4 :  miss
+465:	| 4	| 28	| 3	| 17	| 24	| 20	| 0	| 23	|: page requested: 27 :  miss
+466:	| 4	| 27	| 3	| 17	| 24	| 20	| 0	| 23	|: page requested: 25 :  miss
+467:	| 4	| 27	| 25	| 17	| 24	| 20	| 0	| 23	|: page requested: 14 :  miss
+468:	| 4	| 27	| 25	| 14	| 24	| 20	| 0	| 23	|: page requested: 23 :  hit
+469:	| 4	| 27	| 25	| 14	| 24	| 20	| 0	| 23	|: page requested: 15 :  miss
+470:	| 4	| 27	| 25	| 14	| 15	| 20	| 0	| 23	|: page requested: 6 :  miss
+471:	| 4	| 27	| 25	| 14	| 15	| 6	| 0	| 23	|: page requested: 0 :  hit
+472:	| 4	| 27	| 25	| 14	| 15	| 6	| 0	| 23	|: page requested: 3 :  miss
+473:	| 4	| 27	| 25	| 14	| 15	| 6	| 3	| 23	|: page requested: 21 :  miss
+474:	| 4	| 27	| 25	| 14	| 15	| 6	| 3	| 21	|: page requested: 20 :  miss
+475:	| 20	| 27	| 25	| 14	| 15	| 6	| 3	| 21	|: page requested: 13 :  miss
+476:	| 20	| 13	| 25	| 14	| 15	| 6	| 3	| 21	|: page requested: 0 :  miss
+477:	| 20	| 13	| 0	| 14	| 15	| 6	| 3	| 21	|: page requested: 29 :  miss
+478:	| 20	| 13	| 0	| 29	| 15	| 6	| 3	| 21	|: page requested: 17 :  miss
+479:	| 20	| 13	| 0	| 29	| 17	| 6	| 3	| 21	|: page requested: 20 :  hit
+480:	| 20	| 13	| 0	| 29	| 17	| 6	| 3	| 21	|: page requested: 26 :  miss
+481:	| 20	| 13	| 0	| 29	| 17	| 26	| 3	| 21	|: page requested: 2 :  miss
+482:	| 20	| 13	| 0	| 29	| 17	| 26	| 2	| 21	|: page requested: 17 :  hit
+483:	| 20	| 13	| 0	| 29	| 17	| 26	| 2	| 21	|: page requested: 23 :  miss
+484:	| 20	| 13	| 0	| 29	| 17	| 26	| 2	| 23	|: page requested: 18 :  miss
+485:	| 18	| 13	| 0	| 29	| 17	| 26	| 2	| 23	|: page requested: 14 :  miss
+486:	| 18	| 14	| 0	| 29	| 17	| 26	| 2	| 23	|: page requested: 27 :  miss
+487:	| 18	| 14	| 27	| 29	| 17	| 26	| 2	| 23	|: page requested: 3 :  miss
+488:	| 18	| 14	| 27	| 3	| 17	| 26	| 2	| 23	|: page requested: 24 :  miss
+489:	| 18	| 14	| 27	| 3	| 24	| 26	| 2	| 23	|: page requested: 3 :  hit
+490:	| 18	| 14	| 27	| 3	| 24	| 26	| 2	| 23	|: page requested: 0 :  miss
+491:	| 18	| 14	| 27	| 3	| 24	| 0	| 2	| 23	|: page requested: 17 :  miss
+492:	| 18	| 14	| 27	| 3	| 24	| 0	| 17	| 23	|: page requested: 23 :  hit
+493:	| 18	| 14	| 27	| 3	| 24	| 0	| 17	| 23	|: page requested: 0 :  hit
+494:	| 18	| 14	| 27	| 3	| 24	| 0	| 17	| 23	|: page requested: 8 :  miss
+495:	| 18	| 14	| 27	| 3	| 24	| 0	| 17	| 8	|: page requested: 28 :  miss
+496:	| 28	| 14	| 27	| 3	| 24	| 0	| 17	| 8	|: page requested: 27 :  hit
+497:	| 28	| 14	| 27	| 3	| 24	| 0	| 17	| 8	|: page requested: 1 :  miss
+498:	| 28	| 1	| 27	| 3	| 24	| 0	| 17	| 8	|: page requested: 10 :  miss
+499:	| 28	| 1	| 10	| 3	| 24	| 0	| 17	| 8	|: page requested: 18 :  miss
+500:	| 28	| 1	| 10	| 18	| 24	| 0	| 17	| 8	|: page requested: 16 :  miss
+501:	| 28	| 1	| 10	| 18	| 16	| 0	| 17	| 8	|: page requested: 16 :  hit
+502:	| 28	| 1	| 10	| 18	| 16	| 0	| 17	| 8	|: page requested: 19 :  miss
+503:	| 28	| 1	| 10	| 18	| 16	| 19	| 17	| 8	|: page requested: 20 :  miss
+504:	| 28	| 1	| 10	| 18	| 16	| 19	| 20	| 8	|: page requested: 5 :  miss
+505:	| 28	| 1	| 10	| 18	| 16	| 19	| 20	| 5	|: page requested: 7 :  miss
+506:	| 7	| 1	| 10	| 18	| 16	| 19	| 20	| 5	|: page requested: 1 :  hit
+507:	| 7	| 1	| 10	| 18	| 16	| 19	| 20	| 5	|: page requested: 5 :  hit
+508:	| 7	| 1	| 10	| 18	| 16	| 19	| 20	| 5	|: page requested: 4 :  miss
+509:	| 7	| 4	| 10	| 18	| 16	| 19	| 20	| 5	|: page requested: 18 :  hit
+510:	| 7	| 4	| 10	| 18	| 16	| 19	| 20	| 5	|: page requested: 26 :  miss
+511:	| 7	| 4	| 26	| 18	| 16	| 19	| 20	| 5	|: page requested: 31 :  miss
+512:	| 7	| 4	| 26	| 31	| 16	| 19	| 20	| 5	|: page requested: 20 :  hit
+513:	| 7	| 4	| 26	| 31	| 16	| 19	| 20	| 5	|: page requested: 11 :  miss
+514:	| 7	| 4	| 26	| 31	| 11	| 19	| 20	| 5	|: page requested: 22 :  miss
+515:	| 7	| 4	| 26	| 31	| 11	| 22	| 20	| 5	|: page requested: 6 :  miss
+516:	| 7	| 4	| 26	| 31	| 11	| 22	| 6	| 5	|: page requested: 25 :  miss
+517:	| 7	| 4	| 26	| 31	| 11	| 22	| 6	| 25	|: page requested: 17 :  miss
+518:	| 17	| 4	| 26	| 31	| 11	| 22	| 6	| 25	|: page requested: 10 :  miss
+519:	| 17	| 10	| 26	| 31	| 11	| 22	| 6	| 25	|: page requested: 17 :  hit
+520:	| 17	| 10	| 26	| 31	| 11	| 22	| 6	| 25	|: page requested: 20 :  miss
+521:	| 17	| 10	| 20	| 31	| 11	| 22	| 6	| 25	|: page requested: 10 :  hit
+522:	| 17	| 10	| 20	| 31	| 11	| 22	| 6	| 25	|: page requested: 2 :  miss
+523:	| 17	| 10	| 20	| 2	| 11	| 22	| 6	| 25	|: page requested: 12 :  miss
+524:	| 17	| 10	| 20	| 2	| 12	| 22	| 6	| 25	|: page requested: 10 :  hit
+525:	| 17	| 10	| 20	| 2	| 12	| 22	| 6	| 25	|: page requested: 10 :  hit
+526:	| 17	| 10	| 20	| 2	| 12	| 22	| 6	| 25	|: page requested: 8 :  miss
+527:	| 17	| 10	| 20	| 2	| 12	| 8	| 6	| 25	|: page requested: 5 :  miss
+528:	| 17	| 10	| 20	| 2	| 12	| 8	| 5	| 25	|: page requested: 11 :  miss
+529:	| 17	| 10	| 20	| 2	| 12	| 8	| 5	| 11	|: page requested: 18 :  miss
+530:	| 18	| 10	| 20	| 2	| 12	| 8	| 5	| 11	|: page requested: 24 :  miss
+531:	| 18	| 24	| 20	| 2	| 12	| 8	| 5	| 11	|: page requested: 28 :  miss
+532:	| 18	| 24	| 28	| 2	| 12	| 8	| 5	| 11	|: page requested: 2 :  hit
+533:	| 18	| 24	| 28	| 2	| 12	| 8	| 5	| 11	|: page requested: 11 :  hit
+534:	| 18	| 24	| 28	| 2	| 12	| 8	| 5	| 11	|: page requested: 16 :  miss
+535:	| 18	| 24	| 28	| 16	| 12	| 8	| 5	| 11	|: page requested: 7 :  miss
+536:	| 18	| 24	| 28	| 16	| 7	| 8	| 5	| 11	|: page requested: 18 :  hit
+537:	| 18	| 24	| 28	| 16	| 7	| 8	| 5	| 11	|: page requested: 17 :  miss
+538:	| 18	| 24	| 28	| 16	| 7	| 17	| 5	| 11	|: page requested: 13 :  miss
+539:	| 18	| 24	| 28	| 16	| 7	| 17	| 13	| 11	|: page requested: 23 :  miss
+540:	| 18	| 24	| 28	| 16	| 7	| 17	| 13	| 23	|: page requested: 3 :  miss
+541:	| 3	| 24	| 28	| 16	| 7	| 17	| 13	| 23	|: page requested: 7 :  hit
+542:	| 3	| 24	| 28	| 16	| 7	| 17	| 13	| 23	|: page requested: 22 :  miss
+543:	| 3	| 22	| 28	| 16	| 7	| 17	| 13	| 23	|: page requested: 24 :  miss
+544:	| 3	| 22	| 24	| 16	| 7	| 17	| 13	| 23	|: page requested: 18 :  miss
+545:	| 3	| 22	| 24	| 18	| 7	| 17	| 13	| 23	|: page requested: 12 :  miss
+546:	| 3	| 22	| 24	| 18	| 12	| 17	| 13	| 23	|: page requested: 30 :  miss
+547:	| 3	| 22	| 24	| 18	| 12	| 30	| 13	| 23	|: page requested: 11 :  miss
+548:	| 3	| 22	| 24	| 18	| 12	| 30	| 11	| 23	|: page requested: 30 :  hit
+549:	| 3	| 22	| 24	| 18	| 12	| 30	| 11	| 23	|: page requested: 8 :  miss
+550:	| 3	| 22	| 24	| 18	| 12	| 30	| 11	| 8	|: page requested: 28 :  miss
+551:	| 28	| 22	| 24	| 18	| 12	| 30	| 11	| 8	|: page requested: 18 :  hit
+552:	| 28	| 22	| 24	| 18	| 12	| 30	| 11	| 8	|: page requested: 18 :  hit
+553:	| 28	| 22	| 24	| 18	| 12	| 30	| 11	| 8	|: page requested: 31 :  miss
+554:	| 28	| 31	| 24	| 18	| 12	| 30	| 11	| 8	|: page requested: 30 :  hit
+555:	| 28	| 31	| 24	| 18	| 12	| 30	| 11	| 8	|: page requested: 28 :  hit
+556:	| 28	| 31	| 24	| 18	| 12	| 30	| 11	| 8	|: page requested: 9 :  miss
+557:	| 28	| 31	| 9	| 18	| 12	| 30	| 11	| 8	|: page requested: 6 :  miss
+558:	| 28	| 31	| 9	| 6	| 12	| 30	| 11	| 8	|: page requested: 2 :  miss
+559:	| 28	| 31	| 9	| 6	| 2	| 30	| 11	| 8	|: page requested: 21 :  miss
+560:	| 28	| 31	| 9	| 6	| 2	| 21	| 11	| 8	|: page requested: 24 :  miss
+561:	| 28	| 31	| 9	| 6	| 2	| 21	| 24	| 8	|: page requested: 26 :  miss
+562:	| 28	| 31	| 9	| 6	| 2	| 21	| 24	| 26	|: page requested: 17 :  miss
+563:	| 17	| 31	| 9	| 6	| 2	| 21	| 24	| 26	|: page requested: 26 :  hit
+564:	| 17	| 31	| 9	| 6	| 2	| 21	| 24	| 26	|: page requested: 5 :  miss
+565:	| 17	| 5	| 9	| 6	| 2	| 21	| 24	| 26	|: page requested: 1 :  miss
+566:	| 17	| 5	| 1	| 6	| 2	| 21	| 24	| 26	|: page requested: 2 :  hit
+567:	| 17	| 5	| 1	| 6	| 2	| 21	| 24	| 26	|: page requested: 23 :  miss
+568:	| 17	| 5	| 1	| 23	| 2	| 21	| 24	| 26	|: page requested: 18 :  miss
+569:	| 17	| 5	| 1	| 23	| 18	| 21	| 24	| 26	|: page requested: 15 :  miss
+570:	| 17	| 5	| 1	| 23	| 18	| 15	| 24	| 26	|: page requested: 14 :  miss
+571:	| 17	| 5	| 1	| 23	| 18	| 15	| 14	| 26	|: page requested: 21 :  miss
+572:	| 17	| 5	| 1	| 23	| 18	| 15	| 14	| 21	|: page requested: 22 :  miss
+573:	| 22	| 5	| 1	| 23	| 18	| 15	| 14	| 21	|: page requested: 4 :  miss
+574:	| 22	| 4	| 1	| 23	| 18	| 15	| 14	| 21	|: page requested: 13 :  miss
+575:	| 22	| 4	| 13	| 23	| 18	| 15	| 14	| 21	|: page requested: 8 :  miss
+576:	| 22	| 4	| 13	| 8	| 18	| 15	| 14	| 21	|: page requested: 17 :  miss
+577:	| 22	| 4	| 13	| 8	| 17	| 15	| 14	| 21	|: page requested: 12 :  miss
+578:	| 22	| 4	| 13	| 8	| 17	| 12	| 14	| 21	|: page requested: 19 :  miss
+579:	| 22	| 4	| 13	| 8	| 17	| 12	| 19	| 21	|: page requested: 15 :  miss
+580:	| 22	| 4	| 13	| 8	| 17	| 12	| 19	| 15	|: page requested: 20 :  miss
+581:	| 20	| 4	| 13	| 8	| 17	| 12	| 19	| 15	|: page requested: 15 :  hit
+582:	| 20	| 4	| 13	| 8	| 17	| 12	| 19	| 15	|: page requested: 1 :  miss
+583:	| 20	| 1	| 13	| 8	| 17	| 12	| 19	| 15	|: page requested: 7 :  miss
+584:	| 20	| 1	| 7	| 8	| 17	| 12	| 19	| 15	|: page requested: 14 :  miss
+585:	| 20	| 1	| 7	| 14	| 17	| 12	| 19	| 15	|: page requested: 0 :  miss
+586:	| 20	| 1	| 7	| 14	| 0	| 12	| 19	| 15	|: page requested: 3 :  miss
+587:	| 20	| 1	| 7	| 14	| 0	| 3	| 19	| 15	|: page requested: 24 :  miss
+588:	| 20	| 1	| 7	| 14	| 0	| 3	| 24	| 15	|: page requested: 6 :  miss
+589:	| 20	| 1	| 7	| 14	| 0	| 3	| 24	| 6	|: page requested: 5 :  miss
+590:	| 5	| 1	| 7	| 14	| 0	| 3	| 24	| 6	|: page requested: 13 :  miss
+591:	| 5	| 13	| 7	| 14	| 0	| 3	| 24	| 6	|: page requested: 31 :  miss
+592:	| 5	| 13	| 31	| 14	| 0	| 3	| 24	| 6	|: page requested: 31 :  hit
+593:	| 5	| 13	| 31	| 14	| 0	| 3	| 24	| 6	|: page requested: 30 :  miss
+594:	| 5	| 13	| 31	| 30	| 0	| 3	| 24	| 6	|: page requested: 25 :  miss
+595:	| 5	| 13	| 31	| 30	| 25	| 3	| 24	| 6	|: page requested: 4 :  miss
+596:	| 5	| 13	| 31	| 30	| 25	| 4	| 24	| 6	|: page requested: 31 :  hit
+597:	| 5	| 13	| 31	| 30	| 25	| 4	| 24	| 6	|: page requested: 27 :  miss
+598:	| 5	| 13	| 31	| 30	| 25	| 4	| 27	| 6	|: page requested: 28 :  miss
+599:	| 5	| 13	| 31	| 30	| 25	| 4	| 27	| 28	|: page requested: 17 :  miss
+600:	| 17	| 13	| 31	| 30	| 25	| 4	| 27	| 28	|: page requested: 10 :  miss
+601:	| 17	| 10	| 31	| 30	| 25	| 4	| 27	| 28	|: page requested: 10 :  hit
+602:	| 17	| 10	| 31	| 30	| 25	| 4	| 27	| 28	|: page requested: 6 :  miss
+603:	| 17	| 10	| 6	| 30	| 25	| 4	| 27	| 28	|: page requested: 0 :  miss
+604:	| 17	| 10	| 6	| 0	| 25	| 4	| 27	| 28	|: page requested: 15 :  miss
+605:	| 17	| 10	| 6	| 0	| 15	| 4	| 27	| 28	|: page requested: 20 :  miss
+606:	| 17	| 10	| 6	| 0	| 15	| 20	| 27	| 28	|: page requested: 8 :  miss
+607:	| 17	| 10	| 6	| 0	| 15	| 20	| 8	| 28	|: page requested: 0 :  hit
+608:	| 17	| 10	| 6	| 0	| 15	| 20	| 8	| 28	|: page requested: 0 :  hit
+609:	| 17	| 10	| 6	| 0	| 15	| 20	| 8	| 28	|: page requested: 27 :  miss
+610:	| 17	| 10	| 6	| 0	| 15	| 20	| 8	| 27	|: page requested: 15 :  hit
+611:	| 17	| 10	| 6	| 0	| 15	| 20	| 8	| 27	|: page requested: 20 :  hit
+612:	| 17	| 10	| 6	| 0	| 15	| 20	| 8	| 27	|: page requested: 11 :  miss
+613:	| 11	| 10	| 6	| 0	| 15	| 20	| 8	| 27	|: page requested: 16 :  miss
+614:	| 11	| 16	| 6	| 0	| 15	| 20	| 8	| 27	|: page requested: 27 :  hit
+615:	| 11	| 16	| 6	| 0	| 15	| 20	| 8	| 27	|: page requested: 25 :  miss
+616:	| 11	| 16	| 25	| 0	| 15	| 20	| 8	| 27	|: page requested: 16 :  hit
+617:	| 11	| 16	| 25	| 0	| 15	| 20	| 8	| 27	|: page requested: 31 :  miss
+618:	| 11	| 16	| 25	| 31	| 15	| 20	| 8	| 27	|: page requested: 17 :  miss
+619:	| 11	| 16	| 25	| 31	| 17	| 20	| 8	| 27	|: page requested: 23 :  miss
+620:	| 11	| 16	| 25	| 31	| 17	| 23	| 8	| 27	|: page requested: 4 :  miss
+621:	| 11	| 16	| 25	| 31	| 17	| 23	| 4	| 27	|: page requested: 30 :  miss
+622:	| 11	| 16	| 25	| 31	| 17	| 23	| 4	| 30	|: page requested: 22 :  miss
+623:	| 22	| 16	| 25	| 31	| 17	| 23	| 4	| 30	|: page requested: 4 :  hit
+624:	| 22	| 16	| 25	| 31	| 17	| 23	| 4	| 30	|: page requested: 28 :  miss
+625:	| 22	| 28	| 25	| 31	| 17	| 23	| 4	| 30	|: page requested: 15 :  miss
+626:	| 22	| 28	| 15	| 31	| 17	| 23	| 4	| 30	|: page requested: 8 :  miss
+627:	| 22	| 28	| 15	| 8	| 17	| 23	| 4	| 30	|: page requested: 27 :  miss
+628:	| 22	| 28	| 15	| 8	| 27	| 23	| 4	| 30	|: page requested: 11 :  miss
+629:	| 22	| 28	| 15	| 8	| 27	| 11	| 4	| 30	|: page requested: 4 :  hit
+630:	| 22	| 28	| 15	| 8	| 27	| 11	| 4	| 30	|: page requested: 12 :  miss
+631:	| 22	| 28	| 15	| 8	| 27	| 11	| 12	| 30	|: page requested: 21 :  miss
+632:	| 22	| 28	| 15	| 8	| 27	| 11	| 12	| 21	|: page requested: 15 :  hit
+633:	| 22	| 28	| 15	| 8	| 27	| 11	| 12	| 21	|: page requested: 19 :  miss
+634:	| 19	| 28	| 15	| 8	| 27	| 11	| 12	| 21	|: page requested: 22 :  miss
+635:	| 19	| 22	| 15	| 8	| 27	| 11	| 12	| 21	|: page requested: 30 :  miss
+636:	| 19	| 22	| 30	| 8	| 27	| 11	| 12	| 21	|: page requested: 7 :  miss
+637:	| 19	| 22	| 30	| 7	| 27	| 11	| 12	| 21	|: page requested: 30 :  hit
+638:	| 19	| 22	| 30	| 7	| 27	| 11	| 12	| 21	|: page requested: 30 :  hit
+639:	| 19	| 22	| 30	| 7	| 27	| 11	| 12	| 21	|: page requested: 7 :  hit
+640:	| 19	| 22	| 30	| 7	| 27	| 11	| 12	| 21	|: page requested: 26 :  miss
+641:	| 19	| 22	| 30	| 7	| 26	| 11	| 12	| 21	|: page requested: 13 :  miss
+642:	| 19	| 22	| 30	| 7	| 26	| 13	| 12	| 21	|: page requested: 27 :  miss
+643:	| 19	| 22	| 30	| 7	| 26	| 13	| 27	| 21	|: page requested: 5 :  miss
+644:	| 19	| 22	| 30	| 7	| 26	| 13	| 27	| 5	|: page requested: 29 :  miss
+645:	| 29	| 22	| 30	| 7	| 26	| 13	| 27	| 5	|: page requested: 23 :  miss
+646:	| 29	| 23	| 30	| 7	| 26	| 13	| 27	| 5	|: page requested: 30 :  hit
+647:	| 29	| 23	| 30	| 7	| 26	| 13	| 27	| 5	|: page requested: 14 :  miss
+648:	| 29	| 23	| 14	| 7	| 26	| 13	| 27	| 5	|: page requested: 22 :  miss
+649:	| 29	| 23	| 14	| 22	| 26	| 13	| 27	| 5	|: page requested: 16 :  miss
+650:	| 29	| 23	| 14	| 22	| 16	| 13	| 27	| 5	|: page requested: 5 :  hit
+651:	| 29	| 23	| 14	| 22	| 16	| 13	| 27	| 5	|: page requested: 26 :  miss
+652:	| 29	| 23	| 14	| 22	| 16	| 26	| 27	| 5	|: page requested: 14 :  hit
+653:	| 29	| 23	| 14	| 22	| 16	| 26	| 27	| 5	|: page requested: 27 :  hit
+654:	| 29	| 23	| 14	| 22	| 16	| 26	| 27	| 5	|: page requested: 30 :  miss
+655:	| 29	| 23	| 14	| 22	| 16	| 26	| 30	| 5	|: page requested: 11 :  miss
+656:	| 29	| 23	| 14	| 22	| 16	| 26	| 30	| 11	|: page requested: 10 :  miss
+657:	| 10	| 23	| 14	| 22	| 16	| 26	| 30	| 11	|: page requested: 7 :  miss
+658:	| 10	| 7	| 14	| 22	| 16	| 26	| 30	| 11	|: page requested: 6 :  miss
+659:	| 10	| 7	| 6	| 22	| 16	| 26	| 30	| 11	|: page requested: 21 :  miss
+660:	| 10	| 7	| 6	| 21	| 16	| 26	| 30	| 11	|: page requested: 11 :  hit
+661:	| 10	| 7	| 6	| 21	| 16	| 26	| 30	| 11	|: page requested: 19 :  miss
+662:	| 10	| 7	| 6	| 21	| 19	| 26	| 30	| 11	|: page requested: 11 :  hit
+663:	| 10	| 7	| 6	| 21	| 19	| 26	| 30	| 11	|: page requested: 26 :  hit
+664:	| 10	| 7	| 6	| 21	| 19	| 26	| 30	| 11	|: page requested: 6 :  hit
+665:	| 10	| 7	| 6	| 21	| 19	| 26	| 30	| 11	|: page requested: 1 :  miss
+666:	| 10	| 7	| 6	| 21	| 19	| 1	| 30	| 11	|: page requested: 24 :  miss
+667:	| 10	| 7	| 6	| 21	| 19	| 1	| 24	| 11	|: page requested: 13 :  miss
+668:	| 10	| 7	| 6	| 21	| 19	| 1	| 24	| 13	|: page requested: 31 :  miss
+669:	| 31	| 7	| 6	| 21	| 19	| 1	| 24	| 13	|: page requested: 22 :  miss
+670:	| 31	| 22	| 6	| 21	| 19	| 1	| 24	| 13	|: page requested: 20 :  miss
+671:	| 31	| 22	| 20	| 21	| 19	| 1	| 24	| 13	|: page requested: 25 :  miss
+672:	| 31	| 22	| 20	| 25	| 19	| 1	| 24	| 13	|: page requested: 3 :  miss
+673:	| 31	| 22	| 20	| 25	| 3	| 1	| 24	| 13	|: page requested: 15 :  miss
+674:	| 31	| 22	| 20	| 25	| 3	| 15	| 24	| 13	|: page requested: 30 :  miss
+675:	| 31	| 22	| 20	| 25	| 3	| 15	| 30	| 13	|: page requested: 1 :  miss
+676:	| 31	| 22	| 20	| 25	| 3	| 15	| 30	| 1	|: page requested: 6 :  miss
+677:	| 6	| 22	| 20	| 25	| 3	| 15	| 30	| 1	|: page requested: 29 :  miss
+678:	| 6	| 29	| 20	| 25	| 3	| 15	| 30	| 1	|: page requested: 15 :  hit
+679:	| 6	| 29	| 20	| 25	| 3	| 15	| 30	| 1	|: page requested: 28 :  miss
+680:	| 6	| 29	| 28	| 25	| 3	| 15	| 30	| 1	|: page requested: 13 :  miss
+681:	| 6	| 29	| 28	| 13	| 3	| 15	| 30	| 1	|: page requested: 20 :  miss
+682:	| 6	| 29	| 28	| 13	| 20	| 15	| 30	| 1	|: page requested: 23 :  miss
+683:	| 6	| 29	| 28	| 13	| 20	| 23	| 30	| 1	|: page requested: 27 :  miss
+684:	| 6	| 29	| 28	| 13	| 20	| 23	| 27	| 1	|: page requested: 15 :  miss
+685:	| 6	| 29	| 28	| 13	| 20	| 23	| 27	| 15	|: page requested: 21 :  miss
+686:	| 21	| 29	| 28	| 13	| 20	| 23	| 27	| 15	|: page requested: 6 :  miss
+687:	| 21	| 6	| 28	| 13	| 20	| 23	| 27	| 15	|: page requested: 25 :  miss
+688:	| 21	| 6	| 25	| 13	| 20	| 23	| 27	| 15	|: page requested: 28 :  miss
+689:	| 21	| 6	| 25	| 28	| 20	| 23	| 27	| 15	|: page requested: 13 :  miss
+690:	| 21	| 6	| 25	| 28	| 13	| 23	| 27	| 15	|: page requested: 15 :  hit
+691:	| 21	| 6	| 25	| 28	| 13	| 23	| 27	| 15	|: page requested: 8 :  miss
+692:	| 21	| 6	| 25	| 28	| 13	| 8	| 27	| 15	|: page requested: 0 :  miss
+693:	| 21	| 6	| 25	| 28	| 13	| 8	| 0	| 15	|: page requested: 26 :  miss
+694:	| 21	| 6	| 25	| 28	| 13	| 8	| 0	| 26	|: page requested: 2 :  miss
+695:	| 2	| 6	| 25	| 28	| 13	| 8	| 0	| 26	|: page requested: 6 :  hit
+696:	| 2	| 6	| 25	| 28	| 13	| 8	| 0	| 26	|: page requested: 27 :  miss
+697:	| 2	| 27	| 25	| 28	| 13	| 8	| 0	| 26	|: page requested: 27 :  hit
+698:	| 2	| 27	| 25	| 28	| 13	| 8	| 0	| 26	|: page requested: 19 :  miss
+699:	| 2	| 27	| 19	| 28	| 13	| 8	| 0	| 26	|: page requested: 26 :  hit
+700:	| 2	| 27	| 19	| 28	| 13	| 8	| 0	| 26	|: page requested: 17 :  miss
+701:	| 2	| 27	| 19	| 17	| 13	| 8	| 0	| 26	|: page requested: 7 :  miss
+702:	| 2	| 27	| 19	| 17	| 7	| 8	| 0	| 26	|: page requested: 20 :  miss
+703:	| 2	| 27	| 19	| 17	| 7	| 20	| 0	| 26	|: page requested: 21 :  miss
+704:	| 2	| 27	| 19	| 17	| 7	| 20	| 21	| 26	|: page requested: 22 :  miss
+705:	| 2	| 27	| 19	| 17	| 7	| 20	| 21	| 22	|: page requested: 18 :  miss
+706:	| 18	| 27	| 19	| 17	| 7	| 20	| 21	| 22	|: page requested: 22 :  hit
+707:	| 18	| 27	| 19	| 17	| 7	| 20	| 21	| 22	|: page requested: 29 :  miss
+708:	| 18	| 29	| 19	| 17	| 7	| 20	| 21	| 22	|: page requested: 15 :  miss
+709:	| 18	| 29	| 15	| 17	| 7	| 20	| 21	| 22	|: page requested: 5 :  miss
+710:	| 18	| 29	| 15	| 5	| 7	| 20	| 21	| 22	|: page requested: 25 :  miss
+711:	| 18	| 29	| 15	| 5	| 25	| 20	| 21	| 22	|: page requested: 28 :  miss
+712:	| 18	| 29	| 15	| 5	| 25	| 28	| 21	| 22	|: page requested: 25 :  hit
+713:	| 18	| 29	| 15	| 5	| 25	| 28	| 21	| 22	|: page requested: 16 :  miss
+714:	| 18	| 29	| 15	| 5	| 25	| 28	| 16	| 22	|: page requested: 24 :  miss
+715:	| 18	| 29	| 15	| 5	| 25	| 28	| 16	| 24	|: page requested: 8 :  miss
+716:	| 8	| 29	| 15	| 5	| 25	| 28	| 16	| 24	|: page requested: 6 :  miss
+717:	| 8	| 6	| 15	| 5	| 25	| 28	| 16	| 24	|: page requested: 30 :  miss
+718:	| 8	| 6	| 30	| 5	| 25	| 28	| 16	| 24	|: page requested: 1 :  miss
+719:	| 8	| 6	| 30	| 1	| 25	| 28	| 16	| 24	|: page requested: 2 :  miss
+720:	| 8	| 6	| 30	| 1	| 2	| 28	| 16	| 24	|: page requested: 11 :  miss
+721:	| 8	| 6	| 30	| 1	| 2	| 11	| 16	| 24	|: page requested: 16 :  hit
+722:	| 8	| 6	| 30	| 1	| 2	| 11	| 16	| 24	|: page requested: 10 :  miss
+723:	| 8	| 6	| 30	| 1	| 2	| 11	| 10	| 24	|: page requested: 11 :  hit
+724:	| 8	| 6	| 30	| 1	| 2	| 11	| 10	| 24	|: page requested: 10 :  hit
+725:	| 8	| 6	| 30	| 1	| 2	| 11	| 10	| 24	|: page requested: 13 :  miss
+726:	| 8	| 6	| 30	| 1	| 2	| 11	| 10	| 13	|: page requested: 17 :  miss
+727:	| 17	| 6	| 30	| 1	| 2	| 11	| 10	| 13	|: page requested: 5 :  miss
+728:	| 17	| 5	| 30	| 1	| 2	| 11	| 10	| 13	|: page requested: 8 :  miss
+729:	| 17	| 5	| 8	| 1	| 2	| 11	| 10	| 13	|: page requested: 4 :  miss
+730:	| 17	| 5	| 8	| 4	| 2	| 11	| 10	| 13	|: page requested: 0 :  miss
+731:	| 17	| 5	| 8	| 4	| 0	| 11	| 10	| 13	|: page requested: 25 :  miss
+732:	| 17	| 5	| 8	| 4	| 0	| 25	| 10	| 13	|: page requested: 11 :  miss
+733:	| 17	| 5	| 8	| 4	| 0	| 25	| 11	| 13	|: page requested: 20 :  miss
+734:	| 17	| 5	| 8	| 4	| 0	| 25	| 11	| 20	|: page requested: 14 :  miss
+735:	| 14	| 5	| 8	| 4	| 0	| 25	| 11	| 20	|: page requested: 2 :  miss
+736:	| 14	| 2	| 8	| 4	| 0	| 25	| 11	| 20	|: page requested: 6 :  miss
+737:	| 14	| 2	| 6	| 4	| 0	| 25	| 11	| 20	|: page requested: 4 :  hit
+738:	| 14	| 2	| 6	| 4	| 0	| 25	| 11	| 20	|: page requested: 31 :  miss
+739:	| 14	| 2	| 6	| 31	| 0	| 25	| 11	| 20	|: page requested: 22 :  miss
+740:	| 14	| 2	| 6	| 31	| 22	| 25	| 11	| 20	|: page requested: 9 :  miss
+741:	| 14	| 2	| 6	| 31	| 22	| 9	| 11	| 20	|: page requested: 24 :  miss
+742:	| 14	| 2	| 6	| 31	| 22	| 9	| 24	| 20	|: page requested: 18 :  miss
+743:	| 14	| 2	| 6	| 31	| 22	| 9	| 24	| 18	|: page requested: 2 :  hit
+744:	| 14	| 2	| 6	| 31	| 22	| 9	| 24	| 18	|: page requested: 9 :  hit
+745:	| 14	| 2	| 6	| 31	| 22	| 9	| 24	| 18	|: page requested: 10 :  miss
+746:	| 10	| 2	| 6	| 31	| 22	| 9	| 24	| 18	|: page requested: 10 :  hit
+747:	| 10	| 2	| 6	| 31	| 22	| 9	| 24	| 18	|: page requested: 15 :  miss
+748:	| 10	| 15	| 6	| 31	| 22	| 9	| 24	| 18	|: page requested: 9 :  hit
+749:	| 10	| 15	| 6	| 31	| 22	| 9	| 24	| 18	|: page requested: 12 :  miss
+750:	| 10	| 15	| 12	| 31	| 22	| 9	| 24	| 18	|: page requested: 17 :  miss
+751:	| 10	| 15	| 12	| 17	| 22	| 9	| 24	| 18	|: page requested: 20 :  miss
+752:	| 10	| 15	| 12	| 17	| 20	| 9	| 24	| 18	|: page requested: 28 :  miss
+753:	| 10	| 15	| 12	| 17	| 20	| 28	| 24	| 18	|: page requested: 28 :  hit
+754:	| 10	| 15	| 12	| 17	| 20	| 28	| 24	| 18	|: page requested: 0 :  miss
+755:	| 10	| 15	| 12	| 17	| 20	| 28	| 0	| 18	|: page requested: 7 :  miss
+756:	| 10	| 15	| 12	| 17	| 20	| 28	| 0	| 7	|: page requested: 9 :  miss
+757:	| 9	| 15	| 12	| 17	| 20	| 28	| 0	| 7	|: page requested: 17 :  hit
+758:	| 9	| 15	| 12	| 17	| 20	| 28	| 0	| 7	|: page requested: 12 :  hit
+759:	| 9	| 15	| 12	| 17	| 20	| 28	| 0	| 7	|: page requested: 17 :  hit
+760:	| 9	| 15	| 12	| 17	| 20	| 28	| 0	| 7	|: page requested: 22 :  miss
+761:	| 9	| 22	| 12	| 17	| 20	| 28	| 0	| 7	|: page requested: 12 :  hit
+762:	| 9	| 22	| 12	| 17	| 20	| 28	| 0	| 7	|: page requested: 10 :  miss
+763:	| 9	| 22	| 10	| 17	| 20	| 28	| 0	| 7	|: page requested: 1 :  miss
+764:	| 9	| 22	| 10	| 1	| 20	| 28	| 0	| 7	|: page requested: 0 :  hit
+765:	| 9	| 22	| 10	| 1	| 20	| 28	| 0	| 7	|: page requested: 25 :  miss
+766:	| 9	| 22	| 10	| 1	| 25	| 28	| 0	| 7	|: page requested: 3 :  miss
+767:	| 9	| 22	| 10	| 1	| 25	| 3	| 0	| 7	|: page requested: 7 :  hit
+768:	| 9	| 22	| 10	| 1	| 25	| 3	| 0	| 7	|: page requested: 29 :  miss
+769:	| 9	| 22	| 10	| 1	| 25	| 3	| 29	| 7	|: page requested: 2 :  miss
+770:	| 9	| 22	| 10	| 1	| 25	| 3	| 29	| 2	|: page requested: 29 :  hit
+771:	| 9	| 22	| 10	| 1	| 25	| 3	| 29	| 2	|: page requested: 7 :  miss
+772:	| 7	| 22	| 10	| 1	| 25	| 3	| 29	| 2	|: page requested: 27 :  miss
+773:	| 7	| 27	| 10	| 1	| 25	| 3	| 29	| 2	|: page requested: 15 :  miss
+774:	| 7	| 27	| 15	| 1	| 25	| 3	| 29	| 2	|: page requested: 9 :  miss
+775:	| 7	| 27	| 15	| 9	| 25	| 3	| 29	| 2	|: page requested: 4 :  miss
+776:	| 7	| 27	| 15	| 9	| 4	| 3	| 29	| 2	|: page requested: 26 :  miss
+777:	| 7	| 27	| 15	| 9	| 4	| 26	| 29	| 2	|: page requested: 20 :  miss
+778:	| 7	| 27	| 15	| 9	| 4	| 26	| 20	| 2	|: page requested: 19 :  miss
+779:	| 7	| 27	| 15	| 9	| 4	| 26	| 20	| 19	|: page requested: 3 :  miss
+780:	| 3	| 27	| 15	| 9	| 4	| 26	| 20	| 19	|: page requested: 0 :  miss
+781:	| 3	| 0	| 15	| 9	| 4	| 26	| 20	| 19	|: page requested: 4 :  hit
+782:	| 3	| 0	| 15	| 9	| 4	| 26	| 20	| 19	|: page requested: 23 :  miss
+783:	| 3	| 0	| 23	| 9	| 4	| 26	| 20	| 19	|: page requested: 28 :  miss
+784:	| 3	| 0	| 23	| 28	| 4	| 26	| 20	| 19	|: page requested: 0 :  hit
+785:	| 3	| 0	| 23	| 28	| 4	| 26	| 20	| 19	|: page requested: 23 :  hit
+786:	| 3	| 0	| 23	| 28	| 4	| 26	| 20	| 19	|: page requested: 3 :  hit
+787:	| 3	| 0	| 23	| 28	| 4	| 26	| 20	| 19	|: page requested: 9 :  miss
+788:	| 3	| 0	| 23	| 28	| 9	| 26	| 20	| 19	|: page requested: 9 :  hit
+789:	| 3	| 0	| 23	| 28	| 9	| 26	| 20	| 19	|: page requested: 16 :  miss
+790:	| 3	| 0	| 23	| 28	| 9	| 16	| 20	| 19	|: page requested: 26 :  miss
+791:	| 3	| 0	| 23	| 28	| 9	| 16	| 26	| 19	|: page requested: 31 :  miss
+792:	| 3	| 0	| 23	| 28	| 9	| 16	| 26	| 31	|: page requested: 28 :  hit
+793:	| 3	| 0	| 23	| 28	| 9	| 16	| 26	| 31	|: page requested: 5 :  miss
+794:	| 5	| 0	| 23	| 28	| 9	| 16	| 26	| 31	|: page requested: 0 :  hit
+795:	| 5	| 0	| 23	| 28	| 9	| 16	| 26	| 31	|: page requested: 29 :  miss
+796:	| 5	| 29	| 23	| 28	| 9	| 16	| 26	| 31	|: page requested: 30 :  miss
+797:	| 5	| 29	| 30	| 28	| 9	| 16	| 26	| 31	|: page requested: 4 :  miss
+798:	| 5	| 29	| 30	| 4	| 9	| 16	| 26	| 31	|: page requested: 4 :  hit
+799:	| 5	| 29	| 30	| 4	| 9	| 16	| 26	| 31	|: page requested: 27 :  miss
+800:	| 5	| 29	| 30	| 4	| 27	| 16	| 26	| 31	|: page requested: 6 :  miss
+801:	| 5	| 29	| 30	| 4	| 27	| 6	| 26	| 31	|: page requested: 1 :  miss
+802:	| 5	| 29	| 30	| 4	| 27	| 6	| 1	| 31	|: page requested: 2 :  miss
+803:	| 5	| 29	| 30	| 4	| 27	| 6	| 1	| 2	|: page requested: 1 :  hit
+804:	| 5	| 29	| 30	| 4	| 27	| 6	| 1	| 2	|: page requested: 16 :  miss
+805:	| 16	| 29	| 30	| 4	| 27	| 6	| 1	| 2	|: page requested: 12 :  miss
+806:	| 16	| 12	| 30	| 4	| 27	| 6	| 1	| 2	|: page requested: 5 :  miss
+807:	| 16	| 12	| 5	| 4	| 27	| 6	| 1	| 2	|: page requested: 10 :  miss
+808:	| 16	| 12	| 5	| 10	| 27	| 6	| 1	| 2	|: page requested: 0 :  miss
+809:	| 16	| 12	| 5	| 10	| 0	| 6	| 1	| 2	|: page requested: 24 :  miss
+810:	| 16	| 12	| 5	| 10	| 0	| 24	| 1	| 2	|: page requested: 13 :  miss
+811:	| 16	| 12	| 5	| 10	| 0	| 24	| 13	| 2	|: page requested: 0 :  hit
+812:	| 16	| 12	| 5	| 10	| 0	| 24	| 13	| 2	|: page requested: 29 :  miss
+813:	| 16	| 12	| 5	| 10	| 0	| 24	| 13	| 29	|: page requested: 5 :  hit
+814:	| 16	| 12	| 5	| 10	| 0	| 24	| 13	| 29	|: page requested: 28 :  miss
+815:	| 28	| 12	| 5	| 10	| 0	| 24	| 13	| 29	|: page requested: 29 :  hit
+816:	| 28	| 12	| 5	| 10	| 0	| 24	| 13	| 29	|: page requested: 28 :  hit
+817:	| 28	| 12	| 5	| 10	| 0	| 24	| 13	| 29	|: page requested: 0 :  hit
+818:	| 28	| 12	| 5	| 10	| 0	| 24	| 13	| 29	|: page requested: 7 :  miss
+819:	| 28	| 7	| 5	| 10	| 0	| 24	| 13	| 29	|: page requested: 5 :  hit
+820:	| 28	| 7	| 5	| 10	| 0	| 24	| 13	| 29	|: page requested: 16 :  miss
+821:	| 28	| 7	| 16	| 10	| 0	| 24	| 13	| 29	|: page requested: 1 :  miss
+822:	| 28	| 7	| 16	| 1	| 0	| 24	| 13	| 29	|: page requested: 4 :  miss
+823:	| 28	| 7	| 16	| 1	| 4	| 24	| 13	| 29	|: page requested: 12 :  miss
+824:	| 28	| 7	| 16	| 1	| 4	| 12	| 13	| 29	|: page requested: 6 :  miss
+825:	| 28	| 7	| 16	| 1	| 4	| 12	| 6	| 29	|: page requested: 5 :  miss
+826:	| 28	| 7	| 16	| 1	| 4	| 12	| 6	| 5	|: page requested: 9 :  miss
+827:	| 9	| 7	| 16	| 1	| 4	| 12	| 6	| 5	|: page requested: 4 :  hit
+828:	| 9	| 7	| 16	| 1	| 4	| 12	| 6	| 5	|: page requested: 9 :  hit
+829:	| 9	| 7	| 16	| 1	| 4	| 12	| 6	| 5	|: page requested: 13 :  miss
+830:	| 9	| 13	| 16	| 1	| 4	| 12	| 6	| 5	|: page requested: 0 :  miss
+831:	| 9	| 13	| 0	| 1	| 4	| 12	| 6	| 5	|: page requested: 15 :  miss
+832:	| 9	| 13	| 0	| 15	| 4	| 12	| 6	| 5	|: page requested: 14 :  miss
+833:	| 9	| 13	| 0	| 15	| 14	| 12	| 6	| 5	|: page requested: 2 :  miss
+834:	| 9	| 13	| 0	| 15	| 14	| 2	| 6	| 5	|: page requested: 17 :  miss
+835:	| 9	| 13	| 0	| 15	| 14	| 2	| 17	| 5	|: page requested: 31 :  miss
+836:	| 9	| 13	| 0	| 15	| 14	| 2	| 17	| 31	|: page requested: 14 :  hit
+837:	| 9	| 13	| 0	| 15	| 14	| 2	| 17	| 31	|: page requested: 22 :  miss
+838:	| 22	| 13	| 0	| 15	| 14	| 2	| 17	| 31	|: page requested: 9 :  miss
+839:	| 22	| 9	| 0	| 15	| 14	| 2	| 17	| 31	|: page requested: 14 :  hit
+840:	| 22	| 9	| 0	| 15	| 14	| 2	| 17	| 31	|: page requested: 15 :  hit
+841:	| 22	| 9	| 0	| 15	| 14	| 2	| 17	| 31	|: page requested: 23 :  miss
+842:	| 22	| 9	| 23	| 15	| 14	| 2	| 17	| 31	|: page requested: 14 :  hit
+843:	| 22	| 9	| 23	| 15	| 14	| 2	| 17	| 31	|: page requested: 12 :  miss
+844:	| 22	| 9	| 23	| 12	| 14	| 2	| 17	| 31	|: page requested: 28 :  miss
+845:	| 22	| 9	| 23	| 12	| 28	| 2	| 17	| 31	|: page requested: 11 :  miss
+846:	| 22	| 9	| 23	| 12	| 28	| 11	| 17	| 31	|: page requested: 9 :  hit
+847:	| 22	| 9	| 23	| 12	| 28	| 11	| 17	| 31	|: page requested: 24 :  miss
+848:	| 22	| 9	| 23	| 12	| 28	| 11	| 24	| 31	|: page requested: 11 :  hit
+849:	| 22	| 9	| 23	| 12	| 28	| 11	| 24	| 31	|: page requested: 16 :  miss
+850:	| 22	| 9	| 23	| 12	| 28	| 11	| 24	| 16	|: page requested: 30 :  miss
+851:	| 30	| 9	| 23	| 12	| 28	| 11	| 24	| 16	|: page requested: 27 :  miss
+852:	| 30	| 27	| 23	| 12	| 28	| 11	| 24	| 16	|: page requested: 18 :  miss
+853:	| 30	| 27	| 18	| 12	| 28	| 11	| 24	| 16	|: page requested: 2 :  miss
+854:	| 30	| 27	| 18	| 2	| 28	| 11	| 24	| 16	|: page requested: 7 :  miss
+855:	| 30	| 27	| 18	| 2	| 7	| 11	| 24	| 16	|: page requested: 24 :  hit
+856:	| 30	| 27	| 18	| 2	| 7	| 11	| 24	| 16	|: page requested: 7 :  hit
+857:	| 30	| 27	| 18	| 2	| 7	| 11	| 24	| 16	|: page requested: 17 :  miss
+858:	| 30	| 27	| 18	| 2	| 7	| 17	| 24	| 16	|: page requested: 29 :  miss
+859:	| 30	| 27	| 18	| 2	| 7	| 17	| 29	| 16	|: page requested: 16 :  hit
+860:	| 30	| 27	| 18	| 2	| 7	| 17	| 29	| 16	|: page requested: 30 :  hit
+861:	| 30	| 27	| 18	| 2	| 7	| 17	| 29	| 16	|: page requested: 29 :  hit
+862:	| 30	| 27	| 18	| 2	| 7	| 17	| 29	| 16	|: page requested: 0 :  miss
+863:	| 30	| 27	| 18	| 2	| 7	| 17	| 29	| 0	|: page requested: 13 :  miss
+864:	| 13	| 27	| 18	| 2	| 7	| 17	| 29	| 0	|: page requested: 31 :  miss
+865:	| 13	| 31	| 18	| 2	| 7	| 17	| 29	| 0	|: page requested: 17 :  hit
+866:	| 13	| 31	| 18	| 2	| 7	| 17	| 29	| 0	|: page requested: 12 :  miss
+867:	| 13	| 31	| 12	| 2	| 7	| 17	| 29	| 0	|: page requested: 14 :  miss
+868:	| 13	| 31	| 12	| 14	| 7	| 17	| 29	| 0	|: page requested: 7 :  hit
+869:	| 13	| 31	| 12	| 14	| 7	| 17	| 29	| 0	|: page requested: 21 :  miss
+870:	| 13	| 31	| 12	| 14	| 21	| 17	| 29	| 0	|: page requested: 28 :  miss
+871:	| 13	| 31	| 12	| 14	| 21	| 28	| 29	| 0	|: page requested: 22 :  miss
+872:	| 13	| 31	| 12	| 14	| 21	| 28	| 22	| 0	|: page requested: 12 :  hit
+873:	| 13	| 31	| 12	| 14	| 21	| 28	| 22	| 0	|: page requested: 11 :  miss
+874:	| 13	| 31	| 12	| 14	| 21	| 28	| 22	| 11	|: page requested: 2 :  miss
+875:	| 2	| 31	| 12	| 14	| 21	| 28	| 22	| 11	|: page requested: 8 :  miss
+876:	| 2	| 8	| 12	| 14	| 21	| 28	| 22	| 11	|: page requested: 22 :  hit
+877:	| 2	| 8	| 12	| 14	| 21	| 28	| 22	| 11	|: page requested: 12 :  hit
+878:	| 2	| 8	| 12	| 14	| 21	| 28	| 22	| 11	|: page requested: 1 :  miss
+879:	| 2	| 8	| 1	| 14	| 21	| 28	| 22	| 11	|: page requested: 1 :  hit
+880:	| 2	| 8	| 1	| 14	| 21	| 28	| 22	| 11	|: page requested: 28 :  hit
+881:	| 2	| 8	| 1	| 14	| 21	| 28	| 22	| 11	|: page requested: 31 :  miss
+882:	| 2	| 8	| 1	| 31	| 21	| 28	| 22	| 11	|: page requested: 28 :  hit
+883:	| 2	| 8	| 1	| 31	| 21	| 28	| 22	| 11	|: page requested: 14 :  miss
+884:	| 2	| 8	| 1	| 31	| 14	| 28	| 22	| 11	|: page requested: 1 :  hit
+885:	| 2	| 8	| 1	| 31	| 14	| 28	| 22	| 11	|: page requested: 3 :  miss
+886:	| 2	| 8	| 1	| 31	| 14	| 3	| 22	| 11	|: page requested: 7 :  miss
+887:	| 2	| 8	| 1	| 31	| 14	| 3	| 7	| 11	|: page requested: 9 :  miss
+888:	| 2	| 8	| 1	| 31	| 14	| 3	| 7	| 9	|: page requested: 20 :  miss
+889:	| 20	| 8	| 1	| 31	| 14	| 3	| 7	| 9	|: page requested: 4 :  miss
+890:	| 20	| 4	| 1	| 31	| 14	| 3	| 7	| 9	|: page requested: 25 :  miss
+891:	| 20	| 4	| 25	| 31	| 14	| 3	| 7	| 9	|: page requested: 19 :  miss
+892:	| 20	| 4	| 25	| 19	| 14	| 3	| 7	| 9	|: page requested: 1 :  miss
+893:	| 20	| 4	| 25	| 19	| 1	| 3	| 7	| 9	|: page requested: 25 :  hit
+894:	| 20	| 4	| 25	| 19	| 1	| 3	| 7	| 9	|: page requested: 0 :  miss
+895:	| 20	| 4	| 25	| 19	| 1	| 0	| 7	| 9	|: page requested: 0 :  hit
+896:	| 20	| 4	| 25	| 19	| 1	| 0	| 7	| 9	|: page requested: 10 :  miss
+897:	| 20	| 4	| 25	| 19	| 1	| 0	| 10	| 9	|: page requested: 12 :  miss
+898:	| 20	| 4	| 25	| 19	| 1	| 0	| 10	| 12	|: page requested: 14 :  miss
+899:	| 14	| 4	| 25	| 19	| 1	| 0	| 10	| 12	|: page requested: 18 :  miss
+900:	| 14	| 18	| 25	| 19	| 1	| 0	| 10	| 12	|: page requested: 1 :  hit
+901:	| 14	| 18	| 25	| 19	| 1	| 0	| 10	| 12	|: page requested: 11 :  miss
+902:	| 14	| 18	| 11	| 19	| 1	| 0	| 10	| 12	|: page requested: 8 :  miss
+903:	| 14	| 18	| 11	| 8	| 1	| 0	| 10	| 12	|: page requested: 14 :  hit
+904:	| 14	| 18	| 11	| 8	| 1	| 0	| 10	| 12	|: page requested: 22 :  miss
+905:	| 14	| 18	| 11	| 8	| 22	| 0	| 10	| 12	|: page requested: 11 :  hit
+906:	| 14	| 18	| 11	| 8	| 22	| 0	| 10	| 12	|: page requested: 22 :  hit
+907:	| 14	| 18	| 11	| 8	| 22	| 0	| 10	| 12	|: page requested: 12 :  hit
+908:	| 14	| 18	| 11	| 8	| 22	| 0	| 10	| 12	|: page requested: 23 :  miss
+909:	| 14	| 18	| 11	| 8	| 22	| 23	| 10	| 12	|: page requested: 23 :  hit
+910:	| 14	| 18	| 11	| 8	| 22	| 23	| 10	| 12	|: page requested: 13 :  miss
+911:	| 14	| 18	| 11	| 8	| 22	| 23	| 13	| 12	|: page requested: 19 :  miss
+912:	| 14	| 18	| 11	| 8	| 22	| 23	| 13	| 19	|: page requested: 22 :  hit
+913:	| 14	| 18	| 11	| 8	| 22	| 23	| 13	| 19	|: page requested: 9 :  miss
+914:	| 9	| 18	| 11	| 8	| 22	| 23	| 13	| 19	|: page requested: 2 :  miss
+915:	| 9	| 2	| 11	| 8	| 22	| 23	| 13	| 19	|: page requested: 24 :  miss
+916:	| 9	| 2	| 24	| 8	| 22	| 23	| 13	| 19	|: page requested: 12 :  miss
+917:	| 9	| 2	| 24	| 12	| 22	| 23	| 13	| 19	|: page requested: 9 :  hit
+918:	| 9	| 2	| 24	| 12	| 22	| 23	| 13	| 19	|: page requested: 1 :  miss
+919:	| 9	| 2	| 24	| 12	| 1	| 23	| 13	| 19	|: page requested: 1 :  hit
+920:	| 9	| 2	| 24	| 12	| 1	| 23	| 13	| 19	|: page requested: 13 :  hit
+921:	| 9	| 2	| 24	| 12	| 1	| 23	| 13	| 19	|: page requested: 26 :  miss
+922:	| 9	| 2	| 24	| 12	| 1	| 26	| 13	| 19	|: page requested: 20 :  miss
+923:	| 9	| 2	| 24	| 12	| 1	| 26	| 20	| 19	|: page requested: 14 :  miss
+924:	| 9	| 2	| 24	| 12	| 1	| 26	| 20	| 14	|: page requested: 20 :  hit
+925:	| 9	| 2	| 24	| 12	| 1	| 26	| 20	| 14	|: page requested: 20 :  hit
+926:	| 9	| 2	| 24	| 12	| 1	| 26	| 20	| 14	|: page requested: 14 :  hit
+927:	| 9	| 2	| 24	| 12	| 1	| 26	| 20	| 14	|: page requested: 30 :  miss
+928:	| 30	| 2	| 24	| 12	| 1	| 26	| 20	| 14	|: page requested: 0 :  miss
+929:	| 30	| 0	| 24	| 12	| 1	| 26	| 20	| 14	|: page requested: 29 :  miss
+930:	| 30	| 0	| 29	| 12	| 1	| 26	| 20	| 14	|: page requested: 16 :  miss
+931:	| 30	| 0	| 29	| 16	| 1	| 26	| 20	| 14	|: page requested: 1 :  hit
+932:	| 30	| 0	| 29	| 16	| 1	| 26	| 20	| 14	|: page requested: 8 :  miss
+933:	| 30	| 0	| 29	| 16	| 8	| 26	| 20	| 14	|: page requested: 25 :  miss
+934:	| 30	| 0	| 29	| 16	| 8	| 25	| 20	| 14	|: page requested: 15 :  miss
+935:	| 30	| 0	| 29	| 16	| 8	| 25	| 15	| 14	|: page requested: 30 :  hit
+936:	| 30	| 0	| 29	| 16	| 8	| 25	| 15	| 14	|: page requested: 4 :  miss
+937:	| 30	| 0	| 29	| 16	| 8	| 25	| 15	| 4	|: page requested: 6 :  miss
+938:	| 6	| 0	| 29	| 16	| 8	| 25	| 15	| 4	|: page requested: 10 :  miss
+939:	| 6	| 10	| 29	| 16	| 8	| 25	| 15	| 4	|: page requested: 27 :  miss
+940:	| 6	| 10	| 27	| 16	| 8	| 25	| 15	| 4	|: page requested: 29 :  miss
+941:	| 6	| 10	| 27	| 29	| 8	| 25	| 15	| 4	|: page requested: 23 :  miss
+942:	| 6	| 10	| 27	| 29	| 23	| 25	| 15	| 4	|: page requested: 14 :  miss
+943:	| 6	| 10	| 27	| 29	| 23	| 14	| 15	| 4	|: page requested: 20 :  miss
+944:	| 6	| 10	| 27	| 29	| 23	| 14	| 20	| 4	|: page requested: 0 :  miss
+945:	| 6	| 10	| 27	| 29	| 23	| 14	| 20	| 0	|: page requested: 16 :  miss
+946:	| 16	| 10	| 27	| 29	| 23	| 14	| 20	| 0	|: page requested: 12 :  miss
+947:	| 16	| 12	| 27	| 29	| 23	| 14	| 20	| 0	|: page requested: 12 :  hit
+948:	| 16	| 12	| 27	| 29	| 23	| 14	| 20	| 0	|: page requested: 25 :  miss
+949:	| 16	| 12	| 25	| 29	| 23	| 14	| 20	| 0	|: page requested: 13 :  miss
+950:	| 16	| 12	| 25	| 13	| 23	| 14	| 20	| 0	|: page requested: 13 :  hit
+951:	| 16	| 12	| 25	| 13	| 23	| 14	| 20	| 0	|: page requested: 6 :  miss
+952:	| 16	| 12	| 25	| 13	| 6	| 14	| 20	| 0	|: page requested: 7 :  miss
+953:	| 16	| 12	| 25	| 13	| 6	| 7	| 20	| 0	|: page requested: 1 :  miss
+954:	| 16	| 12	| 25	| 13	| 6	| 7	| 1	| 0	|: page requested: 20 :  miss
+955:	| 16	| 12	| 25	| 13	| 6	| 7	| 1	| 20	|: page requested: 27 :  miss
+956:	| 27	| 12	| 25	| 13	| 6	| 7	| 1	| 20	|: page requested: 21 :  miss
+957:	| 27	| 21	| 25	| 13	| 6	| 7	| 1	| 20	|: page requested: 3 :  miss
+958:	| 27	| 21	| 3	| 13	| 6	| 7	| 1	| 20	|: page requested: 26 :  miss
+959:	| 27	| 21	| 3	| 26	| 6	| 7	| 1	| 20	|: page requested: 21 :  hit
+960:	| 27	| 21	| 3	| 26	| 6	| 7	| 1	| 20	|: page requested: 0 :  miss
+961:	| 27	| 21	| 3	| 26	| 0	| 7	| 1	| 20	|: page requested: 10 :  miss
+962:	| 27	| 21	| 3	| 26	| 0	| 10	| 1	| 20	|: page requested: 23 :  miss
+963:	| 27	| 21	| 3	| 26	| 0	| 10	| 23	| 20	|: page requested: 8 :  miss
+964:	| 27	| 21	| 3	| 26	| 0	| 10	| 23	| 8	|: page requested: 3 :  hit
+965:	| 27	| 21	| 3	| 26	| 0	| 10	| 23	| 8	|: page requested: 6 :  miss
+966:	| 6	| 21	| 3	| 26	| 0	| 10	| 23	| 8	|: page requested: 6 :  hit
+967:	| 6	| 21	| 3	| 26	| 0	| 10	| 23	| 8	|: page requested: 7 :  miss
+968:	| 6	| 7	| 3	| 26	| 0	| 10	| 23	| 8	|: page requested: 12 :  miss
+969:	| 6	| 7	| 12	| 26	| 0	| 10	| 23	| 8	|: page requested: 16 :  miss
+970:	| 6	| 7	| 12	| 16	| 0	| 10	| 23	| 8	|: page requested: 2 :  miss
+971:	| 6	| 7	| 12	| 16	| 2	| 10	| 23	| 8	|: page requested: 10 :  hit
+972:	| 6	| 7	| 12	| 16	| 2	| 10	| 23	| 8	|: page requested: 7 :  hit
+973:	| 6	| 7	| 12	| 16	| 2	| 10	| 23	| 8	|: page requested: 17 :  miss
+974:	| 6	| 7	| 12	| 16	| 2	| 17	| 23	| 8	|: page requested: 30 :  miss
+975:	| 6	| 7	| 12	| 16	| 2	| 17	| 30	| 8	|: page requested: 7 :  hit
+976:	| 6	| 7	| 12	| 16	| 2	| 17	| 30	| 8	|: page requested: 1 :  miss
+977:	| 6	| 7	| 12	| 16	| 2	| 17	| 30	| 1	|: page requested: 10 :  miss
+978:	| 10	| 7	| 12	| 16	| 2	| 17	| 30	| 1	|: page requested: 19 :  miss
+979:	| 10	| 19	| 12	| 16	| 2	| 17	| 30	| 1	|: page requested: 27 :  miss
+980:	| 10	| 19	| 27	| 16	| 2	| 17	| 30	| 1	|: page requested: 23 :  miss
+981:	| 10	| 19	| 27	| 23	| 2	| 17	| 30	| 1	|: page requested: 1 :  hit
+982:	| 10	| 19	| 27	| 23	| 2	| 17	| 30	| 1	|: page requested: 1 :  hit
+983:	| 10	| 19	| 27	| 23	| 2	| 17	| 30	| 1	|: page requested: 30 :  hit
+984:	| 10	| 19	| 27	| 23	| 2	| 17	| 30	| 1	|: page requested: 2 :  hit
+985:	| 10	| 19	| 27	| 23	| 2	| 17	| 30	| 1	|: page requested: 22 :  miss
+986:	| 10	| 19	| 27	| 23	| 22	| 17	| 30	| 1	|: page requested: 26 :  miss
+987:	| 10	| 19	| 27	| 23	| 22	| 26	| 30	| 1	|: page requested: 24 :  miss
+988:	| 10	| 19	| 27	| 23	| 22	| 26	| 24	| 1	|: page requested: 25 :  miss
+989:	| 10	| 19	| 27	| 23	| 22	| 26	| 24	| 25	|: page requested: 20 :  miss
+990:	| 20	| 19	| 27	| 23	| 22	| 26	| 24	| 25	|: page requested: 13 :  miss
+991:	| 20	| 13	| 27	| 23	| 22	| 26	| 24	| 25	|: page requested: 25 :  hit
+992:	| 20	| 13	| 27	| 23	| 22	| 26	| 24	| 25	|: page requested: 30 :  miss
+993:	| 20	| 13	| 30	| 23	| 22	| 26	| 24	| 25	|: page requested: 4 :  miss
+994:	| 20	| 13	| 30	| 4	| 22	| 26	| 24	| 25	|: page requested: 1 :  miss
+995:	| 20	| 13	| 30	| 4	| 1	| 26	| 24	| 25	|: page requested: 2 :  miss
+996:	| 20	| 13	| 30	| 4	| 1	| 2	| 24	| 25	|: page requested: 11 :  miss
+997:	| 20	| 13	| 30	| 4	| 1	| 2	| 11	| 25	|: page requested: 7 :  miss
+998:	| 20	| 13	| 30	| 4	| 1	| 2	| 11	| 7	|: page requested: 9 :  miss
+999:	| 9	| 13	| 30	| 4	| 1	| 2	| 11	| 7	|: page requested: 23 :  miss
+Of the 1000 memory access requests, 739 were misses, making it a hit rate of 0.261000

@@ -120,12 +120,12 @@ struct TEST_FRAMEWORK *init_test_framework(int pattern){
 
 	for(i = 0; i < 1000; i++){
 		switch(pattern){
-		case 0:	temp = isu_mem_req_create((unsigned short)((i * 4096) % 65536));
+		case 0:	temp = isu_mem_req_create((unsigned short)((i) % 32));
 			break;
-		case 1: temp = isu_mem_req_create((unsigned short)(rand() % 65536));
+		case 1: temp = isu_mem_req_create((unsigned short)(rand() % 32));
 			break;
 		case 2: if(i < 5){
-				temp = isu_mem_req_create((unsigned short)(rand() % 65536));
+				temp = isu_mem_req_create((unsigned short)(rand() % 32));
 				isu_llist_push(past_elements, temp, ISU_LLIST_TAIL);
 			}else{
 				temp = isu_llist_ittr_start(past_elements, ISU_LLIST_TAIL);
@@ -135,11 +135,11 @@ struct TEST_FRAMEWORK *init_test_framework(int pattern){
 						temp = isu_llist_ittr_next(past_elements);
 						j--;
 					}
-					temp = isu_mem_req_create(isu_mem_req_get_address(temp));
+					temp = isu_mem_req_create(isu_mem_req_get_page(temp));
 					isu_llist_pop(past_elements, ISU_LLIST_HEAD);
 					isu_llist_push(past_elements, temp, ISU_LLIST_TAIL);
 				}else{
-					temp = isu_mem_req_create((unsigned short)(rand() % 65536));
+					temp = isu_mem_req_create((unsigned short)(rand() % 32));
 					isu_llist_pop(past_elements, ISU_LLIST_HEAD);
 					isu_llist_push(past_elements, temp, ISU_LLIST_TAIL);
 				}
@@ -175,14 +175,23 @@ void print_test_framework(struct TEST_FRAMEWORK *f, char *name){
 	/// open another file with the name `name`.json
 	/// traverse the list of mem requests
 	/// print to the open json file
+	int i;
 	strncat(name, ".log", (size_t)4);
 	FILE *file = fopen(name, "w");
 	isu_mem_req_t t = (isu_mem_req_t)isu_llist_ittr_start(f->mem_list, ISU_LLIST_HEAD);
 	while(t){
-		fprintf(file, "memory address: %u in page: %d requested at time: %llu handled at time: %llu and was a", isu_mem_req_get_address(t),
-															(isu_mem_req_get_address(t) / 4096),
-													   	 	isu_mem_req_get_req_time(t),
-													    		isu_mem_req_get_handle_time(t));
+		fprintf(file, "%llu:\t| ", isu_mem_req_get_req_time(t));
+		int *page = (int *)isu_llist_ittr_start(isu_mem_req_get_pages(t), ISU_LLIST_HEAD);
+		for(i = 0; i < isu_llist_count(isu_mem_req_get_pages(t)); i++){
+			if(i < (isu_llist_count(isu_mem_req_get_pages(t)) - 1)){
+				fprintf(file, "%d\t| ", *page);
+			}else{
+				fprintf(file, "%d\t|:", *page);
+			}
+			page = (int *)isu_llist_ittr_next(isu_mem_req_get_pages(t));
+		}
+		fprintf(file, " page requested: %d : ", isu_mem_req_get_page(t));
+			
 		if(isu_mem_req_get_access_hit(t)){
 			fprintf(file, " hit\n");
 		}else{
@@ -191,7 +200,6 @@ void print_test_framework(struct TEST_FRAMEWORK *f, char *name){
 		}
 		t = (isu_mem_req_t)isu_llist_ittr_next(f->mem_list);
 	}
-	fprintf(file, "1000 memory access requests were handled in %llu nanoseconds\n", f->current_time);
 	fprintf(file, "Of the 1000 memory access requests, %d were misses, making it a hit rate of %f\n", f->misses, 1.f - ((float)(f->misses) / 1000.f));
 	fclose(file);
 	file = 0;

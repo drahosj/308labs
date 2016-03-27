@@ -7,15 +7,14 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "llist/isu_llist.h"
 #include "isu_mem_req.h"
 
 /**
  * The main page request object type
  */
 struct ISU_MEM_REQ_STRUCT{
-	//the virtual address that is requested
-	unsigned short mem_address;
+	//the page that is requested
+	unsigned short page;
 	//whether or not the address requested is within the current set of pages
 	char access_hit;
 	//list of the current set of pages for data logging
@@ -32,10 +31,10 @@ struct ISU_MEM_REQ_STRUCT{
  * 			the address that is to be requested
  * @return	the memory request or NULL if something horrible happens
  */
-isu_mem_req_t isu_mem_req_create(unsigned short addr){
+isu_mem_req_t isu_mem_req_create(unsigned short p){
 	isu_mem_req_t ret;
 	ret = calloc(1, sizeof(struct ISU_MEM_REQ_STRUCT));
-	ret->mem_address = addr;
+	ret->page = p;
 	ret->pages = isu_llist_create();
 	return ret;
 }
@@ -50,13 +49,13 @@ void isu_mem_req_destroy(isu_mem_req_t req){
 	free(req);
 }
 /**
- * @brief	gets the value of the variable `mem_address`
+ * @brief	gets the value of the variable `page`
  * @param	req
- * 			the memory request to get the address from
- * @return	the value of `mem_address` stored in the variable req
+ * 			the memory request to get the page from
+ * @return	the value of `page` stored in the variable `req`
  */
-unsigned short isu_mem_req_get_address(isu_mem_req_t req){
-	return req->mem_address;
+unsigned short isu_mem_req_get_page(isu_mem_req_t req){
+	return req->page;
 }
 /**
  * @brief	gets the value of the variable `access_hit`
@@ -88,6 +87,16 @@ void isu_mem_req_add_page(isu_mem_req_t req, int page_num){
 	int *temp = calloc(1, sizeof(int));
 	*temp = page_num;
 	isu_llist_push(req->pages, (void *)temp, ISU_LLIST_TAIL);
+}
+
+/**
+ * @brief	gets the pages that have been logged in the isu_mem_req_t
+ * @param	req
+			the memory request object to get the logged pages from
+ * @return	the list of pages that have been logged
+ */
+isu_llist_t isu_mem_req_get_pages(isu_mem_req_t req){
+	return req->pages;
 }
 
 /**
