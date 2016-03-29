@@ -164,6 +164,8 @@ void run_test_framework(struct TEST_FRAMEWORK *f, int mode, isu_mmu_t MMU){
 	while(t){
 		if(mode < 2){
 			isu_mmu_ref_clear(MMU);
+		}else if(mode == 3){
+			if(f->current_time % 2 == 0) isu_mmu_ref_clear(MMU);
 		}
 		isu_mmu_handle_req(MMU, t, &(f->current_time));
 		t = isu_llist_ittr_next(f->mem_list);
