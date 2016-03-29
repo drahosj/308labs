@@ -192,9 +192,6 @@ int isu_mmu_page_rep_fifo(isu_mmu_t mem, isu_mem_req_t req, unsigned long long *
 		ret = 0;
 	}
 
-	/// increment the time, t
-	(*t)++;
-
 	return ret;
 }
 

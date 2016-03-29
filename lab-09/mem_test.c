@@ -162,11 +162,12 @@ void run_test_framework(struct TEST_FRAMEWORK *f, int mode, isu_mmu_t MMU){
 	/// handle memory request
 	isu_mem_req_t t = (isu_mem_req_t)isu_llist_ittr_start(f->mem_list, ISU_LLIST_HEAD);
 	while(t){
-		if(mode != 2){
+		if(mode < 2){
 			isu_mmu_ref_clear(MMU);
 		}
 		isu_mmu_handle_req(MMU, t, &(f->current_time));
 		t = isu_llist_ittr_next(f->mem_list);
+		f->current_time++;
 	}
 }
 
