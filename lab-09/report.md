@@ -94,8 +94,6 @@ Similar behavior is observed with the sequential pattern. Below 32 pages,
 it maintains a 100% miss rate. At 32, it becomes a much lower
 miss rate, with 33 misses (32 for clock).
 
-### Observations: Random pattern
-
 #### New hypothesis at this point
 
 Based on the previous observations, it is now possible
@@ -106,6 +104,8 @@ on disk. Once it reaches 32 pages, the entire address space can be held
 "in memory", and it is no longer to swap pages out. With that in mind, it
 is expected that the random pattern will exhibit behavior identical
 to the spatial pattern for increasing NUM_PAGES.
+
+### Observations: Random pattern
 
 The random pattern behaved similarly to the spatial pattern. It approached
 the 33 miss sweet spot, albeit with a steeper slope due to the higher
