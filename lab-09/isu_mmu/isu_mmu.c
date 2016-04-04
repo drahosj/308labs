@@ -16,7 +16,7 @@
 #include "common/isu_color.h"
 
 /// defines for the delays for memory access, in nanoseconds
-#define NUM_PAGES 8
+#define NUM_PAGES 4
 
 /*****************************
  *Prototypes
@@ -230,7 +230,7 @@ int isu_mmu_page_rep_lru(isu_mmu_t mem, isu_mem_req_t req, unsigned long long *t
 		new = page;
 
 		/// now we figure out which one is to be replaced
-		/// first find the position of the page with the earliest placement time
+		/// first find the position of the page with the earliest access time
 		unsigned long long temp = mem->pages[0]->access_time;
 		old = 0;
 		for(i = 0; i < NUM_PAGES; i++){
@@ -249,14 +249,68 @@ int isu_mmu_page_rep_lru(isu_mmu_t mem, isu_mem_req_t req, unsigned long long *t
 		ret = 0;
 	}
 
-	
+	return ret;
 }
 
 int isu_mmu_page_rep_clock(isu_mmu_t mem, isu_mem_req_t req, unsigned long long *t){
-	/// TODO implement the clock page replacement algorithm here
-	/// First we want to do some book keeping, copy the elements in L1
-	/// to the memory request class
-	#warning TODO implement the clock page replacement algorithm
+	int ret;
+	int new;
+	int old;
+	int i;
+
+	/// book keeping purposes, copying all the pages in L1 cache
+	for(i = 0; i < NUM_PAGES; i++){
+		isu_mem_req_add_page(req, (mem->pages[i]->page));
+	}
+	
+	//first, get the page that is being requested
+	int page = isu_mem_req_get_page(req);
+
+	//once we have the page number, check if it is in memory
+	//if the page is in the working set, it is a hit, otherwise it is a miss
+	//	find the page that has been placed in the working set the earliest and
+	//	replace it with the new page
+	char hit = (char)isu_mmu_page_check(mem, page);
+	/// if `hit` is 1, it is a hit, and that the memory page is already in the working set
+	if(hit){
+		isu_mem_req_set_access_hit(req, 1);
+		for(i = 0; i < NUM_PAGES; i++){
+			if(mem->pages[i]->page == page){
+				mem->pages[i]->access_time = *t;
+				mem->pages[i]->ref = 1;
+			}
+		}
+		ret = 0;
+	/// if `hit` is 0 then `page` is not in the working set, and we need to replace it
+	}else{
+		/// the new page to be put in the working set is `page`
+		new = page;
+
+		/* Replace the page at the hand, if */
+		ssize_t old = -1;
+		while (old == -1) {
+			if (mem->pages[mem->hand]->ref == 0) {
+				old = mem->hand;	
+			}
+
+			mem->pages[mem->hand]->ref = 0;
+			mem->hand++;
+
+			if (mem->hand >= NUM_PAGES) {
+				mem->hand = 0;
+			}
+		}
+		
+		/// once the loop is complete, we know the `old` page to be replaced with
+		/// the `new` page
+		mem->pages[old]->placement_time = *t;
+		mem->pages[old]->access_time = *t;
+		mem->pages[old]->page = new;
+		mem->pages[old]->ref = 1;
+		ret = 0;
+	}
+
+	return ret;
 }
 
 int isu_mmu_page_rep_second_chance(isu_mmu_t mem, isu_mem_req_t req, unsigned long long *t){
