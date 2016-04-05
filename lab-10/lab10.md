@@ -8,7 +8,7 @@ In this lab, you will gain hands-on experience reading a FAT-12 filesystem.  Usi
 ## Terms
 
 ### Sector
-The smallest unit of transfer; It's also called a block. There are 512 bytes / sector on a floppy disk.
+The smallest unit of transfer; It's also called a block. There are 512 bytes / block on a floppy disk.
 
 ### Boot Sector
 Stores the vital information about the filesystem.  The boot sector is laid out in the following way, starting at the beginning of the disk(logical sector 0, byte 0):
@@ -29,6 +29,65 @@ All values are stored as unsigned little-endian numbers unless otherwise specifi
 |  0x18  |2	  |Sectors per track			|decimal	 |
 |  0x1A  |2	  |Number of heads			|decimal	 |
 |  0x1C  |2	  |Number of hidden sectors		|decimal	 |
+
+## Note on Endianess
+All data on a computer is stored as a string of 0s and 1s.  Every eight of these binary numbers are grouped together to for a byte, and every byte is given an address in the computers memory.  This leads to the question for how the bytes should be arranged for a multibyte number.  For example, the decimal number 305,419,896.  This number as a `uint32_t` in hexadecimal is 0x12345678.  There are two ways that computers normally store this value in memory: little endian or big endian.  Normally you as the programmer never need to concern yourself with how numbers are stored in the computers memory, but when you are working directly with that physical medium it because a necessarry consideration.
+
+### Little Endian
+Little endian is stored with the least significant byte (LSB) at the lowest memory address.  Therefore if the example number is stored at memory location 0x1000 the resulting memory map would be:
+
+| Address | Value |
+|:-------:|:-----:|
+| 0x1000  | 0x78  |
+| 0x1001  | 0x56  |
+| 0x1002  | 0x34  |
+| 0x1003  | 0x12  |
+
+### Big Endian
+Big endian is stored with the most significant byte (MSB) at the lowest memory address.  Therefore if the example number is stored at memory location 0x1000 in big endian format the resulting memory map would be:
+
+| Address | Value |
+|:-------:|:-----:|
+| 0x1000  | 0x12  |
+| 0x1001  | 0x34  |
+| 0x1002  | 0x56  |
+| 0x1003  | 0x78  |
+
+### Testing Endianess
+You can find online information about a given architecture to find if it is big or little endian.  You can also write a quick program that will test the endianess for you.  Compile and run this program to find the endianess of your architecture.  Include the result in your lab report.
+
+~~~C
+#include <stdio.h>
+#include <stdint.h>
+int main(int argc, const char * argv[])
+{
+ uint32_t a = 0x12345678;
+ uint8_t *c = (uint8_t*)(&a);
+  if (*c == 0x78) {
+   printf("little-endian\n");
+  } else {
+   printf("big-endian\n");
+  }
+ return 0;
+}
+~~~
+
+### Endian Swap
+Sometimes you may find it neccessary to switch from one endianess to another.  The following functions will do just that.
+
+~~~C
+#include <stdint.h>
+
+inline uint16_t swp_end_16(uint16_t n)
+{
+ return (n << 8) | (n >> 8);
+}
+
+inline uint32_t swp_end_32(uint32_t n)
+{
+ return ((n << 24)  & 0xFF000000) | ((n << 8) & 0x00FF0000) | ((n >> 8) & 0x0000FF00) | ((n >> 24) & 0x000000FF);
+}
+~~~
 
 ## Useful system calls
 More information on these system calls can be found in `man 2 open`, `man 2 read`, and `man 2 lseek`.
@@ -83,7 +142,7 @@ Using `hexdump` and the offsets in the tables above, find and decode the values 
 Have the lab TA check your answers.  You will use these values for debugging the next part.
 
 # Task for this lab
-Complete the skeleton code given to decode and print the boot sector of the FAT-12 filesystem.  The starting offset and size of each field can be found in the table at the beginning of the lab handout.  All of the information is stored as binary values on the disk.  When the values are to be printed, use the same format as the table at the beginning of the handout.  The program should:
+Write code to decode and print the boot sector of the FAT-12 filesystem.  The starting offset and size of each field can be found in the table at the beginning of the lab handout.  All of the information is stored as binary values on the disk.  When the values are to be printed, use the same format as the table at the beginning of the handout.  The program should:
  - Take the name of the file to read as an argument
  - decode the boot sector of the file given
  - print out the values in the boot sector
