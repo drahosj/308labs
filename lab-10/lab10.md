@@ -3,7 +3,7 @@ title: 'The FAT-12 Filesystem'
 ---
 
 # Introduction
-In this lab, you will gain hands-on experience reading a FAT-12 filesystem.  Using information we provide, you will decode the boot sector by hand.  You will then write a program to do this automatically.
+In this lab, you will gain hands-on experience reading a FAT-12 filesystem.  Using information we provide, you will decode the boot sector by hand.  You will then write a program to do this automatically.  [You may findthis website very useful as you work on this lab.](http://wiki.osdev.org/FAT)
 
 ## Terms
 
@@ -83,13 +83,16 @@ Using `hexdump` and the offsets in the tables above, find and decode the values 
 Have the lab TA check your answers.  You will use these values for debugging the next part.
 
 # Task for this lab
-Complete the skeleton code givento decode and print the boot sector of the FAT-12 filesystem.  The starting offset and size of each field can be found in the table at the beginning of the lab handout.  All of the information is stored as binary values on the disk.  When the values are to be printed, use the same format as the table at the beginning of the handout.  The program should:
+Complete the skeleton code given to decode and print the boot sector of the FAT-12 filesystem.  The starting offset and size of each field can be found in the table at the beginning of the lab handout.  All of the information is stored as binary values on the disk.  When the values are to be printed, use the same format as the table at the beginning of the handout.  The program should:
  - Take the name of the file to read as an argument
  - decode the boot sector of the file given
  - print out the values in the boot sector
  - no segmentation faults should occur
   - meaning all system calls should be checked if they were successful
   - if an error did occur, it should print out an error message detailing what caused it, and exit gracefully
+
+# Extra credit
+Extra credit can be had for extending the boot sector parser to handle the FAT-16 and FAT-32 filesystems.  Consult the OS Dev website regarding the boot sector for the other two filesystems, [which can be found here.](http://wiki.osdev.org/FAT)
 
 # License
 This lab write up and all accompany materials are distributed under the MIT License.  For more information, read the accompaning LICENSE file distributed with the source code.
