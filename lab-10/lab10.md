@@ -91,6 +91,9 @@ Complete the skeleton code given to decode and print the boot sector of the FAT-
   - meaning all system calls should be checked if they were successful
   - if an error did occur, it should print out an error message detailing what caused it, and exit gracefully
 
+# What to submit
+Please submit **only** your well-formatted and commented source code and a copy of the output.
+
 # Extra credit
 Extra credit can be had for extending the boot sector parser to handle the FAT-16 and FAT-32 filesystems.  Consult the OS Dev website regarding the boot sector for the other two filesystems, [which can be found here.](http://wiki.osdev.org/FAT)
 
