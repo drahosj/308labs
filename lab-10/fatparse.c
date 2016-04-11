@@ -51,7 +51,7 @@ int main(int argc, char ** argv)
 	if (result < 30) {
 		fprintf(stderr, "Failed to read boot sector for %s ", argv[1]);
 		if (feof(image)) {
-			fprintf(stderr, "(Reached EOF)\n");
+			fprintf(stderr, "(unexpected EOF)\n");
 		} else {
 			perror("fread");
 		}
@@ -89,6 +89,8 @@ int main(int argc, char ** argv)
 	printf("| 0x18\t\t| 2\t\t| Sectors per track\t\t| %-8d\t|\n", le16toh(*((uint16_t *) &boot_sector[0x18])));
 	printf("| 0x1A\t\t| 2\t\t| Number of heads\t\t| %-8d\t|\n", le16toh(*((uint16_t *) &boot_sector[0x1A])));
 	printf("| 0x1C\t\t| 2\t\t| Number of hidden sectors\t| %-8d\t|\n", le16toh(*((uint16_t *) &boot_sector[0x1C])));
+
+	fclose(image);
 	return 0;
 }
 
