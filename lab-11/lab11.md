@@ -22,10 +22,12 @@ A group of sectors, generally in a power of 2(1, 2, 4, 8, 16 or 32 in FAT-12).  
 |:--------------|:----|:--------|:---------------|:-----|
 | 0		| 1   | X	| Y		 | Z 	|
 
-Floppy disks have logical sectors starting at 0.  This is where you'll find the boot sector.  The first FAT always starts at logical sector 1, but after that you have to calculate the starting positions using information from the boot sector.  The formulas for finding the sector numbers for the 2nd FAT, the root directory and the data area are as follows:
-X = 1 + sectors/FAT
-Y = X + sectors/FAT
-Z = Y + _roundup_512(32 * _directoryEntries_) [ have to start at the next open block ]
+Floppy disks have logical sectors starting at 0.  This is where you'll find the boot sector.  The first FAT always starts at logical sector 1, but after that you have to calculate the starting positions using information from the boot sector.  The formulas for finding the sector numbers for the 2nd FAT, the root directory, and the data area are as follows:
+
+ - X = 1 + sectors/FAT
+ - Y = X + sectors/FAT
+ - Z = Y + _roundup_512(32 * _directoryEntries_) [ have to start at the next open block ]
+
 Note: _roundup_512() rounds up to the next multiple of 512; this is because data must start at an open block.  The formula in the parentheses is due to the fact that each directory entry takes 32 bytes of space.
 
 ## Root Directory Layout
@@ -35,19 +37,19 @@ The root directory is an array of directory entries(the number of such entries i
 |:--------------|:--------------|:--------------|
 | 0x00		| 8		| Filename	|
 | 0x08		| 3		| Extension	|
-| 0x0b		| 1		| Attributes	|
-| 0x0c		| 10		| Reserved	|
+| 0x0B		| 1		| Attributes	|
+| 0x0C		| 10		| Reserved	|
 | 0x16		| 2		| Time		|
 | 0x18		| 2 		| Date		|
-| 0x1a		| 2		| First Cluster	|
-| 0x1c		| 4		| Size		|
+| 0x1A		| 2		| First Cluster	|
+| 0x1C		| 4		| Size		|
 
 Notes on interpreting a directory entry:
 If the filename starts with 0x00, or 0xE5, it is not a valid entry.  Filenames starting with 0xE5 are entries that have been released/deleted.  If the filename starts with anything else, assume that it is a valid entry.
 
-**Filename** In DOS, the naming convention is 8.3; meaning that files and directories have 8 character names and 3 character extensions, such as `FILENAME.EXT`.  If a filename is longer than 8 characters, then it is represented using multiple entries.  Long file name entries always have a regular 8.3 entry to which they belong, and they immediately precede that 8.3 entry.  [More information regarding long file names can be found here.](http://wiki.osdev.org/FAT#Long_File_Names)
+**Filename** In DOS, the naming convention is 8.3; meaning that files and directories have names that are 8 characters long, and extensions that are 3 characters long, such as `FILENAME.EXT`.  If a filename is longer than 8 characters, then it is represented using multiple entries.  Long file name entries always have a regular 8.3 entry to which they belong, and they immediately precede that 8.3 entry.  [More information regarding long file names can be found here.](http://wiki.osdev.org/FAT#Long_File_Names)
 
-**Attributes** A file's attributes include read/write permissions, among other things.  There are 8 bits, and if the bit is set, it indicates the property is true.  The bits represent the following properties:
+**Attributes** A file's attributes include read/write permissions, whether or not a file is hidden, among other things.  There are 8 bits, and if the bit is set, it indicates the property is true.  The bits represent the following properties:
 
 | Bit | Attribute	|
 |-----|-----------------|
@@ -63,15 +65,17 @@ Note: If the entry is a long file name entry, the attribute byte will be set to 
 Also of note, bit 0 is the least significant bit(i.e., the right most bit).
 
 **Date and time** These fields are each 16 bits long.  The bits are laid out as follows:
+
  - **Time**:
-   - 5 bits for the hour
-   - 6 bits for the minutes
-   - 5 bits for the seconds
-   - Note that 5 bits is not enough to represent 60 seconds, so only every other second is counted.  This means that if your seconds count is 16, that indicates a value of 32 seconds.
+     - 5 bits for the hour
+     - 6 bits for the minutes
+     - 5 bits for the seconds
+         - Note that 5 bits is not enough to represent 60 seconds, so only every other second is counted.  This means that if your seconds count is 16, that indicates a value of 32 seconds.
+
  - **Date**: encoded in a yyyy/mm/dd format
-   - 7 bits for the years since 1980, so add 1980 to the value to get the current year
-   - 4 bits for the month
-   - 5 bits for the day
+     - 7 bits for the years since 1980, so add 1980 to the value to get the current year
+     - 4 bits for the month
+     - 5 bits for the day
 
 # Task for this lab
 Write a function that does what ls would do: print out the filename, time, date, attributes, and size of the file for each valid entry in the root directory.  This program should also support a `-R` flag, which will tell the program to recursively traverse the directories and print out the information for the files in the different directories as well.  No need to sort the files in each directory - simply list them in disk order.  Make sure to state the directory that is being printed before printing out the contents.
@@ -89,3 +93,9 @@ Attrib: RHS
 Time/Date: 21:37:24 2002/11/06
 Size: 78870 bytes
 ~~~
+
+# Extra credit
+As it was in the previous lab, extra credit will be given for supporting the reading and listing of the files and directories in the FAT-16 and FAT-32 filesystems.
+
+# License
+This lab write up and all accompany materials are distributed under the MIT License.  For more information, read the accompaning LICENSE file distributed with the source code.
