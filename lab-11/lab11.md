@@ -16,13 +16,13 @@ A list of files and directories.  The root directory is a sequence of entries, w
 ### Cluster
 A group of sectors, generally in a power of 2(1, 2, 4, 8, 16 or 32 in FAT-12).  The data area is divided into clusters; the number of sectors/cluster determines what the resolution is.  More sectors/cluster means you can address a larger data area, but you potentially waste more space due to internal fragmentation with smaller files.
 
-## Overall Floppy Disk Layout
+## Overall FAT12
 
 | Boot Sector 	| FAT | 2nd FAT | Root Directory | Data |
 |:--------------|:----|:--------|:---------------|:-----|
 | 0		| 1   | X	| Y		 | Z 	|
 
-Floppy disks have logical sectors starting at 0.  This is where you'll find the boot sector.  The first FAT always starts at logical sector 1, but after that you have to calculate the starting positions using information from the boot sector.  The formulas for finding the sector numbers for the 2nd FAT, the root directory, and the data area are as follows:
+FAT12 disks have logical sectors starting at 0.  This is where you'll find the boot sector.  The first FAT always starts at logical sector 1, but after that you have to calculate the starting positions using information from the boot sector.  The formulas for finding the sector numbers for the 2nd FAT, the root directory, and the data area are as follows:
 
  - X = 1 + sectors/FAT
  - Y = X + sectors/FAT
