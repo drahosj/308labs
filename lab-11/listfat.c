@@ -27,8 +27,8 @@ struct fat_params {
 	FILE * image;
 };
 
-static int print_dirent(uint8_t * dirent, int recurse, struct fat_params * p);
-static int parse_dir(uint8_t * dir, uint16_t num_entries, int recurse, struct fat_params * p);
+static int print_dirent(uint8_t * dirent, int recurse, struct fat_params * p, char * path);
+static int parse_dir(uint8_t * dir, uint16_t num_entries, int recurse, struct fat_params * p, char * path);
 
 int main(int argc, char ** argv)
 {
@@ -158,7 +158,7 @@ int main(int argc, char ** argv)
 
 	p.image = image;
 
-	parse_dir(root_dir, p.num_root_dirents, recurse, &p);
+	parse_dir(root_dir, p.num_root_dirents, recurse, &p, "/");
 
 	/* Success */
 	ret = 0;
@@ -177,7 +177,7 @@ close_image:
 	return ret;	
 }
 
-static int print_dirent(uint8_t * dirent, int recurse, struct fat_params * p)
+static int print_dirent(uint8_t * dirent, int recurse, struct fat_params * p, char * path)
 {
 	/* Check validitiy */
 	if ((dirent[0] == 0) || (dirent[0] == 0xE5)) {
@@ -199,7 +199,16 @@ static int print_dirent(uint8_t * dirent, int recurse, struct fat_params * p)
 	memcpy(name, dirent, 8);
 	memcpy(ext, &dirent[8], 3);
 
-	printf((ext[0] != ' ') ? "Name: %s.%s\n" : "Name: %s\n", name, ext);
+
+	char * last;
+	while (*(last = (strchr(name, '\0')) - 1) == ' ') {
+		*last = '\0';
+	}
+	while (*(last = (strchr(ext, '\0')) - 1) == ' ') {
+		*last = '\0';
+	}
+
+	printf(ext[0] ? "Name: %s%s.%s\n" : "Name: %s%s\n", path, name, ext);
 
 	/* Create formatting buffer for attrs */
 	char attr[7];
@@ -229,9 +238,6 @@ static int print_dirent(uint8_t * dirent, int recurse, struct fat_params * p)
 		uint8_t * dir = NULL;
 		int num_clusters = 1;
 		do {
-			/* Because reasons */
-			current_cluster -= 2;
-
 			/* Allocate space to read this cluster */
 			uint8_t * tmp = realloc(dir, num_clusters * p->bytes_per_sector * p->sectors_per_cluster);
 			if (tmp == NULL) {
@@ -246,7 +252,7 @@ static int print_dirent(uint8_t * dirent, int recurse, struct fat_params * p)
 			uint32_t root_dir_sectors = (p->num_root_dirents * 32) / p->bytes_per_sector;
 
 			/* Seek to beginning of this cluster */
-			if (fseek(p->image, p->bytes_per_sector * (current_cluster * p->sectors_per_cluster +
+			if (fseek(p->image, p->bytes_per_sector * ((current_cluster - 2) * p->sectors_per_cluster +
 							p->sectors_per_fat * p->num_fats + 1 + root_dir_sectors) , SEEK_SET)) {
 				perror("fseek");
 				free(dir);
@@ -279,23 +285,33 @@ static int print_dirent(uint8_t * dirent, int recurse, struct fat_params * p)
 			} else if (fat_ent >= 0xFF8) {
 				break;
 			} else {
-				break;
 				current_cluster = fat_ent;
 				num_clusters++;
 			}
 		} while(1);
 
-		printf((ext[0] != ' ') ? "\nEntering %s.%s\n" : "\nEntering %s\n", name, ext);
-		parse_dir(dir, (num_clusters * (p->bytes_per_sector * p->sectors_per_cluster))  / 32, 1, p);
+		char * newpath = malloc(strlen(path) + strlen(name) + 2);
+		if (newpath == NULL) {
+			perror("malloc");
+			free(dir);
+			return 1;
+		}
+
+		strcpy(newpath, path);
+		strcat(newpath, name);
+		strcat(newpath, "/");
+
+		parse_dir(dir, (num_clusters * (p->bytes_per_sector * p->sectors_per_cluster))  / 32, 1, p, newpath);
+		free(newpath);
 		free(dir);
 	}
 	return 0;
 }
 
-static int parse_dir(uint8_t * dir, uint16_t num_entries, int recurse, struct fat_params * p)
+static int parse_dir(uint8_t * dir, uint16_t num_entries, int recurse, struct fat_params * p, char * path)
 {
 	for (int i = 0; i < num_entries; i++) {
-		print_dirent(&dir[32 * i], recurse, p);
+		print_dirent(&dir[32 * i], recurse, p, path);
 	}	
 	return 0;
 }
