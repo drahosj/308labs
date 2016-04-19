@@ -82,7 +82,7 @@ int main(int argc, char ** argv)
 	printf("| 0x13\t\t| 2\t\t| Number of logical sectors\t| %-8d\t|\n", le16toh(*((uint16_t *) &boot_sector[0x13])));
 
 	/* Hex */
-	printf("| 0x15\t\t| 1\t\t| Medium descriptor\t\t| 0x%02X\t\t|\n", boot_sector[0x10]);
+	printf("| 0x15\t\t| 1\t\t| Medium descriptor\t\t| 0x%02X\t\t|\n", boot_sector[0x15]);
 
 	/* Final decimal values (all 16 bit)*/
 	printf("| 0x16\t\t| 2\t\t| Sectors per FAT\t\t| %-8d\t|\n", le16toh(*((uint16_t *) &boot_sector[0x16])));
