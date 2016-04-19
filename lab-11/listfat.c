@@ -191,7 +191,6 @@ static int print_dirent(uint8_t * dirent, int recurse, struct fat_params * p, ch
 	ext[3] = '\0';
 
 	if (dirent[0xb] == 0x0f) {
-		printf("LFN\n");
 		char * this_lfn = malloc(13);
 		if (this_lfn == NULL) {
 			perror("malloc");
@@ -263,8 +262,19 @@ static int print_dirent(uint8_t * dirent, int recurse, struct fat_params * p, ch
 	strcat(attr, (dirent[0xB] & 0x20) ? "A" : "");
 
 	printf("Attr: %s\n", attr);
+	
+	uint16_t time = le16toh(*((uint16_t *) &dirent[0x16]));
+	uint16_t date = le16toh(*((uint16_t *) &dirent[0x18]));
 
-	/* TODO: Time and date */
+	int h = (time & 0xF800) >> 11;
+	int mi = (time & 0x07E0) >> 5;
+	int s = (time & 0x001F) * 2;
+
+	int y = ((date & 0xFE00) >> 9) + 1980;
+	int mo = (date & 0x01E0) >> 5;
+	int d = (date & 0x001F);
+
+	printf("%04d/%02d/%02d %02d:%02d:%02d\n", y, mo, d, h, mi, s);
 
 	/* Size */
 	uint32_t size = le32toh(*((uint32_t *) &dirent[0x1C]));
