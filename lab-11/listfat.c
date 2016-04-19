@@ -27,7 +27,7 @@ struct fat_params {
 	FILE * image;
 };
 
-static int print_dirent(uint8_t * dirent, int recurse, struct fat_params * p, char * path);
+static int print_dirent(uint8_t * dirent, int recurse, struct fat_params * p, char * path, char ** lfn);
 static int parse_dir(uint8_t * dir, uint16_t num_entries, int recurse, struct fat_params * p, char * path);
 
 int main(int argc, char ** argv)
@@ -117,7 +117,7 @@ int main(int argc, char ** argv)
 
 	if (root_dir == NULL) {
 		perror("malloc");
-		ret = 1;
+		ret = 2;
 		goto close_image;
 	}
 
@@ -135,7 +135,7 @@ int main(int argc, char ** argv)
 	p.fat = malloc(p.fat_size);
 	if (p.fat == NULL) {
 		perror("malloc");
-		ret = 1;
+		ret = 2;
 		goto free_root_dir;
 	}
 
@@ -177,7 +177,7 @@ close_image:
 	return ret;	
 }
 
-static int print_dirent(uint8_t * dirent, int recurse, struct fat_params * p, char * path)
+static int print_dirent(uint8_t * dirent, int recurse, struct fat_params * p, char * path, char ** lfn)
 {
 	/* Check validitiy */
 	if ((dirent[0] == 0) || (dirent[0] == 0xE5)) {
@@ -191,8 +191,44 @@ static int print_dirent(uint8_t * dirent, int recurse, struct fat_params * p, ch
 	ext[3] = '\0';
 
 	if (dirent[0xb] == 0x0f) {
-		printf("LFN Entry\n");
-		return 2;
+		printf("LFN\n");
+		char * this_lfn = malloc(13);
+		if (this_lfn == NULL) {
+			perror("malloc");
+			return 2;
+		}
+
+		/* Load LFN (We only support ASCII) */
+		this_lfn[0] = dirent[1];
+		this_lfn[1] = dirent[3];
+		this_lfn[2] = dirent[5];
+		this_lfn[3] = dirent[7];
+		this_lfn[4] = dirent[9];
+
+		this_lfn[5] = dirent[14];
+		this_lfn[6] = dirent[16];
+		this_lfn[7] = dirent[18];
+		this_lfn[8] = dirent[20];
+		this_lfn[9] = dirent[22];
+		this_lfn[10] = dirent[24];
+
+		this_lfn[11] = dirent[28];
+		this_lfn[12] = dirent[30];
+
+		if (*lfn == NULL) {
+			*lfn = this_lfn;
+		} else {
+			char * tmp = realloc(*lfn, strlen(*lfn) + strlen(this_lfn) + 1);
+			if (tmp == NULL) {
+				perror("malloc");
+				free(this_lfn);
+				return 2;
+			}
+			strcat(*lfn, this_lfn);
+			free(this_lfn);
+		}
+
+		return 0;
 	}
 
 	/* Copy name and ext to buffers */
@@ -208,7 +244,11 @@ static int print_dirent(uint8_t * dirent, int recurse, struct fat_params * p, ch
 		*last = '\0';
 	}
 
-	printf(ext[0] ? "Name: %s%s.%s\n" : "Name: %s%s\n", path, name, ext);
+	if (*lfn == NULL) {
+		printf(ext[0] ? "Name: %s%s.%s\n" : "Name: %s%s\n", path, name, ext);
+	} else {
+		printf(ext[0] ? "Name: %s%s.%s\n" : "Name: %s%s\n", path, *lfn, ext);
+	}
 
 	/* Create formatting buffer for attrs */
 	char attr[7];
@@ -294,14 +334,18 @@ static int print_dirent(uint8_t * dirent, int recurse, struct fat_params * p, ch
 		if (newpath == NULL) {
 			perror("malloc");
 			free(dir);
-			return 1;
+			return 2;
 		}
 
 		strcpy(newpath, path);
 		strcat(newpath, name);
 		strcat(newpath, "/");
 
-		parse_dir(dir, (num_clusters * (p->bytes_per_sector * p->sectors_per_cluster))  / 32, 1, p, newpath);
+		uint32_t num_entries = (num_clusters * (p->bytes_per_sector * p->sectors_per_cluster))  / 32;
+		/* Break out on critical failure */;
+		if (parse_dir(dir, num_entries, 1, p, newpath) == 2) {
+			return 2;
+		}
 		free(newpath);
 		free(dir);
 	}
@@ -310,8 +354,12 @@ static int print_dirent(uint8_t * dirent, int recurse, struct fat_params * p, ch
 
 static int parse_dir(uint8_t * dir, uint16_t num_entries, int recurse, struct fat_params * p, char * path)
 {
+	char * lfn = NULL;
 	for (int i = 0; i < num_entries; i++) {
-		print_dirent(&dir[32 * i], recurse, p, path);
+		/* Break out on critical failure */
+		if (print_dirent(&dir[32 * i], recurse, p, path, &lfn) == 2) {
+			return 2;
+		}
 	}	
 	return 0;
 }
